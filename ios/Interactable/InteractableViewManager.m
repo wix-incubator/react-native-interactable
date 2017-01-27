@@ -8,6 +8,8 @@
 
 #import "InteractableViewManager.h"
 #import "InteractableView.h"
+#import "InteractablePoint.h"
+#import "RCTConvert+Interactable.h"
 
 @implementation InteractableViewManager
 
@@ -20,5 +22,6 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(verticalOnly, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(horizontalOnly, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(snapTo, NSArray<InteractablePoint *>)
 
 @end

@@ -7,16 +7,19 @@
 //
 
 #import "InteractableView.h"
+#import <React/UIView+React.h>
 
 @interface InteractableView()
-@property (nonatomic, assign) CGPoint initialCenter;
+@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGPoint initialPanCenter;
 @end
 
 @implementation InteractableView
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if ((self = [super init]))
+    {
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         [pan setMinimumNumberOfTouches:1];
         [pan setMaximumNumberOfTouches:1];
@@ -25,23 +28,60 @@
     return self;
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)pan {
-    if (pan.state == UIGestureRecognizerStateBegan) {
-        self.initialCenter = self.center;
+- (void)reactSetFrame:(CGRect)frame
+{
+    [super reactSetFrame:frame];
+    self.origin = self.center;
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)pan
+{
+    if (pan.state == UIGestureRecognizerStateBegan)
+    {
+        self.initialPanCenter = self.center;
     }
     
     CGPoint translation = [pan translationInView:self];
-    if (self.horizontalOnly) {
-        self.center = CGPointMake(self.initialCenter.x + translation.x, self.initialCenter.y);
-    } else if (self.verticalOnly) {
-        self.center = CGPointMake(self.initialCenter.x, self.initialCenter.y + translation.y);
-    } else {
-        self.center = CGPointMake(self.initialCenter.x + translation.x, self.initialCenter.y + translation.y);
+    if (self.horizontalOnly)
+    {
+        self.center = CGPointMake(self.initialPanCenter.x + translation.x, self.initialPanCenter.y);
+    } else if (self.verticalOnly)
+    {
+        self.center = CGPointMake(self.initialPanCenter.x, self.initialPanCenter.y + translation.y);
+    } else
+    {
+        self.center = CGPointMake(self.initialPanCenter.x + translation.x, self.initialPanCenter.y + translation.y);
     }
     
-    if (pan.state == UIGestureRecognizerStateEnded) {
-        // self.center = self.initialCenter;
+    if (pan.state == UIGestureRecognizerStateEnded)
+    {
+        InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:self.center];
+        if (snapPoint)
+        {
+            [UIView animateWithDuration:0.8 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:nil animations:^
+            {
+                self.center = [snapPoint positionWithOrigin:self.origin];
+            } completion:^(BOOL finished)
+            {
+            }];
+        }
     }
+}
+
+- (InteractablePoint*)findClosestPoint:(NSArray<InteractablePoint *>*)points toPoint:(CGPoint)relativeToPoint
+{
+    InteractablePoint *res = nil;
+    CGFloat minDistance = CGFLOAT_MAX;
+    for (InteractablePoint *point in points)
+    {
+        CGFloat distance = [point distanceFromPoint:relativeToPoint withOrigin:self.origin];
+        if (distance < minDistance)
+        {
+            minDistance = distance;
+            res = point;
+        }
+    }
+    return res;
 }
 
 

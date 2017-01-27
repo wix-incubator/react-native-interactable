@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InteractablePoint.h"
 
 @interface InteractableView : UIView
 
 @property (nonatomic, assign) BOOL verticalOnly;
 @property (nonatomic, assign) BOOL horizontalOnly;
+@property (nonatomic, copy) NSArray<InteractablePoint *> *snapTo;
 
 @end

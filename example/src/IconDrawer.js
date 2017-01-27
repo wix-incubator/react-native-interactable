@@ -14,6 +14,10 @@ export default class IconDrawer extends Component {
           <View style={{backgroundColor: 'red'}}>
             <Interactable.View
               horizontalOnly={true}
+              snapTo={[
+                {x: 0},
+                {x: -220}
+              ]}
             >
               <View style={{left: 0, right: 0, height: 75, backgroundColor: '#e0e0e0'}} />
             </Interactable.View>

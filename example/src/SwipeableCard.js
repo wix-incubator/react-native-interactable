@@ -16,6 +16,11 @@ export default class SwipeableCard extends Component {
           <Interactable.View
             key={i}
             horizontalOnly={true}
+            snapTo={[
+              {x: 350},
+              {x: 0},
+              {x: -350}
+            ]}
           >
             <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
           </Interactable.View>

@@ -10,6 +10,8 @@
 		CC01279C1E3ACC3900B23C9F /* InteractableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */; };
 		CC01279D1E3ACC3900B23C9F /* InteractableViewManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC01279A1E3ACC3900B23C9F /* InteractableViewManager.h */; };
 		CC0127DC1E3AD42C00B23C9F /* InteractableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0127DB1E3AD42C00B23C9F /* InteractableView.m */; };
+		CCA33C9A1E3B642500649701 /* InteractablePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA33C991E3B642500649701 /* InteractablePoint.m */; };
+		CCA33C9D1E3B6B5000649701 /* RCTConvert+Interactable.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA33C9C1E3B6B5000649701 /* RCTConvert+Interactable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,10 @@
 		CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractableViewManager.m; sourceTree = "<group>"; };
 		CC0127DA1E3AD42C00B23C9F /* InteractableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractableView.h; sourceTree = "<group>"; };
 		CC0127DB1E3AD42C00B23C9F /* InteractableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractableView.m; sourceTree = "<group>"; };
+		CCA33C981E3B642500649701 /* InteractablePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractablePoint.h; sourceTree = "<group>"; };
+		CCA33C991E3B642500649701 /* InteractablePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractablePoint.m; sourceTree = "<group>"; };
+		CCA33C9B1E3B6B5000649701 /* RCTConvert+Interactable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+Interactable.h"; sourceTree = "<group>"; };
+		CCA33C9C1E3B6B5000649701 /* RCTConvert+Interactable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+Interactable.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,10 @@
 				CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */,
 				CC0127DA1E3AD42C00B23C9F /* InteractableView.h */,
 				CC0127DB1E3AD42C00B23C9F /* InteractableView.m */,
+				CCA33C981E3B642500649701 /* InteractablePoint.h */,
+				CCA33C991E3B642500649701 /* InteractablePoint.m */,
+				CCA33C9B1E3B6B5000649701 /* RCTConvert+Interactable.h */,
+				CCA33C9C1E3B6B5000649701 /* RCTConvert+Interactable.m */,
 			);
 			path = Interactable;
 			sourceTree = "<group>";
@@ -129,7 +139,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC0127DC1E3AD42C00B23C9F /* InteractableView.m in Sources */,
+				CCA33C9A1E3B642500649701 /* InteractablePoint.m in Sources */,
 				CC01279C1E3ACC3900B23C9F /* InteractableViewManager.m in Sources */,
+				CCA33C9D1E3B6B5000649701 /* RCTConvert+Interactable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

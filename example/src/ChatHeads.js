@@ -11,7 +11,20 @@ export default class ChatHeads extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Interactable.View>
+        <Interactable.View
+          snapTo={[
+            {x: -140, y: -280},
+            {x: 140, y: -280},
+            {x: -140, y: -140},
+            {x: 140, y: -140},
+            {x: -140, y: 0},
+            {x: 140, y: 0},
+            {x: -140, y: 140},
+            {x: 140, y: 140},
+            {x: -140, y: 280},
+            {x: 140, y: 280}
+          ]}
+        >
           <View style={{width: 50, height: 50, backgroundColor: 'red', borderRadius: 25}} />
         </Interactable.View>
       </View>

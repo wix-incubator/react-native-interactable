@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CC01279C1E3ACC3900B23C9F /* InteractableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */; };
+		CC01279D1E3ACC3900B23C9F /* InteractableViewManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC01279A1E3ACC3900B23C9F /* InteractableViewManager.h */; };
+		CC0127DC1E3AD42C00B23C9F /* InteractableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0127DB1E3AD42C00B23C9F /* InteractableView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CC0127951E3ACC3900B23C9F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				CC01279D1E3ACC3900B23C9F /* InteractableViewManager.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CC0127971E3ACC3900B23C9F /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libInteractable.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC01279A1E3ACC3900B23C9F /* InteractableViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractableViewManager.h; sourceTree = "<group>"; };
+		CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractableViewManager.m; sourceTree = "<group>"; };
+		CC0127DA1E3AD42C00B23C9F /* InteractableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractableView.h; sourceTree = "<group>"; };
+		CC0127DB1E3AD42C00B23C9F /* InteractableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractableView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CC0127941E3ACC3900B23C9F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CC01278E1E3ACC3900B23C9F = {
+			isa = PBXGroup;
+			children = (
+				CC0127991E3ACC3900B23C9F /* Interactable */,
+				CC0127981E3ACC3900B23C9F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CC0127981E3ACC3900B23C9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC0127971E3ACC3900B23C9F /* libInteractable.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC0127991E3ACC3900B23C9F /* Interactable */ = {
+			isa = PBXGroup;
+			children = (
+				CC01279A1E3ACC3900B23C9F /* InteractableViewManager.h */,
+				CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */,
+				CC0127DA1E3AD42C00B23C9F /* InteractableView.h */,
+				CC0127DB1E3AD42C00B23C9F /* InteractableView.m */,
+			);
+			path = Interactable;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CC0127961E3ACC3900B23C9F /* Interactable */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC0127A01E3ACC3900B23C9F /* Build configuration list for PBXNativeTarget "Interactable" */;
+			buildPhases = (
+				CC0127931E3ACC3900B23C9F /* Sources */,
+				CC0127941E3ACC3900B23C9F /* Frameworks */,
+				CC0127951E3ACC3900B23C9F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Interactable;
+			productName = Interactable;
+			productReference = CC0127971E3ACC3900B23C9F /* libInteractable.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CC01278F1E3ACC3900B23C9F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Wix;
+				TargetAttributes = {
+					CC0127961E3ACC3900B23C9F = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CC0127921E3ACC3900B23C9F /* Build configuration list for PBXProject "Interactable" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CC01278E1E3ACC3900B23C9F;
+			productRefGroup = CC0127981E3ACC3900B23C9F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CC0127961E3ACC3900B23C9F /* Interactable */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CC0127931E3ACC3900B23C9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC0127DC1E3AD42C00B23C9F /* InteractableView.m in Sources */,
+				CC01279C1E3ACC3900B23C9F /* InteractableViewManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CC01279E1E3ACC3900B23C9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CC01279F1E3ACC3900B23C9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CC0127A11E3ACC3900B23C9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CC0127A21E3ACC3900B23C9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CC0127921E3ACC3900B23C9F /* Build configuration list for PBXProject "Interactable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC01279E1E3ACC3900B23C9F /* Debug */,
+				CC01279F1E3ACC3900B23C9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC0127A01E3ACC3900B23C9F /* Build configuration list for PBXNativeTarget "Interactable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC0127A11E3ACC3900B23C9F /* Debug */,
+				CC0127A21E3ACC3900B23C9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CC01278F1E3ACC3900B23C9F /* Project object */;
+}

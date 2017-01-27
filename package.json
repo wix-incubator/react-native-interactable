@@ -1,0 +1,39 @@
+{
+  "name": "react-native-interactable",
+  "version": "0.0.1",
+  "description": "Experimental implementation of interactable views in React Native",
+  "license": "MIT",
+  "author": "Tal Kol <talkol@gmail.com>",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "bugs": {
+    "url": "https://github.com/wix/react-native-interactable/issues"
+  },
+  "homepage": "https://github.com/wix/react-native-interactable",
+  "readme": "https://github.com/wix/react-native-interactable#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wix/react-native-interactable.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "react-native start",
+		"test": "jest"
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "react": ">= 15.0.0",
+    "react-native": ">= 0.32.0"
+  },
+  "jest": {
+    "preset": "jest-react-native"
+  },
+  "devDependencies": {
+    "babel-jest": "18.0.0",
+		"babel-preset-react-native": "1.9.1",
+		"jest": "18.1.0",
+		"react-test-renderer": "15.4.2"
+  }
+}

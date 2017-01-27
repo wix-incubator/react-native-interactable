@@ -1,6 +1,6 @@
 {
   "name": "react-native-interactable",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Experimental implementation of interactable views in React Native",
   "license": "MIT",
   "author": "Tal Kol <talkol@gmail.com>",

@@ -31,7 +31,13 @@
     }
     
     CGPoint translation = [pan translationInView:self];
-    self.center = CGPointMake(self.initialCenter.x + translation.x, self.initialCenter.y + translation.y);
+    if (self.horizontalOnly) {
+        self.center = CGPointMake(self.initialCenter.x + translation.x, self.initialCenter.y);
+    } else if (self.verticalOnly) {
+        self.center = CGPointMake(self.initialCenter.x, self.initialCenter.y + translation.y);
+    } else {
+        self.center = CGPointMake(self.initialCenter.x + translation.x, self.initialCenter.y + translation.y);
+    }
     
     if (pan.state == UIGestureRecognizerStateEnded) {
         // self.center = self.initialCenter;

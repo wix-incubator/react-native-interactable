@@ -2,20 +2,39 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
+  Button,
   View
 } from 'react-native';
-import Interactable from 'react-native-interactable';
+import ChatHeads from './src/ChatHeads';
+import SwipeableCard from './src/SwipeableCard';
+import IconDrawer from './src/IconDrawer';
+import CollapsingHeader from './src/CollapsingHeader';
 
 export default class example extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentExample: undefined
+    }
+  }
+
   render() {
+    if (this.state.currentExample) {
+      const ExampleComponent = this.state.currentExample;
+      return <ExampleComponent />;
+    }
     return (
       <View style={styles.container}>
-        <Interactable.View>
-          <View style={{width: 50, height: 50, backgroundColor: 'red', borderRadius: 25}} />
-        </Interactable.View>
+        <Button title="Chat Heads" onPress={this.onExamplePress.bind(this, ChatHeads)} />
+        <Button title="Swipeable Card" onPress={this.onExamplePress.bind(this, SwipeableCard)} />
+        <Button title="Icon Drawer" onPress={this.onExamplePress.bind(this, IconDrawer)} />
+        <Button title="Collapsing Header" onPress={this.onExamplePress.bind(this, CollapsingHeader)} />
       </View>
     );
+  }
+
+  onExamplePress(currentExample) {
+    this.setState({currentExample});
   }
 }
 

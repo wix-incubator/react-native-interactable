@@ -5,14 +5,15 @@ import {
   Text,
   View
 } from 'react-native';
+import Interactable from 'react-native-interactable';
 
-export default class example extends Component {
+export default class ChatHeads extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Not Implemented
-        </Text>
+        <Interactable.View>
+          <View style={{width: 50, height: 50, backgroundColor: 'red', borderRadius: 25}} />
+        </Interactable.View>
       </View>
     );
   }
@@ -23,13 +24,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    backgroundColor: 'white',
   }
 });
-
-AppRegistry.registerComponent('example', () => example);

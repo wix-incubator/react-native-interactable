@@ -18,4 +18,7 @@ RCT_EXPORT_MODULE()
     return [[InteractableView alloc] init];
 }
 
+RCT_EXPORT_VIEW_PROPERTY(verticalOnly, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(horizontalOnly, BOOL)
+
 @end

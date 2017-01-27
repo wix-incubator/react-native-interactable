@@ -10,4 +10,7 @@
 
 @interface InteractableView : UIView
 
+@property (nonatomic, assign) BOOL verticalOnly;
+@property (nonatomic, assign) BOOL horizontalOnly;
+
 @end

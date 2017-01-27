@@ -101,7 +101,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 - (void)setVelocity:(CGPoint)velocity
 {
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self]];
-    itemBehaviour.allowsRotation = NO;
+    itemBehaviour.allowsRotation = self.allowRotation;
     itemBehaviour.resistance = 0;
     [itemBehaviour addLinearVelocity:velocity forItem:self];
     [self.animator addBehavior:itemBehaviour];

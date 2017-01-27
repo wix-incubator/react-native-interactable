@@ -17,6 +17,7 @@
     InteractablePoint *point = [InteractablePoint new];
     point.x = [self CGFloat:json[@"x"] ?: @(CGFLOAT_MAX)];
     point.y = [self CGFloat:json[@"y"] ?: @(CGFLOAT_MAX)];
+    point.damping = [self CGFloat:json[@"damping"] ?: @(0.5)];
     return point;
 }
 

@@ -37,6 +37,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
     if (self.superview)
     {
         self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.superview];
+        self.animator.delegate = self;
     }
 }
 
@@ -101,6 +102,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 {
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self]];
     itemBehaviour.allowsRotation = NO;
+    itemBehaviour.resistance = 0;
     [itemBehaviour addLinearVelocity:velocity forItem:self];
     [self.animator addBehavior:itemBehaviour];
 }
@@ -108,9 +110,13 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 - (void)snapToPoint:(InteractablePoint*)snapPoint
 {
     UISnapBehavior *snapBehaviour = [[UISnapBehavior alloc] initWithItem:self snapToPoint:[snapPoint positionWithOrigin:self.origin]];
-    snapBehaviour.damping = 0.8f;
+    snapBehaviour.damping = snapPoint.damping;
     [self.animator addBehavior:snapBehaviour];
 }
 
+- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
+{
+    
+}
 
 @end

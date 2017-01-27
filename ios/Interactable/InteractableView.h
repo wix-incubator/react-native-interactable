@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "InteractablePoint.h"
 
-@interface InteractableView : UIView
+@interface InteractableView : UIView <UIDynamicAnimatorDelegate>
 
 @property (nonatomic, assign) BOOL verticalOnly;
 @property (nonatomic, assign) BOOL horizontalOnly;

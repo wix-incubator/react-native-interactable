@@ -22,7 +22,7 @@ export default class ChatHeads extends Component {
             {x: -140, y: 140},
             {x: 140, y: 140},
             {x: -140, y: 280},
-            {x: 140, y: 280}
+            {x: 140, y: 280, damping: 0.05}
           ]}
         >
           <View style={{width: 50, height: 50, backgroundColor: 'red', borderRadius: 25}} />

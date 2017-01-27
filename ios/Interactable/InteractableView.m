@@ -102,7 +102,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 {
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self]];
     itemBehaviour.allowsRotation = self.allowRotation;
-    itemBehaviour.resistance = 0;
+    itemBehaviour.resistance = self.resistance;
     [itemBehaviour addLinearVelocity:velocity forItem:self];
     [self.animator addBehavior:itemBehaviour];
 }

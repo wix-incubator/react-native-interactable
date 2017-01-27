@@ -24,5 +24,6 @@ RCT_EXPORT_VIEW_PROPERTY(verticalOnly, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(horizontalOnly, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(snapTo, NSArray<InteractablePoint *>)
 RCT_EXPORT_VIEW_PROPERTY(allowRotation, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(resistance, CGFloat)
 
 @end

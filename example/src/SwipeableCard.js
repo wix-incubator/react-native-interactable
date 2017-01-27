@@ -14,6 +14,7 @@ export default class SwipeableCard extends Component {
         <Interactable.View
           key="first"
           horizontalOnly={true}
+          resistance={3000}
           snapTo={[
             {x: 350},
             {x: 0},

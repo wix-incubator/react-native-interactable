@@ -15,5 +15,6 @@
 @property (nonatomic, assign) BOOL horizontalOnly;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *snapTo;
 @property (nonatomic, assign) BOOL allowRotation;
+@property (nonatomic, assign) CGFloat resistance;
 
 @end

@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 export default class IconDrawer extends Component {
@@ -26,8 +21,8 @@ export default class IconDrawer extends Component {
       </View>
     );
   }
-  onDrawerSnap(e) {
-    const snapPointId = e.nativeEvent.id;
+  onDrawerSnap(event) {
+    const snapPointId = event.nativeEvent.id;
     console.log(`drawer state is ${snapPointId}`);
   }
 }

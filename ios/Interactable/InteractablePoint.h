@@ -18,5 +18,6 @@
 
 - (CGPoint)positionWithOrigin:(CGPoint)origin;
 - (CGFloat)distanceFromPoint:(CGPoint)point withOrigin:(CGPoint)origin;
++ (CGPoint)deltaBetweenPoint:(CGPoint)point andOrigin:(CGPoint)origin;
 
 @end

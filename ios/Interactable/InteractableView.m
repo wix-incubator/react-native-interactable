@@ -12,6 +12,7 @@
 const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 
 @interface InteractableView()
+@property (nonatomic, assign) BOOL originSet;
 @property (nonatomic, assign) CGPoint origin;
 @property (nonatomic, assign) CGPoint initialPanCenter;
 @property (nonatomic) UIDynamicAnimator *animator;
@@ -28,6 +29,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
         [pan setMinimumNumberOfTouches:1];
         [pan setMaximumNumberOfTouches:1];
         [self addGestureRecognizer:pan];
+        self.originSet = NO;
         self.initialPositionSet = NO;
     }
     return self;
@@ -47,6 +49,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 {
     [super reactSetFrame:frame];
     self.origin = self.center;
+    self.originSet = YES;
     
     // initial position
     if (!self.initialPositionSet)
@@ -57,6 +60,12 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
             self.center = CGPointMake(self.origin.x + self.initialPosition.x, self.origin.y + self.initialPosition.y);
         }
     }
+}
+
+- (void)setCenter:(CGPoint)center
+{
+    [super setCenter:center];
+    [self reportAnimatedEvent];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan
@@ -84,8 +93,8 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
         CGPoint velocity = [pan velocityInView:self.superview];
         if (self.horizontalOnly) velocity.y = 0;
         if (self.verticalOnly) velocity.x = 0;
-        CGPoint correctedCenter = CGPointMake(self.center.x + VTPP*velocity.x, self.center.y + VTPP*velocity.y);
-        InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:correctedCenter];
+        CGPoint projectedCenter = CGPointMake(self.center.x + VTPP*velocity.x, self.center.y + VTPP*velocity.y);
+        InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:projectedCenter];
         if (snapPoint)
         {
             [self setVelocity:velocity];
@@ -136,6 +145,19 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
         {
             @"index": @([self.snapTo indexOfObject:snapPoint]),
             @"id": snapPoint.id
+        });
+    }
+}
+
+- (void)reportAnimatedEvent
+{
+    if (self.onAnimatedEvent && self.originSet)
+    {
+        CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
+        self.onAnimatedEvent(@
+        {
+            @"x": @(deltaFromOrigin.x),
+            @"y": @(deltaFromOrigin.y)
         });
     }
 }

@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 export default class SwipeableCard extends Component {

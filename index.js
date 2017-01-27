@@ -1,5 +1,5 @@
-import { requireNativeComponent } from 'react-native';
+import InteractableView from './src/InteractableView';
 
 module.exports = {
-  View: requireNativeComponent('InteractableView', null)
+  View: InteractableView
 };

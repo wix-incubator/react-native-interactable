@@ -30,4 +30,9 @@
     return sqrt(dx*dx + dy*dy);
 }
 
++ (CGPoint)deltaBetweenPoint:(CGPoint)point andOrigin:(CGPoint)origin
+{
+    return CGPointMake(point.x - origin.x, point.y - origin.y);
+}
+
 @end

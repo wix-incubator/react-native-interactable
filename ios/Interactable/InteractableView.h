@@ -19,5 +19,6 @@
 @property (nonatomic, assign) CGFloat resistance;
 @property (nonatomic, copy) RCTBubblingEventBlock onSnap;
 @property (nonatomic, assign) CGPoint initialPosition;
+@property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
 
 @end

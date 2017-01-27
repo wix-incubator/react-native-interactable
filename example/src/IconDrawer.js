@@ -15,15 +15,20 @@ export default class IconDrawer extends Component {
             <Interactable.View
               horizontalOnly={true}
               snapTo={[
-                {x: 0},
-                {x: -220}
+                {x: 0, id: 'closed'},
+                {x: -220, id: 'open'}
               ]}
+              onSnap={this.onDrawerSnap}
             >
               <View style={{left: 0, right: 0, height: 75, backgroundColor: '#e0e0e0'}} />
             </Interactable.View>
           </View>
       </View>
     );
+  }
+  onDrawerSnap(e) {
+    const snapPointId = e.nativeEvent.id;
+    console.log(`drawer state is ${snapPointId}`);
   }
 }
 

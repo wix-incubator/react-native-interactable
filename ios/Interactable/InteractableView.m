@@ -116,7 +116,16 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
 {
-    
+    if (!self.onSnap) return;
+    InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:self.center];
+    if (snapPoint)
+    {
+        self.onSnap(@
+        {
+            @"index": @([self.snapTo indexOfObject:snapPoint]),
+            @"id": snapPoint.id
+        });
+    }
 }
 
 @end

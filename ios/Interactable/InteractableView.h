@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <React/RCTComponent.h>
 #import "InteractablePoint.h"
 
 @interface InteractableView : UIView <UIDynamicAnimatorDelegate>
@@ -16,5 +17,6 @@
 @property (nonatomic, copy) NSArray<InteractablePoint *> *snapTo;
 @property (nonatomic, assign) BOOL allowRotation;
 @property (nonatomic, assign) CGFloat resistance;
+@property (nonatomic, copy) RCTBubblingEventBlock onSnap;
 
 @end

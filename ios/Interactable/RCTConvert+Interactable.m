@@ -18,6 +18,7 @@
     point.x = [self CGFloat:json[@"x"] ?: @(CGFLOAT_MAX)];
     point.y = [self CGFloat:json[@"y"] ?: @(CGFLOAT_MAX)];
     point.damping = [self CGFloat:json[@"damping"] ?: @(0.5)];
+    point.id = [self NSString:json[@"id"] ?: nil];
     return point;
 }
 

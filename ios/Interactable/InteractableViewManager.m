@@ -26,5 +26,6 @@ RCT_EXPORT_VIEW_PROPERTY(snapTo, NSArray<InteractablePoint *>)
 RCT_EXPORT_VIEW_PROPERTY(allowRotation, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(resistance, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(onSnap, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(initialPosition, CGPoint)
 
 @end

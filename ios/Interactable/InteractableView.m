@@ -15,6 +15,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 @property (nonatomic, assign) CGPoint origin;
 @property (nonatomic, assign) CGPoint initialPanCenter;
 @property (nonatomic) UIDynamicAnimator *animator;
+@property (nonatomic, assign) BOOL initialPositionSet;
 @end
 
 @implementation InteractableView
@@ -27,6 +28,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
         [pan setMinimumNumberOfTouches:1];
         [pan setMaximumNumberOfTouches:1];
         [self addGestureRecognizer:pan];
+        self.initialPositionSet = NO;
     }
     return self;
 }
@@ -45,6 +47,16 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 {
     [super reactSetFrame:frame];
     self.origin = self.center;
+    
+    // initial position
+    if (!self.initialPositionSet)
+    {
+        self.initialPositionSet = YES;
+        if (!CGPointEqualToPoint(self.initialPosition, CGPointZero))
+        {
+            self.center = CGPointMake(self.origin.x + self.initialPosition.x, self.origin.y + self.initialPosition.y);
+        }
+    }
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan

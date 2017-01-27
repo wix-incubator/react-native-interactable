@@ -18,5 +18,6 @@
 @property (nonatomic, assign) BOOL allowRotation;
 @property (nonatomic, assign) CGFloat resistance;
 @property (nonatomic, copy) RCTBubblingEventBlock onSnap;
+@property (nonatomic, assign) CGPoint initialPosition;
 
 @end

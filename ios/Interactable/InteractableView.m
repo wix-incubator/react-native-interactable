@@ -9,9 +9,12 @@
 #import "InteractableView.h"
 #import <React/UIView+React.h>
 
+const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
+
 @interface InteractableView()
 @property (nonatomic, assign) CGPoint origin;
 @property (nonatomic, assign) CGPoint initialPanCenter;
+@property (nonatomic) UIDynamicAnimator *animator;
 @end
 
 @implementation InteractableView
@@ -28,6 +31,15 @@
     return self;
 }
 
+- (void)didMoveToSuperview
+{
+    [super didMoveToSuperview];
+    if (self.superview)
+    {
+        self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.superview];
+    }
+}
+
 - (void)reactSetFrame:(CGRect)frame
 {
     [super reactSetFrame:frame];
@@ -39,6 +51,7 @@
     if (pan.state == UIGestureRecognizerStateBegan)
     {
         self.initialPanCenter = self.center;
+        [self.animator removeAllBehaviors];
     }
     
     CGPoint translation = [pan translationInView:self];
@@ -55,15 +68,15 @@
     
     if (pan.state == UIGestureRecognizerStateEnded)
     {
-        InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:self.center];
+        CGPoint velocity = [pan velocityInView:self.superview];
+        if (self.horizontalOnly) velocity.y = 0;
+        if (self.verticalOnly) velocity.x = 0;
+        CGPoint correctedCenter = CGPointMake(self.center.x + VTPP*velocity.x, self.center.y + VTPP*velocity.y);
+        InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:correctedCenter];
         if (snapPoint)
         {
-            [UIView animateWithDuration:0.8 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:nil animations:^
-            {
-                self.center = [snapPoint positionWithOrigin:self.origin];
-            } completion:^(BOOL finished)
-            {
-            }];
+            [self setVelocity:velocity];
+            [self snapToPoint:snapPoint];
         }
     }
 }
@@ -82,6 +95,21 @@
         }
     }
     return res;
+}
+
+- (void)setVelocity:(CGPoint)velocity
+{
+    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self]];
+    itemBehaviour.allowsRotation = NO;
+    [itemBehaviour addLinearVelocity:velocity forItem:self];
+    [self.animator addBehavior:itemBehaviour];
+}
+
+- (void)snapToPoint:(InteractablePoint*)snapPoint
+{
+    UISnapBehavior *snapBehaviour = [[UISnapBehavior alloc] initWithItem:self snapToPoint:[snapPoint positionWithOrigin:self.origin]];
+    snapBehaviour.damping = 0.8f;
+    [self.animator addBehavior:snapBehaviour];
 }
 
 

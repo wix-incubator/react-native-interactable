@@ -6,6 +6,7 @@ export default class SwipeableCard extends Component {
   render() {
     return (
       <View style={styles.container}>
+
         <Interactable.View
           key="first"
           horizontalOnly={true}
@@ -14,10 +15,10 @@ export default class SwipeableCard extends Component {
             {x: 350},
             {x: 0},
             {x: -350}
-          ]}
-        >
+          ]}>
           <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
         </Interactable.View>
+
         <Interactable.View
           key="second"
           horizontalOnly={true}
@@ -25,10 +26,10 @@ export default class SwipeableCard extends Component {
             {x: 350},
             {x: 0},
             {x: -350}
-          ]}
-        >
+          ]}>
           <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
         </Interactable.View>
+
         <Interactable.View
           key="third"
           horizontalOnly={true}
@@ -37,10 +38,10 @@ export default class SwipeableCard extends Component {
             {x: 350},
             {x: 0},
             {x: -350}
-          ]}
-        >
+          ]}>
           <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
         </Interactable.View>
+
       </View>
     );
   }

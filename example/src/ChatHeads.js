@@ -20,8 +20,7 @@ export default class ChatHeads extends Component {
             {x: 140, y: 280, damping: 0.05}
           ]}
           initialPosition={{x: -140, y: -280}}
-          resistance={2000}
-        >
+          resistance={2000}>
           <View style={{width: 50, height: 50, backgroundColor: 'red', borderRadius: 25}} />
         </Interactable.View>
       </View>

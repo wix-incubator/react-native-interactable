@@ -10,6 +10,7 @@ export default class CollapsingHeader extends Component {
   render() {
     return (
       <View style={styles.container}>
+
           <View style={{backgroundColor: 'red', height: 250, alignItems: 'center'}}>
             <Animated.View style={{
               transform: [
@@ -30,16 +31,14 @@ export default class CollapsingHeader extends Component {
               <View style={{width: 150, height: 150, backgroundColor: 'blue', borderRadius: 75, marginTop: 50}} />
             </Animated.View>
           </View>
+
           <Interactable.View
             verticalOnly={true}
-            snapTo={[
-              {y: 0},
-              {y: -150}
-            ]}
-            animatedValueY={this._deltaY}
-          >
+            snapTo={[{y: 0}, {y: -150}]}
+            animatedValueY={this._deltaY}>
             <View style={{left: 0, right: 0, height: 600, backgroundColor: '#e0e0e0'}} />
           </Interactable.View>
+
       </View>
     );
   }

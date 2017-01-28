@@ -108,7 +108,7 @@ Optional, a function called whenever the view snaps to a `snapTo` point (after b
 animatedValueX={this._deltaX}
 ```
 
-[`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (x axis). See [this](#animating-other-views-according-to-interactableview-position) for more details on how to animate other views according to the movement of this view.
+[`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (x axis). See [this](README.md#animating-other-views-according-to-interactableview-position) for more details on how to animate other views according to the movement of this view.
 
 #### `animatedValueY` (Animated.Value)
 
@@ -116,7 +116,7 @@ animatedValueX={this._deltaX}
 animatedValueY={this._deltaY}
 ```
 
-[`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (y axis). See [this](#animating-other-views-according-to-interactableview-position) for more details on how to animate other views according to the movement of this view.
+[`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (y axis). See [this](README.md#animating-other-views-according-to-interactableview-position) for more details on how to animate other views according to the movement of this view.
 
 #### `resistance` (number)
 

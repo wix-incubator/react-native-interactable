@@ -36,7 +36,7 @@ export default class CollapsingHeader extends Component {
             verticalOnly={true}
             snapTo={[{y: 0}, {y: -150}]}
             animatedValueY={this._deltaY}>
-            <View style={{left: 0, right: 0, height: 600, backgroundColor: '#e0e0e0'}} />
+            <View style={{left: 0, right: 0, height: 650, backgroundColor: '#e0e0e0'}} />
           </Interactable.View>
 
       </View>

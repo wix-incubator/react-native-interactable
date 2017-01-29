@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Button,
-  View
+  View,
+  TouchableOpacity,
+  Text
 } from 'react-native';
 import ChatHeads from './src/ChatHeads';
 import SwipeableCard from './src/SwipeableCard';
@@ -25,10 +26,18 @@ export default class example extends Component {
     }
     return (
       <View style={styles.container}>
-        <Button title="Chat Heads" onPress={this.onExamplePress.bind(this, ChatHeads)} />
-        <Button title="Swipeable Card" onPress={this.onExamplePress.bind(this, SwipeableCard)} />
-        <Button title="Icon Drawer" onPress={this.onExamplePress.bind(this, IconDrawer)} />
-        <Button title="Collapsing Header" onPress={this.onExamplePress.bind(this, CollapsingHeader)} />
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, ChatHeads)}>
+          <Text style={styles.button}>Chat Heads</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, SwipeableCard)}>
+          <Text style={styles.button}>Swipeable Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, IconDrawer)}>
+          <Text style={styles.button}>Icon Drawer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeader)}>
+          <Text style={styles.button}>Collapsing Header</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -44,6 +53,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  button: {
+    color: 'blue',
+    fontSize: 24,
+    marginBottom: 24
   }
 });
 

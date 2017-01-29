@@ -64,6 +64,8 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 
 - (void)setCenter:(CGPoint)center
 {
+    if (self.horizontalOnly && self.originSet) center.y = self.origin.y;
+    if (self.verticalOnly && self.originSet) center.x = self.origin.x;
     [super setCenter:center];
     [self reportAnimatedEvent];
 }

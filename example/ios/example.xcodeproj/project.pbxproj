@@ -24,7 +24,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		CC0127CD1E3ACFFD00B23C9F /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0127B31E3ACFD500B23C9F /* libInteractable.a */; };
+		CCA33CBE1E3E365200649701 /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA33CBD1E3E363100649701 /* libInteractable.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,9 +210,9 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		CC0127B21E3ACFD500B23C9F /* PBXContainerItemProxy */ = {
+		CCA33CBC1E3E363100649701 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CC0127AE1E3ACFD500B23C9F /* Interactable.xcodeproj */;
+			containerPortal = CCA33CB81E3E363100649701 /* Interactable.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CC0127971E3ACC3900B23C9F;
 			remoteInfo = Interactable;
@@ -242,7 +242,7 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		CC0127AE1E3ACFD500B23C9F /* Interactable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = ../../ios/Interactable.xcodeproj; sourceTree = "<group>"; };
+		CCA33CB81E3E363100649701 /* Interactable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,7 +258,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC0127CD1E3ACFFD00B23C9F /* libInteractable.a in Frameworks */,
+				CCA33CBE1E3E365200649701 /* libInteractable.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -403,7 +403,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				CC0127AE1E3ACFD500B23C9F /* Interactable.xcodeproj */,
+				CCA33CB81E3E363100649701 /* Interactable.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -449,10 +449,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CC0127AF1E3ACFD500B23C9F /* Products */ = {
+		CCA33CB91E3E363100649701 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CC0127B31E3ACFD500B23C9F /* libInteractable.a */,
+				CCA33CBD1E3E363100649701 /* libInteractable.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -507,7 +507,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = S3GLW74Y8N;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = S3GLW74Y8N;
 					};
 				};
 			};
@@ -524,8 +528,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = CC0127AF1E3ACFD500B23C9F /* Products */;
-					ProjectRef = CC0127AE1E3ACFD500B23C9F /* Interactable.xcodeproj */;
+					ProductGroup = CCA33CB91E3E363100649701 /* Products */;
+					ProjectRef = CCA33CB81E3E363100649701 /* Interactable.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -756,11 +760,11 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CC0127B31E3ACFD500B23C9F /* libInteractable.a */ = {
+		CCA33CBD1E3E363100649701 /* libInteractable.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libInteractable.a;
-			remoteRef = CC0127B21E3ACFD500B23C9F /* PBXContainerItemProxy */;
+			remoteRef = CCA33CBC1E3E363100649701 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -846,6 +850,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = S3GLW74Y8N;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -863,6 +868,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = S3GLW74Y8N;
 				INFOPLIST_FILE = exampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -877,6 +883,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = S3GLW74Y8N;
 				INFOPLIST_FILE = example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -894,6 +901,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S3GLW74Y8N;
 				INFOPLIST_FILE = example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -940,7 +948,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -975,7 +983,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

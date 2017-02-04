@@ -15,7 +15,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 @property (nonatomic, assign) BOOL originSet;
 @property (nonatomic, assign) CGPoint origin;
 @property (nonatomic, assign) CGPoint initialPanCenter;
-@property (nonatomic) UIDynamicAnimator *animator;
+@property (nonatomic) PhysicsAnimator *animator;
 @property (nonatomic, assign) BOOL initialPositionSet;
 @end
 
@@ -40,7 +40,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
     [super didMoveToSuperview];
     if (self.superview)
     {
-        self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.superview];
+        self.animator = [[PhysicsAnimator alloc] initWithReferenceView:self.superview];
         self.animator.delegate = self;
     }
 }
@@ -123,21 +123,26 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 
 - (void)setVelocity:(CGPoint)velocity
 {
+    [self.animator setTarget:self velocity:velocity];
+    /*
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self]];
     itemBehaviour.allowsRotation = self.allowRotation;
     itemBehaviour.resistance = self.resistance;
     [itemBehaviour addLinearVelocity:velocity forItem:self];
     [self.animator addBehavior:itemBehaviour];
+    */
 }
 
 - (void)snapToPoint:(InteractablePoint*)snapPoint
 {
-    UISnapBehavior *snapBehaviour = [[UISnapBehavior alloc] initWithItem:self snapToPoint:[snapPoint positionWithOrigin:self.origin]];
+    PhysicsSnapBehavior *snapBehaviour = [[PhysicsSnapBehavior alloc] initWithTarget:self snapToPoint:[snapPoint positionWithOrigin:self.origin]];
+    /*
     snapBehaviour.damping = snapPoint.damping;
+    */
     [self.animator addBehavior:snapBehaviour];
 }
 
-- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
+- (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator
 {
     if (!self.onSnap) return;
     InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:self.center];

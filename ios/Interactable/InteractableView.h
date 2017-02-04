@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <React/RCTComponent.h>
 #import "InteractablePoint.h"
+#import "PhysicsAnimator.h"
 
-@interface InteractableView : UIView <UIDynamicAnimatorDelegate>
+@interface InteractableView : UIView <PhysicsAnimatorDelegate>
 
 @property (nonatomic, assign) BOOL verticalOnly;
 @property (nonatomic, assign) BOOL horizontalOnly;

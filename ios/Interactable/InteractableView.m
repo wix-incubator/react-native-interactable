@@ -64,8 +64,23 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 
 - (void)setCenter:(CGPoint)center
 {
-    if (self.horizontalOnly && self.originSet) center.y = self.origin.y;
-    if (self.verticalOnly && self.originSet) center.x = self.origin.x;
+    if (self.originSet)
+    {
+        if (self.horizontalOnly) center.y = self.origin.y;
+        if (self.verticalOnly) center.x = self.origin.x;
+        
+        if (self.limitX)
+        {
+            if (center.x - self.origin.x < self.limitX.min) center.x = self.limitX.min + self.origin.x;
+            if (center.x - self.origin.x > self.limitX.max) center.x = self.limitX.max + self.origin.x;
+        }
+        if (self.limitY)
+        {
+            if (center.y - self.origin.y < self.limitY.min) center.y = self.limitY.min + self.origin.y;
+            if (center.y - self.origin.y > self.limitY.max) center.y = self.limitY.max + self.origin.y;
+        }
+    }
+    
     [super setCenter:center];
     [self reportAnimatedEvent];
 }

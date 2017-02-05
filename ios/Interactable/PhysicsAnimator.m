@@ -15,7 +15,7 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
 @interface PhysicsAnimator()
 @property (nonatomic) CADisplayLink *displayLink;
 @property (nonatomic, assign) CFTimeInterval lastFrameTime;
-@property (nonatomic) NSMutableArray *behaviors;
+@property (nonatomic) NSMutableArray<PhysicsBehavior *> *behaviors;
 @property (nonatomic) NSMapTable *targetsToObjects;
 @property (nonatomic, assign) int consecutiveFramesWithNoMovement;
 @property (nonatomic, assign) CGFloat screenScale;

@@ -10,6 +10,7 @@ import ChatHeads from './src/ChatHeads';
 import SwipeableCard from './src/SwipeableCard';
 import IconDrawer from './src/IconDrawer';
 import CollapsingHeader from './src/CollapsingHeader';
+import MoreDrawers from './src/MoreDrawers';
 
 export default class example extends Component {
   constructor(props) {
@@ -37,6 +38,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeader)}>
           <Text style={styles.button}>Collapsing Header</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, MoreDrawers)}>
+          <Text style={styles.button}>More Drawers</Text>
         </TouchableOpacity>
       </View>
     );

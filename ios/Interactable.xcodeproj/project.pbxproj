@@ -15,6 +15,7 @@
 		CC8513CF1E45D5C900137CA9 /* PhysicsSnapBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513CE1E45D5C900137CA9 /* PhysicsSnapBehavior.m */; };
 		CC8513D21E45E01F00137CA9 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513D11E45E01F00137CA9 /* PhysicsObject.m */; };
 		CC8513D51E467EAE00137CA9 /* PhysicsAttractionBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513D41E467EAE00137CA9 /* PhysicsAttractionBehavior.m */; };
+		CC8513F21E47E1FC00137CA9 /* InteractableLimit.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513F11E47E1FC00137CA9 /* InteractableLimit.m */; };
 		CCA33C9A1E3B642500649701 /* InteractablePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA33C991E3B642500649701 /* InteractablePoint.m */; };
 		CCA33C9D1E3B6B5000649701 /* RCTConvert+Interactable.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA33C9C1E3B6B5000649701 /* RCTConvert+Interactable.m */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,8 @@
 		CC8513D11E45E01F00137CA9 /* PhysicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsObject.m; sourceTree = "<group>"; };
 		CC8513D31E467EAE00137CA9 /* PhysicsAttractionBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsAttractionBehavior.h; sourceTree = "<group>"; };
 		CC8513D41E467EAE00137CA9 /* PhysicsAttractionBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsAttractionBehavior.m; sourceTree = "<group>"; };
+		CC8513F01E47E1FC00137CA9 /* InteractableLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractableLimit.h; sourceTree = "<group>"; };
+		CC8513F11E47E1FC00137CA9 /* InteractableLimit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractableLimit.m; sourceTree = "<group>"; };
 		CCA33C981E3B642500649701 /* InteractablePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractablePoint.h; sourceTree = "<group>"; };
 		CCA33C991E3B642500649701 /* InteractablePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractablePoint.m; sourceTree = "<group>"; };
 		CCA33C9B1E3B6B5000649701 /* RCTConvert+Interactable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+Interactable.h"; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 				CC0127DB1E3AD42C00B23C9F /* InteractableView.m */,
 				CCA33C981E3B642500649701 /* InteractablePoint.h */,
 				CCA33C991E3B642500649701 /* InteractablePoint.m */,
+				CC8513F01E47E1FC00137CA9 /* InteractableLimit.h */,
+				CC8513F11E47E1FC00137CA9 /* InteractableLimit.m */,
 				CCA33C9B1E3B6B5000649701 /* RCTConvert+Interactable.h */,
 				CCA33C9C1E3B6B5000649701 /* RCTConvert+Interactable.m */,
 			);
@@ -179,6 +184,7 @@
 				CC8513D21E45E01F00137CA9 /* PhysicsObject.m in Sources */,
 				CC8513C81E45D2A200137CA9 /* PhysicsAnimator.m in Sources */,
 				CCA33C9D1E3B6B5000649701 /* RCTConvert+Interactable.m in Sources */,
+				CC8513F21E47E1FC00137CA9 /* InteractableLimit.m in Sources */,
 				CC8513CC1E45D59C00137CA9 /* PhysicsBehavior.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

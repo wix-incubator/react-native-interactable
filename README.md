@@ -97,6 +97,28 @@ verticalOnly={true}
 
 Optional, whether the view should be locked to vertical movement only.
 
+#### `limitX` (object)
+
+```jsx
+limitX={{max: 100, min: -100}}
+```
+
+Optional, an object providing limits to movement relative to the view's center (after initial layout). Contains following properties:
+
+* `max` - The maximum horizontal position (relative to the center). Optional.
+* `min` - The minimum horizontal position (relative to the center). Optional.
+
+#### `limitY` (object)
+
+```jsx
+limitY={{max: 100, min: -100}}
+```
+
+Optional, an object providing limits to movement relative to the view's center (after initial layout). Contains following properties:
+
+* `max` - The maximum vertical position (relative to the center). Optional.
+* `min` - The minimum vertical position (relative to the center). Optional.
+
 #### `onSnap` (function)
 
 ```jsx

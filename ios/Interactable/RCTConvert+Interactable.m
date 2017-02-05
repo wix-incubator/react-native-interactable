@@ -8,6 +8,7 @@
 
 #import "RCTConvert+Interactable.h"
 #import "InteractablePoint.h"
+#import "InteractableLimit.h"
 
 @implementation RCTConvert(Interactable)
 
@@ -21,6 +22,15 @@
     point.strength = [self CGFloat:json[@"strength"] ?: @(300.0)];
     point.id = [self NSString:json[@"id"] ?: nil];
     return point;
+}
+
++ (InteractableLimit *)InteractableLimit:(id)json
+{
+    json = [self NSDictionary:json];
+    InteractableLimit *limit = [InteractableLimit new];
+    limit.min = [self CGFloat:json[@"min"] ?: @(-CGFLOAT_MAX)];
+    limit.max = [self CGFloat:json[@"max"] ?: @(CGFLOAT_MAX)];
+    return limit;
 }
 
 RCT_ARRAY_CONVERTER(InteractablePoint)

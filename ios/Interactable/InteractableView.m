@@ -99,7 +99,7 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
         InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:projectedCenter];
         if (snapPoint)
         {
-            [self setVelocity:velocity];
+            [self.animator setTarget:self velocity:velocity];
             [self snapToPoint:snapPoint];
         }
     }
@@ -121,24 +121,11 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
     return res;
 }
 
-- (void)setVelocity:(CGPoint)velocity
-{
-    [self.animator setTarget:self velocity:velocity];
-    /*
-    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self]];
-    itemBehaviour.allowsRotation = self.allowRotation;
-    itemBehaviour.resistance = self.resistance;
-    [itemBehaviour addLinearVelocity:velocity forItem:self];
-    [self.animator addBehavior:itemBehaviour];
-    */
-}
-
 - (void)snapToPoint:(InteractablePoint*)snapPoint
 {
     PhysicsSnapBehavior *snapBehaviour = [[PhysicsSnapBehavior alloc] initWithTarget:self snapToPoint:[snapPoint positionWithOrigin:self.origin]];
-    /*
     snapBehaviour.damping = snapPoint.damping;
-    */
+    snapBehaviour.tension = snapPoint.strength;
     [self.animator addBehavior:snapBehaviour];
 }
 

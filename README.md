@@ -57,7 +57,7 @@ import Interactable from 'react-native-interactable';
   horizontalOnly={true}
   snapTo={[{x: 0}, {x: -200}]}
   onSnap={this.onDrawerSnap}>
-  
+
   // the view that you wrap here will now support interactions
 
 </Interactable.View>
@@ -75,7 +75,8 @@ A list of points the view will snap to after being dragged by the user. To imple
 
 * `x` - The horizontal position (relative to the center). Optional if a single dimension is needed.
 * `y` - The vertical position (relative to the center). Optional if a single dimension is needed.
-* `damping` - Amount of damping on the spring connected to this point. Default is `0.5`.
+* `damping` - Amount of damping on the spring connected to this point. Default is `0.7`.
+* `strength` - Strength of the spring connected to this point. Default is `300`.
 * `id` - An optional string name for the point to identify it in the `onSnap` event.
 
 Examples for [chat heads](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/ChatHeads.js#L10), [drawer](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/IconDrawer.js#L62) and [swipeable card](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/SwipeableCard.js#L25).
@@ -123,14 +124,6 @@ animatedValueY={this._deltaY}
 
 [`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (y axis). See [this](README.md#animating-other-views-according-to-interactableview-position) for more details on how to animate other views according to the movement of this view.
 
-#### `resistance` (number)
-
-```jsx
-resistance={3000}
-```
-
-Optional, a physical attribute that will cause the view to resist movement (move slower). A value of at least `1000` is required for a significant change.
-
 #### `initialPosition` (point)
 
 ```jsx
@@ -138,14 +131,6 @@ initialPosition={{x: -140, y: -280}}
 ```
 
 Optional, used to initialize the view's position to a position different than it's original center. This is mostly useful when you want to provide `snapTo` points relative to the center calculated by React Native layout, but want the view itself to start from a different position. See [chat heads](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/ChatHeads.js#L22) example.
-
-#### `allowRotation` (boolean)
-
-```jsx
-allowRotation={true}
-```
-
-Optional, whether the view can rotate on its center axis when tossed around.
 
 ## Animating other views according to `Interactable.View` position
 
@@ -170,7 +155,7 @@ this._deltaY = new Animated.Value(0);
       outputRange: [0.3, 0.3, 1, 1]
     })
   }]
-}}> 
+}}>
   ...
 </Animated.View>
 

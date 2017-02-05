@@ -15,8 +15,8 @@
     if ((self = [super initWithTarget:target]))
     {
         self.anchorPoint = point;
-        self.tension = 80.0;
-        self.damping = 10.0;
+        self.tension = 300.0;
+        self.damping = 0.7;
     }
     return self;
 }
@@ -29,12 +29,12 @@
 
 - (void) applySpring:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object
 {
-    CGFloat dx = self.anchorPoint.x - self.target.center.x;
-    CGFloat ax = (self.tension * dx) / object.mass;
+    CGFloat dx = self.target.center.x - self.anchorPoint.x;
+    CGFloat ax = (-self.tension * dx) / object.mass;
     CGFloat vx = object.velocity.x + deltaTime * ax;
     
-    CGFloat dy = self.anchorPoint.y - self.target.center.y;
-    CGFloat ay = (self.tension * dy) / object.mass;
+    CGFloat dy = self.target.center.y - self.anchorPoint.y;
+    CGFloat ay = (-self.tension * dy) / object.mass;
     CGFloat vy = object.velocity.y + deltaTime * ay;
     
     object.velocity = CGPointMake(vx, vy);
@@ -42,11 +42,8 @@
 
 - (void) applyDamping:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object
 {
-    CGFloat ax = (-self.damping * object.velocity.x) / object.mass;
-    CGFloat vx = object.velocity.x + deltaTime * ax;
-    
-    CGFloat ay = (-self.damping * object.velocity.y) / object.mass;
-    CGFloat vy = object.velocity.y + deltaTime * ay;
+    CGFloat vx = pow(self.damping, 60.0 * deltaTime) * object.velocity.x;
+    CGFloat vy = pow(self.damping, 60.0 * deltaTime) * object.velocity.y;
     
     object.velocity = CGPointMake(vx, vy);
 }

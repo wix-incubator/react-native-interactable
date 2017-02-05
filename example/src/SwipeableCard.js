@@ -10,10 +10,9 @@ export default class SwipeableCard extends Component {
         <Interactable.View
           key="first"
           horizontalOnly={true}
-          resistance={3000}
           snapTo={[
             {x: 360},
-            {x: 0},
+            {x: 0, damping: 0.5},
             {x: -360}
           ]}>
           <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
@@ -33,10 +32,9 @@ export default class SwipeableCard extends Component {
         <Interactable.View
           key="third"
           horizontalOnly={true}
-          allowRotation={true}
           snapTo={[
             {x: 360},
-            {x: 0},
+            {x: 0, damping: 0.8},
             {x: -360}
           ]}>
           <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />

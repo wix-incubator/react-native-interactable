@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "PhysicsSnapBehavior.h"
+#import "PhysicsBounceBehavior.h"
 
 @protocol PhysicsAnimatorDelegate;
 

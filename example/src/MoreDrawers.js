@@ -28,6 +28,17 @@ export default class MoreDrawers extends Component {
           </Interactable.View>
         </View>
 
+        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+          <Interactable.View
+            snapTo={[{x: 0}, {x: -230}]}
+            limitX={{max: 0, bounce: 0.2}}
+            horizontalOnly={true}>
+            <View style={styles.cover}>
+              <Text style={styles.label}>I am a drawer</Text>
+            </View>
+          </Interactable.View>
+        </View>
+
       </View>
     );
   }

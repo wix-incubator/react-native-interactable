@@ -13,5 +13,6 @@
 
 @property (nonatomic, assign) CGFloat min;
 @property (nonatomic, assign) CGFloat max;
+@property (nonatomic, assign) CGFloat bounce;
 
 @end

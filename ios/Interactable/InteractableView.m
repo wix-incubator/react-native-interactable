@@ -117,6 +117,8 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
             [self.animator setTarget:self velocity:velocity];
             [self snapToPoint:snapPoint];
         }
+        
+        [self bounceFromLimits];
     }
 }
 
@@ -142,6 +144,30 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
     snapBehaviour.damping = snapPoint.damping;
     snapBehaviour.tension = snapPoint.strength;
     [self.animator addBehavior:snapBehaviour];
+}
+
+- (void)bounceFromLimits
+{
+    if (self.limitX && self.limitX.bounce > 0.0)
+    {
+        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
+        if (self.limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + self.limitX.min;
+        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
+        if (self.limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + self.limitX.max;
+        PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
+        bounceBehavior.bounce = self.limitX.bounce;
+        [self.animator addBehavior:bounceBehavior];
+    }
+    if (self.limitY && self.limitY.bounce > 0.0)
+    {
+        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
+        if (self.limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + self.limitY.min;
+        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
+        if (self.limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + self.limitY.max;
+        PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
+        bounceBehavior.bounce = self.limitY.bounce;
+        [self.animator addBehavior:bounceBehavior];
+    }
 }
 
 - (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator

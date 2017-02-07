@@ -30,6 +30,7 @@
     InteractableLimit *limit = [InteractableLimit new];
     limit.min = [self CGFloat:json[@"min"] ?: @(-CGFLOAT_MAX)];
     limit.max = [self CGFloat:json[@"max"] ?: @(CGFLOAT_MAX)];
+    limit.bounce = [self CGFloat:json[@"bounce"] ?: @(0.0)];
     return limit;
 }
 

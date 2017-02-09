@@ -14,6 +14,7 @@
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;
 @property (nonatomic, assign) CGFloat damping;
+@property (nonatomic, assign) CGFloat strength;
 @property (nonatomic, copy) NSString *id;
 
 - (CGPoint)positionWithOrigin:(CGPoint)origin;

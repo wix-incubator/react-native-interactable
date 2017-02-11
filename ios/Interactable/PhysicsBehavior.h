@@ -9,12 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "PhysicsObject.h"
+#import "PhysicsArea.h"
 
 @interface PhysicsBehavior : NSObject
 
 @property (nonatomic) UIView *target;
+@property (nonatomic, assign) int priority; // priority 1 is handled first, 2 handled 2nd
+@property (nonatomic, assign) BOOL temp;
+@property (nonatomic, assign) CGPoint anchorPoint;
+@property (nonatomic, copy) PhysicsArea *influence;
 
-- (id) initWithTarget:(UIView*)target;
-- (void) executeFrameWithDeltaTime:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object;
+- (instancetype)initWithTarget:(UIView*)target;
+- (instancetype)initWithTarget:(UIView*)target anchorPoint:(CGPoint)anchorPoint;
+- (void)executeFrameWithDeltaTime:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object;
+- (NSUInteger)findSortIndexInArray:(NSArray*)array;
+- (BOOL)isWithinInfluence;
 
 @end

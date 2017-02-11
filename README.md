@@ -76,7 +76,7 @@ A list of points the view will snap to after being dragged by the user. To imple
 * `x` - The horizontal position (relative to the center). Optional if a single dimension is needed.
 * `y` - The vertical position (relative to the center). Optional if a single dimension is needed.
 * `damping` - Amount of damping on the spring connected to this point. Default is `0.7`.
-* `strength` - Strength of the spring connected to this point. Default is `300`.
+* `tension` - Tension of the spring connected to this point. Default is `300`.
 * `id` - An optional string name for the point to identify it in the `onSnap` event.
 
 Examples for [chat heads](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/ChatHeads.js#L10), [drawer](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/IconDrawer.js#L62) and [swipeable card](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/SwipeableCard.js#L25).
@@ -107,7 +107,7 @@ Optional, an object providing limits to movement relative to the view's center (
 
 * `max` - The maximum horizontal position (relative to the center). Optional.
 * `min` - The minimum horizontal position (relative to the center). Optional.
-* `bounce` - The amount of bounce when hitting the limit (0.0-1.0). Optional.
+* `bounce` - The amount of bounce when hitting the limit (`0.0`-`1.0`). Optional.
 
 #### `limitY` (object)
 
@@ -119,7 +119,7 @@ Optional, an object providing limits to movement relative to the view's center (
 
 * `max` - The maximum vertical position (relative to the center). Optional.
 * `min` - The minimum vertical position (relative to the center). Optional.
-* `bounce` - The amount of bounce when hitting the limit (0.0-1.0). Optional.
+* `bounce` - The amount of bounce when hitting the limit (`0.0`-`1.0`). Optional.
 
 #### `onSnap` (function)
 
@@ -131,6 +131,37 @@ Optional, a function called whenever the view snaps to a `snapTo` point (after b
 
 * `index` - The zero-based index of the point in the `snapTo` array.
 * `id` - The string `id` of the point in the `snapTo` array (assuming it was provided).
+
+#### `drag` (object)
+
+```jsx
+drag={{tension: 2000, damping: 0.5, toss: 0.1}}
+```
+
+Optional, an object controlling the dragging behavior of the view. Contains following properties:
+
+* `tension` - If given, drag will be done via a spring. This defines the tension of the spring.
+* `damping` - Amount of damping on the spring used for dragging. Optional.
+* `toss` - Time in seconds the view is allowed to be tossed before snapping to a point. Default is `0.1`.
+
+#### `springs` (array of points)
+
+```jsx
+springs={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
+```
+
+Connect the view's center to a group of constant springs. Every point in the array is an object with the following properties:
+
+* `x` - The horizontal anchor position of the spring (relative to the center). Default is `0.0`.
+* `y` - The vertical anchor position of the spring (relative to the center). Default is `0.0`.
+* `damping` - Amount of damping on the spring. Default is `0.0`.
+* `tension` - Tension of the spring. Default is `300`.
+* `limitX` - Limit the spring influence to a specific horizontal area. Optional. An object with the following properties:
+  * `max` - The maximum horizontal influence point (relative to the center). Optional.
+  * `min` - The minimum horizontal influence point (relative to the center). Optional.
+* `limitY` - Limit the spring influence to a specific vertical area. Optional. An object with the following properties:
+  * `max` - The maximum vertical influence point (relative to the center). Optional.
+  * `min` - The minimum vertical influence point (relative to the center). Optional.
 
 #### `animatedValueX` (Animated.Value)
 

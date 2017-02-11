@@ -10,7 +10,7 @@
 
 @implementation PhysicsBounceBehavior
 
-- (id) initWithTarget:(UIView*)target minPoint:(CGPoint)minPoint maxPoint:(CGPoint)maxPoint
+- (instancetype)initWithTarget:(UIView*)target minPoint:(CGPoint)minPoint maxPoint:(CGPoint)maxPoint
 {
     if ((self = [super initWithTarget:target]))
     {
@@ -21,7 +21,7 @@
     return self;
 }
 
-- (void) executeFrameWithDeltaTime:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object
+- (void)executeFrameWithDeltaTime:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object
 {
     if (self.minPoint.x == self.target.center.x && object.velocity.x < 0.0)
     {

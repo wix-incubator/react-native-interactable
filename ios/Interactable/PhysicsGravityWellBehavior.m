@@ -20,6 +20,11 @@
     return self;
 }
 
+// regular gravitational force is proportional to 1/r^2 which is instable when r -> 0
+// instead, we're using a potential that looks like an inverted gaussian which behaves much better
+// its deriviative (the force) looks like this:
+// https://www.wolframalpha.com/input/?i=max+-5%2F(7)*sqrt(e)x*e%5E(-1%2F2%2F7%5E2*x%5E2)
+
 - (void)executeFrameWithDeltaTime:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object
 {
     if (![self isWithinInfluence]) return;

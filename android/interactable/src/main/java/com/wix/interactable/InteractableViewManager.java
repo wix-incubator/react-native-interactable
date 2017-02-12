@@ -35,7 +35,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
 
     @ReactProp(name = "snapTo")
     public void setSnapTo(InteractableView view, @Nullable ReadableArray snapTo) {
-        view.setSprings(RNConvert.interactablePoints(snapTo));
+        view.setSnapTo(RNConvert.interactablePoints(snapTo));
     }
 
     @ReactProp(name = "springs")
@@ -45,7 +45,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
 
     @ReactProp(name = "gravity")
     public void setGravity(InteractableView view, @Nullable ReadableArray gravity) {
-        view.setSprings(RNConvert.interactablePoints(gravity));
+        view.setGravity(RNConvert.interactablePoints(gravity));
     }
 
     @ReactProp(name = "drag")

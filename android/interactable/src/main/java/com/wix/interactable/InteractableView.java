@@ -85,12 +85,12 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
         if (drag == null || drag.tension == Float.MAX_VALUE) {
             PhysicsAnchorBehavior anchorBehavior = new PhysicsAnchorBehavior(this,getTransPoint());
             res = anchorBehavior;
-            this.mAnimator.addBehavior(anchorBehavior);
+            this.animator.addBehavior(anchorBehavior);
         }
         else {
             PhysicsSpringBehavior springBehavior = new PhysicsSpringBehavior(this,getTransPoint());
             res = springBehavior;
-            this.mAnimator.addBehavior(springBehavior);
+            this.animator.addBehavior(springBehavior);
         }
 
         return res;

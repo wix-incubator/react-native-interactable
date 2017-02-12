@@ -178,14 +178,32 @@ Attract/repel the view's center with a group of constant gravity wells. Every po
 * `strength` - Strength of the field (positive attracts, negative repels). Default is `400`.
 * `falloff` - Distance of decay for the field strength. Default is `40`.
 * `damping` - Amount of damping on the field strength. Default is `0.0`.
-* `limitX` - Limit the spring influence to a specific horizontal area. Optional. An object with the following properties:
+* `limitX` - Limit the field influence to a specific horizontal area. Optional. An object with the following properties:
   * `max` - The maximum horizontal influence point (relative to the center). Optional.
   * `min` - The minimum horizontal influence point (relative to the center). Optional.
-* `limitY` - Limit the spring influence to a specific vertical area. Optional. An object with the following properties:
+* `limitY` - Limit the field influence to a specific vertical area. Optional. An object with the following properties:
   * `max` - The maximum vertical influence point (relative to the center). Optional.
   * `min` - The minimum vertical influence point (relative to the center). Optional.
 
 Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
+
+#### `friction` (array of points)
+
+```jsx
+friction={[{damping: 0.5, limitY: {min: 0}}]}
+```
+
+Add friction to the view's movement with a group of friction regions. Every point in the array is an object with the following properties:
+
+* `damping` - Amount of friction (`0.0`-`1.0`). Default is `0.0`.
+* `limitX` - Limit the friction influence to a specific horizontal area. Optional. An object with the following properties:
+  * `max` - The maximum horizontal influence point (relative to the center). Optional.
+  * `min` - The minimum horizontal influence point (relative to the center). Optional.
+* `limitY` - Limit the friction influence to a specific vertical area. Optional. An object with the following properties:
+  * `max` - The maximum vertical influence point (relative to the center). Optional.
+  * `min` - The minimum vertical influence point (relative to the center). Optional.
+
+Note: For the friction to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
 
 #### `animatedValueX` (Animated.Value)
 

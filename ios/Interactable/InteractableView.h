@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSArray<InteractablePoint *> *snapTo;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *springs;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *gravity;
+@property (nonatomic, copy) NSArray<InteractablePoint *> *friction;
 @property (nonatomic, copy) InteractableLimit *limitX;
 @property (nonatomic, copy) InteractableLimit *limitY;
 @property (nonatomic, copy) InteractableDrag *drag;

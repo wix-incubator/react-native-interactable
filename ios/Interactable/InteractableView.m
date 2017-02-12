@@ -88,6 +88,10 @@
     {
         for (InteractablePoint *point in self.gravity) [self addConstantGravityBehavior:point];
     }
+    if (self.friction)
+    {
+        for (InteractablePoint *point in self.friction) [self addConstantFrictionBehavior:point];
+    }
 }
 
 - (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator
@@ -280,6 +284,17 @@
         frictionBehavior.friction = point.damping;
         if (gravityBehavior.influence) frictionBehavior.influence = gravityBehavior.influence;
         else frictionBehavior.influence = [self influenceAreaWithRadius:1.2 * point.falloff fromAnchor:anchor];
+        [self.animator addBehavior:frictionBehavior];
+    }
+}
+
+- (void)addConstantFrictionBehavior:(InteractablePoint*)point
+{
+    if (point.damping > 0.0)
+    {
+        PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
+        frictionBehavior.friction = point.damping;
+        frictionBehavior.influence = [self influenceAreaFromPoint:point];
         [self.animator addBehavior:frictionBehavior];
     }
 }

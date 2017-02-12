@@ -28,6 +28,9 @@ export default class MoreChatHeads extends Component {
         <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderGravityWells)}>
           <Text style={styles.button}>Gravity wells</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderHalfFriction)}>
+          <Text style={styles.button}>Friction on lower half</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -98,6 +101,22 @@ export default class MoreChatHeads extends Component {
           gravity={[
             {x: 0, y:-140, strength:  8000, falloff: 40, damping: 0.5},
             {x: 0, y: 140, strength: -8000, falloff: 40, damping: 0.5}]}
+          initialPosition={{x: -140, y: -280}}>
+          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+        </Interactable.View>
+      </View>
+    );
+  }
+
+  renderHalfFriction() {
+    return (
+      <View style={styles.container}>
+        <Interactable.View
+          snapTo={[
+            {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
+            {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
+          drag={{tension: 2000, damping: 0.5}}
+          friction={[{damping: 0.5, limitY: {min: 0}}]}
           initialPosition={{x: -140, y: -280}}>
           <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
         </Interactable.View>

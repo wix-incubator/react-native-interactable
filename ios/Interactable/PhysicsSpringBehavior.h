@@ -9,12 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "PhysicsBehavior.h"
 
-@interface PhysicsSnapBehavior : PhysicsBehavior
+@interface PhysicsSpringBehavior : PhysicsBehavior
 
-@property (nonatomic, assign) CGPoint anchorPoint;
 @property (nonatomic, assign) CGFloat tension;
-@property (nonatomic, assign) CGFloat damping;
-
-- (id) initWithTarget:(UIView*)target snapToPoint:(CGPoint)point;
 
 @end

@@ -15,6 +15,6 @@
 @property (nonatomic, assign) CGPoint maxPoint;
 @property (nonatomic, assign) CGFloat bounce;
 
-- (id) initWithTarget:(UIView*)target minPoint:(CGPoint)minPoint maxPoint:(CGPoint)maxPoint;
+- (instancetype)initWithTarget:(UIView*)target minPoint:(CGPoint)minPoint maxPoint:(CGPoint)maxPoint;
 
 @end

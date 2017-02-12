@@ -10,6 +10,11 @@
 
 @implementation InteractablePoint
 
+- (id)copyWithZone:(__unused NSZone *)zone
+{
+    return self;
+}
+
 - (CGPoint)positionWithOrigin:(CGPoint)origin
 {
     CGPoint res = origin;
@@ -33,6 +38,22 @@
 + (CGPoint)deltaBetweenPoint:(CGPoint)point andOrigin:(CGPoint)origin
 {
     return CGPointMake(point.x - origin.x, point.y - origin.y);
+}
+
++ (InteractablePoint*)findClosestPoint:(NSArray<InteractablePoint *>*)points toPoint:(CGPoint)relativeToPoint withOrigin:(CGPoint)origin
+{
+    InteractablePoint *res = nil;
+    CGFloat minDistance = CGFLOAT_MAX;
+    for (InteractablePoint *point in points)
+    {
+        CGFloat distance = [point distanceFromPoint:relativeToPoint withOrigin:origin];
+        if (distance < minDistance)
+        {
+            minDistance = distance;
+            res = point;
+        }
+    }
+    return res;
 }
 
 @end

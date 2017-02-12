@@ -9,13 +9,13 @@
 #import "InteractableView.h"
 #import <React/UIView+React.h>
 
-const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
-
 @interface InteractableView()
 @property (nonatomic, assign) BOOL originSet;
 @property (nonatomic, assign) CGPoint origin;
-@property (nonatomic, assign) CGPoint initialPanCenter;
 @property (nonatomic) PhysicsAnimator *animator;
+@property (nonatomic) PhysicsBehavior *dragBehavior;
+@property (nonatomic, assign) CGPoint dragStartCenter;
+@property (nonatomic, assign) CGPoint dragStartLocation;
 @property (nonatomic, assign) BOOL initialPositionSet;
 @end
 
@@ -25,24 +25,10 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
 {
     if ((self = [super init]))
     {
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        [pan setMinimumNumberOfTouches:1];
-        [pan setMaximumNumberOfTouches:1];
-        [self addGestureRecognizer:pan];
         self.originSet = NO;
         self.initialPositionSet = NO;
     }
     return self;
-}
-
-- (void)didMoveToSuperview
-{
-    [super didMoveToSuperview];
-    if (self.superview)
-    {
-        self.animator = [[PhysicsAnimator alloc] initWithReferenceView:self.superview];
-        self.animator.delegate = self;
-    }
 }
 
 - (void)reactSetFrame:(CGRect)frame
@@ -59,6 +45,9 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
         {
             self.center = CGPointMake(self.origin.x + self.initialPosition.x, self.origin.y + self.initialPosition.y);
         }
+        
+        // make sure this is after origin is set and happens once
+        [self initializeAnimator];
     }
 }
 
@@ -85,95 +74,22 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
     [self reportAnimatedEvent];
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)pan
+- (void)initializeAnimator
 {
-    if (pan.state == UIGestureRecognizerStateBegan)
-    {
-        self.initialPanCenter = self.center;
-        [self.animator removeAllBehaviors];
-    }
+    self.animator = [[PhysicsAnimator alloc] init];
+    self.animator.delegate = self;
     
-    CGPoint translation = [pan translationInView:self];
-    if (self.horizontalOnly)
+    // initialize constant behaviors
+    if (self.springs)
     {
-        self.center = CGPointMake(self.initialPanCenter.x + translation.x, self.initialPanCenter.y);
-    } else if (self.verticalOnly)
-    {
-        self.center = CGPointMake(self.initialPanCenter.x, self.initialPanCenter.y + translation.y);
-    } else
-    {
-        self.center = CGPointMake(self.initialPanCenter.x + translation.x, self.initialPanCenter.y + translation.y);
-    }
-    
-    if (pan.state == UIGestureRecognizerStateEnded)
-    {
-        CGPoint velocity = [pan velocityInView:self.superview];
-        if (self.horizontalOnly) velocity.y = 0;
-        if (self.verticalOnly) velocity.x = 0;
-        CGPoint projectedCenter = CGPointMake(self.center.x + VTPP*velocity.x, self.center.y + VTPP*velocity.y);
-        InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:projectedCenter];
-        if (snapPoint)
-        {
-            [self.animator setTarget:self velocity:velocity];
-            [self snapToPoint:snapPoint];
-        }
-        
-        [self bounceFromLimits];
-    }
-}
-
-- (InteractablePoint*)findClosestPoint:(NSArray<InteractablePoint *>*)points toPoint:(CGPoint)relativeToPoint
-{
-    InteractablePoint *res = nil;
-    CGFloat minDistance = CGFLOAT_MAX;
-    for (InteractablePoint *point in points)
-    {
-        CGFloat distance = [point distanceFromPoint:relativeToPoint withOrigin:self.origin];
-        if (distance < minDistance)
-        {
-            minDistance = distance;
-            res = point;
-        }
-    }
-    return res;
-}
-
-- (void)snapToPoint:(InteractablePoint*)snapPoint
-{
-    PhysicsSnapBehavior *snapBehaviour = [[PhysicsSnapBehavior alloc] initWithTarget:self snapToPoint:[snapPoint positionWithOrigin:self.origin]];
-    snapBehaviour.damping = snapPoint.damping;
-    snapBehaviour.tension = snapPoint.strength;
-    [self.animator addBehavior:snapBehaviour];
-}
-
-- (void)bounceFromLimits
-{
-    if (self.limitX && self.limitX.bounce > 0.0)
-    {
-        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
-        if (self.limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + self.limitX.min;
-        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
-        if (self.limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + self.limitX.max;
-        PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
-        bounceBehavior.bounce = self.limitX.bounce;
-        [self.animator addBehavior:bounceBehavior];
-    }
-    if (self.limitY && self.limitY.bounce > 0.0)
-    {
-        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
-        if (self.limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + self.limitY.min;
-        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
-        if (self.limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + self.limitY.max;
-        PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
-        bounceBehavior.bounce = self.limitY.bounce;
-        [self.animator addBehavior:bounceBehavior];
+        for (InteractablePoint *point in self.springs) [self addConstantSpringBehavior:point];
     }
 }
 
 - (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator
 {
     if (!self.onSnap) return;
-    InteractablePoint *snapPoint = [self findClosestPoint:self.snapTo toPoint:self.center];
+    InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapTo toPoint:self.center withOrigin:self.origin];
     if (snapPoint)
     {
         self.onSnap(@
@@ -194,6 +110,160 @@ const CGFloat VTPP = 0.1; // VELOCITY_TO_POSITION_PROJECTION
             @"x": @(deltaFromOrigin.x),
             @"y": @(deltaFromOrigin.y)
         });
+    }
+}
+
+// MARK: - Touches
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    self.dragStartCenter = self.center;
+    self.dragStartLocation = [touch locationInView:self.superview];
+    
+    [self setTempBehaviorsForDragStart];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:self.superview];
+    CGFloat newCenterX = self.dragStartCenter.x + location.x - self.dragStartLocation.x;
+    CGFloat newCenterY = self.dragStartCenter.y + location.y - self.dragStartLocation.y;
+    
+    self.dragBehavior.anchorPoint = CGPointMake(newCenterX, newCenterY);
+    [self.animator ensureRunning];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self setTempBehaviorsForDragEnd];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self setTempBehaviorsForDragEnd];
+}
+
+- (void)setTempBehaviorsForDragStart
+{
+    [self.animator removeTempBehaviors];
+    self.dragBehavior = nil;
+    
+    self.dragBehavior = [self addTempDragBehavior:self.drag];
+}
+
+- (void)setTempBehaviorsForDragEnd
+{
+    [self.animator removeTempBehaviors];
+    self.dragBehavior = nil;
+    
+    CGPoint velocity = [self.animator getTargetVelocity:self];
+    if (self.horizontalOnly) velocity.y = 0;
+    if (self.verticalOnly) velocity.x = 0;
+    CGFloat toss = 0.1;
+    if (self.drag) toss = self.drag.toss;
+    CGPoint projectedCenter = CGPointMake(self.center.x + toss*velocity.x, self.center.y + toss*velocity.y);
+    
+    InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapTo toPoint:projectedCenter withOrigin:self.origin];
+    if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
+    
+    [self addTempBounceBehaviorWithLimitX:self.limitX limitY:self.limitY];
+}
+
+// MARK: - Behaviors
+
+- (PhysicsBehavior*)addTempDragBehavior:(InteractableDrag*)drag
+{
+    PhysicsBehavior *res = nil;
+    
+    if (!drag || drag.tension == CGFLOAT_MAX)
+    {
+        PhysicsAnchorBehavior *anchorBehavior = [[PhysicsAnchorBehavior alloc] initWithTarget:self anchorPoint:self.center];
+        res = anchorBehavior;
+        [self.animator addTempBehavior:anchorBehavior];
+    }
+    else
+    {
+        PhysicsSpringBehavior *springBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:self.center];
+        springBehavior.tension = drag.tension;
+        res = springBehavior;
+        [self.animator addTempBehavior:springBehavior];
+    }
+    
+    if (drag && drag.damping > 0.0)
+    {
+        PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
+        frictionBehavior.friction = drag.damping;
+        [self.animator addTempBehavior:frictionBehavior];
+    }
+    
+    return res;
+}
+
+- (void)addTempSnapToPointBehavior:(InteractablePoint*)snapPoint
+{
+    PhysicsSpringBehavior *snapBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:[snapPoint positionWithOrigin:self.origin]];
+    snapBehavior.tension = snapPoint.tension;
+    [self.animator addTempBehavior:snapBehavior];
+    
+    CGFloat damping = 0.7;
+    if (snapPoint.damping > 0.0) damping = snapPoint.damping;
+    PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
+    frictionBehavior.friction = damping;
+    [self.animator addTempBehavior:frictionBehavior];
+}
+
+- (void)addTempBounceBehaviorWithLimitX:(InteractableLimit*)limitX limitY:(InteractableLimit*)limitY
+{
+    if (limitX && limitX.bounce > 0.0)
+    {
+        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
+        if (limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + limitX.min;
+        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
+        if (limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + limitX.max;
+        PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
+        bounceBehavior.bounce = limitX.bounce;
+        [self.animator addTempBehavior:bounceBehavior];
+    }
+    if (limitY && limitY.bounce > 0.0)
+    {
+        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
+        if (limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + limitY.min;
+        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
+        if (limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + limitY.max;
+        PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
+        bounceBehavior.bounce = limitY.bounce;
+        [self.animator addTempBehavior:bounceBehavior];
+    }
+}
+
+- (void)addConstantSpringBehavior:(InteractablePoint*)point
+{
+    CGPoint anchor = self.origin;
+    if (point.x != CGFLOAT_MAX) anchor.x = self.origin.x + point.x;
+    if (point.y != CGFLOAT_MAX) anchor.y = self.origin.y + point.y;
+    
+    PhysicsSpringBehavior *springBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:anchor];
+    springBehavior.tension = point.tension;
+    if (point.limitX || point.limitY)
+    {
+        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
+        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
+        if (point.limitX && point.limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + point.limitX.min;
+        if (point.limitX && point.limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + point.limitX.max;
+        if (point.limitY && point.limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + point.limitY.min;
+        if (point.limitY && point.limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + point.limitY.max;
+        springBehavior.influence = [[PhysicsArea alloc] initWithMinPoint:minPoint maxPoint:maxPoint];
+    }
+    [self.animator addBehavior:springBehavior];
+    
+    if (point.damping > 0.0)
+    {
+        PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
+        frictionBehavior.friction = point.damping;
+        if (springBehavior.influence) frictionBehavior.influence = springBehavior.influence;
+        [self.animator addBehavior:frictionBehavior];
     }
 }
 

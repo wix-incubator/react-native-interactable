@@ -8,17 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "InteractableLimit.h"
 
-@interface InteractablePoint : NSObject
+@interface InteractablePoint : NSObject<NSCopying>
 
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;
 @property (nonatomic, assign) CGFloat damping;
-@property (nonatomic, assign) CGFloat strength;
+@property (nonatomic, assign) CGFloat tension;
 @property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) InteractableLimit *limitX;
+@property (nonatomic, copy) InteractableLimit *limitY;
 
 - (CGPoint)positionWithOrigin:(CGPoint)origin;
 - (CGFloat)distanceFromPoint:(CGPoint)point withOrigin:(CGPoint)origin;
 + (CGPoint)deltaBetweenPoint:(CGPoint)point andOrigin:(CGPoint)origin;
++ (InteractablePoint*)findClosestPoint:(NSArray<InteractablePoint *>*)points toPoint:(CGPoint)relativeToPoint withOrigin:(CGPoint)origin;
 
 @end

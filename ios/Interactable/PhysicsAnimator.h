@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "PhysicsSnapBehavior.h"
+#import "PhysicsSpringBehavior.h"
 #import "PhysicsBounceBehavior.h"
+#import "PhysicsFrictionBehavior.h"
+#import "PhysicsAnchorBehavior.h"
+#import "PhysicsElectricBehavior.h"
 
 @protocol PhysicsAnimatorDelegate;
 
@@ -17,11 +20,15 @@
 
 @property (nonatomic, assign) id<PhysicsAnimatorDelegate> delegate;
 
-- (id) initWithReferenceView:(UIView*)referenceView;
-- (void) addBehavior:(PhysicsBehavior*)behavior;
-- (void) removeAllBehaviors;
-- (void) setTarget:(UIView*)target mass:(CGFloat)mass;
-- (void) setTarget:(UIView*)target velocity:(CGPoint)velocity;
+- (void)addBehavior:(PhysicsBehavior*)behavior;
+- (void)addTempBehavior:(PhysicsBehavior*)behavior;
+- (void)removeAllBehaviors;
+- (void)removeTempBehaviors;
+- (void)ensureRunning;
+- (void)stopRunning;
+- (void)setTarget:(UIView*)target mass:(CGFloat)mass;
+- (void)setTarget:(UIView*)target velocity:(CGPoint)velocity;
+- (CGPoint)getTargetVelocity:(UIView*)target;
 
 @end
 

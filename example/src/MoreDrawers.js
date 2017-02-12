@@ -12,7 +12,7 @@ export default class MoreDrawers extends Component {
             snapTo={[{x: 0}, {x: -230}]}
             horizontalOnly={true}>
             <View style={styles.cover}>
-              <Text style={styles.label}>I am a drawer</Text>
+              <Text style={styles.label}>Default drawer</Text>
             </View>
           </Interactable.View>
         </View>
@@ -23,7 +23,7 @@ export default class MoreDrawers extends Component {
             limitX={{max: 0}}
             horizontalOnly={true}>
             <View style={styles.cover}>
-              <Text style={styles.label}>I am a drawer</Text>
+              <Text style={styles.label}>Drawer with limits</Text>
             </View>
           </Interactable.View>
         </View>
@@ -34,7 +34,30 @@ export default class MoreDrawers extends Component {
             limitX={{max: 0, bounce: 0.2}}
             horizontalOnly={true}>
             <View style={styles.cover}>
-              <Text style={styles.label}>I am a drawer</Text>
+              <Text style={styles.label}>Limits with bounce</Text>
+            </View>
+          </Interactable.View>
+        </View>
+
+        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+          <Interactable.View
+            snapTo={[{x: 0}, {x: -230}]}
+            drag={{tension: 1000, damping: 0.7}}
+            horizontalOnly={true}>
+            <View style={styles.cover}>
+              <Text style={styles.label}>Drag via spring</Text>
+            </View>
+          </Interactable.View>
+        </View>
+
+        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+          <Interactable.View
+            snapTo={[{x: 0}, {x: -230}]}
+            drag={{tension: 2000, damping: 0.5}}
+            springs={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
+            horizontalOnly={true}>
+            <View style={styles.cover}>
+              <Text style={styles.label}>Drag with spring resistance</Text>
             </View>
           </Interactable.View>
         </View>
@@ -49,6 +72,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: 'white',
+    paddingTop: 80,
+    paddingBottom: 40
   },
   cover: {
     left: 0,

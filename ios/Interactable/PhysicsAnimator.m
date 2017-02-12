@@ -23,7 +23,7 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
 
 @implementation PhysicsAnimator
 
-- (instancetype) initWithReferenceView:(UIView*)referenceView
+- (instancetype)init
 {
     if ((self = [super init]))
     {
@@ -61,15 +61,22 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     self.displayLink.paused = YES;
 }
 
-- (void) addBehavior:(PhysicsBehavior*)behavior
+- (void)addBehavior:(PhysicsBehavior*)behavior
 {
     NSAssert([NSThread isMainThread], @"Not on main thread");
     if (behavior.target) [self ensureTargetObjectExists:behavior.target];
-    [self.behaviors addObject:behavior];
+    NSUInteger index = [behavior findSortIndexInArray:self.behaviors];
+    [self.behaviors insertObject:behavior atIndex:index];
     [self ensureRunning];
 }
 
-- (void) removeAllBehaviors
+- (void)addTempBehavior:(PhysicsBehavior*)behavior
+{
+    behavior.temp = YES;
+    [self addBehavior:behavior];
+}
+
+- (void)removeAllBehaviors
 {
     NSAssert([NSThread isMainThread], @"Not on main thread");
     [self.behaviors removeAllObjects];
@@ -77,7 +84,17 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     [self stopRunning];
 }
 
-- (PhysicsObject*) ensureTargetObjectExists:(UIView*)target
+- (void)removeTempBehaviors
+{
+    NSAssert([NSThread isMainThread], @"Not on main thread");
+    [self.behaviors filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
+    {
+        PhysicsBehavior *behavior = (PhysicsBehavior *)evaluatedObject;
+        return behavior.temp == NO;
+    }]];
+}
+
+- (PhysicsObject*)ensureTargetObjectExists:(UIView*)target
 {
     PhysicsObject *object = [self.targetsToObjects objectForKey:target];
     if (!object)
@@ -88,7 +105,7 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     return object;
 }
 
-- (void) setTarget:(UIView*)target mass:(CGFloat)mass
+- (void)setTarget:(UIView*)target mass:(CGFloat)mass
 {
     NSAssert([NSThread isMainThread], @"Not on main thread");
     PhysicsObject *object = [self ensureTargetObjectExists:target];
@@ -96,7 +113,7 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     [self ensureRunning];
 }
 
-- (void) setTarget:(UIView*)target velocity:(CGPoint)velocity
+- (void)setTarget:(UIView*)target velocity:(CGPoint)velocity
 {
     NSAssert([NSThread isMainThread], @"Not on main thread");
     PhysicsObject *object = [self ensureTargetObjectExists:target];
@@ -104,7 +121,15 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     [self ensureRunning];
 }
 
-- (void) displayLinkUpdated
+- (CGPoint)getTargetVelocity:(UIView*)target
+{
+    NSAssert([NSThread isMainThread], @"Not on main thread");
+    PhysicsObject *object = [self.targetsToObjects objectForKey:target];
+    if (object) return object.velocity;
+    return CGPointZero;
+}
+
+- (void)displayLinkUpdated
 {
     CFTimeInterval deltaTime = 0.0;
     CFTimeInterval currentTime = [self.displayLink timestamp];
@@ -114,7 +139,7 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     [self animateFrameWithDeltaTime:deltaTime];
 }
 
-- (void) animateFrameWithDeltaTime:(CFTimeInterval)deltaTime
+- (void)animateFrameWithDeltaTime:(CFTimeInterval)deltaTime
 {
     // execute all behaviors
     for (PhysicsBehavior *behavior in self.behaviors)

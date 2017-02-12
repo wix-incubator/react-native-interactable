@@ -1,6 +1,7 @@
 package com.wix.interactable.physics;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 
 /**
  * Created by rotemm on 09/02/2017.
@@ -8,15 +9,15 @@ import android.graphics.Point;
 
 public class PhysicsObject {
 
-    Point velocity;
+    PointF velocity;
     float mass;
 
     public PhysicsObject() {
-        this.velocity = new Point(0,0);
+        this.velocity = new PointF(0,0);
         this.mass = 1.0f;
     }
 
-    public PhysicsObject(Point velocity, float mass) {
+    public PhysicsObject(PointF velocity, float mass) {
         this.velocity = velocity;
         this.mass = mass;
     }

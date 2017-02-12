@@ -1,5 +1,7 @@
 package com.wix.interactable.physics;
 
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.view.View;
 
 /**
@@ -9,20 +11,27 @@ import android.view.View;
 public abstract class PhysicsBehavior {
     View target;
 
+    PointF anchorPoint;
+
     private PhysicsArea influence;
 
-    public void initWithTarget(View target) {
+    public PhysicsBehavior(View target) {
         this.target = target;
     }
+    public PhysicsBehavior(View target,PointF anchorPoint) {
+        this(target);
+        this.anchorPoint = anchorPoint;
+    }
 
-    public abstract void executeFrameWithDeltaTime(long timeInterval,PhysicsObject physicsObject);
+
+    public abstract void executeFrameWithDeltaTime(float timeInterval,PhysicsObject physicsObject);
 
     public boolean isWithinInfluence() {
-        if (target.getLeft() < influence.minPoint.x) return false;
-        if (target.getRight() > influence.maxPoint.x) return false;
+        if (target.getTranslationX() < influence.minPoint.x) return false;
+        if (target.getTranslationX() > influence.maxPoint.x) return false;
 
-        if (target.getTop() < influence.minPoint.y) return false;
-        if (target.getBottom() > influence.maxPoint.y) return false;
+        if (target.getTranslationY() < influence.minPoint.y) return false;
+        if (target.getTranslationY() > influence.maxPoint.y) return false;
         return true;
     }
 }

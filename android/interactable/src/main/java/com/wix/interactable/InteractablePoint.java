@@ -11,8 +11,19 @@ public class InteractablePoint {
     private float y;
     private float damping;
     private float tension;
+    private float strength;
+    private float falloff;
     private InteractableLimit limitX;
     private InteractableLimit limitY;
+
+    public InteractablePoint(float x, float y, float damping, float tension, float strength, float falloff, InteractableLimit limitX, InteractableLimit limitY) {
+        this.x = x;
+        this.y = y;
+        this.damping = damping;
+        this.tension = tension;
+        this.limitX = limitX;
+        this.limitY = limitY;
+    }
 
     public Point positionWithOrigin(Point origin) {
         Point res = origin;

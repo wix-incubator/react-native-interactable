@@ -5,7 +5,14 @@ package com.wix.interactable;
  */
 
 public class InteractableDrag {
-    float tension;
     float toss;
+    float tension;
     float damping;
+
+
+    public InteractableDrag(float toss, float tension, float damping) {
+        this.toss = toss;
+        this.tension = tension;
+        this.damping = damping;
+    }
 }

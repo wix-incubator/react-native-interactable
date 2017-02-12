@@ -2,14 +2,15 @@ package com.wix.interactable;
 
 import android.support.annotation.Nullable;
 
-import com.facebook.react.bridge.ReadableNativeArray;
-import com.facebook.react.uimanager.SimpleViewManager;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-public class InteractableViewManager extends SimpleViewManager<InteractableView> {
+public class InteractableViewManager extends ViewGroupManager<InteractableView> {
 
-    public static final String REACT_CLASS = "InteractableViewManager";
+    public static final String REACT_CLASS = "InteractableView";
 
     @Override
     public String getName() {
@@ -32,23 +33,26 @@ public class InteractableViewManager extends SimpleViewManager<InteractableView>
     }
 
     @ReactProp(name = "snapTo")
-    public void setSnapTo(InteractableView view, @Nullable ReadableNativeArray snapTo) {
+    public void setSnapTo(InteractableView view, @Nullable ReadableArray snapTo) {
 
     }
 
     @ReactProp(name = "limitX")
-    public void setLimitX(InteractableView view, @Nullable InteractableLimit limitX) {
-
+    public void setLimitX(InteractableView view, @Nullable ReadableArray limitX) {
+//        double min = limitX.getDouble(0);
+//        double max = limitX.getDouble(1);
+//        double bounce = limitX.getDouble(2);
+//        new InteractableLimit(min, max, bounce);
     }
 
     @ReactProp(name = "limitY")
-    public void setLimitY(InteractableView view, @Nullable InteractableLimit limitY) {
+    public void setLimitY(InteractableView view, @Nullable ReadableArray limitY) {
 
     }
 
     @ReactProp(name = "initialPosition")
-    public void setInitialPosition(InteractableView view, @Nullable float[] setInitialPosition) {
-
+    public void setInitialPosition(InteractableView view, @Nullable ReadableMap setInitialPosition) {
+        view.setAlpha(1);
     }
 
     //TODO - `onSnap`  and `onAnimatedEvent` through EventEmitter

@@ -1,25 +1,25 @@
 package com.wix.interactable;
 
 public class InteractableLimit {
-    private float min;
-    private float max;
-    private float bounce;
+    private double min;
+    private double max;
+    private double bounce;
 
-    public InteractableLimit(float min, float max, float bounce) {
+    public InteractableLimit(double min, double max, double bounce) {
         this.min = min;
         this.max = max;
         this.bounce = bounce;
     }
 
-    public float getMin() {
+    public double getMin() {
         return min;
     }
 
-    public float getMax() {
+    public double getMax() {
         return max;
     }
 
-    public float getBounce() {
+    public double getBounce() {
         return bounce;
     }
 }

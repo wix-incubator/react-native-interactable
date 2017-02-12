@@ -39,7 +39,7 @@ public class PhysicsAnimator {
 
     public void animateFrameWithDeltaTime(float deltaTime) {
         for (PhysicsBehavior behavior : behaviors) {
-            behavior.
+//            behavior.
         }
     }
 }

@@ -11,9 +11,15 @@ import android.view.View;
 public abstract class PhysicsBehavior {
     View target;
 
+    public void setAnchorPoint(PointF anchorPoint) {
+        this.anchorPoint = anchorPoint;
+    }
+
     PointF anchorPoint;
 
     private PhysicsArea influence;
+
+    boolean isTemp = false;
 
     public PhysicsBehavior(View target) {
         this.target = target;

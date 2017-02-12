@@ -2,6 +2,7 @@ package com.wix.interactable.physics;
 
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -18,6 +19,8 @@ public class PhysicsAnchorBehavior extends PhysicsBehavior {
     @Override
     public void executeFrameWithDeltaTime(float deltaTime, PhysicsObject physicsObject) {
         if (deltaTime == 0.0) return;
+
+        Log.d("InteractableView"," PhysicsAnchorBehavior executeFrameWithDeltaTime: " + deltaTime);
 
         float dx = this.anchorPoint.x - this.target.getTranslationX();
         float vx = dx / deltaTime;

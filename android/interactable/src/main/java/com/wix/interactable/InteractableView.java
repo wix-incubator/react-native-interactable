@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
@@ -60,8 +61,10 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
     }
 
     private void init() {
+        Log.d("InteractableView","init!!!");
         originSet = false;
         initialPositionSet = false;
+        initializeAnimator();
 
     }
 
@@ -85,27 +88,48 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
         if (drag == null || drag.tension == Float.MAX_VALUE) {
             PhysicsAnchorBehavior anchorBehavior = new PhysicsAnchorBehavior(this,getTransPoint());
             res = anchorBehavior;
-            this.animator.addBehavior(anchorBehavior);
+            this.animator.addTempBehavior(anchorBehavior);
         }
         else {
             PhysicsSpringBehavior springBehavior = new PhysicsSpringBehavior(this,getTransPoint());
             res = springBehavior;
-            this.animator.addBehavior(springBehavior);
+            this.animator.addTempBehavior(springBehavior);
         }
 
         return res;
     }
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
+        return true;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        Log.d("InteractableView","onTouchEvent action = " + event.getAction());
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                this.dragStartLocation = new PointF(event.getX(),event.getY());
+                this.dragBehavior = addTempDragBehavior(null);
+
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                float newX = getTranslationX() + event.getX() - dragStartLocation.x;
+                float newY = getTranslationY() + event.getY() - dragStartLocation.y;
+                this.dragBehavior.setAnchorPoint(new PointF(newX,newY));
+
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                this.animator.removeTempBehaviors();
                 break;
 
         }
 
-        return super.onTouchEvent(event);
+        return true;
     }
 
     public void setVerticalOnly(boolean verticalOnly) {

@@ -1,10 +1,12 @@
 package com.wix.interactable.physics;
 
+import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by rotemm on 09/02/2017.
@@ -17,8 +19,10 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
 
     @Override
     public void doFrame(long frameTimeNanos) {
+//        Log.d("InteractableView","doFrame frameTimeNanos = " + frameTimeNanos);
         if (lastFrameTS != 0) {
             float delta = (float) ((frameTimeNanos - lastFrameTS) * 1e-9);
+//            Log.d("InteractableView","doFrame delta = " + delta);
             animateFrameWithDeltaTime(delta);
         }
         lastFrameTS = frameTimeNanos;
@@ -62,8 +66,24 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
         }
     }
 
+    public void addTempBehavior(PhysicsBehavior behavior) {
+        behavior.isTemp = true;
+        addBehavior(behavior);
+    }
+
+
     public void removeAllBehaviors() {
         behaviors.clear();
+    }
+
+    public void removeTempBehaviors() {
+        Iterator<PhysicsBehavior> iterator = behaviors.iterator();
+
+        while (iterator.hasNext()) {
+            if (iterator.next().isTemp) {
+                iterator.remove();
+            }
+        }
     }
 
     private PhysicsObject ensureTargetObjectExists(View target) {
@@ -91,7 +111,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
         boolean hadMovement = false;
         for (View v : targetsToObjects.keySet()) {
             PhysicsObject physicsObject = targetsToObjects.get(v);
-
+            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " vx = " + physicsObject.velocity.x);
             float dx = 0f;
             if (Math.abs(physicsObject.velocity.x) > ANIMATOR_PAUSE_ZERO_VELOCITY) {
                 dx = deltaTime * physicsObject.velocity.x;
@@ -103,8 +123,9 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
                 hadMovement = true;
             }
 
-            v.animate().translationXBy(dx);
-            v.animate().translationYBy(dy);
+            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " dx = " + dx);
+
+            v.animate().translationXBy(dx).translationYBy(dy).setDuration(0).start();
         }
 
         if (hadMovement) this.consecutiveFramesWithNoMovement = 0;

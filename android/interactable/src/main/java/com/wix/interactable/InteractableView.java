@@ -78,7 +78,7 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
         animator.setDelegate(this);
     }
 
-    private PointF getTransPoint() {
+    private PointF getCurrentPosition() {
         return new PointF(getTranslationX(),getTranslationY());
     }
 
@@ -86,12 +86,12 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
         PhysicsBehavior res = null;
 
         if (drag == null || drag.tension == Float.MAX_VALUE) {
-            PhysicsAnchorBehavior anchorBehavior = new PhysicsAnchorBehavior(this,getTransPoint());
+            PhysicsAnchorBehavior anchorBehavior = new PhysicsAnchorBehavior(this, getCurrentPosition());
             res = anchorBehavior;
             this.animator.addTempBehavior(anchorBehavior);
         }
         else {
-            PhysicsSpringBehavior springBehavior = new PhysicsSpringBehavior(this,getTransPoint());
+            PhysicsSpringBehavior springBehavior = new PhysicsSpringBehavior(this, getCurrentPosition());
             res = springBehavior;
             this.animator.addTempBehavior(springBehavior);
         }
@@ -112,7 +112,7 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 this.dragStartLocation = new PointF(event.getX(),event.getY());
-                this.dragBehavior = addTempDragBehavior(null);
+                this.dragBehavior = addTempDragBehavior(this.drag);
 
                 break;
 

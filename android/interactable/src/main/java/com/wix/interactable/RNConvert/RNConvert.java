@@ -1,5 +1,7 @@
 package com.wix.interactable.RNConvert;
 
+import android.graphics.PointF;
+
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.wix.interactable.InteractableDrag;
@@ -15,16 +17,16 @@ import java.util.ArrayList;
 public class RNConvert {
 
     public static InteractableLimit interactableLimit(ReadableMap params) {
-        int min = params.hasKey("min") ? params.getInt("min") : Integer.MIN_VALUE;
-        int max = params.hasKey("max") ? params.getInt("max") : Integer.MAX_VALUE;
-        int bounce = params.hasKey("bounce") ? params.getInt("bounce") : 0;
+        float min = params.hasKey("min") ? (float) params.getDouble("min") : Float.MIN_VALUE;
+        float max = params.hasKey("max") ? (float) params.getDouble("max") : Float.MAX_VALUE;
+        float bounce = params.hasKey("bounce") ? (float) params.getDouble("bounce") : 0f;
 
         return new InteractableLimit(min, max, bounce);
     }
 
     public static InteractablePoint interactablePoint(ReadableMap params) {
         float x = params.hasKey("x") ? (float) params.getDouble("x") : Float.MAX_VALUE;
-        float y = params.hasKey("x") ? (float) params.getDouble("y") : Float.MAX_VALUE;;
+        float y = params.hasKey("y") ? (float) params.getDouble("y") : Float.MAX_VALUE;
         float damping = params.hasKey("damping") ? (float) params.getDouble("damping") : 0f;
         float tension = params.hasKey("tension") ? (float) params.getDouble("tension") : 300f;
         float strength = params.hasKey("strength") ? (float) params.getDouble("strength") : 400f;
@@ -51,5 +53,12 @@ public class RNConvert {
         }
 
         return interactablePoints;
+    }
+
+    public static PointF pointF(ReadableMap params) {
+        int x = params.hasKey("x") ? params.getInt("x") : 0;
+        int y = params.hasKey("y") ? params.getInt("y") : 0;
+
+        return new PointF(x, y);
     }
 }

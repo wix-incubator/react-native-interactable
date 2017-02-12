@@ -1,6 +1,5 @@
 package com.wix.interactable;
 
-import android.graphics.PointF;
 import android.support.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableArray;
@@ -66,7 +65,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
 
     @ReactProp(name = "initialPosition")
     public void setInitialPosition(InteractableView view, @Nullable ReadableMap setInitialPosition) {
-        view.setInitialPosition(new PointF(setInitialPosition.getInt("x"), setInitialPosition.getInt("y")));
+        view.setInitialPosition(RNConvert.pointF(setInitialPosition));
 
     }
 

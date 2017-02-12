@@ -133,6 +133,17 @@ Optional, a function called whenever the view snaps to a `snapTo` point (after b
 * `index` - The zero-based index of the point in the `snapTo` array.
 * `id` - The string `id` of the point in the `snapTo` array (assuming it was provided).
 
+#### `onStop` (function)
+
+```jsx
+onStop={this.onStopInteraction}
+```
+
+Optional, a function called whenever the interaction stops (views freeze momentarily). When the function is called, an event object is passed as argument, containing the following properties:
+
+* `x` - The horizontal position of the view (relative to the center).
+* `y` - The vertical position of the view (relative to the center).
+
 #### `drag` (object)
 
 ```jsx

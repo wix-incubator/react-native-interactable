@@ -96,14 +96,26 @@
 
 - (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator
 {
-    if (!self.onSnap) return;
-    InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapTo toPoint:self.center withOrigin:self.origin];
-    if (snapPoint)
+    if (self.onSnap)
     {
-        self.onSnap(@
+        InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapTo toPoint:self.center withOrigin:self.origin];
+        if (snapPoint)
         {
-            @"index": @([self.snapTo indexOfObject:snapPoint]),
-            @"id": snapPoint.id
+            self.onSnap(@
+            {
+                @"index": @([self.snapTo indexOfObject:snapPoint]),
+                @"id": snapPoint.id
+            });
+        }
+    }
+    
+    if (self.onStop)
+    {
+        CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
+        self.onStop(@
+        {
+            @"x": @(deltaFromOrigin.x),
+            @"y": @(deltaFromOrigin.y)
         });
     }
 }
@@ -287,7 +299,7 @@
         frictionBehavior.friction = point.damping;
         if (gravityBehavior.strength > 0.0) frictionBehavior.haptics = point.haptics;
         if (gravityBehavior.influence) frictionBehavior.influence = gravityBehavior.influence;
-        else frictionBehavior.influence = [self influenceAreaWithRadius:1.2 * point.falloff fromAnchor:anchor];
+        else frictionBehavior.influence = [self influenceAreaWithRadius:1.4 * point.falloff fromAnchor:anchor];
         [self.animator addBehavior:frictionBehavior];
     }
 }

@@ -175,10 +175,11 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     if (self.consecutiveFramesWithNoMovement >= ANIMATOR_PAUSE_CONSECUTIVE_FRAMES)
     {
         [self stopRunning];
-        if (self.delegate) [self.delegate physicsAnimatorDidPause:self];
         
         // round centers for all targets on screen
         for (UIView *target in self.targetsToObjects) target.center = [self roundPointToPixelRatio:target.center];
+        
+        if (self.delegate) [self.delegate physicsAnimatorDidPause:self];
     }
 }
 

@@ -32,6 +32,7 @@ RCT_EXPORT_VIEW_PROPERTY(limitX, InteractableLimit)
 RCT_EXPORT_VIEW_PROPERTY(limitY, InteractableLimit)
 RCT_EXPORT_VIEW_PROPERTY(drag, InteractableDrag)
 RCT_EXPORT_VIEW_PROPERTY(onSnap, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStop, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(initialPosition, CGPoint)
 RCT_EXPORT_VIEW_PROPERTY(onAnimatedEvent, RCTDirectEventBlock)
 

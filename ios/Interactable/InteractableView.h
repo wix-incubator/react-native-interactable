@@ -25,6 +25,7 @@
 @property (nonatomic, copy) InteractableLimit *limitY;
 @property (nonatomic, copy) InteractableDrag *drag;
 @property (nonatomic, copy) RCTBubblingEventBlock onSnap;
+@property (nonatomic, copy) RCTBubblingEventBlock onStop;
 @property (nonatomic, assign) CGPoint initialPosition;
 @property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
 

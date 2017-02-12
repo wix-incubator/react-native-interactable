@@ -1,5 +1,6 @@
 package com.wix.interactable.physics;
 
+import android.graphics.PointF;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
@@ -30,15 +31,15 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
             this.choreographer.postFrameCallback(this);
     }
 
-    public interface PhysicsAnimatorDelegate {
+    public interface PhysicsAnimatorListener {
         void onAnimatorPause();
     }
 
-    public void setDelegate(PhysicsAnimatorDelegate mDelegate) {
-        this.mDelegate = mDelegate;
+    public void setListener(PhysicsAnimatorListener listener) {
+        this.animatorListener = listener;
     }
 
-    private PhysicsAnimatorDelegate mDelegate;
+    private PhysicsAnimatorListener animatorListener;
 
     Choreographer choreographer;
 
@@ -95,6 +96,14 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
         return physicsObject;
     }
 
+    public PointF getTargetVelocity(View target) {
+        PhysicsObject physicsObject = targetsToObjects.get(target);
+        if (physicsObject != null) {
+            return physicsObject.velocity;
+        }
+        return new PointF(0,0);
+    }
+
     public void stopRunning() {
         isRunning = false;
         this.choreographer.removeFrameCallback(this);
@@ -133,8 +142,8 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
         if (this.consecutiveFramesWithNoMovement >= ANIMATOR_PAUSE_CONSECUTIVE_FRAMES)
         {
             stopRunning();
-            if (mDelegate != null) {
-                mDelegate.onAnimatorPause();
+            if (animatorListener != null) {
+                animatorListener.onAnimatorPause();
             }
         }
     }

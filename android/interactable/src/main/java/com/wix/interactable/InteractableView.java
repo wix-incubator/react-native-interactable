@@ -16,7 +16,7 @@ import com.wix.interactable.physics.PhysicsSpringBehavior;
 
 import java.util.ArrayList;
 
-public class InteractableView extends FrameLayout implements PhysicsAnimator.PhysicsAnimatorDelegate {
+public class InteractableView extends FrameLayout implements PhysicsAnimator.PhysicsAnimatorListener {
 
     private boolean originSet;
     private PointF origin;
@@ -75,7 +75,7 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
 
     private void initializeAnimator() {
         animator = new PhysicsAnimator(this);
-        animator.setDelegate(this);
+        animator.setListener(this);
     }
 
     private PointF getCurrentPosition() {
@@ -124,12 +124,35 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                this.animator.removeTempBehaviors();
+                handleEndOfDrag();
                 break;
 
         }
 
         return true;
+    }
+
+    private void handleEndOfDrag() {
+        this.animator.removeTempBehaviors();
+
+        PointF velocity = this.animator.getTargetVelocity(this);
+        if (this.horizontalOnly) velocity.y = 0;
+        if (this.verticalOnly) velocity.x = 0;
+        float toss = 0.1f;
+        if (this.drag != null) toss = this.drag.toss;
+
+        PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
+                                            getTranslationY() + toss*velocity.y);
+
+        InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapTo,projectedCenter);
+
+    }
+
+    private void addTempSnapToPointBehavior(InteractablePoint snapPoint) {
+        PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
+        snapBehavior.tension = snapPoint.tension;
+        //TODO - continue here!
+
     }
 
     public void setVerticalOnly(boolean verticalOnly) {

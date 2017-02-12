@@ -9,7 +9,7 @@ import android.view.View;
  */
 
 public class PhysicsSpringBehavior extends PhysicsBehavior {
-    private float tension = 300f;
+    public float tension = 300f;
     public PhysicsSpringBehavior(View target, PointF anchorPoint) {
         super(target, anchorPoint);
     }

@@ -31,7 +31,7 @@ export default class MoreDrawers extends Component {
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
             snapTo={[{x: 0}, {x: -230}]}
-            limitX={{max: 0, bounce: 0.2}}
+            limitX={{max: 0, bounce: 0.2, haptics: true}}
             horizontalOnly={true}>
             <View style={styles.cover}>
               <Text style={styles.label}>Limits with bounce</Text>

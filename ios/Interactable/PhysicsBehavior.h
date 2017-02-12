@@ -18,11 +18,13 @@
 @property (nonatomic, assign) BOOL temp;
 @property (nonatomic, assign) CGPoint anchorPoint;
 @property (nonatomic, copy) PhysicsArea *influence;
+@property (nonatomic, assign) BOOL haptics;
 
 - (instancetype)initWithTarget:(UIView*)target;
 - (instancetype)initWithTarget:(UIView*)target anchorPoint:(CGPoint)anchorPoint;
 - (void)executeFrameWithDeltaTime:(CFTimeInterval)deltaTime onObject:(PhysicsObject*)object;
 - (NSUInteger)findSortIndexInArray:(NSArray*)array;
 - (BOOL)isWithinInfluence;
+- (void)doHaptics;
 
 @end

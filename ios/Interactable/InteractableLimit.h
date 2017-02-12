@@ -14,5 +14,6 @@
 @property (nonatomic, assign) CGFloat min;
 @property (nonatomic, assign) CGFloat max;
 @property (nonatomic, assign) CGFloat bounce;
+@property (nonatomic, assign) BOOL haptics;
 
 @end

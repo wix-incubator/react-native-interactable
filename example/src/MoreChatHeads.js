@@ -79,8 +79,8 @@ export default class MoreChatHeads extends Component {
             {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
           drag={{tension: 2000, damping: 0.5}}
           springs={[
-            {x: 0, y:-140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min: -180, max: -100}},
-            {x: 0, y: 140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min:  100, max:  180}}]}
+            {x: 0, y:-140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min: -180, max: -100}, haptics: true},
+            {x: 0, y: 140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min:  100, max:  180}, haptics: true}]}
           initialPosition={{x: -140, y: -280}}>
           <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
         </Interactable.View>
@@ -99,8 +99,8 @@ export default class MoreChatHeads extends Component {
             {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
           drag={{tension: 2000, damping: 0.5}}
           gravity={[
-            {x: 0, y:-140, strength:  8000, falloff: 40, damping: 0.5},
-            {x: 0, y: 140, strength: -8000, falloff: 40, damping: 0.5}]}
+            {x: 0, y:-140, strength:  8000, falloff: 40, damping: 0.5, haptics: true},
+            {x: 0, y: 140, strength: -8000, falloff: 40, damping: 0.5, haptics: true}]}
           initialPosition={{x: -140, y: -280}}>
           <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
         </Interactable.View>
@@ -116,7 +116,7 @@ export default class MoreChatHeads extends Component {
             {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
             {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
           drag={{tension: 2000, damping: 0.5}}
-          friction={[{damping: 0.5, limitY: {min: 0}}]}
+          friction={[{damping: 0.3, limitY: {min: 0}, haptics: true}]}
           initialPosition={{x: -140, y: -280}}>
           <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
         </Interactable.View>

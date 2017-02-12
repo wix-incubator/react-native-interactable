@@ -21,6 +21,7 @@
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) InteractableLimit *limitX;
 @property (nonatomic, copy) InteractableLimit *limitY;
+@property (nonatomic, assign) BOOL haptics;
 
 - (CGPoint)positionWithOrigin:(CGPoint)origin;
 - (CGFloat)distanceFromPoint:(CGPoint)point withOrigin:(CGPoint)origin;

@@ -28,24 +28,28 @@
         CGFloat vx = -object.velocity.x * self.bounce;
         CGFloat vy = object.velocity.y;
         object.velocity = CGPointMake(vx, vy);
+        [self doHaptics];
     }
     if (self.minPoint.y == self.target.center.y && object.velocity.y < 0.0)
     {
         CGFloat vx = object.velocity.x;
         CGFloat vy = -object.velocity.y * self.bounce;
         object.velocity = CGPointMake(vx, vy);
+        [self doHaptics];
     }
     if (self.maxPoint.x == self.target.center.x && object.velocity.x > 0.0)
     {
         CGFloat vx = -object.velocity.x * self.bounce;
         CGFloat vy = object.velocity.y;
         object.velocity = CGPointMake(vx, vy);
+        [self doHaptics];
     }
     if (self.maxPoint.y == self.target.center.y && object.velocity.y > 0.0)
     {
         CGFloat vx = object.velocity.x;
         CGFloat vy = -object.velocity.y * self.bounce;
         object.velocity = CGPointMake(vx, vy);
+        [self doHaptics];
     }
 }
 

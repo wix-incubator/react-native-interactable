@@ -232,6 +232,7 @@
         if (limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + limitX.max;
         PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
         bounceBehavior.bounce = limitX.bounce;
+        bounceBehavior.haptics = limitX.haptics;
         [self.animator addTempBehavior:bounceBehavior];
     }
     if (limitY && limitY.bounce > 0.0)
@@ -242,6 +243,7 @@
         if (limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + limitY.max;
         PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
         bounceBehavior.bounce = limitY.bounce;
+        bounceBehavior.haptics = limitY.haptics;
         [self.animator addTempBehavior:bounceBehavior];
     }
 }
@@ -254,6 +256,7 @@
     
     PhysicsSpringBehavior *springBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:anchor];
     springBehavior.tension = point.tension;
+    springBehavior.haptics = point.haptics;
     springBehavior.influence = [self influenceAreaFromPoint:point];
     [self.animator addBehavior:springBehavior];
     
@@ -282,6 +285,7 @@
     {
         PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
         frictionBehavior.friction = point.damping;
+        if (gravityBehavior.strength > 0.0) frictionBehavior.haptics = point.haptics;
         if (gravityBehavior.influence) frictionBehavior.influence = gravityBehavior.influence;
         else frictionBehavior.influence = [self influenceAreaWithRadius:1.2 * point.falloff fromAnchor:anchor];
         [self.animator addBehavior:frictionBehavior];
@@ -294,6 +298,7 @@
     {
         PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
         frictionBehavior.friction = point.damping;
+        frictionBehavior.haptics = point.haptics;
         frictionBehavior.influence = [self influenceAreaFromPoint:point];
         [self.animator addBehavior:frictionBehavior];
     }

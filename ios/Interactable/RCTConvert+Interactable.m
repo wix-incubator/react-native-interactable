@@ -26,6 +26,7 @@
     point.id = [self NSString:json[@"id"] ?: nil];
     point.limitX = [self InteractableLimit:json[@"limitX"] ?: nil];
     point.limitY = [self InteractableLimit:json[@"limitY"] ?: nil];
+    point.haptics = [self BOOL:json[@"haptics"] ?: @(NO)];
     return point;
 }
 
@@ -37,6 +38,7 @@
     limit.min = [self CGFloat:json[@"min"] ?: @(-CGFLOAT_MAX)];
     limit.max = [self CGFloat:json[@"max"] ?: @(CGFLOAT_MAX)];
     limit.bounce = [self CGFloat:json[@"bounce"] ?: @(0.0)];
+    limit.haptics = [self BOOL:json[@"haptics"] ?: @(NO)];
     return limit;
 }
 

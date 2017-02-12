@@ -71,7 +71,7 @@ import Interactable from 'react-native-interactable';
 snapTo={[{x: 0}, {x: -200}]}
 ```
 
-A list of points the view will snap to after being dragged by the user. To implement a a drawer for example, provide 2 points - one for the open state and one for the closed state. Points are relative to the view's center (after initial layout). Every point in the array is an object with the following properties:
+A list of points the view will snap to after being dragged by the user. To implement a a drawer for example, provide 2 points - one for the open state and one for the closed state. Points are relative to the view's center (after initial layout). Every element in the array is an object with the following properties:
 
 * `x` - The horizontal position (relative to the center). Optional if a single dimension is needed.
 * `y` - The vertical position (relative to the center). Optional if a single dimension is needed.
@@ -120,6 +120,7 @@ Optional, an object providing limits to movement relative to the view's center (
 * `max` - The maximum vertical position (relative to the center). Optional.
 * `min` - The minimum vertical position (relative to the center). Optional.
 * `bounce` - The amount of bounce when hitting the limit (`0.0`-`1.0`). Optional.
+* `haptics` - Whether to enable haptic feedback on bounce. Default `false`.
 
 #### `onSnap` (function)
 
@@ -150,7 +151,7 @@ Optional, an object controlling the dragging behavior of the view. Contains foll
 springs={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
 ```
 
-Connect the view's center to a group of constant springs. Every point in the array is an object with the following properties:
+Connect the view's center to a group of constant springs. Every element in the array is an object with the following properties:
 
 * `x` - The horizontal anchor position of the spring (relative to the center). Default is `0.0`.
 * `y` - The vertical anchor position of the spring (relative to the center). Default is `0.0`.
@@ -162,6 +163,7 @@ Connect the view's center to a group of constant springs. Every point in the arr
 * `limitY` - Limit the spring influence to a specific vertical area. Optional. An object with the following properties:
   * `max` - The maximum vertical influence point (relative to the center). Optional.
   * `min` - The minimum vertical influence point (relative to the center). Optional.
+* `haptics` - Whether to enable haptic feedback on springs with influence area. Default `false`.
 
 Note: For the springs to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
 
@@ -171,7 +173,7 @@ Note: For the springs to affect the view while dragging, make sure dragging is p
 gravity={[{x: 0, y: 0, strength: 8000, falloff: 40, damping: 0.5}]}
 ```
 
-Attract/repel the view's center with a group of constant gravity wells. Every point in the array is an object with the following properties:
+Attract/repel the view's center with a group of constant gravity wells. Every element in the array is an object with the following properties:
 
 * `x` - The horizontal position of the well (relative to the center). Default is `0.0`.
 * `y` - The vertical position of the well (relative to the center). Default is `0.0`.
@@ -184,6 +186,7 @@ Attract/repel the view's center with a group of constant gravity wells. Every po
 * `limitY` - Limit the field influence to a specific vertical area. Optional. An object with the following properties:
   * `max` - The maximum vertical influence point (relative to the center). Optional.
   * `min` - The minimum vertical influence point (relative to the center). Optional.
+* `haptics` - Whether to enable haptic feedback on fields with influence area. Default `false`.
 
 Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
 
@@ -193,7 +196,7 @@ Note: For the gravity to affect the view while dragging, make sure dragging is p
 friction={[{damping: 0.5, limitY: {min: 0}}]}
 ```
 
-Add friction to the view's movement with a group of friction regions. Every point in the array is an object with the following properties:
+Add friction to the view's movement with a group of friction regions. Every element in the array is an object with the following properties:
 
 * `damping` - Amount of friction (`0.0`-`1.0`). Default is `0.0`.
 * `limitX` - Limit the friction influence to a specific horizontal area. Optional. An object with the following properties:
@@ -202,6 +205,7 @@ Add friction to the view's movement with a group of friction regions. Every poin
 * `limitY` - Limit the friction influence to a specific vertical area. Optional. An object with the following properties:
   * `max` - The maximum vertical influence point (relative to the center). Optional.
   * `min` - The minimum vertical influence point (relative to the center). Optional.
+* `haptics` - Whether to enable haptic feedback on regions with influence area. Default `false`.
 
 Note: For the friction to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
 

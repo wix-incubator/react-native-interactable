@@ -12,7 +12,7 @@
 #import "PhysicsBounceBehavior.h"
 #import "PhysicsFrictionBehavior.h"
 #import "PhysicsAnchorBehavior.h"
-#import "PhysicsElectricBehavior.h"
+#import "PhysicsGravityWellBehavior.h"
 
 @protocol PhysicsAnimatorDelegate;
 

@@ -140,7 +140,7 @@ drag={{tension: 2000, damping: 0.5, toss: 0.1}}
 
 Optional, an object controlling the dragging behavior of the view. Contains following properties:
 
-* `tension` - If given, drag will be done via a spring. This defines the tension of the spring.
+* `tension` - If given, drag will be done via a spring. This defines the tension of the spring. If not given, drag will be done using a pinned anchor point.
 * `damping` - Amount of damping on the spring used for dragging. Optional.
 * `toss` - Time in seconds the view is allowed to be tossed before snapping to a point. Default is `0.1`.
 
@@ -154,14 +154,38 @@ Connect the view's center to a group of constant springs. Every point in the arr
 
 * `x` - The horizontal anchor position of the spring (relative to the center). Default is `0.0`.
 * `y` - The vertical anchor position of the spring (relative to the center). Default is `0.0`.
-* `damping` - Amount of damping on the spring. Default is `0.0`.
 * `tension` - Tension of the spring. Default is `300`.
+* `damping` - Amount of damping on the spring. Default is `0.0`.
 * `limitX` - Limit the spring influence to a specific horizontal area. Optional. An object with the following properties:
   * `max` - The maximum horizontal influence point (relative to the center). Optional.
   * `min` - The minimum horizontal influence point (relative to the center). Optional.
 * `limitY` - Limit the spring influence to a specific vertical area. Optional. An object with the following properties:
   * `max` - The maximum vertical influence point (relative to the center). Optional.
   * `min` - The minimum vertical influence point (relative to the center). Optional.
+
+Note: For the springs to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
+
+#### `gravity` (array of points)
+
+```jsx
+gravity={[{x: 0, y: 0, strength: 8000, falloff: 40, damping: 0.5}]}
+```
+
+Attract/repel the view's center with a group of constant gravity wells. Every point in the array is an object with the following properties:
+
+* `x` - The horizontal position of the well (relative to the center). Default is `0.0`.
+* `y` - The vertical position of the well (relative to the center). Default is `0.0`.
+* `strength` - Strength of the field (positive attracts, negative repels). Default is `400`.
+* `falloff` - Distance of decay for the field strength. Default is `40`.
+* `damping` - Amount of damping on the field strength. Default is `0.0`.
+* `limitX` - Limit the spring influence to a specific horizontal area. Optional. An object with the following properties:
+  * `max` - The maximum horizontal influence point (relative to the center). Optional.
+  * `min` - The minimum horizontal influence point (relative to the center). Optional.
+* `limitY` - Limit the spring influence to a specific vertical area. Optional. An object with the following properties:
+  * `max` - The maximum vertical influence point (relative to the center). Optional.
+  * `min` - The minimum vertical influence point (relative to the center). Optional.
+
+Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
 
 #### `animatedValueX` (Animated.Value)
 

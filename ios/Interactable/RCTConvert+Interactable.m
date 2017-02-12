@@ -21,6 +21,8 @@
     point.y = [self CGFloat:json[@"y"] ?: @(CGFLOAT_MAX)];
     point.damping = [self CGFloat:json[@"damping"] ?: @(0.0)];
     point.tension = [self CGFloat:json[@"tension"] ?: @(300.0)];
+    point.strength = [self CGFloat:json[@"strength"] ?: @(400.0)];
+    point.falloff = [self CGFloat:json[@"falloff"] ?: @(40.0)];
     point.id = [self NSString:json[@"id"] ?: nil];
     point.limitX = [self InteractableLimit:json[@"limitX"] ?: nil];
     point.limitY = [self InteractableLimit:json[@"limitY"] ?: nil];
@@ -30,6 +32,7 @@
 + (InteractableLimit *)InteractableLimit:(id)json
 {
     json = [self NSDictionary:json];
+    if (json == nil) return nil;
     InteractableLimit *limit = [InteractableLimit new];
     limit.min = [self CGFloat:json[@"min"] ?: @(-CGFLOAT_MAX)];
     limit.max = [self CGFloat:json[@"max"] ?: @(CGFLOAT_MAX)];
@@ -40,6 +43,7 @@
 + (InteractableDrag *)InteractableDrag:(id)json
 {
     json = [self NSDictionary:json];
+    if (json == nil) return nil;
     InteractableDrag *drag = [InteractableDrag new];
     drag.toss = [self CGFloat:json[@"toss"] ?: @(0.1)];
     drag.tension = [self CGFloat:json[@"tension"] ?: @(CGFLOAT_MAX)];

@@ -25,6 +25,9 @@ export default class MoreChatHeads extends Component {
         <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderLocalizedSprings)}>
           <Text style={styles.button}>Localized springs</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderGravityWells)}>
+          <Text style={styles.button}>Gravity wells</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -75,6 +78,26 @@ export default class MoreChatHeads extends Component {
           springs={[
             {x: 0, y:-140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min: -180, max: -100}},
             {x: 0, y: 140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min:  100, max:  180}}]}
+          initialPosition={{x: -140, y: -280}}>
+          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+        </Interactable.View>
+      </View>
+    );
+  }
+
+  renderGravityWells() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.markerContainer}><View style={[styles.marker, {top: -140}]} /></View>
+        <View style={styles.markerContainer}><View style={[styles.marker, {top:  140}]} /></View>
+        <Interactable.View
+          snapTo={[
+            {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
+            {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
+          drag={{tension: 2000, damping: 0.5}}
+          gravity={[
+            {x: 0, y:-140, strength:  8000, falloff: 40, damping: 0.5},
+            {x: 0, y: 140, strength: -8000, falloff: 40, damping: 0.5}]}
           initialPosition={{x: -140, y: -280}}>
           <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
         </Interactable.View>

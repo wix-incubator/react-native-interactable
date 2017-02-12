@@ -16,6 +16,8 @@
 @property (nonatomic, assign) CGFloat y;
 @property (nonatomic, assign) CGFloat damping;
 @property (nonatomic, assign) CGFloat tension;
+@property (nonatomic, assign) CGFloat strength;
+@property (nonatomic, assign) CGFloat falloff;
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) InteractableLimit *limitX;
 @property (nonatomic, copy) InteractableLimit *limitY;

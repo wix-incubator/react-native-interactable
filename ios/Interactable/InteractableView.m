@@ -84,6 +84,10 @@
     {
         for (InteractablePoint *point in self.springs) [self addConstantSpringBehavior:point];
     }
+    if (self.gravity)
+    {
+        for (InteractablePoint *point in self.gravity) [self addConstantGravityBehavior:point];
+    }
 }
 
 - (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator
@@ -246,16 +250,7 @@
     
     PhysicsSpringBehavior *springBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:anchor];
     springBehavior.tension = point.tension;
-    if (point.limitX || point.limitY)
-    {
-        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
-        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
-        if (point.limitX && point.limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + point.limitX.min;
-        if (point.limitX && point.limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + point.limitX.max;
-        if (point.limitY && point.limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + point.limitY.min;
-        if (point.limitY && point.limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + point.limitY.max;
-        springBehavior.influence = [[PhysicsArea alloc] initWithMinPoint:minPoint maxPoint:maxPoint];
-    }
+    springBehavior.influence = [self influenceAreaFromPoint:point];
     [self.animator addBehavior:springBehavior];
     
     if (point.damping > 0.0)
@@ -265,6 +260,48 @@
         if (springBehavior.influence) frictionBehavior.influence = springBehavior.influence;
         [self.animator addBehavior:frictionBehavior];
     }
+}
+
+- (void)addConstantGravityBehavior:(InteractablePoint*)point
+{
+    CGPoint anchor = self.origin;
+    if (point.x != CGFLOAT_MAX) anchor.x = self.origin.x + point.x;
+    if (point.y != CGFLOAT_MAX) anchor.y = self.origin.y + point.y;
+    
+    PhysicsGravityWellBehavior *gravityBehavior = [[PhysicsGravityWellBehavior alloc] initWithTarget:self anchorPoint:anchor];
+    gravityBehavior.strength = point.strength;
+    gravityBehavior.falloff = point.falloff;
+    gravityBehavior.influence = [self influenceAreaFromPoint:point];
+    [self.animator addBehavior:gravityBehavior];
+    
+    if (point.damping > 0.0)
+    {
+        PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
+        frictionBehavior.friction = point.damping;
+        if (gravityBehavior.influence) frictionBehavior.influence = gravityBehavior.influence;
+        else frictionBehavior.influence = [self influenceAreaWithRadius:1.2 * point.falloff fromAnchor:anchor];
+        [self.animator addBehavior:frictionBehavior];
+    }
+}
+
+- (PhysicsArea*)influenceAreaFromPoint:(InteractablePoint*)point
+{
+    if (!point.limitX && !point.limitY) return nil;
+    CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
+    CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
+    if (point.limitX && point.limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + point.limitX.min;
+    if (point.limitX && point.limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + point.limitX.max;
+    if (point.limitY && point.limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + point.limitY.min;
+    if (point.limitY && point.limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + point.limitY.max;
+    return [[PhysicsArea alloc] initWithMinPoint:minPoint maxPoint:maxPoint];
+}
+
+- (PhysicsArea*)influenceAreaWithRadius:(CGFloat)radius fromAnchor:(CGPoint)anchor
+{
+    if (radius <= 0.0) return nil;
+    CGPoint minPoint = CGPointMake(anchor.x - radius, anchor.y - radius);
+    CGPoint maxPoint = CGPointMake(anchor.y + radius, anchor.y + radius);
+    return [[PhysicsArea alloc] initWithMinPoint:minPoint maxPoint:maxPoint];
 }
 
 @end

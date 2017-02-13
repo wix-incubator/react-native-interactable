@@ -7,7 +7,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
 
 import com.wix.interactable.physics.PhysicsAnchorBehavior;
 import com.wix.interactable.physics.PhysicsAnimator;
@@ -20,7 +20,7 @@ import com.wix.interactable.physics.PhysicsSpringBehavior;
 
 import java.util.ArrayList;
 
-public class InteractableView extends FrameLayout implements PhysicsAnimator.PhysicsAnimatorListener {
+public class InteractableView extends ViewGroup implements PhysicsAnimator.PhysicsAnimatorListener {
 
     private boolean originSet;
     private PointF origin;
@@ -107,6 +107,11 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
         return true;
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
     }
 
     @Override

@@ -47,7 +47,7 @@ export default class MoreChatHeads extends Component {
             {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
             {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
           initialPosition={{x: -140, y: -280}}>
-          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+          <View style={styles.head} />
         </Interactable.View>
       </View>
     );
@@ -62,7 +62,7 @@ export default class MoreChatHeads extends Component {
             {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
           drag={{tension: 1000, damping: 0.7}}
           initialPosition={{x: -140, y: -280}}>
-          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+          <View style={styles.head} />
         </Interactable.View>
       </View>
     );
@@ -82,7 +82,7 @@ export default class MoreChatHeads extends Component {
             {x: 0, y:-140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min: -180, max: -100}, haptics: true},
             {x: 0, y: 140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min:  100, max:  180}, haptics: true}]}
           initialPosition={{x: -140, y: -280}}>
-          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+          <View style={styles.head} />
         </Interactable.View>
       </View>
     );
@@ -103,7 +103,7 @@ export default class MoreChatHeads extends Component {
             {x: 0, y: 140, strength: -8000, falloff: 40, damping: 0.5, haptics: true}]}
           onStop={this.onStopInteraction}
           initialPosition={{x: -140, y: -280}}>
-          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+          <View style={styles.head} />
         </Interactable.View>
       </View>
     );
@@ -119,7 +119,7 @@ export default class MoreChatHeads extends Component {
           drag={{tension: 2000, damping: 0.5}}
           friction={[{damping: 0.3, limitY: {min: 0}, haptics: true}]}
           initialPosition={{x: -140, y: -280}}>
-          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+          <View style={styles.head} />
         </Interactable.View>
       </View>
     );
@@ -164,5 +164,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#dddddd',
     position: 'relative'
+  },
+  head : {
+    width: 70,
+    height: 70,
+    backgroundColor: 'red',
+    borderRadius: 35,
+    borderWidth: 0.5
   }
 });

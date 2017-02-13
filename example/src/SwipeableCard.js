@@ -15,7 +15,7 @@ export default class SwipeableCard extends Component {
             {x: 0, damping: 0.5},
             {x: -360}
           ]}>
-          <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
+          <View style={styles.card} />
         </Interactable.View>
 
         <Interactable.View
@@ -26,7 +26,7 @@ export default class SwipeableCard extends Component {
             {x: 0},
             {x: -360}
           ]}>
-          <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
+          <View style={styles.card} />
         </Interactable.View>
 
         <Interactable.View
@@ -37,7 +37,7 @@ export default class SwipeableCard extends Component {
             {x: 0, damping: 0.8},
             {x: -360}
           ]}>
-          <View style={{width: 300, height: 200, backgroundColor: 'red', borderRadius: 8, marginVertical: 6}} />
+          <View style={styles.card} />
         </Interactable.View>
 
       </View>
@@ -51,5 +51,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  card : {
+    width: 300,
+    height: 180,
+    backgroundColor: 'red',
+    borderRadius: 8,
+    marginVertical: 6,
+    borderWidth: 0.5
   }
 });

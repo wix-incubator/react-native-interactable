@@ -28,7 +28,7 @@ export default class CollapsingHeader extends Component {
                 }
               ]
             }}>
-              <View style={{width: 150, height: 150, backgroundColor: 'blue', borderRadius: 75, marginTop: 50}} />
+              <View style={{width: 150, height: 150, backgroundColor: 'blue', borderRadius: 75, marginTop: 50, borderWidth: 0.5}} />
             </Animated.View>
           </View>
 

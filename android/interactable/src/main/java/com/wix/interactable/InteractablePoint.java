@@ -29,6 +29,8 @@ public class InteractablePoint {
         this.tension = tension;
         this.limitX = limitX;
         this.limitY = limitY;
+        this.strength = strength;
+        this.falloff = falloff;
     }
 
     public PointF positionWithOrigin() {

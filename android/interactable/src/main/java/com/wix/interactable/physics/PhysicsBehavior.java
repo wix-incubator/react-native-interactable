@@ -28,6 +28,8 @@ public abstract class PhysicsBehavior {
 
     boolean isTemp = false;
     boolean haptic = false;
+    boolean lastIsWithinInfluenceInitialized = false;
+    boolean lastIsWithinInfluence = false;
 
     public PhysicsBehavior(View target) {
         this.target = target;
@@ -41,22 +43,30 @@ public abstract class PhysicsBehavior {
     public abstract void executeFrameWithDeltaTime(float timeInterval,PhysicsObject physicsObject);
 
     public boolean isWithinInfluence() {
+        boolean res = true;
         if (influence == null) {
             return true;
         }
-        if (target.getTranslationX() < influence.minPoint.x) return false;
-        if (target.getTranslationX() > influence.maxPoint.x) return false;
+        if (target.getTranslationX() < influence.minPoint.x) res =  false;
+        if (target.getTranslationX() > influence.maxPoint.x) res =  false;
 
-        if (target.getTranslationY() < influence.minPoint.y) return false;
-        if (target.getTranslationY() > influence.maxPoint.y) return false;
-        return true;
+        if (target.getTranslationY() < influence.minPoint.y) res =  false;
+        if (target.getTranslationY() > influence.maxPoint.y) res =  false;
+
+        if (lastIsWithinInfluenceInitialized) {
+            if (res != lastIsWithinInfluence) {
+                doHaptic();
+            }
+
+        }
+        lastIsWithinInfluenceInitialized = true;
+        lastIsWithinInfluence = res;
+        return res;
     }
 
     protected void doHaptic() {
         Log.d("InteractableView","doHaptic ");
         Vibrator v = (Vibrator) target.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-
-// Vibrate for 300 milliseconds
-        v.vibrate(300);
+        v.vibrate(3);
     }
 }

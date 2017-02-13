@@ -99,6 +99,11 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             res = springBehavior;
             this.animator.addTempBehavior(springBehavior);
         }
+        if (drag != null && drag.damping > 0.0)
+        {
+            PhysicsFrictionBehavior frictionBehavior = new PhysicsFrictionBehavior(this,drag.damping);
+            this.animator.addTempBehavior(frictionBehavior);
+        }
 
         return res;
     }
@@ -239,8 +244,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (point.y != Float.MAX_VALUE) anchor.y = point.y;
 
         PhysicsGravityWellBehavior gravityBehavior = new PhysicsGravityWellBehavior(this,anchor);
-        gravityBehavior.setStrength(point.strength);
-        gravityBehavior.setFalloff(point.falloff);
+        gravityBehavior.setStrength(point.strength );
+        gravityBehavior.setFalloff(point.falloff );
         PhysicsArea influenceArea = influenceAreaFromPoint(point);
         gravityBehavior.setInfluence(influenceArea);
 
@@ -257,6 +262,12 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             }
             this.animator.addBehavior(frictionBehavior);
         }
+    }
+
+    private void addConstantFrictionBehavior(InteractablePoint point) {
+        PhysicsFrictionBehavior frictionBehavior = new PhysicsFrictionBehavior(this,point.damping);
+        frictionBehavior.setInfluence(influenceAreaFromPoint(point));
+        this.animator.addBehavior(frictionBehavior);
     }
 
     private PhysicsArea influenceAreaFromPoint(InteractablePoint point)
@@ -289,6 +300,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setInitialPosition(PointF initialPosition) {
         this.initialPosition = initialPosition;
+        setTranslationX(initialPosition.x);
+        setTranslationY(initialPosition.y);
     }
 
     public void setLimitX(InteractableLimit limitX) {

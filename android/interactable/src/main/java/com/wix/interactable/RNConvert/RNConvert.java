@@ -32,7 +32,7 @@ public class RNConvert {
         float damping = params.hasKey("damping") ? (float) params.getDouble("damping") : 0f;
         float tension = params.hasKey("tension") ? (float) params.getDouble("tension") : 300f;
         float strength = params.hasKey("strength") ? (float) params.getDouble("strength") : 400f;
-        float falloff = params.hasKey("falloff") ? (float) params.getDouble("falloff") : 40f;
+        float falloff = params.hasKey("falloff") ? (float) PixelUtil.toPixelFromDIP( params.getDouble("falloff")) : 40f;
         InteractableLimit limitX = params.hasKey("limitX") ? interactableLimit(params.getMap("limitX")) : null;
         InteractableLimit limitY = params.hasKey("limitY") ? interactableLimit(params.getMap("limitY")) : null;
 

@@ -2,6 +2,7 @@ package com.wix.interactable.physics;
 
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -27,6 +28,8 @@ public class PhysicsSpringBehavior extends PhysicsBehavior {
         float dy = this.target.getTranslationY() - this.anchorPoint.y;
         float ay = (-this.tension * dy) / physicsObject.mass;
         float vy = physicsObject.velocity.y + deltaTime * ay;
+
+        Log.d("InteractableView"," PhysicsSpringBehavior executeFrameWithDeltaTime: " + deltaTime + " vx = " + vx);
 
         physicsObject.velocity = new PointF(vx, vy);
     }

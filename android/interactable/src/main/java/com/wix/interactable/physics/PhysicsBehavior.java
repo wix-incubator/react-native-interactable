@@ -1,7 +1,10 @@
 package com.wix.interactable.physics;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -33,11 +36,22 @@ public abstract class PhysicsBehavior {
     public abstract void executeFrameWithDeltaTime(float timeInterval,PhysicsObject physicsObject);
 
     public boolean isWithinInfluence() {
+        if (influence == null) {
+            return true;
+        }
         if (target.getTranslationX() < influence.minPoint.x) return false;
         if (target.getTranslationX() > influence.maxPoint.x) return false;
 
         if (target.getTranslationY() < influence.minPoint.y) return false;
         if (target.getTranslationY() > influence.maxPoint.y) return false;
         return true;
+    }
+
+    protected void doHaptic() {
+        Log.d("InteractableView","doHaptic ");
+        Vibrator v = (Vibrator) target.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+
+// Vibrate for 300 milliseconds
+        v.vibrate(300);
     }
 }

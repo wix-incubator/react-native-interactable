@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 import com.wix.interactable.physics.PhysicsAnchorBehavior;
 import com.wix.interactable.physics.PhysicsAnimator;
 import com.wix.interactable.physics.PhysicsBehavior;
+import com.wix.interactable.physics.PhysicsBounceBehavior;
+import com.wix.interactable.physics.PhysicsFrictionBehavior;
 import com.wix.interactable.physics.PhysicsSpringBehavior;
 
 import java.util.ArrayList;
@@ -119,6 +121,13 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
             case MotionEvent.ACTION_MOVE:
                 float newX = getTranslationX() + event.getX() - dragStartLocation.x;
                 float newY = getTranslationY() + event.getY() - dragStartLocation.y;
+                if (horizontalOnly) {
+                    newY = 0;
+                }
+                if (verticalOnly) {
+                    newX = 0;
+                }
+
                 this.dragBehavior.setAnchorPoint(new PointF(newX,newY));
 
                 break;
@@ -145,13 +154,56 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
                                             getTranslationY() + toss*velocity.y);
 
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapTo,projectedCenter);
+        addTempSnapToPointBehavior(snapPoint);
+        addTempBounceBehavior(this.limitX,this.limitY);
 
     }
 
     private void addTempSnapToPointBehavior(InteractablePoint snapPoint) {
+        if (snapPoint == null) {
+            return;
+        }
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
+
+        this.animator.addTempBehavior(snapBehavior);
+
+        float damping = 0.7f;
+        if (snapPoint.damping > 0.0) damping = snapPoint.damping;
+        PhysicsFrictionBehavior frictionBehavior = new PhysicsFrictionBehavior(this,damping);
+        this.animator.addTempBehavior(frictionBehavior);
         //TODO - continue here!
+
+    }
+
+    private void addTempBounceBehavior(InteractableLimit limitX,InteractableLimit limitY) {
+        Log.d("InteractableView","addTempBounceBehavior limitX = " + limitX);
+        if (limitX != null && limitX.getBounce() > 0.0)
+        {
+            PointF minPoint = new PointF(-Float.MAX_VALUE,-Float.MAX_VALUE);
+            if (limitX.getMin() != -Float.MAX_VALUE)
+                minPoint.x = limitX.getMin();
+            PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
+            if (limitX.getMax() != Float.MAX_VALUE)
+                maxPoint.x = limitX.getMax();
+            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint,
+                    maxPoint,limitX.getBounce());
+//            bounceBehavior.haptics = limitX.haptics;
+            this.animator.addTempBehavior(bounceBehavior);
+        }
+        if (limitY != null && limitY.getBounce() > 0.0)
+        {
+            PointF minPoint = new PointF(-Float.MAX_VALUE,-Float.MAX_VALUE);
+            if (limitY.getMin() != -Float.MAX_VALUE)
+                minPoint.y = limitY.getMin();
+            PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
+            if (limitY.getMax() != Float.MAX_VALUE)
+                maxPoint.y = limitY.getMax();
+            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint,
+                    maxPoint,limitY.getBounce());
+//            bounceBehavior.haptics = limitX.haptics;
+            this.animator.addTempBehavior(bounceBehavior);
+        }
 
     }
 

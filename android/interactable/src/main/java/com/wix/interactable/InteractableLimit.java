@@ -11,15 +11,15 @@ public class InteractableLimit {
         this.bounce = bounce;
     }
 
-    public double getMin() {
+    public float getMin() {
         return min;
     }
 
-    public double getMax() {
+    public float getMax() {
         return max;
     }
 
-    public double getBounce() {
+    public float getBounce() {
         return bounce;
     }
 }

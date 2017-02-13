@@ -20,7 +20,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
 
     @Override
     public void doFrame(long frameTimeNanos) {
-//        Log.d("InteractableView","doFrame frameTimeNanos = " + frameTimeNanos);
+        Log.d("InteractableView","doFrame frameTimeNanos = " + frameTimeNanos + " last = " + lastFrameTS);
         if (lastFrameTS != 0) {
             float delta = (float) ((frameTimeNanos - lastFrameTS) * 1e-9);
 //            Log.d("InteractableView","doFrame delta = " + delta);
@@ -63,6 +63,8 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
         ensureTargetObjectExists(behavior.target);
         if (!isRunning) {
             isRunning = true;
+            lastFrameTS = 0;
+            this.consecutiveFramesWithNoMovement = 0;
             this.choreographer.postFrameCallback(this);
         }
     }
@@ -75,6 +77,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
 
     public void removeAllBehaviors() {
         behaviors.clear();
+        targetsToObjects.clear();
     }
 
     public void removeTempBehaviors() {
@@ -85,6 +88,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
                 iterator.remove();
             }
         }
+        targetsToObjects.clear();
     }
 
     private PhysicsObject ensureTargetObjectExists(View target) {
@@ -106,6 +110,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
 
     public void stopRunning() {
         isRunning = false;
+
         this.choreographer.removeFrameCallback(this);
     }
 
@@ -114,6 +119,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
             PhysicsObject physicsObject = targetsToObjects.get(behavior.target);
             if (physicsObject != null) {
                 behavior.executeFrameWithDeltaTime(deltaTime,physicsObject);
+
             }
         }
 

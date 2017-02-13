@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 
 public class InteractablePoint {
+    public String id;
     public float x;
     public float y;
     public float damping;
@@ -20,7 +21,8 @@ public class InteractablePoint {
     public InteractableLimit limitX;
     public InteractableLimit limitY;
 
-    public InteractablePoint(float x, float y, float damping, float tension, float strength, float falloff, InteractableLimit limitX, InteractableLimit limitY) {
+    public InteractablePoint(String id, float x, float y, float damping, float tension, float strength, float falloff, InteractableLimit limitX, InteractableLimit limitY) {
+        this.id = id;
         this.x = x;
         this.y = y;
         this.damping = damping;

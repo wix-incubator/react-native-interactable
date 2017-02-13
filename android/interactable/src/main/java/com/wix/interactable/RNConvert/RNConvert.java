@@ -26,6 +26,7 @@ public class RNConvert {
     }
 
     public static InteractablePoint interactablePoint(ReadableMap params) {
+        String id = params.hasKey("id") ? params.getString("id") : null;
         float x = params.hasKey("x") ? PixelUtil.toPixelFromDIP(params.getDouble("x")) : Float.MAX_VALUE;
         float y = params.hasKey("y") ? PixelUtil.toPixelFromDIP(params.getDouble("y")) : Float.MAX_VALUE;
         float damping = params.hasKey("damping") ? (float) params.getDouble("damping") : 0f;
@@ -35,7 +36,7 @@ public class RNConvert {
         InteractableLimit limitX = params.hasKey("limitX") ? interactableLimit(params.getMap("limitX")) : null;
         InteractableLimit limitY = params.hasKey("limitY") ? interactableLimit(params.getMap("limitY")) : null;
 
-        return new InteractablePoint(x, y, damping, tension, strength, falloff, limitX, limitY);
+        return new InteractablePoint(id, x, y, damping, tension, strength, falloff, limitX, limitY);
     }
 
     public static InteractableDrag interactableDrag(ReadableMap params) {

@@ -11,9 +11,11 @@ import android.widget.FrameLayout;
 
 import com.wix.interactable.physics.PhysicsAnchorBehavior;
 import com.wix.interactable.physics.PhysicsAnimator;
+import com.wix.interactable.physics.PhysicsArea;
 import com.wix.interactable.physics.PhysicsBehavior;
 import com.wix.interactable.physics.PhysicsBounceBehavior;
 import com.wix.interactable.physics.PhysicsFrictionBehavior;
+import com.wix.interactable.physics.PhysicsGravityWellBehavior;
 import com.wix.interactable.physics.PhysicsSpringBehavior;
 
 import java.util.ArrayList;
@@ -207,6 +209,71 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
 
     }
 
+    private void addConstantSpringBehavior(InteractablePoint point) {
+        PointF anchor = new PointF(0,0);
+        if (point.x != Float.MAX_VALUE) anchor.x = point.x;
+        if (point.y != Float.MAX_VALUE) anchor.y = point.y;
+
+        PhysicsSpringBehavior springBehavior = new PhysicsSpringBehavior(this,anchor);
+        springBehavior.tension = point.tension;
+        springBehavior.setInfluence(influenceAreaFromPoint(point));
+
+        this.animator.addBehavior(springBehavior);
+
+        if (point.damping > 0.0) {
+            PhysicsFrictionBehavior frictionBehavior = new PhysicsFrictionBehavior(this,point.damping);
+            frictionBehavior.setInfluence(influenceAreaFromPoint(point));
+
+            this.animator.addBehavior(frictionBehavior);
+        }
+    }
+
+    private void addConstantGravityBehavior(InteractablePoint point) {
+        PointF anchor = new PointF(0,0);
+        if (point.x != Float.MAX_VALUE) anchor.x = point.x;
+        if (point.y != Float.MAX_VALUE) anchor.y = point.y;
+
+        PhysicsGravityWellBehavior gravityBehavior = new PhysicsGravityWellBehavior(this,anchor);
+        gravityBehavior.setStrength(point.strength);
+        gravityBehavior.setFalloff(point.falloff);
+        PhysicsArea influenceArea = influenceAreaFromPoint(point);
+        gravityBehavior.setInfluence(influenceArea);
+
+        this.animator.addBehavior(gravityBehavior);
+
+        if (point.damping > 0.0) {
+            PhysicsFrictionBehavior frictionBehavior = new PhysicsFrictionBehavior(this,point.damping);
+
+            if (influenceArea == null) {
+                frictionBehavior.setInfluence(influenceAreaWithRadius(1.4f * point.falloff,anchor));
+            }
+            else {
+                frictionBehavior.setInfluence(influenceArea);
+            }
+            this.animator.addBehavior(frictionBehavior);
+        }
+    }
+
+    private PhysicsArea influenceAreaFromPoint(InteractablePoint point)
+    {
+        if (point.limitX == null && point.limitY == null) return null;
+        
+        PointF minPoint = new PointF(-Float.MAX_VALUE, -Float.MAX_VALUE);
+        PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
+        if (point.limitX != null && point.limitX.getMin() != -Float.MAX_VALUE) minPoint.x = point.limitX.getMin();
+        if (point.limitX != null && point.limitX.getMax() != Float.MAX_VALUE) maxPoint.x = point.limitX.getMax();
+        if (point.limitY != null && point.limitY.getMin() != -Float.MAX_VALUE) minPoint.y =  point.limitY.getMin();
+        if (point.limitY != null && point.limitY.getMax() != Float.MAX_VALUE) maxPoint.y = point.limitY.getMax();
+        return new PhysicsArea(minPoint,maxPoint);
+    }
+
+    private PhysicsArea influenceAreaWithRadius(float radius,PointF anchor) {
+        if (radius <= 0.0) return null;
+        PointF minPoint = new PointF(anchor.x - radius, anchor.y - radius);
+        PointF maxPoint = new PointF(anchor.y + radius, anchor.y + radius);
+        return new PhysicsArea(minPoint,maxPoint);
+    }
+
     public void setVerticalOnly(boolean verticalOnly) {
         this.verticalOnly = verticalOnly;
     }
@@ -235,11 +302,17 @@ public class InteractableView extends FrameLayout implements PhysicsAnimator.Phy
         this.snapTo = snapTo;
     }
 
-    public void setSprings(ArrayList springs) {
+    public void setSprings(ArrayList<InteractablePoint> springs) {
         this.springs = springs;
+        for (InteractablePoint point : springs) {
+            addConstantSpringBehavior(point);
+        }
     }
 
-    public void setGravity(ArrayList gravity) {
+    public void setGravity(ArrayList<InteractablePoint> gravity) {
         this.gravity = gravity;
+        for (InteractablePoint point : gravity) {
+            addConstantGravityBehavior(point);
+        }
     }
 }

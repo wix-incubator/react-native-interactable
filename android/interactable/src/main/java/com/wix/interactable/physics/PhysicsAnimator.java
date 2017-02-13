@@ -109,6 +109,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
     }
 
     public void stopRunning() {
+        removeTempBehaviors();
         isRunning = false;
 
         this.choreographer.removeFrameCallback(this);

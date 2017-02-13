@@ -10,6 +10,14 @@ import android.view.View;
 
 public class PhysicsGravityWellBehavior extends PhysicsBehavior {
 
+    public void setStrength(float strength) {
+        this.strength = strength;
+    }
+
+    public void setFalloff(float falloff) {
+        this.falloff = falloff;
+    }
+
     private float strength = 400f;
     private float falloff = 40f;
 

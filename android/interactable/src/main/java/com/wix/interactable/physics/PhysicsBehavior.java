@@ -20,9 +20,14 @@ public abstract class PhysicsBehavior {
 
     PointF anchorPoint;
 
+    public void setInfluence(PhysicsArea influence) {
+        this.influence = influence;
+    }
+
     private PhysicsArea influence;
 
     boolean isTemp = false;
+    boolean haptic = false;
 
     public PhysicsBehavior(View target) {
         this.target = target;

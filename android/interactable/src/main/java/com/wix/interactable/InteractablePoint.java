@@ -2,6 +2,7 @@ package com.wix.interactable;
 
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,8 @@ public class InteractablePoint {
         float minDist = Float.MAX_VALUE;
         InteractablePoint closestPoint = null;
         for (InteractablePoint point : pointArray) {
+            Log.d("InteractableView","findClosestPoint point x = " + point.x);
+
             float curDist = point.distanceFromPoint(relativePoint);
             if (curDist < minDist) {
                 minDist = curDist;

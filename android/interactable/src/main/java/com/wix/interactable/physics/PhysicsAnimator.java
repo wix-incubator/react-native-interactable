@@ -20,19 +20,24 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
 
     @Override
     public void doFrame(long frameTimeNanos) {
-        Log.d("InteractableView","doFrame frameTimeNanos = " + frameTimeNanos + " last = " + lastFrameTS);
+//        Log.d("InteractableView","doFrame frameTimeNanos = " + frameTimeNanos + " last = " + lastFrameTS);
         if (lastFrameTS != 0) {
             float delta = (float) ((frameTimeNanos - lastFrameTS) * 1e-9);
 //            Log.d("InteractableView","doFrame delta = " + delta);
             animateFrameWithDeltaTime(delta);
         }
         lastFrameTS = frameTimeNanos;
-        if (isRunning)
+        if (isRunning) {
             this.choreographer.postFrameCallback(this);
+        }
+        if (animatorListener != null) {
+            animatorListener.onAnimationFrame();
+        }
     }
 
     public interface PhysicsAnimatorListener {
         void onAnimatorPause();
+        void onAnimationFrame();
     }
 
     public void setListener(PhysicsAnimatorListener listener) {

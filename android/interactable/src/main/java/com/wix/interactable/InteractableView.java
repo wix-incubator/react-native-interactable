@@ -42,6 +42,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private ArrayList<InteractablePoint> springs;
     private ArrayList<InteractablePoint> gravity;
 
+    private InteractionListener listener;
+
 
     public InteractableView(Context context) {
         super(context);
@@ -65,16 +67,23 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
     private void init() {
-        Log.d("InteractableView","init!!!");
         originSet = false;
         initialPositionSet = false;
         initializeAnimator();
+    }
 
+    public void setEventListener(InteractionListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public void onAnimatorPause() {
 
+    }
+
+    @Override
+    public void onAnimationFrame() {
+        listener.onAnimatedEvent(getTranslationX(), getTranslationY());
     }
 
     private void initializeAnimator() {
@@ -122,7 +131,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        Log.d("InteractableView","onTouchEvent action = " + event.getAction());
+//        Log.d("InteractableView","onTouchEvent action = " + event.getAction());
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 this.dragStartLocation = new PointF(event.getX(),event.getY());
@@ -166,8 +175,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
                                             getTranslationY() + toss*velocity.y);
 
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapTo,projectedCenter);
+        listener.onSnap(snapTo.indexOf(snapPoint), snapPoint.id);
         addTempSnapToPointBehavior(snapPoint);
-        addTempBounceBehavior(this.limitX,this.limitY);
+        addTempBounceBehavior(this.limitX, this.limitY);
 
     }
 
@@ -332,5 +342,10 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         for (InteractablePoint point : gravity) {
             addConstantGravityBehavior(point);
         }
+    }
+
+    public interface InteractionListener {
+        void onSnap(int indexOfSnapPoint, String snapPointId);
+        void onAnimatedEvent(float x, float y);
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ListView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ListView, TouchableOpacity, Text } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 export default class HandleTouches extends Component {
@@ -25,13 +25,23 @@ export default class HandleTouches extends Component {
         <Interactable.View
           horizontalOnly={true}
           snapTo={[{x: 360},{x: 0},{x: -360}]}>
-          <View style={styles.card} />
+          <View style={styles.card}>
+            <TouchableOpacity style={styles.button} onPress={this.onButtonPress.bind(this, 'A')}>
+              <Text style={{textAlign: 'center'}}>Button A</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.onButtonPress.bind(this, 'B')}>
+              <Text style={{textAlign: 'center'}}>Button B</Text>
+            </TouchableOpacity>
+          </View>
         </Interactable.View>
       </TouchableOpacity>
     );
   }
   onCardPress() {
     alert('Card was pressed');
+  }
+  onButtonPress(type) {
+    alert(`Button ${type} was pressed`);
   }
 }
 
@@ -40,12 +50,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white'
   },
-  card : {
+  card: {
     width: 300,
     height: 180,
     backgroundColor: 'red',
     borderRadius: 8,
     marginVertical: 6,
     borderWidth: 0.5
+  },
+  button: {
+    width: 80,
+    height: 40,
+    marginLeft: 30,
+    marginTop: 30,
+    justifyContent: 'center',
+    backgroundColor: 'purple'
   }
 });

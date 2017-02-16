@@ -31,6 +31,8 @@ public abstract class PhysicsBehavior {
     boolean lastIsWithinInfluenceInitialized = false;
     boolean lastIsWithinInfluence = false;
 
+    int priority = 1;
+
     public PhysicsBehavior(View target) {
         this.target = target;
     }

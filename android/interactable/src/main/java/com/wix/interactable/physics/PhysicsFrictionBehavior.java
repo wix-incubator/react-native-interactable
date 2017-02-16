@@ -14,10 +14,12 @@ public class PhysicsFrictionBehavior extends PhysicsBehavior {
     public PhysicsFrictionBehavior(View target,float friction) {
         super(target);
         this.friction = friction;
+        this.priority = 2;
     }
 
     @Override
     public void executeFrameWithDeltaTime(float deltaTime, PhysicsObject physicsObject) {
+        Log.d("InteractableView"," PhysicsFrictionBehavior executeFrameWithDeltaTime friction = " + friction);
         if (!isWithinInfluence()) {
             return;
         }
@@ -25,8 +27,7 @@ public class PhysicsFrictionBehavior extends PhysicsBehavior {
         float vx = (float) (Math.pow(this.friction, 60.0 * deltaTime) * physicsObject.velocity.x);
         float vy = (float) (Math.pow(this.friction, 60.0 * deltaTime) * physicsObject.velocity.y);
 
-        Log.d("InteractableView"," PhysicsFrictionBehavior executeFrameWithDeltaTime: " + deltaTime
-                + " vx = " + vx + " cur vx = " + physicsObject.velocity.x);
+        Log.d("InteractableView"," vx = " + vx + " cur vx = " + physicsObject.velocity.x);
 
         physicsObject.velocity = new PointF(vx,vy);
     }

@@ -38,9 +38,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private InteractableLimit limitX;
     private InteractableLimit limitY;
     private InteractableDrag drag;
-    private ArrayList<InteractablePoint> snapTo;
-    private ArrayList<InteractablePoint> springs;
-    private ArrayList<InteractablePoint> gravity;
+    private ArrayList<InteractablePoint> snapTo = new ArrayList<>();
+    private ArrayList<InteractablePoint> springs = new ArrayList<>();
+    private ArrayList<InteractablePoint> gravity = new ArrayList<>();
 
     private InteractionListener listener;
 
@@ -105,6 +105,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         }
         else {
             PhysicsSpringBehavior springBehavior = new PhysicsSpringBehavior(this, getCurrentPosition());
+            springBehavior.tension = drag.tension;
             res = springBehavior;
             this.animator.addTempBehavior(springBehavior);
         }
@@ -171,11 +172,13 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         float toss = 0.1f;
         if (this.drag != null) toss = this.drag.toss;
 
+        Log.d("InteractableView","handleEndOfDrag velocity = " + velocity);
+
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                                             getTranslationY() + toss*velocity.y);
 
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapTo,projectedCenter);
-        listener.onSnap(snapTo.indexOf(snapPoint), snapPoint.id);
+
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehavior(this.limitX, this.limitY);
 
@@ -185,6 +188,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (snapPoint == null) {
             return;
         }
+        listener.onSnap(snapTo.indexOf(snapPoint), snapPoint.id);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
 
@@ -254,7 +258,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (point.y != Float.MAX_VALUE) anchor.y = point.y;
 
         PhysicsGravityWellBehavior gravityBehavior = new PhysicsGravityWellBehavior(this,anchor);
-        gravityBehavior.setStrength(point.strength );
+        gravityBehavior.setStrength(point.strength);
         gravityBehavior.setFalloff(point.falloff );
         PhysicsArea influenceArea = influenceAreaFromPoint(point);
         gravityBehavior.setInfluence(influenceArea);
@@ -296,7 +300,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private PhysicsArea influenceAreaWithRadius(float radius,PointF anchor) {
         if (radius <= 0.0) return null;
         PointF minPoint = new PointF(anchor.x - radius, anchor.y - radius);
-        PointF maxPoint = new PointF(anchor.y + radius, anchor.y + radius);
+        PointF maxPoint = new PointF(anchor.x + radius, anchor.y + radius);
+        Log.d("InteractableView","influenceAreaWithRadius minPoint = " + minPoint + " maxPoint = " + maxPoint);
         return new PhysicsArea(minPoint,maxPoint);
     }
 
@@ -340,7 +345,18 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     public void setGravity(ArrayList<InteractablePoint> gravity) {
         this.gravity = gravity;
         for (InteractablePoint point : gravity) {
+            Log.d("InteractableView","setGravity strength = " + point.strength);
+            Log.d("InteractableView","setGravity damping = " + point.damping);
+
             addConstantGravityBehavior(point);
+        }
+    }
+
+    public void setFriction(ArrayList<InteractablePoint> friction) {
+        this.gravity = gravity;
+        for (InteractablePoint point : friction) {
+            Log.d("InteractableView","setFriction damping = " + point.damping);
+            addConstantFrictionBehavior(point);
         }
     }
 

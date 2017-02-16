@@ -53,6 +53,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setGravity(RNConvert.interactablePoints(gravity));
     }
 
+    @ReactProp(name = "friction")
+    public void setFriction(InteractableView view, @Nullable ReadableArray gravity) {
+        view.setFriction(RNConvert.interactablePoints(gravity));
+    }
+
     @ReactProp(name = "drag")
     public void setDrag(InteractableView view, @Nullable ReadableMap drag) {
         view.setDrag(RNConvert.interactableDrag(drag));

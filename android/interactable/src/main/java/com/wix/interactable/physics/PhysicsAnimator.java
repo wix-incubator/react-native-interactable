@@ -63,7 +63,11 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
     }
 
     public void addBehavior(PhysicsBehavior behavior) {
-        behaviors.add(behavior);
+        int idx = 0;
+        while (behaviors.size() > idx && behaviors.get(idx).priority < behavior.priority) {
+            ++idx;
+        }
+        behaviors.add(idx,behavior);
 
         ensureTargetObjectExists(behavior.target);
         if (!isRunning) {
@@ -93,7 +97,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
                 iterator.remove();
             }
         }
-        targetsToObjects.clear();
+//        targetsToObjects.clear();
     }
 
     private PhysicsObject ensureTargetObjectExists(View target) {
@@ -125,7 +129,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
             PhysicsObject physicsObject = targetsToObjects.get(behavior.target);
             if (physicsObject != null) {
                 behavior.executeFrameWithDeltaTime(deltaTime,physicsObject);
-
+                Log.d("InteractableView"," animateFrameWithDeltaTime doing behavior " + " vx = " + physicsObject.velocity.x);
             }
         }
 
@@ -144,7 +148,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
                 hadMovement = true;
             }
 
-            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " dx = " + dx);
+//            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " dx = " + dx);
 
             v.animate().translationXBy(dx).translationYBy(dy).setDuration(0).start();
         }

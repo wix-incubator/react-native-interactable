@@ -8,6 +8,7 @@
 
 #import "InteractableView.h"
 #import <React/UIView+React.h>
+#import <React/RCTRootView.h>
 
 @interface InteractableView()
 @property (nonatomic, assign) BOOL originSet;
@@ -27,6 +28,10 @@
     {
         self.originSet = NO;
         self.initialPositionSet = NO;
+        // pan gesture recognizer for touches
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        pan.delegate = self;
+        [self addGestureRecognizer:pan];
     }
     return self;
 }
@@ -135,6 +140,67 @@
 
 // MARK: - Touches
 
+- (void)handlePan:(UIPanGestureRecognizer *)pan
+{
+    if (pan.state == UIGestureRecognizerStateBegan)
+    {
+        [self cancelCurrentReactTouch];
+        self.dragStartCenter = self.center;
+        [self setTempBehaviorsForDragStart];
+    }
+    
+    CGPoint translation = [pan translationInView:self];
+    self.dragBehavior.anchorPoint = CGPointMake(self.dragStartCenter.x + translation.x, self.dragStartCenter.y + translation.y);
+    [self.animator ensureRunning];
+    
+    if (pan.state == UIGestureRecognizerStateEnded ||
+        pan.state == UIGestureRecognizerStateFailed ||
+        pan.state == UIGestureRecognizerStateCancelled)
+    {
+        [self setTempBehaviorsForDragEnd];
+    }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)pan
+{
+    CGPoint translation = [pan translationInView:self];
+    if (self.horizontalOnly) return fabs(translation.x) > fabs(translation.y);
+    if (self.verticalOnly) return fabs(translation.y) > fabs(translation.x);
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)pan shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)other
+{
+    // return YES to allow a hosting scrollview to scroll while an interactable view is moving
+    return NO;
+}
+
+- (void)cancelCurrentReactTouch
+{
+    RCTRootView *view = [self getRootView];
+    if (view != nil)
+    {
+        [(RCTRootView*)view cancelTouches];
+    }
+}
+
+- (RCTRootView*)getRootView
+{
+    UIView *view = self;
+    while (view.superview != nil)
+    {
+        view = view.superview;
+        if ([view isKindOfClass:[RCTRootView class]]) break;
+    }
+    
+    if ([view isKindOfClass:[RCTRootView class]])
+    {
+        return view;
+    }
+    return nil;
+}
+
+/*
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
@@ -164,7 +230,8 @@
 {
     [self setTempBehaviorsForDragEnd];
 }
-
+*/
+ 
 - (void)setTempBehaviorsForDragStart
 {
     [self.animator removeTempBehaviors];

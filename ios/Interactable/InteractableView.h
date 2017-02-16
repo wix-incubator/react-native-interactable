@@ -13,7 +13,7 @@
 #import "InteractableDrag.h"
 #import "PhysicsAnimator.h"
 
-@interface InteractableView : UIView <PhysicsAnimatorDelegate>
+@interface InteractableView : UIView <PhysicsAnimatorDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) BOOL verticalOnly;
 @property (nonatomic, assign) BOOL horizontalOnly;

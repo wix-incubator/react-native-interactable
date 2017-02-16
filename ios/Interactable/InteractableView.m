@@ -85,17 +85,17 @@
     self.animator.delegate = self;
     
     // initialize constant behaviors
-    if (self.springs)
+    if (self.springPoints)
     {
-        for (InteractablePoint *point in self.springs) [self addConstantSpringBehavior:point];
+        for (InteractablePoint *point in self.springPoints) [self addConstantSpringBehavior:point];
     }
-    if (self.gravity)
+    if (self.gravityPoints)
     {
-        for (InteractablePoint *point in self.gravity) [self addConstantGravityBehavior:point];
+        for (InteractablePoint *point in self.gravityPoints) [self addConstantGravityBehavior:point];
     }
-    if (self.friction)
+    if (self.frictionAreas)
     {
-        for (InteractablePoint *point in self.friction) [self addConstantFrictionBehavior:point];
+        for (InteractablePoint *point in self.frictionAreas) [self addConstantFrictionBehavior:point];
     }
 }
 
@@ -103,12 +103,12 @@
 {
     if (self.onSnap)
     {
-        InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapTo toPoint:self.center withOrigin:self.origin];
+        InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:self.center withOrigin:self.origin];
         if (snapPoint)
         {
             self.onSnap(@
             {
-                @"index": @([self.snapTo indexOfObject:snapPoint]),
+                @"index": @([self.snapPoints indexOfObject:snapPoint]),
                 @"id": snapPoint.id
             });
         }
@@ -252,7 +252,7 @@
     if (self.drag) toss = self.drag.toss;
     CGPoint projectedCenter = CGPointMake(self.center.x + toss*velocity.x, self.center.y + toss*velocity.y);
     
-    InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapTo toPoint:projectedCenter withOrigin:self.origin];
+    InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
     if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
     
     [self addTempBounceBehaviorWithLimitX:self.limitX limitY:self.limitY];

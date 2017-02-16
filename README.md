@@ -55,7 +55,7 @@ import Interactable from 'react-native-interactable';
 
 <Interactable.View
   horizontalOnly={true}
-  snapTo={[{x: 0}, {x: -200}]}
+  snapPoints={[{x: 0}, {x: -200}]}
   onSnap={this.onDrawerSnap}>
 
   // the view that you wrap here will now support interactions
@@ -65,10 +65,10 @@ import Interactable from 'react-native-interactable';
 
 ### `Interactable.View` Props
 
-#### `snapTo` (array of points)
+#### `snapPoints` (array of points)
 
 ```jsx
-snapTo={[{x: 0}, {x: -200}]}
+snapPoints={[{x: 0}, {x: -200}]}
 ```
 
 A list of points the view will snap to after being dragged by the user. To implement a a drawer for example, provide 2 points - one for the open state and one for the closed state. Points are relative to the view's center (after initial layout). Every element in the array is an object with the following properties:
@@ -128,10 +128,10 @@ Optional, an object providing limits to movement relative to the view's center (
 onSnap={this.onDrawerSnap}
 ```
 
-Optional, a function called whenever the view snaps to a `snapTo` point (after being dragged). Example for [drawer](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/IconDrawer.js#L63). When the function is called, an event object is passed as argument, containing the following properties:
+Optional, a function called whenever the view snaps to a `snapPoints` point (after being dragged). Example for [drawer](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/IconDrawer.js#L63). When the function is called, an event object is passed as argument, containing the following properties:
 
-* `index` - The zero-based index of the point in the `snapTo` array.
-* `id` - The string `id` of the point in the `snapTo` array (assuming it was provided).
+* `index` - The zero-based index of the point in the `snapPoints` array.
+* `id` - The string `id` of the point in the `snapPoints` array (assuming it was provided).
 
 #### `onStop` (function)
 
@@ -156,10 +156,10 @@ Optional, an object controlling the dragging behavior of the view. Contains foll
 * `damping` - Amount of damping on the spring used for dragging. Optional.
 * `toss` - Time in seconds the view is allowed to be tossed before snapping to a point. Default is `0.1`.
 
-#### `springs` (array of points)
+#### `springPoints` (array of points)
 
 ```jsx
-springs={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
+springPoints={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
 ```
 
 Connect the view's center to a group of constant springs. Every element in the array is an object with the following properties:
@@ -178,10 +178,10 @@ Connect the view's center to a group of constant springs. Every element in the a
 
 Note: For the springs to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
 
-#### `gravity` (array of points)
+#### `gravityPoints` (array of points)
 
 ```jsx
-gravity={[{x: 0, y: 0, strength: 8000, falloff: 40, damping: 0.5}]}
+gravityPoints={[{x: 0, y: 0, strength: 8000, falloff: 40, damping: 0.5}]}
 ```
 
 Attract/repel the view's center with a group of constant gravity wells. Every element in the array is an object with the following properties:
@@ -201,10 +201,10 @@ Attract/repel the view's center with a group of constant gravity wells. Every el
 
 Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
 
-#### `friction` (array of points)
+#### `frictionAreas` (array of areas)
 
 ```jsx
-friction={[{damping: 0.5, limitY: {min: 0}}]}
+frictionAreas={[{damping: 0.5, limitY: {min: 0}}]}
 ```
 
 Add friction to the view's movement with a group of friction regions. Every element in the array is an object with the following properties:
@@ -242,7 +242,7 @@ animatedValueY={this._deltaY}
 initialPosition={{x: -140, y: -280}}
 ```
 
-Optional, used to initialize the view's position to a position different than it's original center. This is mostly useful when you want to provide `snapTo` points relative to the center calculated by React Native layout, but want the view itself to start from a different position. See [chat heads](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/ChatHeads.js#L22) example.
+Optional, used to initialize the view's position to a position different than it's original center. This is mostly useful when you want to provide `snapPoints` points relative to the center calculated by React Native layout, but want the view itself to start from a different position. See [chat heads](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/ChatHeads.js#L22) example.
 
 ## Animating other views according to `Interactable.View` position
 
@@ -273,7 +273,7 @@ this._deltaY = new Animated.Value(0);
 
 <Interactable.View
   verticalOnly={true}
-  snapTo={[{y: 0}, {y: -150}]}
+  snapPoints={[{y: 0}, {y: -150}]}
   animatedValueY={this._deltaY}
 >
   ...

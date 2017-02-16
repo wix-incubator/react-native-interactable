@@ -10,7 +10,7 @@ export default class SwipeableCard extends Component {
         <Interactable.View
           key="first"
           horizontalOnly={true}
-          snapTo={[
+          snapPoints={[
             {x: 360},
             {x: 0, damping: 0.5},
             {x: -360}
@@ -21,7 +21,7 @@ export default class SwipeableCard extends Component {
         <Interactable.View
           key="second"
           horizontalOnly={true}
-          snapTo={[
+          snapPoints={[
             {x: 360},
             {x: 0},
             {x: -360}
@@ -32,7 +32,7 @@ export default class SwipeableCard extends Component {
         <Interactable.View
           key="third"
           horizontalOnly={true}
-          snapTo={[
+          snapPoints={[
             {x: 360},
             {x: 0, damping: 0.8},
             {x: -360}

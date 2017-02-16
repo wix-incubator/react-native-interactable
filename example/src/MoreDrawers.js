@@ -9,7 +9,7 @@ export default class MoreDrawers extends Component {
 
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
-            snapTo={[{x: 0}, {x: -230}]}
+            snapPoints={[{x: 0}, {x: -230}]}
             horizontalOnly={true}>
             <View style={styles.cover}>
               <Text style={styles.label}>Default drawer</Text>
@@ -19,7 +19,7 @@ export default class MoreDrawers extends Component {
 
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
-            snapTo={[{x: 0}, {x: -230}]}
+            snapPoints={[{x: 0}, {x: -230}]}
             limitX={{max: 0}}
             horizontalOnly={true}>
             <View style={styles.cover}>
@@ -30,7 +30,7 @@ export default class MoreDrawers extends Component {
 
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
-            snapTo={[{x: 0}, {x: -230}]}
+            snapPoints={[{x: 0}, {x: -230}]}
             limitX={{max: 0, bounce: 0.2, haptics: true}}
             horizontalOnly={true}>
             <View style={styles.cover}>
@@ -41,7 +41,7 @@ export default class MoreDrawers extends Component {
 
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
-            snapTo={[{x: 0}, {x: -230}]}
+            snapPoints={[{x: 0}, {x: -230}]}
             drag={{tension: 1000, damping: 0.7}}
             horizontalOnly={true}>
             <View style={styles.cover}>
@@ -52,9 +52,9 @@ export default class MoreDrawers extends Component {
 
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
-            snapTo={[{x: 0}, {x: -230}]}
+            snapPoints={[{x: 0}, {x: -230}]}
             drag={{tension: 2000, damping: 0.5}}
-            springs={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
+            springPoints={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
             horizontalOnly={true}>
             <View style={styles.cover}>
               <Text style={styles.label}>Drag with spring resistance</Text>

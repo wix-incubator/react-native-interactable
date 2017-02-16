@@ -7,7 +7,7 @@ export default class ChatHeads extends Component {
     return (
       <View style={styles.container}>
         <Interactable.View
-          snapTo={[
+          snapPoints={[
             {x: -140, y: -280},
             {x: 140, y: -280},
             {x: -140, y: -140},

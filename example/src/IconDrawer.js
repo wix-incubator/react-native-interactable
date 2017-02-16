@@ -59,7 +59,7 @@ export default class IconDrawer extends Component {
 
             <Interactable.View
               horizontalOnly={true}
-              snapTo={[{x: 0, id: 'closed'}, {x: -230, id: 'open'}]}
+              snapPoints={[{x: 0, id: 'closed'}, {x: -230, id: 'open'}]}
               onSnap={this.onDrawerSnap}
               animatedValueX={this._deltaX}>
               <View style={{left: 0, right: 0, height: 75, backgroundColor: '#e0e0e0', borderWidth: 0.5}} />

@@ -12,6 +12,8 @@ import IconDrawer from './IconDrawer';
 import CollapsingHeader from './CollapsingHeader';
 import MoreDrawers from './MoreDrawers';
 import MoreChatHeads from './MoreChatHeads';
+import HandleTouches from './HandleTouches';
+import HandleRelayout from './HandleRelayout';
 
 export default class example extends Component {
   constructor(props) {
@@ -45,6 +47,12 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, MoreChatHeads)}>
           <Text style={styles.button}>More Chat Heads</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, HandleTouches)}>
+          <Text style={styles.button}>Handle Touches</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, HandleRelayout)}>
+          <Text style={styles.button}>Handle Relayout</Text>
         </TouchableOpacity>
       </View>
     );

@@ -33,9 +33,9 @@
 
 - (void)reactSetFrame:(CGRect)frame
 {
-    [super reactSetFrame:frame];
-    self.origin = self.center;
+    self.origin = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
     self.originSet = YES;
+    [super reactSetFrame:frame];
     
     // initial position
     if (!self.initialPositionSet)
@@ -69,7 +69,7 @@
             if (center.y - self.origin.y > self.limitY.max) center.y = self.limitY.max + self.origin.y;
         }
     }
-    
+  
     [super setCenter:center];
     [self reportAnimatedEvent];
 }

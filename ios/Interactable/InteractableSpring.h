@@ -1,5 +1,5 @@
 //
-//  InteractableDrag.h
+//  InteractableSpring.h
 //  Interactable
 //
 //  Created by Tal Kol on 2/9/17.
@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface InteractableDrag : NSObject<NSCopying>
+@interface InteractableSpring : NSObject<NSCopying>
 
-@property (nonatomic, assign) CGFloat toss;
 @property (nonatomic, assign) CGFloat tension;
 @property (nonatomic, assign) CGFloat damping;
 

@@ -144,17 +144,24 @@ Optional, a function called whenever the interaction stops (views freeze momenta
 * `x` - The horizontal position of the view (relative to the center).
 * `y` - The vertical position of the view (relative to the center).
 
-#### `drag` (object)
+#### `dragWithSpring` (object)
 
 ```jsx
-drag={{tension: 2000, damping: 0.5, toss: 0.1}}
+dragWithSpring={{tension: 2000, damping: 0.5}}
 ```
 
-Optional, an object controlling the dragging behavior of the view. Contains following properties:
+Optional, specify in order to make dragging behavior of the view occur using a spring. If not given, drag will be done using a pinned anchor point. Contains following properties:
 
-* `tension` - If given, drag will be done via a spring. This defines the tension of the spring. If not given, drag will be done using a pinned anchor point.
+* `tension` - Tension of the spring.
 * `damping` - Amount of damping on the spring used for dragging. Optional.
-* `toss` - Time in seconds the view is allowed to be tossed before snapping to a point. Default is `0.1`.
+
+#### `dragToss` (number)
+
+```jsx
+dragToss={0.1}
+```
+
+Time in seconds the view is allowed to be tossed before snapping to a point. Default is `0.1`.
 
 #### `springPoints` (array of points)
 
@@ -176,7 +183,7 @@ Connect the view's center to a group of constant springs. Every element in the a
   * `min` - The minimum vertical influence point (relative to the center). Optional.
 * `haptics` - Whether to enable haptic feedback on springs with influence area. Default `false`.
 
-Note: For the springs to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
+Note: For the springs to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
 
 #### `gravityPoints` (array of points)
 
@@ -199,7 +206,7 @@ Attract/repel the view's center with a group of constant gravity wells. Every el
   * `min` - The minimum vertical influence point (relative to the center). Optional.
 * `haptics` - Whether to enable haptic feedback on fields with influence area. Default `false`.
 
-Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
+Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
 
 #### `frictionAreas` (array of areas)
 
@@ -218,7 +225,7 @@ Add friction to the view's movement with a group of friction regions. Every elem
   * `min` - The minimum vertical influence point (relative to the center). Optional.
 * `haptics` - Whether to enable haptic feedback on regions with influence area. Default `false`.
 
-Note: For the friction to affect the view while dragging, make sure dragging is performed via a spring using the `drag` prop.
+Note: For the friction to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
 
 #### `animatedValueX` (Animated.Value)
 

@@ -10,7 +10,7 @@
 #import "InteractableView.h"
 #import "InteractablePoint.h"
 #import "InteractableLimit.h"
-#import "InteractableDrag.h"
+#import "InteractableSpring.h"
 #import "RCTConvert+Interactable.h"
 
 @implementation InteractableViewManager
@@ -30,7 +30,8 @@ RCT_EXPORT_VIEW_PROPERTY(gravityPoints, NSArray<InteractablePoint *>)
 RCT_EXPORT_VIEW_PROPERTY(frictionAreas, NSArray<InteractablePoint *>)
 RCT_EXPORT_VIEW_PROPERTY(limitX, InteractableLimit)
 RCT_EXPORT_VIEW_PROPERTY(limitY, InteractableLimit)
-RCT_EXPORT_VIEW_PROPERTY(drag, InteractableDrag)
+RCT_EXPORT_VIEW_PROPERTY(dragWithSpring, InteractableSpring)
+RCT_EXPORT_VIEW_PROPERTY(dragToss, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(onSnap, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStop, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(initialPosition, CGPoint)

@@ -42,7 +42,7 @@ export default class MoreDrawers extends Component {
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
-            drag={{tension: 1000, damping: 0.7}}
+            dragWithSpring={{tension: 1000, damping: 0.7}}
             horizontalOnly={true}>
             <View style={styles.cover}>
               <Text style={styles.label}>Drag via spring</Text>
@@ -53,7 +53,7 @@ export default class MoreDrawers extends Component {
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
-            drag={{tension: 2000, damping: 0.5}}
+            dragWithSpring={{tension: 2000, damping: 0.5}}
             springPoints={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
             horizontalOnly={true}>
             <View style={styles.cover}>

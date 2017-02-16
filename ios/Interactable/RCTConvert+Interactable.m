@@ -9,7 +9,7 @@
 #import "RCTConvert+Interactable.h"
 #import "InteractablePoint.h"
 #import "InteractableLimit.h"
-#import "InteractableDrag.h"
+#import "InteractableSpring.h"
 
 @implementation RCTConvert(Interactable)
 
@@ -42,15 +42,14 @@
     return limit;
 }
 
-+ (InteractableDrag *)InteractableDrag:(id)json
++ (InteractableSpring *)InteractableSpring:(id)json
 {
     json = [self NSDictionary:json];
     if (json == nil) return nil;
-    InteractableDrag *drag = [InteractableDrag new];
-    drag.toss = [self CGFloat:json[@"toss"] ?: @(0.1)];
-    drag.tension = [self CGFloat:json[@"tension"] ?: @(CGFLOAT_MAX)];
-    drag.damping = [self CGFloat:json[@"damping"] ?: @(0.0)];
-    return drag;
+    InteractableSpring *spring = [InteractableSpring new];
+    spring.tension = [self CGFloat:json[@"tension"] ?: @(CGFLOAT_MAX)];
+    spring.damping = [self CGFloat:json[@"damping"] ?: @(0.0)];
+    return spring;
 }
 
 RCT_ARRAY_CONVERTER(InteractablePoint)

@@ -31,6 +31,7 @@ export default class InteractableView extends Component {
   render() {
     return (
       <NativeInteractableView
+        dragToss={0.1}
         {...this.props}
         animatedValueX={undefined}
         animatedValueY={undefined}

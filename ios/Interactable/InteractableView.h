@@ -10,7 +10,7 @@
 #import <React/RCTComponent.h>
 #import "InteractablePoint.h"
 #import "InteractableLimit.h"
-#import "InteractableDrag.h"
+#import "InteractableSpring.h"
 #import "PhysicsAnimator.h"
 
 @interface InteractableView : UIView <PhysicsAnimatorDelegate, UIGestureRecognizerDelegate>
@@ -23,7 +23,8 @@
 @property (nonatomic, copy) NSArray<InteractablePoint *> *frictionAreas;
 @property (nonatomic, copy) InteractableLimit *limitX;
 @property (nonatomic, copy) InteractableLimit *limitY;
-@property (nonatomic, copy) InteractableDrag *drag;
+@property (nonatomic, copy) InteractableSpring *dragWithSpring;
+@property (nonatomic, assign) CGFloat dragToss;
 @property (nonatomic, copy) RCTBubblingEventBlock onSnap;
 @property (nonatomic, copy) RCTBubblingEventBlock onStop;
 @property (nonatomic, assign) CGPoint initialPosition;

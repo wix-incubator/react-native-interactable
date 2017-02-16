@@ -19,7 +19,7 @@
 		CC8513F51E4A874200137CA9 /* PhysicsBounceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513F41E4A874200137CA9 /* PhysicsBounceBehavior.m */; };
 		CC8514071E4CC81400137CA9 /* PhysicsFrictionBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8514061E4CC81400137CA9 /* PhysicsFrictionBehavior.m */; };
 		CC85140A1E4CF66500137CA9 /* PhysicsAnchorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8514091E4CF66500137CA9 /* PhysicsAnchorBehavior.m */; };
-		CC85140D1E4D040000137CA9 /* InteractableDrag.m in Sources */ = {isa = PBXBuildFile; fileRef = CC85140C1E4D040000137CA9 /* InteractableDrag.m */; };
+		CC85140D1E4D040000137CA9 /* InteractableSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = CC85140C1E4D040000137CA9 /* InteractableSpring.m */; };
 		CC8514101E4E790800137CA9 /* PhysicsArea.m in Sources */ = {isa = PBXBuildFile; fileRef = CC85140F1E4E790800137CA9 /* PhysicsArea.m */; };
 		CCA33C9A1E3B642500649701 /* InteractablePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA33C991E3B642500649701 /* InteractablePoint.m */; };
 		CCA33C9D1E3B6B5000649701 /* RCTConvert+Interactable.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA33C9C1E3B6B5000649701 /* RCTConvert+Interactable.m */; };
@@ -62,8 +62,8 @@
 		CC8514061E4CC81400137CA9 /* PhysicsFrictionBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsFrictionBehavior.m; sourceTree = "<group>"; };
 		CC8514081E4CF66500137CA9 /* PhysicsAnchorBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsAnchorBehavior.h; sourceTree = "<group>"; };
 		CC8514091E4CF66500137CA9 /* PhysicsAnchorBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsAnchorBehavior.m; sourceTree = "<group>"; };
-		CC85140B1E4D040000137CA9 /* InteractableDrag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractableDrag.h; sourceTree = "<group>"; };
-		CC85140C1E4D040000137CA9 /* InteractableDrag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractableDrag.m; sourceTree = "<group>"; };
+		CC85140B1E4D040000137CA9 /* InteractableSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractableSpring.h; sourceTree = "<group>"; };
+		CC85140C1E4D040000137CA9 /* InteractableSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractableSpring.m; sourceTree = "<group>"; };
 		CC85140E1E4E790800137CA9 /* PhysicsArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsArea.h; sourceTree = "<group>"; };
 		CC85140F1E4E790800137CA9 /* PhysicsArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsArea.m; sourceTree = "<group>"; };
 		CCA33C981E3B642500649701 /* InteractablePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractablePoint.h; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 				CCA33C991E3B642500649701 /* InteractablePoint.m */,
 				CC8513F01E47E1FC00137CA9 /* InteractableLimit.h */,
 				CC8513F11E47E1FC00137CA9 /* InteractableLimit.m */,
-				CC85140B1E4D040000137CA9 /* InteractableDrag.h */,
-				CC85140C1E4D040000137CA9 /* InteractableDrag.m */,
+				CC85140B1E4D040000137CA9 /* InteractableSpring.h */,
+				CC85140C1E4D040000137CA9 /* InteractableSpring.m */,
 				CCA33C9B1E3B6B5000649701 /* RCTConvert+Interactable.h */,
 				CCA33C9C1E3B6B5000649701 /* RCTConvert+Interactable.m */,
 			);
@@ -208,7 +208,7 @@
 				CC01279C1E3ACC3900B23C9F /* InteractableViewManager.m in Sources */,
 				CC8513CF1E45D5C900137CA9 /* PhysicsSpringBehavior.m in Sources */,
 				CC8513D21E45E01F00137CA9 /* PhysicsObject.m in Sources */,
-				CC85140D1E4D040000137CA9 /* InteractableDrag.m in Sources */,
+				CC85140D1E4D040000137CA9 /* InteractableSpring.m in Sources */,
 				CC85140A1E4CF66500137CA9 /* PhysicsAnchorBehavior.m in Sources */,
 				CC8513C81E45D2A200137CA9 /* PhysicsAnimator.m in Sources */,
 				CCA33C9D1E3B6B5000649701 /* RCTConvert+Interactable.m in Sources */,

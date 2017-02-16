@@ -253,7 +253,7 @@
     [self.animator removeTempBehaviors];
     self.dragBehavior = nil;
     
-    self.dragBehavior = [self addTempDragBehavior:self.drag];
+    self.dragBehavior = [self addTempDragBehavior:self.dragWithSpring];
 }
 
 - (void)setTempBehaviorsForDragEnd
@@ -264,8 +264,7 @@
     CGPoint velocity = [self.animator getTargetVelocity:self];
     if (self.horizontalOnly) velocity.y = 0;
     if (self.verticalOnly) velocity.x = 0;
-    CGFloat toss = 0.1;
-    if (self.drag) toss = self.drag.toss;
+    CGFloat toss = self.dragToss;
     CGPoint projectedCenter = CGPointMake(self.center.x + toss*velocity.x, self.center.y + toss*velocity.y);
     
     InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
@@ -276,11 +275,11 @@
 
 // MARK: - Behaviors
 
-- (PhysicsBehavior*)addTempDragBehavior:(InteractableDrag*)drag
+- (PhysicsBehavior*)addTempDragBehavior:(InteractableSpring*)spring
 {
     PhysicsBehavior *res = nil;
     
-    if (!drag || drag.tension == CGFLOAT_MAX)
+    if (!spring || spring.tension == CGFLOAT_MAX)
     {
         PhysicsAnchorBehavior *anchorBehavior = [[PhysicsAnchorBehavior alloc] initWithTarget:self anchorPoint:self.center];
         res = anchorBehavior;
@@ -289,15 +288,15 @@
     else
     {
         PhysicsSpringBehavior *springBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:self.center];
-        springBehavior.tension = drag.tension;
+        springBehavior.tension = spring.tension;
         res = springBehavior;
         [self.animator addTempBehavior:springBehavior];
     }
     
-    if (drag && drag.damping > 0.0)
+    if (spring && spring.damping > 0.0)
     {
         PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
-        frictionBehavior.friction = drag.damping;
+        frictionBehavior.friction = spring.damping;
         [self.animator addTempBehavior:frictionBehavior];
     }
     

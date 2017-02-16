@@ -25,7 +25,7 @@ export default class HandleRelayout extends Component {
 
         <Interactable.View
           horizontalOnly={true}
-          snapPoints={[{x: 360},{x: 0},{x: -360}]}>
+          snapPoints={[{x: 230},{x: 0},{x: -230}]}>
           <View style={styles.card} />
         </Interactable.View>
 

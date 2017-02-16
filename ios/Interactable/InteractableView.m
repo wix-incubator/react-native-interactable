@@ -18,6 +18,8 @@
 @property (nonatomic, assign) CGPoint dragStartCenter;
 @property (nonatomic, assign) CGPoint dragStartLocation;
 @property (nonatomic, assign) BOOL initialPositionSet;
+@property (nonatomic, assign) BOOL reactRelayoutHappening;
+@property (nonatomic, assign) CGPoint reactRelayoutCenterDeltaFromOrigin;
 @end
 
 @implementation InteractableView
@@ -28,6 +30,8 @@
     {
         self.originSet = NO;
         self.initialPositionSet = NO;
+        self.reactRelayoutHappening = NO;
+        
         // pan gesture recognizer for touches
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         pan.delegate = self;
@@ -38,9 +42,15 @@
 
 - (void)reactSetFrame:(CGRect)frame
 {
+    // to handle the react relayout we need to remember the delta from previous origin
+    self.reactRelayoutCenterDeltaFromOrigin = CGPointMake(self.origin.x - self.center.x, self.origin.y - self.center.y);
+    
     self.origin = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
     self.originSet = YES;
+    
+    self.reactRelayoutHappening = YES;
     [super reactSetFrame:frame];
+    self.reactRelayoutHappening = NO;
     
     // initial position
     if (!self.initialPositionSet)
@@ -58,6 +68,12 @@
 
 - (void)setCenter:(CGPoint)center
 {
+    if (self.initialPositionSet && self.reactRelayoutHappening)
+    {
+        // to handle a react relayout we maintain the same delta but now with the new origin
+        center = CGPointMake(self.origin.x - self.reactRelayoutCenterDeltaFromOrigin.x, self.origin.y - self.reactRelayoutCenterDeltaFromOrigin.y);
+    }
+    
     if (self.originSet)
     {
         if (self.horizontalOnly) center.y = self.origin.y;

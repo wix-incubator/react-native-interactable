@@ -5,7 +5,7 @@ import android.graphics.PointF;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.PixelUtil;
-import com.wix.interactable.InteractableDrag;
+import com.wix.interactable.InteractableSpring;
 import com.wix.interactable.InteractableLimit;
 import com.wix.interactable.InteractablePoint;
 
@@ -39,12 +39,12 @@ public class RNConvert {
         return new InteractablePoint(id, x, y, damping, tension, strength, falloff, limitX, limitY);
     }
 
-    public static InteractableDrag interactableDrag(ReadableMap params) {
+    public static InteractableSpring interactableDrag(ReadableMap params) {
         float toss = params.hasKey("toss") ? (float) params.getDouble("toss") : 0.1f;
         float tension = params.hasKey("tension") ? (float) params.getDouble("tension") : Float.MAX_VALUE;
         float damping = params.hasKey("damping") ? (float) params.getDouble("damping") : 0f;
 
-        return new InteractableDrag(toss, tension, damping);
+        return new InteractableSpring(toss, tension, damping);
     }
 
     public static ArrayList<InteractablePoint> interactablePoints(ReadableArray points) {

@@ -37,7 +37,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private InteractableLimit limitX;
     private InteractableLimit limitY;
-    private InteractableDrag drag;
+    private InteractableSpring dragWithSprings;
+    private float dragToss;
     private ArrayList<InteractablePoint> snapPoints = new ArrayList<>();
     private ArrayList<InteractablePoint> springPoints = new ArrayList<>();
     private ArrayList<InteractablePoint> gravityPoints = new ArrayList<>();
@@ -95,7 +96,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         return new PointF(getTranslationX(),getTranslationY());
     }
 
-    private PhysicsBehavior addTempDragBehavior(InteractableDrag drag) {
+    private PhysicsBehavior addTempDragBehavior(InteractableSpring drag) {
         PhysicsBehavior res = null;
 
         if (drag == null || drag.tension == Float.MAX_VALUE) {
@@ -136,7 +137,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 this.dragStartLocation = new PointF(event.getX(),event.getY());
-                this.dragBehavior = addTempDragBehavior(this.drag);
+                this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
 
                 break;
 
@@ -170,7 +171,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (this.horizontalOnly) velocity.y = 0;
         if (this.verticalOnly) velocity.x = 0;
         float toss = 0.1f;
-        if (this.drag != null) toss = this.drag.toss;
+        if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
         Log.d("InteractableView","handleEndOfDrag velocity = " + velocity);
 
@@ -327,8 +328,12 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         this.limitY = limitY;
     }
 
-    public void setDrag(InteractableDrag drag) {
-        this.drag = drag;
+    public void setDragWithSprings(InteractableSpring dragWithSprings) {
+        this.dragWithSprings = dragWithSprings;
+    }
+
+    public void setDragToss(float dragToss) {
+        this.dragToss = dragToss;
     }
     
     public void setSnapPoints(ArrayList snapPoints) {

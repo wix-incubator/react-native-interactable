@@ -58,9 +58,14 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setFrictionAreas(RNConvert.interactablePoints(frictionAreas));
     }
 
-    @ReactProp(name = "drag")
-    public void setDrag(InteractableView view, @Nullable ReadableMap drag) {
-        view.setDrag(RNConvert.interactableDrag(drag));
+    @ReactProp(name = "dragWithSprings")
+    public void setDrag(InteractableView view, @Nullable ReadableMap dragWithSprings) {
+        view.setDragWithSprings(RNConvert.interactableDrag(dragWithSprings));
+    }
+
+    @ReactProp(name = "dragToss")
+    public void setDragToss(InteractableView view, @Nullable float dragToss) {
+        view.setDragToss(dragToss);
     }
 
     @ReactProp(name = "limitX")

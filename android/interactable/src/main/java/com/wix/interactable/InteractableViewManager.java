@@ -68,14 +68,9 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setDragToss(dragToss);
     }
 
-    @ReactProp(name = "limitX")
-    public void setLimitX(InteractableView view, @Nullable ReadableMap limitX) {
-        view.setLimitX(RNConvert.interactableLimit(limitX));
-    }
-
-    @ReactProp(name = "limitY")
-    public void setLimitY(InteractableView view, @Nullable ReadableMap limitY) {
-        view.setLimitY(RNConvert.interactableLimit(limitY));
+    @ReactProp(name = "boundries")
+    public void setBoundries(InteractableView view, @Nullable ReadableMap boundries) {
+        view.setBoundries(RNConvert.interactableLimit(boundries));
     }
 
     @ReactProp(name = "initialPosition")

@@ -35,8 +35,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private boolean horizontalOnly;
     private PointF initialPosition;
 
-    private InteractableLimit limitX;
-    private InteractableLimit limitY;
+    private InteractableArea boundries;
     private InteractableSpring dragWithSprings;
     private float dragToss;
     private ArrayList<InteractablePoint> snapPoints = new ArrayList<>();
@@ -181,7 +180,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
 
         addTempSnapToPointBehavior(snapPoint);
-        addTempBounceBehavior(this.limitX, this.limitY);
+        addTempBounceBehaviorWithBoundaries(this.boundries);
 
     }
 
@@ -203,35 +202,21 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     }
 
-    private void addTempBounceBehavior(InteractableLimit limitX,InteractableLimit limitY) {
-        Log.d("InteractableView","addTempBounceBehavior limitX = " + limitX);
-        if (limitX != null && limitX.getBounce() > 0.0)
+    private void addTempBounceBehaviorWithBoundaries(InteractableArea boundries) {
+        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundries);
+        if (boundries != null && boundries.getBounce() > 0.0)
         {
             PointF minPoint = new PointF(-Float.MAX_VALUE,-Float.MAX_VALUE);
-            if (limitX.getMin() != -Float.MAX_VALUE)
-                minPoint.x = limitX.getMin();
-            PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
-            if (limitX.getMax() != Float.MAX_VALUE)
-                maxPoint.x = limitX.getMax();
-            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint,
-                    maxPoint,limitX.getBounce());
-//            bounceBehavior.haptics = limitX.haptics;
-            this.animator.addTempBehavior(bounceBehavior);
-        }
-        if (limitY != null && limitY.getBounce() > 0.0)
-        {
-            PointF minPoint = new PointF(-Float.MAX_VALUE,-Float.MAX_VALUE);
-            if (limitY.getMin() != -Float.MAX_VALUE)
-                minPoint.y = limitY.getMin();
-            PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
-            if (limitY.getMax() != Float.MAX_VALUE)
-                maxPoint.y = limitY.getMax();
-            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint,
-                    maxPoint,limitY.getBounce());
-//            bounceBehavior.haptics = limitX.haptics;
-            this.animator.addTempBehavior(bounceBehavior);
-        }
+            if (boundries.getLeft() != -Float.MAX_VALUE) minPoint.x = boundries.getLeft();
+            if (boundries.getTop() != -Float.MAX_VALUE) minPoint.y = boundries.getTop();
 
+            PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
+            if (boundries.getRight() != Float.MAX_VALUE) minPoint.x = boundries.getRight();
+            if (boundries.getBottom() != Float.MAX_VALUE) minPoint.y = boundries.getBottom();
+
+            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint, boundries.getBounce(), boundries.isHeptic());
+            this.animator.addTempBehavior(bounceBehavior);
+        }
     }
 
     private void addConstantSpringBehavior(InteractablePoint point) {
@@ -287,14 +272,16 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private PhysicsArea influenceAreaFromPoint(InteractablePoint point)
     {
-        if (point.limitX == null && point.limitY == null) return null;
+        if (point.influenceArea == null) return null;
         
         PointF minPoint = new PointF(-Float.MAX_VALUE, -Float.MAX_VALUE);
         PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
-        if (point.limitX != null && point.limitX.getMin() != -Float.MAX_VALUE) minPoint.x = point.limitX.getMin();
-        if (point.limitX != null && point.limitX.getMax() != Float.MAX_VALUE) maxPoint.x = point.limitX.getMax();
-        if (point.limitY != null && point.limitY.getMin() != -Float.MAX_VALUE) minPoint.y =  point.limitY.getMin();
-        if (point.limitY != null && point.limitY.getMax() != Float.MAX_VALUE) maxPoint.y = point.limitY.getMax();
+
+        if (point.influenceArea.getLeft() != -Float.MAX_VALUE) minPoint.x = point.influenceArea.getLeft();
+        if (point.influenceArea.getRight() != Float.MAX_VALUE) maxPoint.x = point.influenceArea.getRight();
+        if (point.influenceArea.getTop() != -Float.MAX_VALUE) minPoint.y = point.influenceArea.getTop();
+        if (point.influenceArea.getBottom() != Float.MAX_VALUE) maxPoint.y = point.influenceArea.getBottom();
+
         return new PhysicsArea(minPoint,maxPoint);
     }
 
@@ -320,13 +307,10 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         setTranslationY(initialPosition.y);
     }
 
-    public void setLimitX(InteractableLimit limitX) {
-        this.limitX = limitX;
+    public void setBoundries(InteractableArea boundries) {
+        this.boundries = boundries;
     }
 
-    public void setLimitY(InteractableLimit limitY) {
-        this.limitY = limitY;
-    }
 
     public void setDragWithSprings(InteractableSpring dragWithSprings) {
         this.dragWithSprings = dragWithSprings;

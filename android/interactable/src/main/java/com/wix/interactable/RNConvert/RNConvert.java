@@ -5,9 +5,9 @@ import android.graphics.PointF;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.PixelUtil;
-import com.wix.interactable.InteractableSpring;
-import com.wix.interactable.InteractableLimit;
+import com.wix.interactable.InteractableArea;
 import com.wix.interactable.InteractablePoint;
+import com.wix.interactable.InteractableSpring;
 
 import java.util.ArrayList;
 
@@ -17,12 +17,15 @@ import java.util.ArrayList;
 
 public class RNConvert {
 
-    public static InteractableLimit interactableLimit(ReadableMap params) {
-        float min = params.hasKey("min") ? PixelUtil.toPixelFromDIP((float) params.getDouble("min")) : Float.MIN_VALUE;
-        float max = params.hasKey("max") ? PixelUtil.toPixelFromDIP((float) params.getDouble("max")) : Float.MAX_VALUE;
+    public static InteractableArea interactableLimit(ReadableMap params) {
+        float top = params.hasKey("top") ? PixelUtil.toPixelFromDIP((float) params.getDouble("top")) : -Float.MAX_VALUE;
+        float left = params.hasKey("left") ? PixelUtil.toPixelFromDIP((float) params.getDouble("left")) : -Float.MAX_VALUE;
+        float bottom = params.hasKey("bottom") ? PixelUtil.toPixelFromDIP((float) params.getDouble("bottom")) : Float.MAX_VALUE;
+        float right = params.hasKey("right") ? PixelUtil.toPixelFromDIP((float) params.getDouble("right")) : Float.MAX_VALUE;
         float bounce = params.hasKey("bounce") ? (float) params.getDouble("bounce") : 0f;
+        boolean heptics = params.hasKey("heptics") ? params.getBoolean("heptics") : false;
 
-        return new InteractableLimit(min, max, bounce);
+        return new InteractableArea(top, left, bottom, right, bounce, heptics);
     }
 
     public static InteractablePoint interactablePoint(ReadableMap params) {
@@ -32,11 +35,10 @@ public class RNConvert {
         float damping = params.hasKey("damping") ? (float) params.getDouble("damping") : 0f;
         float tension = params.hasKey("tension") ? (float) params.getDouble("tension") : 300f;
         float strength = params.hasKey("strength") ? (float) params.getDouble("strength") : 400f;
-        float falloff = params.hasKey("falloff") ? (float) PixelUtil.toPixelFromDIP( params.getDouble("falloff")) : 40f;
-        InteractableLimit limitX = params.hasKey("limitX") ? interactableLimit(params.getMap("limitX")) : null;
-        InteractableLimit limitY = params.hasKey("limitY") ? interactableLimit(params.getMap("limitY")) : null;
+        float falloff = params.hasKey("falloff") ? PixelUtil.toPixelFromDIP( params.getDouble("falloff")) : 40f;
+        InteractableArea influenceArea = params.hasKey("influenceArea") ? interactableLimit(params.getMap("influenceArea")) : null;
 
-        return new InteractablePoint(id, x, y, damping, tension, strength, falloff, limitX, limitY);
+        return new InteractablePoint(id, x, y, damping, tension, strength, falloff, influenceArea);
     }
 
     public static InteractableSpring interactableDrag(ReadableMap params) {

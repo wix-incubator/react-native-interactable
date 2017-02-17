@@ -18,17 +18,15 @@ public class InteractablePoint {
     public float tension;
     public float strength;
     public float falloff;
-    public InteractableLimit limitX;
-    public InteractableLimit limitY;
+    public InteractableArea influenceArea;
 
-    public InteractablePoint(String id, float x, float y, float damping, float tension, float strength, float falloff, InteractableLimit limitX, InteractableLimit limitY) {
+    public InteractablePoint(String id, float x, float y, float damping, float tension, float strength, float falloff, InteractableArea influenceArea) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.damping = damping;
         this.tension = tension;
-        this.limitX = limitX;
-        this.limitY = limitY;
+        this.influenceArea = influenceArea;
         this.strength = strength;
         this.falloff = falloff;
     }

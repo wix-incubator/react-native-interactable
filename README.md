@@ -65,85 +65,87 @@ import Interactable from 'react-native-interactable';
 
 ### `Interactable.View` Props
 
-#### [`snapPoints`](https://github.com/wix/react-native-interactable/PROPS.md#snappoints-array-of-points) - a list of points the view will snap to after being dragged by the user
+[Click here for the full reference for all props](https://github.com/wix/react-native-interactable/blob/master/PROPS.md)
+
+* [`snapPoints`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#snappoints-array-of-points) - a list of points the view will snap to after being dragged by the user
 
 ```jsx
 snapPoints={[{x: 0}, {x: -200}]}
 ```
 
-#### [`springPoints`](https://github.com/wix/react-native-interactable/PROPS.md#springpoints-array-of-points) - connect the view's center to a group of constant springs
+* [`springPoints`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#springpoints-array-of-points) - connect the view's center to a group of constant springs
 
 ```jsx
 springPoints={[{x: 0, tension: 6000, damping: 0.5, influenceArea: {left: 0}}]}
 ```
 
-#### [`gravityPoints`](https://github.com/wix/react-native-interactable/PROPS.md#gravitypoints-array-of-points) - attract/repel the view's center with a group of constant gravity wells
+* [`gravityPoints`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#gravitypoints-array-of-points) - attract/repel the view's center with a group of constant gravity wells
 
 ```jsx
 gravityPoints={[{x: 0, y: 0, strength: 8000, falloff: 40, damping: 0.5}]}
 ```
 
-#### [`frictionAreas`](https://github.com/wix/react-native-interactable/PROPS.md#frictionareas-array-of-areas) - add friction to the view's movement with a group of friction regions
+* [`frictionAreas`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#frictionareas-array-of-areas) - add friction to the view's movement with a group of friction regions
 
 ```jsx
 frictionAreas={[{damping: 0.5, limitY: {min: 0}}]}
 ```
 
-#### [`horizontalOnly`](https://github.com/wix/react-native-interactable/PROPS.md#horizontalonly-boolean) - whether the view should be locked to horizontal movement only
+* [`horizontalOnly`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#horizontalonly-boolean) - whether the view should be locked to horizontal movement only
 
 ```jsx
 horizontalOnly={true}
 ```
 
-#### [`verticalOnly`](https://github.com/wix/react-native-interactable/PROPS.md#verticalonly-boolean) - whether the view should be locked to vertical movement only
+* [`verticalOnly`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#verticalonly-boolean) - whether the view should be locked to vertical movement only
 
 ```jsx
 verticalOnly={true}
 ```
 
-#### [`boundaries`](https://github.com/wix/react-native-interactable/PROPS.md#boundaries-object) - limits to movement relative to the view's center (after initial layout)
+* [`boundaries`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#boundaries-object) - limits to movement relative to the view's center (after initial layout)
 
 ```jsx
 boundaries={{left: -100, right: 100, bounce: 0.5}}
 ```
 
-#### [`onSnap`](https://github.com/wix/react-native-interactable/PROPS.md#onsnap-function) - a function called whenever the view snaps to a `snapPoints` point (after dragging)
+* [`onSnap`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onsnap-function) - a function called whenever the view snaps to a `snapPoints` point (after dragging)
 
 ```jsx
 onSnap={this.onDrawerSnap}
 ```
 
-#### [`onStop`](https://github.com/wix/react-native-interactable/PROPS.md#onstop-function) - a function called whenever the interaction stops (views freeze momentarily)
+* [`onStop`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onstop-function) - a function called whenever the interaction stops (views freeze momentarily)
 
 ```jsx
 onStop={this.onStopInteraction}
 ```
 
-#### [`dragWithSpring`](https://github.com/wix/react-native-interactable/PROPS.md#dragwithspring-object) - specify to make dragging behavior of the view occur using a spring
+* [`dragWithSpring`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#dragwithspring-object) - specify to make dragging behavior of the view occur using a spring
 
 ```jsx
 dragWithSpring={{tension: 2000, damping: 0.5}}
 ```
 
-#### [`dragToss`](https://github.com/wix/react-native-interactable/PROPS.md#dragtoss-number) - time in seconds the view is allowed to be tossed before snapping to a point
+* [`dragToss`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#dragtoss-number) - time in seconds the view is allowed to be tossed before snapping to a point
 
 ```jsx
 dragToss={0.1}
 ```
 
-#### [`animatedValueX`](https://github.com/wix/react-native-interactable/PROPS.md#animatedvaluex-animatedvalue) - [`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (x axis)
+* [`animatedValueX`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#animatedvaluex-animatedvalue) - [`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (x axis)
 
 ```jsx
 animatedValueX={this._deltaX}
 ```
 
-#### [`animatedValueY`](https://github.com/wix/react-native-interactable/PROPS.md#animatedvaluey-animatedvalue) - [`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (y axis)
+* [`animatedValueY`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#animatedvaluey-animatedvalue) - [`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (y axis)
 
 ```jsx
 animatedValueY={this._deltaY}
 ```
 
-#### [`initialPosition`](https://github.com/wix/react-native-interactable/PROPS.md#initialposition-point) - used to initialize the view's position to a position different than it's original center
+* [`initialPosition`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#initialposition-point) - used to initialize the view's position to a position different than it's original center
 
 ```jsx
 initialPosition={{x: -140, y: -280}}

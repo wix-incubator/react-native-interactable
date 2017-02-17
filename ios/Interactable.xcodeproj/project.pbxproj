@@ -15,7 +15,7 @@
 		CC8513CF1E45D5C900137CA9 /* PhysicsSpringBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513CE1E45D5C900137CA9 /* PhysicsSpringBehavior.m */; };
 		CC8513D21E45E01F00137CA9 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513D11E45E01F00137CA9 /* PhysicsObject.m */; };
 		CC8513D51E467EAE00137CA9 /* PhysicsGravityWellBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513D41E467EAE00137CA9 /* PhysicsGravityWellBehavior.m */; };
-		CC8513F21E47E1FC00137CA9 /* InteractableLimit.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513F11E47E1FC00137CA9 /* InteractableLimit.m */; };
+		CC8513F21E47E1FC00137CA9 /* InteractableArea.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513F11E47E1FC00137CA9 /* InteractableArea.m */; };
 		CC8513F51E4A874200137CA9 /* PhysicsBounceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8513F41E4A874200137CA9 /* PhysicsBounceBehavior.m */; };
 		CC8514071E4CC81400137CA9 /* PhysicsFrictionBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8514061E4CC81400137CA9 /* PhysicsFrictionBehavior.m */; };
 		CC85140A1E4CF66500137CA9 /* PhysicsAnchorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8514091E4CF66500137CA9 /* PhysicsAnchorBehavior.m */; };
@@ -54,8 +54,8 @@
 		CC8513D11E45E01F00137CA9 /* PhysicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsObject.m; sourceTree = "<group>"; };
 		CC8513D31E467EAE00137CA9 /* PhysicsGravityWellBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsGravityWellBehavior.h; sourceTree = "<group>"; };
 		CC8513D41E467EAE00137CA9 /* PhysicsGravityWellBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsGravityWellBehavior.m; sourceTree = "<group>"; };
-		CC8513F01E47E1FC00137CA9 /* InteractableLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractableLimit.h; sourceTree = "<group>"; };
-		CC8513F11E47E1FC00137CA9 /* InteractableLimit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractableLimit.m; sourceTree = "<group>"; };
+		CC8513F01E47E1FC00137CA9 /* InteractableArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractableArea.h; sourceTree = "<group>"; };
+		CC8513F11E47E1FC00137CA9 /* InteractableArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractableArea.m; sourceTree = "<group>"; };
 		CC8513F31E4A874200137CA9 /* PhysicsBounceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsBounceBehavior.h; sourceTree = "<group>"; };
 		CC8513F41E4A874200137CA9 /* PhysicsBounceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsBounceBehavior.m; sourceTree = "<group>"; };
 		CC8514051E4CC81400137CA9 /* PhysicsFrictionBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsFrictionBehavior.h; sourceTree = "<group>"; };
@@ -109,8 +109,8 @@
 				CC0127DB1E3AD42C00B23C9F /* InteractableView.m */,
 				CCA33C981E3B642500649701 /* InteractablePoint.h */,
 				CCA33C991E3B642500649701 /* InteractablePoint.m */,
-				CC8513F01E47E1FC00137CA9 /* InteractableLimit.h */,
-				CC8513F11E47E1FC00137CA9 /* InteractableLimit.m */,
+				CC8513F01E47E1FC00137CA9 /* InteractableArea.h */,
+				CC8513F11E47E1FC00137CA9 /* InteractableArea.m */,
 				CC85140B1E4D040000137CA9 /* InteractableSpring.h */,
 				CC85140C1E4D040000137CA9 /* InteractableSpring.m */,
 				CCA33C9B1E3B6B5000649701 /* RCTConvert+Interactable.h */,
@@ -212,7 +212,7 @@
 				CC85140A1E4CF66500137CA9 /* PhysicsAnchorBehavior.m in Sources */,
 				CC8513C81E45D2A200137CA9 /* PhysicsAnimator.m in Sources */,
 				CCA33C9D1E3B6B5000649701 /* RCTConvert+Interactable.m in Sources */,
-				CC8513F21E47E1FC00137CA9 /* InteractableLimit.m in Sources */,
+				CC8513F21E47E1FC00137CA9 /* InteractableArea.m in Sources */,
 				CC8514071E4CC81400137CA9 /* PhysicsFrictionBehavior.m in Sources */,
 				CC8513CC1E45D59C00137CA9 /* PhysicsBehavior.m in Sources */,
 				CC8514101E4E790800137CA9 /* PhysicsArea.m in Sources */,

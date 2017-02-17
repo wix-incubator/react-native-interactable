@@ -79,15 +79,12 @@
         if (self.horizontalOnly) center.y = self.origin.y;
         if (self.verticalOnly) center.x = self.origin.x;
         
-        if (self.limitX)
+        if (self.boundaries)
         {
-            if (center.x - self.origin.x < self.limitX.min) center.x = self.limitX.min + self.origin.x;
-            if (center.x - self.origin.x > self.limitX.max) center.x = self.limitX.max + self.origin.x;
-        }
-        if (self.limitY)
-        {
-            if (center.y - self.origin.y < self.limitY.min) center.y = self.limitY.min + self.origin.y;
-            if (center.y - self.origin.y > self.limitY.max) center.y = self.limitY.max + self.origin.y;
+            if (center.x - self.origin.x < self.boundaries.left) center.x = self.boundaries.left + self.origin.x;
+            if (center.x - self.origin.x > self.boundaries.right) center.x = self.boundaries.right + self.origin.x;
+            if (center.y - self.origin.y < self.boundaries.top) center.y = self.boundaries.top + self.origin.y;
+            if (center.y - self.origin.y > self.boundaries.bottom) center.y = self.boundaries.bottom + self.origin.y;
         }
     }
   
@@ -270,7 +267,7 @@
     InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
     if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
     
-    [self addTempBounceBehaviorWithLimitX:self.limitX limitY:self.limitY];
+    [self addTempBounceBehaviorWithBoundaries:self.boundaries];
 }
 
 // MARK: - Behaviors
@@ -316,28 +313,19 @@
     [self.animator addTempBehavior:frictionBehavior];
 }
 
-- (void)addTempBounceBehaviorWithLimitX:(InteractableLimit*)limitX limitY:(InteractableLimit*)limitY
+- (void)addTempBounceBehaviorWithBoundaries:(InteractableArea*)boundaries
 {
-    if (limitX && limitX.bounce > 0.0)
+    if (boundaries && boundaries.bounce > 0.0)
     {
         CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
-        if (limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + limitX.min;
+        if (boundaries.left != -CGFLOAT_MAX) minPoint.x = self.origin.x + boundaries.left;
+        if (boundaries.top != -CGFLOAT_MAX) minPoint.y = self.origin.y + boundaries.top;
         CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
-        if (limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + limitX.max;
+        if (boundaries.right != CGFLOAT_MAX) maxPoint.x = self.origin.x + boundaries.right;
+        if (boundaries.bottom != CGFLOAT_MAX) maxPoint.y = self.origin.y + boundaries.bottom;
         PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
-        bounceBehavior.bounce = limitX.bounce;
-        bounceBehavior.haptics = limitX.haptics;
-        [self.animator addTempBehavior:bounceBehavior];
-    }
-    if (limitY && limitY.bounce > 0.0)
-    {
-        CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
-        if (limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + limitY.min;
-        CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
-        if (limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + limitY.max;
-        PhysicsBounceBehavior *bounceBehavior = [[PhysicsBounceBehavior alloc] initWithTarget:self minPoint:minPoint maxPoint:maxPoint];
-        bounceBehavior.bounce = limitY.bounce;
-        bounceBehavior.haptics = limitY.haptics;
+        bounceBehavior.bounce = boundaries.bounce;
+        bounceBehavior.haptics = boundaries.haptics;
         [self.animator addTempBehavior:bounceBehavior];
     }
 }
@@ -400,13 +388,13 @@
 
 - (PhysicsArea*)influenceAreaFromPoint:(InteractablePoint*)point
 {
-    if (!point.limitX && !point.limitY) return nil;
+    if (!point.influenceArea) return nil;
     CGPoint minPoint = CGPointMake(-CGFLOAT_MAX, -CGFLOAT_MAX);
     CGPoint maxPoint = CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX);
-    if (point.limitX && point.limitX.min != -CGFLOAT_MAX) minPoint.x = self.origin.x + point.limitX.min;
-    if (point.limitX && point.limitX.max != CGFLOAT_MAX) maxPoint.x = self.origin.x + point.limitX.max;
-    if (point.limitY && point.limitY.min != -CGFLOAT_MAX) minPoint.y = self.origin.y + point.limitY.min;
-    if (point.limitY && point.limitY.max != CGFLOAT_MAX) maxPoint.y = self.origin.y + point.limitY.max;
+    if (point.influenceArea.left != -CGFLOAT_MAX) minPoint.x = self.origin.x + point.influenceArea.left;
+    if (point.influenceArea.right != CGFLOAT_MAX) maxPoint.x = self.origin.x + point.influenceArea.right;
+    if (point.influenceArea.top != -CGFLOAT_MAX) minPoint.y = self.origin.y + point.influenceArea.top;
+    if (point.influenceArea.bottom != CGFLOAT_MAX) maxPoint.y = self.origin.y + point.influenceArea.bottom;
     return [[PhysicsArea alloc] initWithMinPoint:minPoint maxPoint:maxPoint];
 }
 

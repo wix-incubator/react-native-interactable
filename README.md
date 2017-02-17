@@ -97,28 +97,18 @@ verticalOnly={true}
 
 Optional, whether the view should be locked to vertical movement only.
 
-#### `limitX` (object)
+#### `boundaries` (object)
 
 ```jsx
-limitX={{max: 100, min: -100, bounce: 0.5}}
+boundaries={{left: -100, right: 100, bounce: 0.5}}
 ```
 
 Optional, an object providing limits to movement relative to the view's center (after initial layout). Contains following properties:
 
-* `max` - The maximum horizontal position (relative to the center). Optional.
-* `min` - The minimum horizontal position (relative to the center). Optional.
-* `bounce` - The amount of bounce when hitting the limit (`0.0`-`1.0`). Optional.
-
-#### `limitY` (object)
-
-```jsx
-limitY={{max: 100, min: -100, bounce: 0.5}}
-```
-
-Optional, an object providing limits to movement relative to the view's center (after initial layout). Contains following properties:
-
-* `max` - The maximum vertical position (relative to the center). Optional.
-* `min` - The minimum vertical position (relative to the center). Optional.
+* `left` - The minimum horizontal position (relative to the center). Optional.
+* `right` - The maximum horizontal position (relative to the center). Optional.
+* `top` - The minimum vertical position (relative to the center). Optional.
+* `bottom` - The maximum vertical position (relative to the center). Optional.
 * `bounce` - The amount of bounce when hitting the limit (`0.0`-`1.0`). Optional.
 * `haptics` - Whether to enable haptic feedback on bounce. Default `false`.
 
@@ -166,7 +156,7 @@ Time in seconds the view is allowed to be tossed before snapping to a point. Def
 #### `springPoints` (array of points)
 
 ```jsx
-springPoints={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
+springPoints={[{x: 0, tension: 6000, damping: 0.5, influenceArea: {left: 0}}]}
 ```
 
 Connect the view's center to a group of constant springs. Every element in the array is an object with the following properties:
@@ -175,12 +165,11 @@ Connect the view's center to a group of constant springs. Every element in the a
 * `y` - The vertical anchor position of the spring (relative to the center). Default is `0.0`.
 * `tension` - Tension of the spring. Default is `300`.
 * `damping` - Amount of damping on the spring. Default is `0.0`.
-* `limitX` - Limit the spring influence to a specific horizontal area. Optional. An object with the following properties:
-  * `max` - The maximum horizontal influence point (relative to the center). Optional.
-  * `min` - The minimum horizontal influence point (relative to the center). Optional.
-* `limitY` - Limit the spring influence to a specific vertical area. Optional. An object with the following properties:
-  * `max` - The maximum vertical influence point (relative to the center). Optional.
-  * `min` - The minimum vertical influence point (relative to the center). Optional.
+* `influenceArea` - Limit the spring influence to a specific area. Optional. An object with the following properties:
+  * `left` - The minimum horizontal influence point (relative to the center). Optional.
+  * `right` - The maximum horizontal influence point (relative to the center). Optional.
+  * `top` - The minimum vertical influence point (relative to the center). Optional.
+  * `bottom` - The maximum vertical influence point (relative to the center). Optional.  
 * `haptics` - Whether to enable haptic feedback on springs with influence area. Default `false`.
 
 Note: For the springs to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
@@ -198,12 +187,11 @@ Attract/repel the view's center with a group of constant gravity wells. Every el
 * `strength` - Strength of the field (positive attracts, negative repels). Default is `400`.
 * `falloff` - Distance of decay for the field strength. Default is `40`.
 * `damping` - Amount of damping on the field strength. Default is `0.0`.
-* `limitX` - Limit the field influence to a specific horizontal area. Optional. An object with the following properties:
-  * `max` - The maximum horizontal influence point (relative to the center). Optional.
-  * `min` - The minimum horizontal influence point (relative to the center). Optional.
-* `limitY` - Limit the field influence to a specific vertical area. Optional. An object with the following properties:
-  * `max` - The maximum vertical influence point (relative to the center). Optional.
-  * `min` - The minimum vertical influence point (relative to the center). Optional.
+* `influenceArea` - Limit the field influence to a specific area. Optional. An object with the following properties:
+  * `left` - The minimum horizontal influence point (relative to the center). Optional.
+  * `right` - The maximum horizontal influence point (relative to the center). Optional.
+  * `top` - The minimum vertical influence point (relative to the center). Optional.
+  * `bottom` - The maximum vertical influence point (relative to the center). Optional.  
 * `haptics` - Whether to enable haptic feedback on fields with influence area. Default `false`.
 
 Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
@@ -217,12 +205,11 @@ frictionAreas={[{damping: 0.5, limitY: {min: 0}}]}
 Add friction to the view's movement with a group of friction regions. Every element in the array is an object with the following properties:
 
 * `damping` - Amount of friction (`0.0`-`1.0`). Default is `0.0`.
-* `limitX` - Limit the friction influence to a specific horizontal area. Optional. An object with the following properties:
-  * `max` - The maximum horizontal influence point (relative to the center). Optional.
-  * `min` - The minimum horizontal influence point (relative to the center). Optional.
-* `limitY` - Limit the friction influence to a specific vertical area. Optional. An object with the following properties:
-  * `max` - The maximum vertical influence point (relative to the center). Optional.
-  * `min` - The minimum vertical influence point (relative to the center). Optional.
+* `influenceArea` - Limit the friction influence to a specific area. Optional. An object with the following properties:
+  * `left` - The minimum horizontal influence point (relative to the center). Optional.
+  * `right` - The maximum horizontal influence point (relative to the center). Optional.
+  * `top` - The minimum vertical influence point (relative to the center). Optional.
+  * `bottom` - The maximum vertical influence point (relative to the center). Optional.  
 * `haptics` - Whether to enable haptic feedback on regions with influence area. Default `false`.
 
 Note: For the friction to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.

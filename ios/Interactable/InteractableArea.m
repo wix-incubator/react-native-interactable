@@ -1,14 +1,14 @@
 //
-//  InteractableLimit.m
+//  InteractableArea.m
 //  Interactable
 //
 //  Created by Tal Kol on 2/6/17.
 //  Copyright © 2017 Wix. All rights reserved.
 //
 
-#import "InteractableLimit.h"
+#import "InteractableArea.h"
 
-@implementation InteractableLimit
+@implementation InteractableArea
 
 - (id)copyWithZone:(__unused NSZone *)zone
 {

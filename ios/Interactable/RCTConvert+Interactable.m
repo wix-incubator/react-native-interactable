@@ -8,7 +8,7 @@
 
 #import "RCTConvert+Interactable.h"
 #import "InteractablePoint.h"
-#import "InteractableLimit.h"
+#import "InteractableArea.h"
 #import "InteractableSpring.h"
 
 @implementation RCTConvert(Interactable)
@@ -24,22 +24,23 @@
     point.strength = [self CGFloat:json[@"strength"] ?: @(400.0)];
     point.falloff = [self CGFloat:json[@"falloff"] ?: @(40.0)];
     point.id = [self NSString:json[@"id"] ?: nil];
-    point.limitX = [self InteractableLimit:json[@"limitX"] ?: nil];
-    point.limitY = [self InteractableLimit:json[@"limitY"] ?: nil];
+    point.influenceArea = [self InteractableArea:json[@"influenceArea"] ?: nil];
     point.haptics = [self BOOL:json[@"haptics"] ?: @(NO)];
     return point;
 }
 
-+ (InteractableLimit *)InteractableLimit:(id)json
++ (InteractableArea *)InteractableArea:(id)json
 {
     json = [self NSDictionary:json];
     if (json == nil) return nil;
-    InteractableLimit *limit = [InteractableLimit new];
-    limit.min = [self CGFloat:json[@"min"] ?: @(-CGFLOAT_MAX)];
-    limit.max = [self CGFloat:json[@"max"] ?: @(CGFLOAT_MAX)];
-    limit.bounce = [self CGFloat:json[@"bounce"] ?: @(0.0)];
-    limit.haptics = [self BOOL:json[@"haptics"] ?: @(NO)];
-    return limit;
+    InteractableArea *area = [InteractableArea new];
+    area.top = [self CGFloat:json[@"top"] ?: @(-CGFLOAT_MAX)];
+    area.left = [self CGFloat:json[@"left"] ?: @(-CGFLOAT_MAX)];
+    area.bottom = [self CGFloat:json[@"bottom"] ?: @(CGFLOAT_MAX)];
+    area.right = [self CGFloat:json[@"right"] ?: @(CGFLOAT_MAX)];
+    area.bounce = [self CGFloat:json[@"bounce"] ?: @(0.0)];
+    area.haptics = [self BOOL:json[@"haptics"] ?: @(NO)];
+    return area;
 }
 
 + (InteractableSpring *)InteractableSpring:(id)json

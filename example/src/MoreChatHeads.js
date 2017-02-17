@@ -79,8 +79,8 @@ export default class MoreChatHeads extends Component {
             {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
           dragWithSpring={{tension: 2000, damping: 0.5}}
           springPoints={[
-            {x: 0, y:-140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min: -180, max: -100}, haptics: true},
-            {x: 0, y: 140, tension: 4000, damping: 0.5, limitX: {min: -40, max: 40}, limitY: {min:  100, max:  180}, haptics: true}]}
+            {x: 0, y:-140, tension: 4000, damping: 0.5, influenceArea: {left: -40, right: 40, top: -180, bottom: -100}, haptics: true},
+            {x: 0, y: 140, tension: 4000, damping: 0.5, influenceArea: {left: -40, right: 40, top:  100, bottom:  180}, haptics: true}]}
           initialPosition={{x: -140, y: -280}}>
           <View style={styles.head} />
         </Interactable.View>

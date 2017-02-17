@@ -1,5 +1,5 @@
 //
-//  InteractableLimit.h
+//  InteractableArea.h
 //  Interactable
 //
 //  Created by Tal Kol on 2/6/17.
@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface InteractableLimit : NSObject<NSCopying>
+@interface InteractableArea : NSObject<NSCopying>
 
-@property (nonatomic, assign) CGFloat min;
-@property (nonatomic, assign) CGFloat max;
+@property (nonatomic, assign) CGFloat top;
+@property (nonatomic, assign) CGFloat left;
+@property (nonatomic, assign) CGFloat bottom;
+@property (nonatomic, assign) CGFloat right;
 @property (nonatomic, assign) CGFloat bounce;
 @property (nonatomic, assign) BOOL haptics;
 

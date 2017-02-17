@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <React/RCTComponent.h>
 #import "InteractablePoint.h"
-#import "InteractableLimit.h"
+#import "InteractableArea.h"
 #import "InteractableSpring.h"
 #import "PhysicsAnimator.h"
 
@@ -21,8 +21,7 @@
 @property (nonatomic, copy) NSArray<InteractablePoint *> *springPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *gravityPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *frictionAreas;
-@property (nonatomic, copy) InteractableLimit *limitX;
-@property (nonatomic, copy) InteractableLimit *limitY;
+@property (nonatomic, copy) InteractableArea *boundaries;
 @property (nonatomic, copy) InteractableSpring *dragWithSpring;
 @property (nonatomic, assign) CGFloat dragToss;
 @property (nonatomic, copy) RCTBubblingEventBlock onSnap;

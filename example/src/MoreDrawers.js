@@ -20,7 +20,7 @@ export default class MoreDrawers extends Component {
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
-            limitX={{max: 0}}
+            boundaries={{right: 0}}
             horizontalOnly={true}>
             <View style={styles.cover}>
               <Text style={styles.label}>Drawer with limits</Text>
@@ -31,7 +31,7 @@ export default class MoreDrawers extends Component {
         <View style={{backgroundColor: 'red', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
-            limitX={{max: 0, bounce: 0.2, haptics: true}}
+            boundaries={{right: 0, bounce: 0.2, haptics: true}}
             horizontalOnly={true}>
             <View style={styles.cover}>
               <Text style={styles.label}>Limits with bounce</Text>
@@ -54,7 +54,7 @@ export default class MoreDrawers extends Component {
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
             dragWithSpring={{tension: 2000, damping: 0.5}}
-            springPoints={[{x: 0, tension: 6000, damping: 0.5, limitX: {min: 0}}]}
+            springPoints={[{x: 0, tension: 6000, damping: 0.5, influenceArea: {left: 0}}]}
             horizontalOnly={true}>
             <View style={styles.cover}>
               <Text style={styles.label}>Drag with spring resistance</Text>

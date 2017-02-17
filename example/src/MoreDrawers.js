@@ -80,8 +80,7 @@ const styles = StyleSheet.create({
     right: 0,
     height: 75,
     backgroundColor: '#e0e0e0',
-    justifyContent: 'center',
-    borderWidth: 0.5
+    justifyContent: 'center'
   },
   label: {
     textAlign: 'center',

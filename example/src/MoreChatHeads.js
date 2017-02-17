@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     backgroundColor: 'red',
-    borderRadius: 35,
-    borderWidth: 0.5
+    borderRadius: 35
   }
 });

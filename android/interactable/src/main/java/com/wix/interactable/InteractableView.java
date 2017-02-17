@@ -35,7 +35,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private boolean horizontalOnly;
     private PointF initialPosition;
 
-    private InteractableArea boundries;
+    private InteractableArea boundaries;
     private InteractableSpring dragWithSprings;
     private float dragToss;
     private ArrayList<InteractablePoint> snapPoints = new ArrayList<>();
@@ -180,7 +180,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
 
         addTempSnapToPointBehavior(snapPoint);
-        addTempBounceBehaviorWithBoundaries(this.boundries);
+        addTempBounceBehaviorWithBoundaries(this.boundaries);
 
     }
 
@@ -202,19 +202,19 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     }
 
-    private void addTempBounceBehaviorWithBoundaries(InteractableArea boundries) {
-        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundries);
-        if (boundries != null && boundries.getBounce() > 0.0)
+    private void addTempBounceBehaviorWithBoundaries(InteractableArea boundaries) {
+        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundaries);
+        if (boundaries != null && boundaries.getBounce() > 0.0)
         {
             PointF minPoint = new PointF(-Float.MAX_VALUE,-Float.MAX_VALUE);
-            if (boundries.getLeft() != -Float.MAX_VALUE) minPoint.x = boundries.getLeft();
-            if (boundries.getTop() != -Float.MAX_VALUE) minPoint.y = boundries.getTop();
+            if (boundaries.getLeft() != -Float.MAX_VALUE) minPoint.x = boundaries.getLeft();
+            if (boundaries.getTop() != -Float.MAX_VALUE) minPoint.y = boundaries.getTop();
 
             PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
-            if (boundries.getRight() != Float.MAX_VALUE) minPoint.x = boundries.getRight();
-            if (boundries.getBottom() != Float.MAX_VALUE) minPoint.y = boundries.getBottom();
+            if (boundaries.getRight() != Float.MAX_VALUE) minPoint.x = boundaries.getRight();
+            if (boundaries.getBottom() != Float.MAX_VALUE) minPoint.y = boundaries.getBottom();
 
-            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint, boundries.getBounce(), boundries.isHeptic());
+            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint, boundaries.getBounce(), boundaries.isHeptic());
             this.animator.addTempBehavior(bounceBehavior);
         }
     }
@@ -307,8 +307,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         setTranslationY(initialPosition.y);
     }
 
-    public void setBoundries(InteractableArea boundries) {
-        this.boundries = boundries;
+    public void setBoundaries(InteractableArea boundaries) {
+        this.boundaries = boundaries;
     }
 
 

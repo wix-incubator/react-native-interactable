@@ -68,9 +68,9 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setDragToss(dragToss);
     }
 
-    @ReactProp(name = "boundries")
-    public void setBoundries(InteractableView view, @Nullable ReadableMap boundries) {
-        view.setBoundries(RNConvert.interactableLimit(boundries));
+    @ReactProp(name = "boundaries")
+    public void setBoundaries(InteractableView view, @Nullable ReadableMap boundaries) {
+        view.setBoundaries(RNConvert.interactableLimit(boundaries));
     }
 
     @ReactProp(name = "initialPosition")

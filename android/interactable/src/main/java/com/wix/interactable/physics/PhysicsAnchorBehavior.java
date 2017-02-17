@@ -1,6 +1,5 @@
 package com.wix.interactable.physics;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +12,7 @@ public class PhysicsAnchorBehavior extends PhysicsBehavior {
 
 
     public PhysicsAnchorBehavior(View target,PointF anchorPoint) {
-        super(target,anchorPoint);
+        super(target, anchorPoint);
     }
 
     @Override

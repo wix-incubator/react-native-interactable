@@ -136,7 +136,7 @@ Note: For the gravity to affect the view while dragging, make sure dragging is p
 #### `frictionAreas` (array of areas)
 
 ```jsx
-frictionAreas={[{damping: 0.5, limitY: {min: 0}}]}
+frictionAreas={[{damping: 0.5, influenceArea: {top: 0}}]}
 ```
 
 Add friction to the view's movement with a group of friction regions. Every element in the array is an object with the following properties:

@@ -88,7 +88,7 @@ gravityPoints={[{x: 0, y: 0, strength: 8000, falloff: 40, damping: 0.5}]}
 * [`frictionAreas`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#frictionareas-array-of-areas) - add friction to the view's movement with a group of friction regions
 
 ```jsx
-frictionAreas={[{damping: 0.5, limitY: {min: 0}}]}
+frictionAreas={[{damping: 0.5, influenceArea: {top: 0}}]}
 ```
 
 * [`horizontalOnly`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#horizontalonly-boolean) - whether the view should be locked to horizontal movement only

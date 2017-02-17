@@ -189,7 +189,9 @@ this._deltaY = new Animated.Value(0);
 
 ## Implementation Details
 
-The iOS implementation relies on [UIKit Dynamics](https://developer.apple.com/reference/uikit/uidynamicanimator) - a powerful native animation engine for physical interactions. A physics engine is required in order to make the interaction life-like. Consider the action of tossing a view connected via a spring to a snap point. A simple native [spring animation](https://developer.apple.com/reference/uikit/uiview/1622594-animatewithduration) will not be enough to take the initial velocity vector into account.
+Originally, the iOS implementation relied on [UIKit Dynamics](https://developer.apple.com/reference/uikit/uidynamicanimator) - a powerful native animation engine for physical interactions. A physics engine is required in order to make the interaction life-like. Consider the action of tossing a view connected via a spring to a snap point. A simple native [spring animation](https://developer.apple.com/reference/uikit/uiview/1622594-animatewithduration) will not be enough to take the initial velocity vector into account.
+
+At some point, UIKit Dynamics was dropped in favor of a home-brewed physics implementation in order to provide more control over the behaviors. This also paved the way for the Android port since there's no parallel to UIKit Dynamics for Android. The home-brewed physics engine was straightforward to port from Objective-C to Java and is now part of this library.
 
 ## Roadmap
 

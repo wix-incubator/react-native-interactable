@@ -38,9 +38,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private InteractableLimit limitX;
     private InteractableLimit limitY;
     private InteractableDrag drag;
-    private ArrayList<InteractablePoint> snapTo = new ArrayList<>();
-    private ArrayList<InteractablePoint> springs = new ArrayList<>();
-    private ArrayList<InteractablePoint> gravity = new ArrayList<>();
+    private ArrayList<InteractablePoint> snapPoints = new ArrayList<>();
+    private ArrayList<InteractablePoint> springPoints = new ArrayList<>();
+    private ArrayList<InteractablePoint> gravityPoints = new ArrayList<>();
 
     private InteractionListener listener;
 
@@ -177,7 +177,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                                             getTranslationY() + toss*velocity.y);
 
-        InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapTo,projectedCenter);
+        InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
 
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehavior(this.limitX, this.limitY);
@@ -188,7 +188,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (snapPoint == null) {
             return;
         }
-        listener.onSnap(snapTo.indexOf(snapPoint), snapPoint.id);
+        listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
 
@@ -331,31 +331,31 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         this.drag = drag;
     }
     
-    public void setSnapTo(ArrayList snapTo) {
-        this.snapTo = snapTo;
+    public void setSnapPoints(ArrayList snapPoints) {
+        this.snapPoints = snapPoints;
     }
 
-    public void setSprings(ArrayList<InteractablePoint> springs) {
-        this.springs = springs;
-        for (InteractablePoint point : springs) {
+    public void setSpringsPoints(ArrayList<InteractablePoint> springPoints) {
+        this.springPoints = springPoints;
+        for (InteractablePoint point : springPoints) {
             addConstantSpringBehavior(point);
         }
     }
 
-    public void setGravity(ArrayList<InteractablePoint> gravity) {
-        this.gravity = gravity;
-        for (InteractablePoint point : gravity) {
-            Log.d("InteractableView","setGravity strength = " + point.strength);
-            Log.d("InteractableView","setGravity damping = " + point.damping);
+    public void setGravityPoints(ArrayList<InteractablePoint> gravityPoints) {
+        this.gravityPoints = gravityPoints;
+        for (InteractablePoint point : gravityPoints) {
+            Log.d("InteractableView","setGravityPoints strength = " + point.strength);
+            Log.d("InteractableView","setGravityPoints damping = " + point.damping);
 
             addConstantGravityBehavior(point);
         }
     }
 
-    public void setFriction(ArrayList<InteractablePoint> friction) {
-        this.gravity = gravity;
-        for (InteractablePoint point : friction) {
-            Log.d("InteractableView","setFriction damping = " + point.damping);
+    public void setFrictionAreas(ArrayList<InteractablePoint> frictionAreas) {
+        this.gravityPoints = gravityPoints;
+        for (InteractablePoint point : frictionAreas) {
+            Log.d("InteractableView","setFrictionAreas damping = " + point.damping);
             addConstantFrictionBehavior(point);
         }
     }

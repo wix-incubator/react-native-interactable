@@ -38,24 +38,24 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setHorizontalOnly(horizontalOnly);
     }
 
-    @ReactProp(name = "snapTo")
-    public void setSnapTo(InteractableView view, @Nullable ReadableArray snapTo) {
-        view.setSnapTo(RNConvert.interactablePoints(snapTo));
+    @ReactProp(name = "snapPoints")
+    public void setSnapTo(InteractableView view, @Nullable ReadableArray snapPoints) {
+        view.setSnapPoints(RNConvert.interactablePoints(snapPoints));
     }
 
-    @ReactProp(name = "springs")
+    @ReactProp(name = "springPoints")
     public void setSprings(InteractableView view, @Nullable ReadableArray springs) {
-        view.setSprings(RNConvert.interactablePoints(springs));
+        view.setSpringsPoints(RNConvert.interactablePoints(springs));
     }
 
-    @ReactProp(name = "gravity")
-    public void setGravity(InteractableView view, @Nullable ReadableArray gravity) {
-        view.setGravity(RNConvert.interactablePoints(gravity));
+    @ReactProp(name = "gravityPoints")
+    public void setGravity(InteractableView view, @Nullable ReadableArray gravityPoints) {
+        view.setGravityPoints(RNConvert.interactablePoints(gravityPoints));
     }
 
-    @ReactProp(name = "friction")
-    public void setFriction(InteractableView view, @Nullable ReadableArray gravity) {
-        view.setFriction(RNConvert.interactablePoints(gravity));
+    @ReactProp(name = "frictionAreas")
+    public void setFriction(InteractableView view, @Nullable ReadableArray frictionAreas) {
+        view.setFrictionAreas(RNConvert.interactablePoints(frictionAreas));
     }
 
     @ReactProp(name = "drag")

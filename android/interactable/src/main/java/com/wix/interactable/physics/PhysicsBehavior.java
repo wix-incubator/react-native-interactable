@@ -1,18 +1,20 @@
 package com.wix.interactable.physics;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
+
 
 /**
  * Created by rotemm on 09/02/2017.
  */
 
 public abstract class PhysicsBehavior {
+    private static int DURATION_BETWEEN_HAPTICS = 500;
+
     View target;
+    long lastHapticsAction;
 
     public void setAnchorPoint(PointF anchorPoint) {
         this.anchorPoint = anchorPoint;
@@ -27,17 +29,18 @@ public abstract class PhysicsBehavior {
     private PhysicsArea influence;
 
     boolean isTemp = false;
-    boolean haptic = false;
+    boolean haptics = false;
     boolean lastIsWithinInfluenceInitialized = false;
     boolean lastIsWithinInfluence = false;
 
     int priority = 1;
 
-    public PhysicsBehavior(View target) {
+    public PhysicsBehavior(View target, boolean haptics) {
         this.target = target;
+        this.haptics = haptics;
     }
-    public PhysicsBehavior(View target,PointF anchorPoint) {
-        this(target);
+    public PhysicsBehavior(View target, PointF anchorPoint) {
+        this(target, false);
         this.anchorPoint = anchorPoint;
     }
 
@@ -67,8 +70,11 @@ public abstract class PhysicsBehavior {
     }
 
     protected void doHaptic() {
-        Log.d("InteractableView","doHaptic ");
-        Vibrator v = (Vibrator) target.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(3);
+
+        if ( haptics && (System.currentTimeMillis() - lastHapticsAction > DURATION_BETWEEN_HAPTICS)) {
+            Vibrator v = (Vibrator) target.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(1);
+            lastHapticsAction = System.currentTimeMillis();
+        }
     }
 }

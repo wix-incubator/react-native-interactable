@@ -23,9 +23,9 @@ public class RNConvert {
         float bottom = params.hasKey("bottom") ? PixelUtil.toPixelFromDIP((float) params.getDouble("bottom")) : Float.MAX_VALUE;
         float right = params.hasKey("right") ? PixelUtil.toPixelFromDIP((float) params.getDouble("right")) : Float.MAX_VALUE;
         float bounce = params.hasKey("bounce") ? (float) params.getDouble("bounce") : 0f;
-        boolean heptics = params.hasKey("heptics") ? params.getBoolean("heptics") : false;
+        boolean haptics = params.hasKey("haptics") ? params.getBoolean("haptics") : false;
 
-        return new InteractableArea(top, left, bottom, right, bounce, heptics);
+        return new InteractableArea(top, left, bottom, right, bounce, haptics);
     }
 
     public static InteractablePoint interactablePoint(ReadableMap params) {

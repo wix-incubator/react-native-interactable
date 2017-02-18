@@ -6,15 +6,15 @@ public class InteractableArea {
     private float bottom;
     private float right;
     private float bounce;
-    private boolean heptics;
+    private boolean haptics;
 
-    public InteractableArea(float top, float left, float bottom, float right, float bounce, boolean heptics) {
+    public InteractableArea(float top, float left, float bottom, float right, float bounce, boolean haptics) {
         this.top = top;
         this.left = left;
         this.bottom = bottom;
         this.right = right;
         this.bounce = bounce;
-        this.heptics = heptics;
+        this.haptics = haptics;
     }
 
 
@@ -38,7 +38,7 @@ public class InteractableArea {
         return bounce;
     }
 
-    public boolean isHeptic() {
-        return heptics;
+    public boolean isHaptic() {
+        return haptics;
     }
 }

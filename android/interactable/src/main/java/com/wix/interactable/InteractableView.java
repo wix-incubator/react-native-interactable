@@ -214,7 +214,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             if (boundaries.getRight() != Float.MAX_VALUE) minPoint.x = boundaries.getRight();
             if (boundaries.getBottom() != Float.MAX_VALUE) minPoint.y = boundaries.getBottom();
 
-            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint, boundaries.getBounce(), boundaries.isHeptic());
+            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint, boundaries.getBounce(), boundaries.isHaptic());
             this.animator.addTempBehavior(bounceBehavior);
         }
     }

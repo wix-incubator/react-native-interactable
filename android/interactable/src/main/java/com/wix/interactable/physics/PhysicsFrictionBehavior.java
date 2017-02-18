@@ -11,8 +11,8 @@ import android.view.View;
 public class PhysicsFrictionBehavior extends PhysicsBehavior {
 
     private float friction;
-    public PhysicsFrictionBehavior(View target,float friction) {
-        super(target);
+    public PhysicsFrictionBehavior(View target, float friction) {
+        super(target, false);
         this.friction = friction;
         this.priority = 2;
     }

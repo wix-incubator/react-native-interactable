@@ -13,14 +13,12 @@ public class PhysicsBounceBehavior extends PhysicsBehavior {
     private PointF minPoint;
     private PointF maxPoint;
     private float bounce = 0.5f;
-    private boolean heptics;
 
-    public PhysicsBounceBehavior(View target,PointF minPoint,PointF maxPoint,float bounce, boolean heptics) {
-        super(target);
+    public PhysicsBounceBehavior(View target, PointF minPoint, PointF maxPoint,float bounce, boolean haptics) {
+        super(target, haptics);
         this.minPoint = minPoint;
         this.maxPoint = maxPoint;
         this.bounce = bounce;
-        this.heptics = heptics;
     }
 
     @Override
@@ -31,7 +29,6 @@ public class PhysicsBounceBehavior extends PhysicsBehavior {
             float vx = -physicsObject.velocity.x * this.bounce;
             float vy = physicsObject.velocity.y;
             physicsObject.velocity = new PointF(vx, vy);
-
             doHaptic();
         }
         if (this.minPoint.y == this.target.getTranslationY() && physicsObject.velocity.y < 0.0)

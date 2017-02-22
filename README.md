@@ -39,7 +39,12 @@ ios/Interactable.xcodeproj
 
 ## Example
 
-To see the library in action, run the [example](example) project - it has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. To run the example, clone the repo and run from the root folder:
+To see the library in action, run the [example](example) project - it has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. 
+
+
+**Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.**
+
+To run the example, clone the repo and run from the root folder:
 
 ```
 cd example

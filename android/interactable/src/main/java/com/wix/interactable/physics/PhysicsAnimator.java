@@ -55,6 +55,12 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
     long lastFrameTS = 0;
     boolean isRunning = false;
 
+    public void setDragging(boolean dragging) {
+        isDragging = dragging;
+    }
+
+    boolean isDragging = false;
+
     public PhysicsAnimator(View referenceView) {
         this.behaviors = new ArrayList<>();
         this.targetsToObjects = new HashMap();
@@ -155,7 +161,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
 
         if (hadMovement) this.consecutiveFramesWithNoMovement = 0;
         else this.consecutiveFramesWithNoMovement++;
-        if (this.consecutiveFramesWithNoMovement >= ANIMATOR_PAUSE_CONSECUTIVE_FRAMES)
+        if (this.consecutiveFramesWithNoMovement >= ANIMATOR_PAUSE_CONSECUTIVE_FRAMES && !isDragging)
         {
             stopRunning();
             if (animatorListener != null) {

@@ -19,11 +19,13 @@ public class PhysicsBounceBehavior extends PhysicsBehavior {
         this.minPoint = minPoint;
         this.maxPoint = maxPoint;
         this.bounce = bounce;
+        this.priority = 3;
     }
 
     @Override
     public void executeFrameWithDeltaTime(float timeInterval, PhysicsObject physicsObject) {
         Log.d("InteractableView"," PhysicsBounceBehavior executeFrameWithDeltaTime: " + timeInterval + " minX = " + minPoint.x);
+        applyLimits();
         if (this.minPoint.x == this.target.getTranslationX() && physicsObject.velocity.x < 0.0)
         {
             float vx = -physicsObject.velocity.x * this.bounce;
@@ -52,7 +54,21 @@ public class PhysicsBounceBehavior extends PhysicsBehavior {
             physicsObject.velocity = new PointF(vx, vy);
             doHaptic();
         }
+    }
 
+    private void applyLimits() {
+        if (this.minPoint.x > this.target.getTranslationX()) {
+            this.target.setTranslationX(this.minPoint.x);
+        }
+        if (this.minPoint.y > this.target.getTranslationY()) {
+            this.target.setTranslationY(this.minPoint.y);
+        }
+        if (this.maxPoint.x < this.target.getTranslationX()) {
+            this.target.setTranslationX(this.maxPoint.x);
+        }
+        if (this.maxPoint.y < this.target.getTranslationY()) {
+            this.target.setTranslationY(this.maxPoint.y);
+        }
     }
 
 

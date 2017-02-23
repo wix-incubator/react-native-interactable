@@ -29,6 +29,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private PointF dragStartCenter;
     private PointF dragStartLocation;
+    private PointF dragLastLocation;
     private boolean initialPositionSet;
 
     private boolean verticalOnly;
@@ -133,14 +134,19 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     public boolean onTouchEvent(MotionEvent event) {
 
 //        Log.d("InteractableView","onTouchEvent action = " + event.getAction());
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                this.animator.removeTempBehaviors();
+                this.animator.setDragging(true);
                 this.dragStartLocation = new PointF(event.getX(),event.getY());
                 this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+
 
                 break;
 
             case MotionEvent.ACTION_MOVE:
+
                 float newX = getTranslationX() + event.getX() - dragStartLocation.x;
                 float newY = getTranslationY() + event.getY() - dragStartLocation.y;
                 if (horizontalOnly) {
@@ -151,6 +157,16 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
                 }
 
                 this.dragBehavior.setAnchorPoint(new PointF(newX,newY));
+//                float dx = event.getX() - dragLastLocation.x;
+//                float dy = event.getY() - dragLastLocation.y;
+//                if (horizontalOnly) {
+//                    dy = 0;
+//                }
+//                if (verticalOnly) {
+//                    dx = 0;
+//                }
+//
+//                this.dragBehavior.moveAnchorPoint(dx,dy);
 
                 break;
             case MotionEvent.ACTION_UP:
@@ -159,12 +175,14 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
                 break;
 
         }
+        this.dragLastLocation = new PointF(event.getX(),event.getY());
 
         return true;
     }
 
     private void handleEndOfDrag() {
         this.animator.removeTempBehaviors();
+        this.animator.setDragging(false);
 
         PointF velocity = this.animator.getTargetVelocity(this);
         if (this.horizontalOnly) velocity.y = 0;
@@ -204,18 +222,38 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private void addTempBounceBehaviorWithBoundaries(InteractableArea boundaries) {
         Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundaries);
-        if (boundaries != null && boundaries.getBounce() > 0.0)
+//        if (boundaries != null && boundaries.getBounce() > 0.0)
+        if (boundaries != null)
         {
             PointF minPoint = new PointF(-Float.MAX_VALUE,-Float.MAX_VALUE);
             if (boundaries.getLeft() != -Float.MAX_VALUE) minPoint.x = boundaries.getLeft();
             if (boundaries.getTop() != -Float.MAX_VALUE) minPoint.y = boundaries.getTop();
 
             PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
-            if (boundaries.getRight() != Float.MAX_VALUE) minPoint.x = boundaries.getRight();
-            if (boundaries.getBottom() != Float.MAX_VALUE) minPoint.y = boundaries.getBottom();
+            if (boundaries.getRight() != Float.MAX_VALUE) maxPoint.x = boundaries.getRight();
+            if (boundaries.getBottom() != Float.MAX_VALUE) maxPoint.y = boundaries.getBottom();
 
             PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint, boundaries.getBounce(), boundaries.isHaptic());
             this.animator.addTempBehavior(bounceBehavior);
+//            this.animator.addBehavior(bounceBehavior);
+        }
+    }
+    private void addConstantBoundaries(InteractableArea boundaries) {
+        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundaries);
+//        if (boundaries != null && boundaries.getBounce() > 0.0)
+        if (boundaries != null)
+        {
+            PointF minPoint = new PointF(-Float.MAX_VALUE,-Float.MAX_VALUE);
+            if (boundaries.getLeft() != -Float.MAX_VALUE) minPoint.x = boundaries.getLeft();
+            if (boundaries.getTop() != -Float.MAX_VALUE) minPoint.y = boundaries.getTop();
+
+            PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
+            if (boundaries.getRight() != Float.MAX_VALUE) maxPoint.x = boundaries.getRight();
+            if (boundaries.getBottom() != Float.MAX_VALUE) maxPoint.y = boundaries.getBottom();
+
+            PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint,0, boundaries.isHaptic());
+
+            this.animator.addBehavior(bounceBehavior);
         }
     }
 
@@ -309,6 +347,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setBoundaries(InteractableArea boundaries) {
         this.boundaries = boundaries;
+        addConstantBoundaries(boundaries);
     }
 
 

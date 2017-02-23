@@ -19,6 +19,10 @@ public abstract class PhysicsBehavior {
     public void setAnchorPoint(PointF anchorPoint) {
         this.anchorPoint = anchorPoint;
     }
+    public void moveAnchorPoint(float dx,float dy) {
+        this.anchorPoint.x += dx;
+        this.anchorPoint.y += dy;
+    }
 
     PointF anchorPoint;
 

@@ -8,12 +8,13 @@ import {
 } from 'react-native';
 import ChatHeads from './ChatHeads';
 import RowActions1 from './RowActions1';
+import RowActions2 from './RowActions2';
 
 export default class example extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentExample: RowActions1
+      currentExample: undefined
     }
   }
 
@@ -29,6 +30,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions1)}>
           <Text style={styles.button}>Row Actions 1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions2)}>
+          <Text style={styles.button}>Row Actions 2</Text>
         </TouchableOpacity>
       </View>
     );

@@ -46,7 +46,7 @@ class Row extends Component {
   }
   render() {
     return (
-      <View style={{backgroundColor: '#2f9a5d'}}>
+      <View style={{backgroundColor: '#de6d77'}}>
 
         <View style={{position: 'absolute', right: 0, height: 75, flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity onPress={this.onButtonPress.bind(this, 'trash')}>

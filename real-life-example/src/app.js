@@ -9,6 +9,7 @@ import {
 import ChatHeads from './ChatHeads';
 import RowActions1 from './RowActions1';
 import RowActions2 from './RowActions2';
+import NowCard from './NowCard';
 
 export default class example extends Component {
   constructor(props) {
@@ -33,6 +34,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions2)}>
           <Text style={styles.button}>Row Actions 2</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, NowCard)}>
+          <Text style={styles.button}>Now Card</Text>
         </TouchableOpacity>
       </View>
     );

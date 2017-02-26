@@ -49,9 +49,6 @@ export default class example extends Component {
     }
     return (
       <View style={styles.menuContainer}>
-        <TouchableOpacity onPress={this.onExamplePress.bind(this, ChatHeads)}>
-          <Text style={styles.button}>Chat Heads</Text>
-        </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions1)}>
           <Text style={styles.button}>Row Actions (Google Style)</Text>
         </TouchableOpacity>
@@ -75,6 +72,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsibleCalendar)}>
           <Text style={styles.button}>Collapsible Calendar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, ChatHeads)}>
+          <Text style={styles.button}>Chat Heads</Text>
         </TouchableOpacity>
       </View>
     );

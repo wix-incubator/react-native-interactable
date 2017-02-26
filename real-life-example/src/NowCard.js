@@ -9,7 +9,7 @@ export default class NowCard extends Component {
     super(props);
     this._deltaX = new Animated.Value(0);
     this.state = {
-      damping: 0.7,
+      damping: 1-0.7,
       tension: 300
     };
   }
@@ -21,7 +21,7 @@ export default class NowCard extends Component {
           horizontalOnly={true}
           snapPoints={[
             {x: 360},
-            {x: 0, damping: this.state.damping, tension: this.state.tension},
+            {x: 0, damping: 1-this.state.damping, tension: this.state.tension},
             {x: -360}
           ]}
           animatedValueX={this._deltaX}>
@@ -44,8 +44,8 @@ export default class NowCard extends Component {
             key='damping'
             style={styles.slider}
             value={this.state.damping}
-            minimumValue={0.0}
-            maximumValue={1.0}
+            minimumValue={0.1}
+            maximumValue={0.6}
             onValueChange={(value) => this.setState({damping: value})}
           />
           <Text style={styles.playgroundLabel}>Change spring tension:</Text>
@@ -54,7 +54,7 @@ export default class NowCard extends Component {
             style={styles.slider}
             value={this.state.tension}
             minimumValue={0.0}
-            maximumValue={2000.0}
+            maximumValue={1000.0}
             onValueChange={(value) => this.setState({tension: value})}
           />
         </View>

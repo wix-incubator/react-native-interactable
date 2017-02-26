@@ -13,7 +13,22 @@ export default class CollapsibleFilter extends Component {
     return (
       <View style={styles.container}>
 
-        <View style={styles.filterContainer}>
+        <Animated.View style={[styles.filterContainer, {
+          transform: [{
+            translateY: this._deltaY.interpolate({
+              inputRange: [-130, -50, -50],
+              outputRange: [-33, 0, 0]
+            })
+          }]
+        }]}>
+          <Animated.View style={[styles.filterTop, {
+            opacity: this._deltaY.interpolate({
+              inputRange: [-90, -90, -20, -20],
+              outputRange: [0, 0, 1, 1]
+            })
+          }]}>
+            <Image style={styles.filterUp} source={require('../img/icon-up.png')} />
+          </Animated.View>
           <TouchableOpacity onPress={() => alert('Anywhere pressed')}>
             <View style={styles.filterField}>
               <Text style={styles.filterFieldText}>Anywhere</Text>
@@ -39,12 +54,12 @@ export default class CollapsibleFilter extends Component {
               <Text style={styles.filterFieldText}>Anything</Text>
             </Animated.View>
           </TouchableOpacity>
-        </View>
+        </Animated.View>
 
         <Interactable.View
           verticalOnly={true}
-          snapPoints={[{y: 0}, {y: -100}]}
-          boundaries={{top: -100}}
+          snapPoints={[{y: 0}, {y: -130}]}
+          boundaries={{top: -160}}
           animatedValueY={this._deltaY}>
           <View style={styles.content}>
             <Text style={styles.panelTitle}>San Francisco Airport</Text>
@@ -68,11 +83,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'stretch',
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   filterContainer: {
     backgroundColor: '#278485',
     paddingTop: 10
+  },
+  filterTop: {
+    height: 36
+  },
+  filterUp: {
+    marginLeft: 24,
+    width: 26,
+    height: 26
   },
   filterField: {
     height: 40,
@@ -116,7 +139,7 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: Screen.width-40,
-    height: 220,
+    height: 190,
     marginBottom: 20
   }
 });

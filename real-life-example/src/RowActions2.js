@@ -8,7 +8,7 @@ export default class RowActions1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      damping: 0.7,
+      damping: 1-0.7,
       tension: 300
     };
   }
@@ -50,8 +50,8 @@ export default class RowActions1 extends Component {
             key='damping'
             style={styles.slider}
             value={this.state.damping}
-            minimumValue={0.0}
-            maximumValue={1.0}
+            minimumValue={0.1}
+            maximumValue={0.6}
             onValueChange={(value) => this.setState({damping: value})}
           />
           <Text style={styles.playgroundLabel}>Change spring tension:</Text>
@@ -60,7 +60,7 @@ export default class RowActions1 extends Component {
             style={styles.slider}
             value={this.state.tension}
             minimumValue={0.0}
-            maximumValue={2000.0}
+            maximumValue={1000.0}
             onValueChange={(value) => this.setState({tension: value})}
           />
         </View>
@@ -130,9 +130,9 @@ class Row extends Component {
         <Interactable.View
           horizontalOnly={true}
           snapPoints={[
-            {x: 78, damping: this.props.damping, tension: this.props.tension},
-            {x: 0, damping: this.props.damping, tension: this.props.tension},
-            {x: -155, damping: this.props.damping, tension: this.props.tension}
+            {x: 78, damping: 1-this.props.damping, tension: this.props.tension},
+            {x: 0, damping: 1-this.props.damping, tension: this.props.tension},
+            {x: -155, damping: 1-this.props.damping, tension: this.props.tension}
           ]}
           animatedValueX={this._deltaX}>
           <View style={{left: 0, right: 0, height: 75, backgroundColor: 'white'}}>

@@ -21,7 +21,8 @@ export default class NotifPanel extends Component {
         <View style={styles.panelContainer}>
           <Interactable.View
             verticalOnly={true}
-            snapPoints={[{y: 0}, {y: -Screen.height + 80}]}
+            snapPoints={[{y: 0, tension: 0, damping: 1}, {y: -Screen.height + 80}]}
+            gravityPoints={[{y: 0, strength: 220, falloff: Screen.height*8, damping: 0.7, influenceArea: {top: (-Screen.height + 80) * 0.5}}]}
             initialPosition={{y: -Screen.height + 80}}
             boundaries={{bottom: 0, bounce: 2, haptics: true}}>
             <View style={styles.panel}>

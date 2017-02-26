@@ -22,6 +22,10 @@ export default class ChatHeads extends Component {
           <Animated.Image
             source={require('../img/chatheads-delete.png')}
             style={[styles.marker, {top: 200*heightFactor}, {
+              opacity: this._deltaY.interpolate({
+                inputRange: [-270*heightFactor, -10*heightFactor, 50*heightFactor],
+                outputRange: [0, 0, 1]
+              }),
               transform: [{
                 translateX: this._deltaX.interpolate({
                   inputRange: [-140*widthFactor, 140*widthFactor],
@@ -31,7 +35,7 @@ export default class ChatHeads extends Component {
               {
                 translateY: this._deltaY.interpolate({
                   inputRange: [-270*heightFactor, -30*heightFactor, 50*heightFactor, 270*heightFactor],
-                  outputRange: [280*heightFactor, 280*heightFactor, -10, 10]
+                  outputRange: [50*heightFactor, 50*heightFactor, -10, 10]
                 })
               }]
             }

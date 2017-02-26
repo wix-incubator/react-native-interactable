@@ -7,7 +7,8 @@ import {
   Image,
   Text
 } from 'react-native';
-import ChatHeads from './ChatHeads';
+
+import Documentation from './Documentation';
 import RowActions1 from './RowActions1';
 import RowActions2 from './RowActions2';
 import NowCard from './NowCard';
@@ -16,6 +17,7 @@ import NotifPanel from './NotifPanel';
 import MapPanel from './MapPanel';
 import CollapsibleFilter from './CollapsibleFilter';
 import CollapsibleCalendar from './CollapsibleCalendar';
+import ChatHeads from './ChatHeads';
 
 export default class example extends Component {
   constructor(props) {
@@ -49,6 +51,9 @@ export default class example extends Component {
     }
     return (
       <View style={styles.menuContainer}>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, Documentation)}>
+          <Text style={styles.button}>Documentation</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions1)}>
           <Text style={styles.button}>Row Actions (Google Style)</Text>
         </TouchableOpacity>

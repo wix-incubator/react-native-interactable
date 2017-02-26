@@ -13,6 +13,7 @@ import NowCard from './NowCard';
 import TinderCard from './TinderCard';
 import NotifPanel from './NotifPanel';
 import MapPanel from './MapPanel';
+import CollapsibleFilter from './CollapsibleFilter';
 
 export default class example extends Component {
   constructor(props) {
@@ -49,6 +50,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, MapPanel)}>
           <Text style={styles.button}>Map Panel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsibleFilter)}>
+          <Text style={styles.button}>Collapsible Filter</Text>
         </TouchableOpacity>
       </View>
     );

@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Animated, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Animated, TouchableOpacity, Slider, Dimensions } from 'react-native';
 import Interactable from 'react-native-interactable';
 
-export default class RowActions1 extends Component {
+const Screen = Dimensions.get('window');
 
+export default class RowActions1 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      damping: 0.7,
+      tension: 300
+    };
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Row>
+
+        <Row damping={this.state.damping} tension={this.state.tension}>
           <View style={styles.rowContent}>
             <View style={styles.rowIcon} />
             <View>
@@ -16,7 +25,7 @@ export default class RowActions1 extends Component {
             </View>
           </View>
         </Row>
-        <Row>
+        <Row damping={this.state.damping} tension={this.state.tension}>
           <View style={styles.rowContent}>
             <View style={styles.rowIcon} />
             <View>
@@ -25,7 +34,7 @@ export default class RowActions1 extends Component {
             </View>
           </View>
         </Row>
-        <Row>
+        <Row damping={this.state.damping} tension={this.state.tension}>
           <View style={styles.rowContent}>
             <View style={styles.rowIcon} />
             <View>
@@ -34,6 +43,28 @@ export default class RowActions1 extends Component {
             </View>
           </View>
         </Row>
+
+        <View style={styles.playground}>
+          <Text style={styles.playgroundLabel}>Change spring damping:</Text>
+          <Slider
+            key='damping'
+            style={styles.slider}
+            value={this.state.damping}
+            minimumValue={0.0}
+            maximumValue={1.0}
+            onValueChange={(value) => this.setState({damping: value})}
+          />
+          <Text style={styles.playgroundLabel}>Change spring tension:</Text>
+          <Slider
+            key='tension'
+            style={styles.slider}
+            value={this.state.tension}
+            minimumValue={0.0}
+            maximumValue={2000.0}
+            onValueChange={(value) => this.setState({tension: value})}
+          />
+        </View>
+
       </View>
     );
   }
@@ -104,7 +135,11 @@ class Row extends Component {
 
         <Interactable.View
           horizontalOnly={true}
-          snapPoints={[{x: 90}, {x: 0}, {x: -155}]}
+          snapPoints={[
+            {x: 90, damping: this.props.damping, tension: this.props.tension},
+            {x: 0, damping: this.props.damping, tension: this.props.tension},
+            {x: -155, damping: this.props.damping, tension: this.props.tension}
+          ]}
           animatedValueX={this._deltaX}>
           <View style={{left: 0, right: 0, height: 75, backgroundColor: 'white'}}>
             {this.props.children}
@@ -155,5 +190,22 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginLeft: 25
+  },
+  playground: {
+    marginTop: 80,
+    padding: 20,
+    width: Screen.width - 40,
+    backgroundColor: '#5894f3',
+    alignItems: 'stretch',
+    alignSelf: 'center'
+  },
+  playgroundLabel: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 15
+  },
+  slider: {
+    height: 40
   }
 });

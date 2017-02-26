@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Image, Text, Animated } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, Text, Animated, Slider } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = Dimensions.get('window');
@@ -8,6 +8,10 @@ export default class NowCard extends Component {
   constructor(props) {
     super(props);
     this._deltaX = new Animated.Value(0);
+    this.state = {
+      damping: 0.7,
+      tension: 300
+    };
   }
   render() {
     return (
@@ -17,7 +21,7 @@ export default class NowCard extends Component {
           horizontalOnly={true}
           snapPoints={[
             {x: 360},
-            {x: 0, damping: 0.7},
+            {x: 0, damping: this.state.damping, tension: this.state.tension},
             {x: -360}
           ]}
           animatedValueX={this._deltaX}>
@@ -33,6 +37,27 @@ export default class NowCard extends Component {
             <Text style={styles.body}>This is the card body, it can be long</Text>
           </Animated.View>
         </Interactable.View>
+
+        <View style={styles.playground}>
+          <Text style={styles.playgroundLabel}>Change spring damping:</Text>
+          <Slider
+            key='damping'
+            style={styles.slider}
+            value={this.state.damping}
+            minimumValue={0.0}
+            maximumValue={1.0}
+            onValueChange={(value) => this.setState({damping: value})}
+          />
+          <Text style={styles.playgroundLabel}>Change spring tension:</Text>
+          <Slider
+            key='tension'
+            style={styles.slider}
+            value={this.state.tension}
+            minimumValue={0.0}
+            maximumValue={2000.0}
+            onValueChange={(value) => this.setState({tension: value})}
+          />
+        </View>
 
       </View>
     );
@@ -79,5 +104,21 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginLeft: 15,
     color: '#7f7f7f'
+  },
+  playground: {
+    marginTop: 40,
+    padding: 20,
+    width: Screen.width - 40,
+    backgroundColor: '#5894f3',
+    alignItems: 'stretch'
+  },
+  playgroundLabel: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 15
+  },
+  slider: {
+    height: 40
   }
 });

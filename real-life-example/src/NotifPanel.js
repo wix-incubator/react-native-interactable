@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     right: 0
   },
   panel: {
-    height: Screen.height,
+    height: Screen.height + 2,
     backgroundColor: '#182e43f0',
     padding: 15,
     paddingTop: 30

@@ -79,7 +79,7 @@ class Row extends Component {
     return (
       <View style={{backgroundColor: '#ceced2'}}>
 
-        <View style={{position: 'absolute', left: 0, right: 0, height: 75}}>
+        <View style={{position: 'absolute', left: 0, right: 0, height: 75}} pointerEvents='box-none'>
           <Animated.View style={
             [styles.buttonHolder, {
               transform: [{
@@ -110,7 +110,7 @@ class Row extends Component {
           </Animated.View>
         </View>
 
-        <View style={{position: 'absolute', left: 0, right: 0, height: 75}}>
+        <View style={{position: 'absolute', left: 0, right: 0, height: 75}} pointerEvents='box-none'>
           <Animated.View style={
             [styles.buttonHolder, {
               transform: [{

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     zIndex: 1000
   },
   header: {
-    marginTop: 40,
+    marginTop: 15,
     height: 40,
     width: Screen.width,
     paddingLeft: 20

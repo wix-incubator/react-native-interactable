@@ -17,7 +17,7 @@ export default class NowCard extends Component {
           horizontalOnly={true}
           snapPoints={[
             {x: 360},
-            {x: 0, damping: 0.8},
+            {x: 0, damping: 0.7},
             {x: -360}
           ]}
           animatedValueX={this._deltaX}>

@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions, Image, Text, Animated } from 'react-native';
 import Interactable from 'react-native-interactable';
 
-const Screen = Dimensions.get('window');
+const Screen = {
+  width: Dimensions.get('window').width,
+  height: Dimensions.get('window').height - 75
+}
 
 export default class MapPanel extends Component {
   constructor(props) {
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: Screen.width-40,
-    height: 300,
+    height: 225,
     marginTop: 30
   },
   map: {

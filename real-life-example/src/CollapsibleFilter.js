@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Image, Text, Animated } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, Text, Animated, TouchableOpacity } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = Dimensions.get('window');
@@ -14,25 +14,31 @@ export default class CollapsibleFilter extends Component {
       <View style={styles.container}>
 
         <View style={styles.filterContainer}>
-          <View style={styles.filterField}>
-            <Text style={styles.filterFieldText}>Anywhere</Text>
-          </View>
-          <Animated.View style={[styles.filterField, {
-            opacity: this._deltaY.interpolate({
-              inputRange: [-70, -70, -50, -50],
-              outputRange: [0, 0, 1, 1]
-            })
-          }]}>
-            <Text style={styles.filterFieldText}>Anytime</Text>
-          </Animated.View>
-          <Animated.View style={[styles.filterField, {
-            opacity: this._deltaY.interpolate({
-              inputRange: [-20, -20, 0, 0],
-              outputRange: [0, 0, 1, 1]
-            })
-          }]}>
-            <Text style={styles.filterFieldText}>Anything</Text>
-          </Animated.View>
+          <TouchableOpacity onPress={() => alert('Anywhere pressed')}>
+            <View style={styles.filterField}>
+              <Text style={styles.filterFieldText}>Anywhere</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('Anytime pressed')}>
+            <Animated.View style={[styles.filterField, {
+              opacity: this._deltaY.interpolate({
+                inputRange: [-70, -70, -50, -50],
+                outputRange: [0, 0, 1, 1]
+              })
+            }]}>
+              <Text style={styles.filterFieldText}>Anytime</Text>
+            </Animated.View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('Anything pressed')}>
+            <Animated.View style={[styles.filterField, {
+              opacity: this._deltaY.interpolate({
+                inputRange: [-20, -20, 0, 0],
+                outputRange: [0, 0, 1, 1]
+              })
+            }]}>
+              <Text style={styles.filterFieldText}>Anything</Text>
+            </Animated.View>
+          </TouchableOpacity>
         </View>
 
         <Interactable.View
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     backgroundColor: '#278485',
-    paddingTop: 40
+    paddingTop: 10
   },
   filterField: {
     height: 40,
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: Screen.width-40,
-    height: 275,
+    height: 220,
     marginBottom: 20
   }
 });

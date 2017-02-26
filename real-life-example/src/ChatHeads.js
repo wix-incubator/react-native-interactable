@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Animated } from 'react-native';
+import { StyleSheet, View, Image, Animated, Dimensions } from 'react-native';
 import Interactable from 'react-native-interactable';
+
+const widthFactor = Dimensions.get('window').width / 375;
+const heightFactor = (Dimensions.get('window').height - 75) / 667;
+
+const showSecondFace = true;
 
 export default class ChatHeads extends Component {
   constructor(props) {
@@ -16,17 +21,17 @@ export default class ChatHeads extends Component {
         <View style={styles.frame}>
           <Animated.Image
             source={require('../img/chatheads-delete.png')}
-            style={[styles.marker, {top: 200}, {
+            style={[styles.marker, {top: 200*heightFactor}, {
               transform: [{
                 translateX: this._deltaX.interpolate({
-                  inputRange: [-140, 140],
+                  inputRange: [-140*widthFactor, 140*widthFactor],
                   outputRange: [-10, 10]
                 })
               },
               {
                 translateY: this._deltaY.interpolate({
-                  inputRange: [-270, -30, 50, 270],
-                  outputRange: [280, 280, -10, 10]
+                  inputRange: [-270*heightFactor, -30*heightFactor, 50*heightFactor, 270*heightFactor],
+                  outputRange: [280*heightFactor, 280*heightFactor, -10, 10]
                 })
               }]
             }
@@ -35,14 +40,14 @@ export default class ChatHeads extends Component {
         <View style={styles.frame} pointerEvents='box-none'>
           <Interactable.View
             snapPoints={[
-              {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -270}, {x: -140, y: 270},
-              {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -270}, {x:  140, y: 270}]}
+              {x: -140*widthFactor, y: 0}, {x: -140*widthFactor, y: -140*heightFactor}, {x: -140*widthFactor, y:  140*heightFactor}, {x: -140*widthFactor, y: -270*heightFactor}, {x: -140*widthFactor, y: 270*heightFactor},
+              {x:  140*widthFactor, y: 0}, {x:  140*widthFactor, y:  140*heightFactor}, {x:  140*widthFactor, y: -140*heightFactor}, {x:  140*widthFactor, y: -270*heightFactor}, {x:  140*widthFactor, y: 270*heightFactor}]}
             dragWithSpring={{tension: 2000, damping: 0.5}}
-            gravityPoints={[{x: 0, y: 200, strength: 8000, falloff: 40, damping: 0.5, haptics: true}]}
+            gravityPoints={[{x: 0, y: 200*heightFactor, strength: 8000, falloff: 40, damping: 0.5, haptics: true}]}
             onStop={(event) => this.onStopInteraction(event, this._face1Scale)}
             animatedValueX={this._deltaX}
             animatedValueY={this._deltaY}
-            initialPosition={{x: -140, y: -270}}>
+            initialPosition={{x: -140*widthFactor, y: -270*heightFactor}}>
             <Animated.View style={[styles.head, {
               transform: [{
                 scale: this._face1Scale
@@ -52,17 +57,19 @@ export default class ChatHeads extends Component {
             </Animated.View>
           </Interactable.View>
         </View>
+
+        {!showSecondFace ? false :
         <View style={styles.frame} pointerEvents='box-none'>
           <Interactable.View
             snapPoints={[
-              {x: -140, y: 20}, {x: -140, y: -120}, {x: -140, y:  160}, {x: -140, y: -250}, {x: -140, y: 290},
-              {x:  140, y: 20}, {x:  140, y:  160}, {x:  140, y: -120}, {x:  140, y: -250}, {x:  140, y: 290}]}
+              {x: -140*widthFactor, y: 20*heightFactor}, {x: -140*widthFactor, y: -120*heightFactor}, {x: -140*widthFactor, y:  160*heightFactor}, {x: -140*widthFactor, y: -250*heightFactor}, {x: -140*widthFactor, y: 290*heightFactor},
+              {x:  140*widthFactor, y: 20*heightFactor}, {x:  140*widthFactor, y:  160*heightFactor}, {x:  140*widthFactor, y: -120*heightFactor}, {x:  140*widthFactor, y: -250*heightFactor}, {x:  140*widthFactor, y: 290*heightFactor}]}
             dragWithSpring={{tension: 2000, damping: 0.5}}
-            gravityPoints={[{x: 0, y: 200, strength: 8000, falloff: 40, damping: 0.5, haptics: true}]}
+            gravityPoints={[{x: 0, y: 200*heightFactor, strength: 8000, falloff: 40, damping: 0.5, haptics: true}]}
             onStop={(event) => this.onStopInteraction(event, this._face2Scale)}
             animatedValueX={this._deltaX}
             animatedValueY={this._deltaY}
-            initialPosition={{x: 140, y: -250}}>
+            initialPosition={{x: 140*widthFactor, y: -250*heightFactor}}>
             <Animated.View style={[styles.head, {
               transform: [{
                 scale: this._face2Scale
@@ -72,13 +79,15 @@ export default class ChatHeads extends Component {
             </Animated.View>
           </Interactable.View>
         </View>
+      }
+
       </View>
     );
   }
   onStopInteraction(event, scaleValue) {
     const x = event.nativeEvent.x;
     const y = event.nativeEvent.y;
-    if (x > -10 && x < 10 && y < 210 && y > 190) {
+    if (x > -10 && x < 10 && y < 210*heightFactor && y > 190*heightFactor) {
       Animated.timing(scaleValue, {toValue: 0, duration: 300}).start();
     }
   }

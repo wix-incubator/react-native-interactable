@@ -14,6 +14,7 @@ import TinderCard from './TinderCard';
 import NotifPanel from './NotifPanel';
 import MapPanel from './MapPanel';
 import CollapsibleFilter from './CollapsibleFilter';
+import CollapsibleCalendar from './CollapsibleCalendar';
 
 export default class example extends Component {
   constructor(props) {
@@ -53,6 +54,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsibleFilter)}>
           <Text style={styles.button}>Collapsible Filter</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsibleCalendar)}>
+          <Text style={styles.button}>Collapsible Calendar</Text>
         </TouchableOpacity>
       </View>
     );

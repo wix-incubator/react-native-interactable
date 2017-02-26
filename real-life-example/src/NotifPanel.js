@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     height: Screen.height,
     backgroundColor: '#182e43f0',
     padding: 15,
-    paddingTop: 50
+    paddingTop: 30
   },
   contentTitle: {
     fontSize: 20,

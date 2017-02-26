@@ -11,6 +11,7 @@ import RowActions1 from './RowActions1';
 import RowActions2 from './RowActions2';
 import NowCard from './NowCard';
 import TinderCard from './TinderCard';
+import NotifPanel from './NotifPanel';
 
 export default class example extends Component {
   constructor(props) {
@@ -41,6 +42,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, TinderCard)}>
           <Text style={styles.button}>Tinder Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, NotifPanel)}>
+          <Text style={styles.button}>Notification Panel</Text>
         </TouchableOpacity>
       </View>
     );

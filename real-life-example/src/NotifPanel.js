@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Image, Text, Animated } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, Text } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = Dimensions.get('window');
 
 export default class NotifPanel extends Component {
-  constructor(props) {
-    super(props);
-    this._deltaX = new Animated.Value(0);
-  }
   render() {
     return (
       <View style={styles.container}>
@@ -23,7 +19,7 @@ export default class NotifPanel extends Component {
           <Interactable.View
             verticalOnly={true}
             snapPoints={[{y: 0}, {y: -Screen.height + 80}]}
-            initialPosition={{z: -Screen.height + 80}}
+            initialPosition={{y: -Screen.height + 80}}
             boundaries={{bottom: 0, bounce: 2, haptics: true}}>
             <View style={styles.panel}>
               <Text style={styles.panelHeader}>Today</Text>

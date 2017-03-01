@@ -1,33 +1,44 @@
 import React, { Component } from 'react';
 import { requireNativeComponent, Animated } from 'react-native';
 
-const NativeInteractableView = requireNativeComponent('InteractableView', null);
+// const NativeInteractableView = requireNativeComponent('InteractableView', null);
 
-/*
+
 // is this required in order to support native events?
 const NativeInteractableView = Animated.createAnimatedComponent(requireNativeComponent('InteractableView', null));
 
 // this is a good test to check if our events are native or not
-setInterval(() => {
-  for (let i=0; i<1e9; i++) {
-    let j = 4;
-  }
-}, 1000);
-*/
+
 
 export default class InteractableView extends Component {
   constructor(props) {
     super(props);
     if (this.props.animatedValueX || this.props.animatedValueY) {
       this._animatedEvent = Animated.event(
-        [{ nativeEvent: {
-          x: this.props.animatedValueX,
-          y: this.props.animatedValueY
-        }}],
-        // { useNativeDriver: true }
+        [{
+          nativeEvent: {
+            x: this.props.animatedValueX,
+            y: this.props.animatedValueY
+          }
+        }],
+        { useNativeDriver: true }
       );
     }
   }
+
+  componentWillMount() {
+    // this.chokeTheBridge();
+  }
+
+  chokeTheBridge() {
+    let j = 0;
+    setInterval(() => {
+      for (var index = 0; index < 1e9; index++) {
+        j++;
+      }
+    }, 500);
+  }
+
   render() {
     return (
       <NativeInteractableView

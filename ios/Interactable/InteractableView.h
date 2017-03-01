@@ -24,8 +24,8 @@
 @property (nonatomic, copy) InteractableArea *boundaries;
 @property (nonatomic, copy) InteractableSpring *dragWithSpring;
 @property (nonatomic, assign) CGFloat dragToss;
-@property (nonatomic, copy) RCTBubblingEventBlock onSnap;
-@property (nonatomic, copy) RCTBubblingEventBlock onStop;
+@property (nonatomic, copy) RCTDirectEventBlock onSnap;
+@property (nonatomic, copy) RCTDirectEventBlock onStop;
 @property (nonatomic, assign) CGPoint initialPosition;
 @property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
 

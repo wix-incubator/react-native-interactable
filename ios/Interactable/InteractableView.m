@@ -9,6 +9,79 @@
 #import "InteractableView.h"
 #import <React/UIView+React.h>
 #import <React/RCTRootView.h>
+#import <React/RCTEventDispatcher.h>
+
+@interface InteractableEvent : NSObject <RCTEvent>
+
+- (instancetype)initWithEventName:(NSString *)eventName
+                         reactTag:(NSNumber *)reactTag
+                 interactableView:(InteractableView *)interactableView
+                         userData:(NSDictionary *)userData
+                    coalescingKey:(uint16_t)coalescingKey NS_DESIGNATED_INITIALIZER;
+
+@end
+
+@implementation InteractableEvent
+{
+    InteractableView *_interactableView;
+    NSDictionary *_userData;
+    uint16_t _coalescingKey;
+}
+
+@synthesize viewTag = _viewTag;
+@synthesize eventName = _eventName;
+
+- (instancetype)initWithEventName:(NSString *)eventName
+                         reactTag:(NSNumber *)reactTag
+                 interactableView:(InteractableView *)interactableView
+                         userData:(NSDictionary *)userData
+                    coalescingKey:(uint16_t)coalescingKey
+{
+    if ((self = [super init])) {
+        _eventName = [eventName copy];
+        _viewTag = reactTag;
+        _interactableView = interactableView;
+        _userData = userData;
+        _coalescingKey = coalescingKey;
+    }
+    return self;
+}
+
+RCT_NOT_IMPLEMENTED(- (instancetype)init)
+
+- (uint16_t)coalescingKey
+{
+    return _coalescingKey;
+}
+
+- (NSDictionary *)body
+{
+    return _userData;
+}
+
+- (BOOL)canCoalesce
+{
+    return YES;
+}
+
+- (InteractableEvent *)coalesceWithEvent:(InteractableEvent *)newEvent
+{
+    newEvent->_userData = _userData;
+    
+    return newEvent;
+}
+
++ (NSString *)moduleDotMethod
+{
+    return @"RCTEventEmitter.receiveEvent";
+}
+
+- (NSArray *)arguments
+{
+    return @[self.viewTag, RCTNormalizeInputEventName(self.eventName), [self body]];
+}
+
+@end
 
 @interface InteractableView()
 @property (nonatomic, assign) BOOL originSet;
@@ -20,6 +93,10 @@
 @property (nonatomic, assign) BOOL initialPositionSet;
 @property (nonatomic, assign) BOOL reactRelayoutHappening;
 @property (nonatomic, assign) CGPoint reactRelayoutCenterDeltaFromOrigin;
+
+@property (nonatomic, assign) uint16_t coalescingKey;
+@property (nonatomic, assign) NSString* lastEmittedEventName;
+
 @end
 
 @implementation InteractableView
@@ -87,7 +164,7 @@
             if (center.y - self.origin.y > self.boundaries.bottom) center.y = self.boundaries.bottom + self.origin.y;
         }
     }
-  
+    
     [super setCenter:center];
     [self reportAnimatedEvent];
 }
@@ -120,10 +197,10 @@
         if (snapPoint)
         {
             self.onSnap(@
-            {
-                @"index": @([self.snapPoints indexOfObject:snapPoint]),
-                @"id": snapPoint.id
-            });
+                        {
+                            @"index": @([self.snapPoints indexOfObject:snapPoint]),
+                            @"id": snapPoint.id
+                        });
         }
     }
     
@@ -131,10 +208,10 @@
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
         self.onStop(@
-        {
-            @"x": @(deltaFromOrigin.x),
-            @"y": @(deltaFromOrigin.y)
-        });
+                    {
+                        @"x": @(deltaFromOrigin.x),
+                        @"y": @(deltaFromOrigin.y)
+                    });
     }
 }
 
@@ -143,11 +220,32 @@
     if (self.onAnimatedEvent && self.originSet)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
-        self.onAnimatedEvent(@
-        {
-            @"x": @(deltaFromOrigin.x),
-            @"y": @(deltaFromOrigin.y)
-        });
+        
+        
+        //        RCT_SEND_SCROLL_EVENT(onAnimatedEvent, (@{@"updatedChildFrames": childFrames}));
+        
+        if (![self.lastEmittedEventName isEqualToString:@"onAnimatedEvent"]) {
+            self.coalescingKey++;
+            self.lastEmittedEventName = @"onAnimatedEvent";
+        }
+        
+        InteractableEvent *event = [[InteractableEvent alloc] initWithEventName:@"onAnimatedEvent"
+                                                                       reactTag:self.reactTag
+                                                               interactableView:self
+                                                                       userData:@{ @"x": @(deltaFromOrigin.x),
+                                                                                   @"y": @(deltaFromOrigin.y)}
+                                                                  coalescingKey:self.coalescingKey];
+        
+        
+        RCTRootView* rootView = ((RCTRootView*)self.window.rootViewController.view);
+        [[[rootView bridge]eventDispatcher] sendEvent:event];
+        
+        
+        //        self.onAnimatedEvent(@
+        //                             {
+        //                                 @"x": @(deltaFromOrigin.x),
+        //                                 @"y": @(deltaFromOrigin.y)
+        //                             });
     }
 }
 
@@ -214,37 +312,37 @@
 }
 
 /*
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [[event allTouches] anyObject];
-    self.dragStartCenter = self.center;
-    self.dragStartLocation = [touch locationInView:self.superview];
-    
-    [self setTempBehaviorsForDragStart];
-}
-
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:self.superview];
-    CGFloat newCenterX = self.dragStartCenter.x + location.x - self.dragStartLocation.x;
-    CGFloat newCenterY = self.dragStartCenter.y + location.y - self.dragStartLocation.y;
-    
-    self.dragBehavior.anchorPoint = CGPointMake(newCenterX, newCenterY);
-    [self.animator ensureRunning];
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self setTempBehaviorsForDragEnd];
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self setTempBehaviorsForDragEnd];
-}
-*/
+ - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+ {
+ UITouch *touch = [[event allTouches] anyObject];
+ self.dragStartCenter = self.center;
+ self.dragStartLocation = [touch locationInView:self.superview];
  
+ [self setTempBehaviorsForDragStart];
+ }
+ 
+ - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+ {
+ UITouch *touch = [[event allTouches] anyObject];
+ CGPoint location = [touch locationInView:self.superview];
+ CGFloat newCenterX = self.dragStartCenter.x + location.x - self.dragStartLocation.x;
+ CGFloat newCenterY = self.dragStartCenter.y + location.y - self.dragStartLocation.y;
+ 
+ self.dragBehavior.anchorPoint = CGPointMake(newCenterX, newCenterY);
+ [self.animator ensureRunning];
+ }
+ 
+ - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+ {
+ [self setTempBehaviorsForDragEnd];
+ }
+ 
+ - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+ {
+ [self setTempBehaviorsForDragEnd];
+ }
+ */
+
 - (void)setTempBehaviorsForDragStart
 {
     [self.animator removeTempBehaviors];
@@ -407,3 +505,5 @@
 }
 
 @end
+
+

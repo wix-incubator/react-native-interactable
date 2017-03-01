@@ -5,42 +5,32 @@ The [demo app](real-life-example) contains several demonstrations that draw insp
 These are the great apps that inspired the demonstrations:
 
 * **Row Actions (Google Style)**
-
-[Inbox by Gmail](https://itunes.apple.com/us/app/inbox-by-gmail/id905060486?mt=8) app by Google Inc.
+<br>[Inbox by Gmail](https://itunes.apple.com/us/app/inbox-by-gmail/id905060486?mt=8) app by Google Inc.
 
 * **Row Actions (Apple Style)**
-
-The official iOS Mail app by Apple
+<br>The official iOS Mail app by Apple
 
 * **Google Now-Style Card**
-
-[Google Now](https://itunes.apple.com/us/app/google-search-made-just-for-mobile/id284815942?mt=8) app by Google Inc.
+<br>[Google Now](https://itunes.apple.com/us/app/google-search-made-just-for-mobile/id284815942?mt=8) app by Google Inc.
 
 * **Tinder-Style Card**
-
-[Flic](https://itunes.apple.com/us/app/flic-delete-manage-camera-roll-easily-delete-photos/id918263212?mt=8) app by Lifehack Labs
-
-[Tinder](https://itunes.apple.com/us/app/tinder/id547702041?mt=8) app by Tinder Inc.
+<br>[Flic](https://itunes.apple.com/us/app/flic-delete-manage-camera-roll-easily-delete-photos/id918263212?mt=8) app by Lifehack Labs
+<br>[Tinder](https://itunes.apple.com/us/app/tinder/id547702041?mt=8) app by Tinder Inc.
 
 * **Notification Panel**
-
-The official iOS top notification panel by Apple
+<br>The official iOS top notification panel by Apple
 
 * **Apple Maps-Style Panel**
-
-The official iOS Maps app by Apple
+<br>The official iOS Maps app by Apple
 
 * **Collapsible Filter**
-
-[Airbnb](https://itunes.apple.com/us/app/airbnb/id401626263?mt=8) app by Airbnb Inc.
+<br>[Airbnb](https://itunes.apple.com/us/app/airbnb/id401626263?mt=8) app by Airbnb Inc.
 
 * **Collapsible Calendar (Any.do-Style)**
-
-[Cal](https://itunes.apple.com/us/app/cal-shared-calendar-daily-organizer-weekly-planner/id648287824?mt=8) app by Any.DO
+<br>[Cal](https://itunes.apple.com/us/app/cal-shared-calendar-daily-organizer-weekly-planner/id648287824?mt=8) app by Any.DO
 
 * **Chat Heads**
-
-[Messenger](https://play.google.com/store/apps/details?id=com.facebook.orca&hl=en) app by Facebook
+<br>[Messenger](https://play.google.com/store/apps/details?id=com.facebook.orca&hl=en) app by Facebook
 
 ### Disclaimer
 

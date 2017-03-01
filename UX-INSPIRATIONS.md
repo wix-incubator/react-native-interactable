@@ -1,6 +1,6 @@
 # UX Inspirations
 
-The [demo app](real-life-example) contains several demonstrations that draw inspiration from beautiful real life apps that we really like. The purpose of the demo app is to learn from these use-cases and see how they could have been implemented with this library.
+The [showcase app](real-life-example) contains several demonstrations that draw inspiration from beautiful real life apps that we really like. The purpose of the showcase app is to learn from these use-cases and see how they could have been implemented with this library.
 
 These are the great apps that inspired the demonstrations:
 
@@ -34,4 +34,4 @@ These are the great apps that inspired the demonstrations:
 
 ### Disclaimer
 
-The demo app is an independent learning project and has not been authorized, sponsored, or otherwise approved by the creators of the inspiring apps listed above.
+The showcase app is an independent learning project and has not been authorized, sponsored, or otherwise approved by the creators of the inspiring apps listed above.

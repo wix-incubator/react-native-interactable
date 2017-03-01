@@ -27,7 +27,9 @@ export default class CollapsibleFilter extends Component {
               outputRange: [0, 0, 1, 1]
             })
           }]}>
-            <Image style={styles.filterUp} source={require('../img/icon-up.png')} />
+            <TouchableOpacity onPress={() => alert('Tip: drag content up to see the filter collapse')}>
+              <Image style={styles.filterUp} source={require('../img/icon-up.png')} />
+            </TouchableOpacity>
           </Animated.View>
           <TouchableOpacity onPress={() => alert('Anywhere pressed')}>
             <View style={styles.filterField}>
@@ -59,7 +61,7 @@ export default class CollapsibleFilter extends Component {
         <Interactable.View
           verticalOnly={true}
           snapPoints={[{y: 0}, {y: -130}]}
-          boundaries={{top: -160}}
+          boundaries={{top: -200}}
           animatedValueY={this._deltaY}>
           <View style={styles.content}>
             <Text style={styles.panelTitle}>San Francisco Airport</Text>

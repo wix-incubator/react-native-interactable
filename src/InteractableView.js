@@ -30,6 +30,7 @@ export default class InteractableView extends Component {
     // this.chokeTheBridge();
   }
 
+  // this helps us verify that useNativeDriver actually works and we don't rely on the bridge
   chokeTheBridge() {
     let j = 0;
     setInterval(() => {

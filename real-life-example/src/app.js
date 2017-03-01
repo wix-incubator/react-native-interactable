@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 
 import Documentation from './Documentation';
@@ -18,6 +19,7 @@ import MapPanel from './MapPanel';
 import CollapsibleFilter from './CollapsibleFilter';
 import CollapsibleCalendar from './CollapsibleCalendar';
 import ChatHeads from './ChatHeads';
+import UxInspirations from './UxInspirations';
 
 export default class example extends Component {
   constructor(props) {
@@ -50,9 +52,9 @@ export default class example extends Component {
       return <ExampleComponent />;
     }
     return (
-      <View style={styles.menuContainer}>
+      <ScrollView style={styles.menuContainer}>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, Documentation)}>
-          <Text style={styles.button}>Documentation</Text>
+          <Text style={styles.button2}>Documentation</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions1)}>
           <Text style={styles.button}>Row Actions (Google Style)</Text>
@@ -76,12 +78,15 @@ export default class example extends Component {
           <Text style={styles.button}>Collapsible Filter</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsibleCalendar)}>
-          <Text style={styles.button}>Collapsible Calendar</Text>
+          <Text style={styles.button}>Collapsible Calendar (Any.do-Style)</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, ChatHeads)}>
           <Text style={styles.button}>Chat Heads</Text>
         </TouchableOpacity>
-      </View>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, UxInspirations)}>
+          <Text style={styles.button2}>UX Inspirations</Text>
+        </TouchableOpacity>
+      </ScrollView>
     );
   }
   onExamplePress(currentExample) {
@@ -127,6 +132,11 @@ const styles = StyleSheet.create({
   },
   button: {
     color: '#e0e0e0',
+    fontSize: 20,
+    marginBottom: 24
+  },
+  button2: {
+    color: '#F09B95',
     fontSize: 20,
     marginBottom: 24
   }

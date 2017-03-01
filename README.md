@@ -6,6 +6,11 @@
 # Interactable
 > react-native-interactable
 
+* [Installation](#installation)
+* [Example](#example)
+* [Usage](#usage)
+* [Implementation Details](#implementation-details)
+
 This is an experimental implementation of a declarative API for handling fluid user interactions with views at 60 FPS in React Native. Here are some example use-cases for views that users can interact with:
 
 * **Swipeable card** (a la Google Now) springing into place unless swiped away with enough force
@@ -39,8 +44,11 @@ ios/Interactable.xcodeproj
 
 ## Example
 
-To see the library in action, run the [example](example) project - it has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. 
+To see the library in action you have several options:
 
+#### 1. Build and run the example project on your computer
+
+The [example](example) project has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. It's simplistic but easy to learn from.
 
 **Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.**
 
@@ -48,6 +56,26 @@ To run the example, clone the repo and run from the root folder:
 
 ```
 cd example
+npm install
+react-native run-ios
+```
+
+#### 2. Install and run the demo app from the App Store on your phone
+
+<img src="http://i.imgur.com/HmsxxSL.gif" width=200 />
+
+Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)
+
+#### 3. Build and run the demo app on your computer
+
+The [demo app](real-life-example) contains more complex demonstrations. It's harder to learn from them, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo.
+
+**Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.**
+
+To run the demo app, clone the repo and run from the root folder:
+
+```
+cd real-life-example
 npm install
 react-native run-ios
 ```
@@ -201,7 +229,6 @@ At some point, UIKit Dynamics was dropped in favor of a home-brewed physics impl
 
 ## Roadmap
 
-* Enable `useNativeDriver` in `Animated.event` to make `Animated.Value` updates to be fully native
 * Add support for automatic installation with `react-native link`
 
 ## Contributing

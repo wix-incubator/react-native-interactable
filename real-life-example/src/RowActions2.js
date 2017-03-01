@@ -21,7 +21,7 @@ export default class RowActions1 extends Component {
             <View style={styles.rowIcon} />
             <View>
               <Text style={styles.rowTitle}>Row Title</Text>
-              <Text style={styles.rowSubtitle}>This is the row subtitle</Text>
+              <Text style={styles.rowSubtitle}>Drag the row left and right</Text>
             </View>
           </View>
         </Row>
@@ -30,7 +30,7 @@ export default class RowActions1 extends Component {
             <View style={styles.rowIcon} />
             <View>
               <Text style={styles.rowTitle}>Another Row</Text>
-              <Text style={styles.rowSubtitle}>This is the 2nd row subtitle</Text>
+              <Text style={styles.rowSubtitle}>You can drag this row too</Text>
             </View>
           </View>
         </Row>
@@ -39,7 +39,7 @@ export default class RowActions1 extends Component {
             <View style={styles.rowIcon} />
             <View>
               <Text style={styles.rowTitle}>And A Third</Text>
-              <Text style={styles.rowSubtitle}>This is the 3rd row subtitle</Text>
+              <Text style={styles.rowSubtitle}>This row can also be swiped</Text>
             </View>
           </View>
         </Row>

@@ -29,7 +29,7 @@ export default class MapPanel extends Component {
           <Interactable.View
             verticalOnly={true}
             snapPoints={[{y: 40}, {y: Screen.height-300}, {y: Screen.height-100}]}
-            boundaries={{top: -100}}
+            boundaries={{top: -300}}
             initialPosition={{y: Screen.height-100}}
             animatedValueY={this._deltaY}>
             <View style={styles.panel}>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     right: 0
   },
   panel: {
-    height: Screen.height + 100,
+    height: Screen.height + 300,
     padding: 20,
     backgroundColor: '#f7f5eee8',
     borderTopLeftRadius: 20,

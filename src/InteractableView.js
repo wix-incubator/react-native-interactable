@@ -3,12 +3,8 @@ import { requireNativeComponent, Animated } from 'react-native';
 
 // const NativeInteractableView = requireNativeComponent('InteractableView', null);
 
-
-// is this required in order to support native events?
+// this is required in order to support native events
 const NativeInteractableView = Animated.createAnimatedComponent(requireNativeComponent('InteractableView', null));
-
-// this is a good test to check if our events are native or not
-
 
 export default class InteractableView extends Component {
   constructor(props) {
@@ -21,7 +17,7 @@ export default class InteractableView extends Component {
             y: this.props.animatedValueY
           }
         }],
-        { useNativeDriver: false }
+        { useNativeDriver: !!this.props.animatedNativeDriver }
       );
     }
   }

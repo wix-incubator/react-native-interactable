@@ -28,6 +28,10 @@ Modern animation libraries for React Native, like [Animated](https://facebook.gi
 
 Fluid user interactions take this a step further than animations. Interactions require UI to continuously react to the user's gestures. This library is designed to support complex physical interactions with ease, using a full-fledged physics engine to drive the interaction on the native side.
 
+### Why is it named interactable?
+
+First off, we are aware that *interactable* isn't a real word. The correct form is *interactive* but this has connotation that isn't necessarily related to physical interactions. Similar to `Animated.View`, we wanted have `Interactable.View`, meaning an view you can interact with. And hey, [Unity](https://docs.unity3d.com/ScriptReference/UI.Selectable-interactable.html) did it too.
+
 ## Installation
 
 * Install the library from npm

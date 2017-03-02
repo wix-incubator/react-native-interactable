@@ -60,8 +60,8 @@ public class RNConvert {
     }
 
     public static PointF pointF(ReadableMap params) {
-        int x = (int) PixelUtil.toPixelFromDIP(params.hasKey("x") ? params.getInt("x") : 0);
-        int y = (int) PixelUtil.toPixelFromDIP(params.hasKey("y") ? params.getInt("y") : 0);
+        int x = (int) PixelUtil.toPixelFromDIP(params.hasKey("x") ? params.getDouble("x") : 0);
+        int y = (int) PixelUtil.toPixelFromDIP(params.hasKey("y") ? params.getDouble("y") : 0);
 
         return new PointF(x, y);
     }

@@ -11,6 +11,7 @@
 * [Usage](#usage)
 * [Implementation Details](#implementation-details)
 
+<br>
 This is an experimental implementation of a declarative API for handling fluid user interactions with views at 60 FPS in React Native. Here are some example use-cases for views that users can interact with:
 
 * **Swipeable card** (a la Google Now) springing into place unless swiped away with enough force
@@ -32,6 +33,7 @@ Fluid user interactions take this a step further than animations. Interactions r
 
 First off, we are aware that *interactable* isn't a real word. The correct form is *interactive* but this has connotation that isn't necessarily related to physical interactions. Similar to `Animated.View`, we wanted to have `Interactable.View` - meaning a view you can interact with. And hey, [Unity](https://docs.unity3d.com/ScriptReference/UI.Selectable-interactable.html) did it too.
 
+<br>
 ## Installation
 
 * Install the library from npm
@@ -46,6 +48,7 @@ npm install react-native-interactable --save
 ios/Interactable.xcodeproj
 ```
 
+<br>
 ## Example
 
 To see the library in action you have several options:
@@ -78,6 +81,7 @@ To run the demo app, clone the repo and run from the root folder:
   react-native run-ios
 ```
 
+<br>
 ## Usage
 
 The core of this library is the `Interactable.View` component, used to wrap views you want to interact with:
@@ -219,15 +223,12 @@ this._deltaY = new Animated.Value(0);
 </Interactable.View>
 ```
 
+<br>
 ## Implementation Details
 
 Originally, the iOS implementation relied on [UIKit Dynamics](https://developer.apple.com/reference/uikit/uidynamicanimator) - a powerful native animation engine for physical interactions. A physics engine is required in order to make the interaction life-like. Consider the action of tossing a view connected via a spring to a snap point. A simple native [spring animation](https://developer.apple.com/reference/uikit/uiview/1622594-animatewithduration) will not be enough to take the initial velocity vector into account.
 
 At some point, UIKit Dynamics was dropped in favor of a home-brewed physics implementation in order to provide more control over the behaviors. This also paved the way for the Android port since there's no parallel to UIKit Dynamics for Android. The home-brewed physics engine was straightforward to port from Objective-C to Java and is now part of this library.
-
-## Roadmap
-
-* Add support for automatic installation with `react-native link`
 
 ## Contributing
 

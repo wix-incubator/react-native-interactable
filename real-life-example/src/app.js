@@ -28,6 +28,7 @@ export default class example extends Component {
       currentExample: undefined
     }
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -46,11 +47,13 @@ export default class example extends Component {
       </View>
     );
   }
+
   renderContent() {
     if (this.state.currentExample) {
       const ExampleComponent = this.state.currentExample;
       return <ExampleComponent />;
     }
+
     return (
       <ScrollView style={styles.menuContainer}>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, Documentation)}>
@@ -89,9 +92,11 @@ export default class example extends Component {
       </ScrollView>
     );
   }
+
   onExamplePress(currentExample) {
     this.setState({currentExample});
   }
+
   onMenuPress() {
     this.setState({currentExample: undefined});
   }
@@ -113,7 +118,8 @@ const styles = StyleSheet.create({
     zIndex: 1001
   },
   body: {
-    flex: 1
+    flex: 1,
+    zIndex: 1000
   },
   menuContainer: {
     flex: 1,

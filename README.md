@@ -30,7 +30,7 @@ Fluid user interactions take this a step further than animations. Interactions r
 
 ### Why is it named interactable?
 
-First off, we are aware that *interactable* isn't a real word. The correct form is *interactive* but this has connotation that isn't necessarily related to physical interactions. Similar to `Animated.View`, we wanted have `Interactable.View`, meaning an view you can interact with. And hey, [Unity](https://docs.unity3d.com/ScriptReference/UI.Selectable-interactable.html) did it too.
+First off, we are aware that *interactable* isn't a real word. The correct form is *interactive* but this has connotation that isn't necessarily related to physical interactions. Similar to `Animated.View`, we wanted to have `Interactable.View` - meaning a view you can interact with. And hey, [Unity](https://docs.unity3d.com/ScriptReference/UI.Selectable-interactable.html) did it too.
 
 ## Installation
 

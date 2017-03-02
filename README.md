@@ -46,38 +46,34 @@ ios/Interactable.xcodeproj
 
 To see the library in action you have several options:
 
-#### 1. Build and run the example project on your computer
-
-The [example](example) project has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. It's simplistic but easy to learn from.
-
-**Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.**
-
-To run the example, clone the repo and run from the root folder:
-
+* **Build and run the example project on your computer**
+<br><br>The [example](example) project has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. It's simplistic but easy to learn from.
+<br><br>*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
+<br><br>
+To run the example, clone the repo and run from the root folder:<br>
 ```
-cd example
-npm install
-react-native run-ios
+  cd example
+  npm install
+  react-native run-ios
 ```
 
-#### 2. Install and run the demo app from the App Store on your phone
+* **Install and run the demo app from the App Store on your phone**
 
-<img src="http://i.imgur.com/HmsxxSL.gif" width=200 />
+<img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="http://i.imgur.com/O7ulJa1.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="http://i.imgur.com/2mrUNIM.gif" width=200 />
 
-Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)
+  Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)
 
-#### 3. Build and run the demo app on your computer
-
-The [demo app](real-life-example) contains more complex demonstrations. It's harder to learn from them, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo.
-
-**Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.**
-
+* **Build and run the demo app on your computer**
+<br><br>The [demo app](real-life-example) contains more complex demonstrations. It's harder to learn from them, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo.
+<br><br>*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
+<br><br>
 To run the demo app, clone the repo and run from the root folder:
-
 ```
-cd real-life-example
-npm install
-react-native run-ios
+  cd real-life-example
+  npm install
+  react-native run-ios
 ```
 
 ## Usage

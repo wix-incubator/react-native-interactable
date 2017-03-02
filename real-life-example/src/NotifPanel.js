@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Image, Text } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, Text, Platform } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = {
@@ -24,7 +24,7 @@ export default class NotifPanel extends Component {
             snapPoints={[{y: 0, tension: 0, damping: 1}, {y: -Screen.height + 80}]}
             gravityPoints={[{y: 0, strength: 220, falloff: Screen.height*8, damping: 0.7, influenceArea: {top: (-Screen.height + 80) * 0.5}}]}
             initialPosition={{y: -Screen.height + 80}}
-            boundaries={{bottom: 0, bounce: 2, haptics: true}}>
+            boundaries={{top: -Screen.height, bottom: 0, bounce: 2, haptics: true}}>
             <View style={styles.panel}>
               <Text style={styles.panelHeader}>Today</Text>
               <Notification title='First Notification' body='This is the body of the first notification' />
@@ -32,9 +32,10 @@ export default class NotifPanel extends Component {
               <Notification title='Third Notification' body='This is the body of the 3rd notification' />
               <Text style={styles.panelHeader}>Yesterday</Text>
               <Notification title='Fourth Notification' body='This is the body of the 4th notification' />
-              <View style={styles.panelFooter}>
+              <View style={(Platform.OS === 'android') ? styles.panelFooterAndroid : styles.panelFooterIos }>
                 <Text style={styles.panelFooterText}>4 NOTIFICATIONS</Text>
                 <View style={styles.panelHandle} />
+
               </View>
             </View>
           </Interactable.View>
@@ -76,7 +77,8 @@ const styles = StyleSheet.create({
     height: Screen.height + 2,
     backgroundColor: '#182e43f0',
     padding: 15,
-    paddingTop: 30
+    paddingTop: 30,
+    flexDirection: 'column'
   },
   contentTitle: {
     fontSize: 20,
@@ -96,12 +98,19 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 15,
     marginBottom: 10,
-    marginLeft: 10
+    marginLeft: 10,
+    justifyContent: 'flex-start'
   },
-  panelFooter: {
+  panelFooterIos: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end'
+  },
+  panelFooterAndroid: {
+    flex: 1,
+    paddingTop: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   panelFooterText: {
     fontSize: 13,

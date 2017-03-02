@@ -167,6 +167,14 @@ animatedValueY={this._deltaY}
 
 [`Animated.Value`](https://facebook.github.io/react-native/docs/animated.html#animatedvalue) that will contain the delta from the center as the view moves (y axis). See [this](README.md#animating-other-views-according-to-interactableview-position) for more details on how to animate other views according to the movement of this view.
 
+#### `animatedNativeDriver` (boolean)
+
+```jsx
+animatedNativeDriver={false}
+```
+
+Whether integration with [Animated](https://facebook.github.io/react-native/docs/animated.html) should use native driver. Default `false` since Animated native driver is still a bit experimental.
+
 #### `initialPosition` (point)
 
 ```jsx

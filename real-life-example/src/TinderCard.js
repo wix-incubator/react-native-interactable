@@ -34,8 +34,10 @@ export default class TinderCard extends Component {
 
             <Animated.View style={[styles.overlay, {backgroundColor: '#de6d77'}, {
               opacity: this._deltaX.interpolate({
-                inputRange: [-120, -120, 0, 0],
-                outputRange: [0.8, 0.8, 0, 0]
+                inputRange: [-120, 0],
+                outputRange: [0.8, 0],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
               })
             }]}>
               <Text style={styles.overlayText}>Trash</Text>
@@ -43,8 +45,10 @@ export default class TinderCard extends Component {
 
             <Animated.View style={[styles.overlay, {backgroundColor: '#2f9a5d'}, {
               opacity: this._deltaX.interpolate({
-                inputRange: [0, 0, 120, 120],
-                outputRange: [0, 0, 0.8, 0.8]
+                inputRange: [0, 120],
+                outputRange: [0, 0.8],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
               })
             }]}>
               <Text style={styles.overlayText}>Keep</Text>

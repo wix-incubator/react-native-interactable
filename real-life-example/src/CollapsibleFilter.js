@@ -16,15 +16,18 @@ export default class CollapsibleFilter extends Component {
         <Animated.View style={[styles.filterContainer, {
           transform: [{
             translateY: this._deltaY.interpolate({
-              inputRange: [-130, -50, -50],
-              outputRange: [-33, 0, 0]
+              inputRange: [-130, -50],
+              outputRange: [-33, 0],
+              extrapolateRight: 'clamp'
             })
           }]
         }]}>
           <Animated.View style={[styles.filterTop, {
             opacity: this._deltaY.interpolate({
-              inputRange: [-90, -90, -20, -20],
-              outputRange: [0, 0, 1, 1]
+              inputRange: [-90, -20],
+              outputRange: [0, 1],
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp'
             })
           }]}>
             <TouchableOpacity onPress={() => alert('Tip: drag content up to see the filter collapse')}>
@@ -39,8 +42,10 @@ export default class CollapsibleFilter extends Component {
           <TouchableOpacity onPress={() => alert('Anytime pressed')}>
             <Animated.View style={[styles.filterField, {
               opacity: this._deltaY.interpolate({
-                inputRange: [-70, -70, -50, -50],
-                outputRange: [0, 0, 1, 1]
+                inputRange: [-70, -50],
+                outputRange: [0, 1],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
               })
             }]}>
               <Text style={styles.filterFieldText}>Anytime</Text>
@@ -49,8 +54,10 @@ export default class CollapsibleFilter extends Component {
           <TouchableOpacity onPress={() => alert('Anything pressed')}>
             <Animated.View style={[styles.filterField, {
               opacity: this._deltaY.interpolate({
-                inputRange: [-20, -20, 0, 0],
-                outputRange: [0, 0, 1, 1]
+                inputRange: [-20, 0],
+                outputRange: [0, 1],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
               })
             }]}>
               <Text style={styles.filterFieldText}>Anything</Text>

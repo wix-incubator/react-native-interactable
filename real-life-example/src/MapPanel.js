@@ -10,7 +10,7 @@ const Screen = {
 export default class MapPanel extends Component {
   constructor(props) {
     super(props);
-    this._deltaY = new Animated.Value(0);
+    this._deltaY = new Animated.Value(Screen.height-100);
   }
   render() {
     return (
@@ -22,8 +22,9 @@ export default class MapPanel extends Component {
           <Animated.View style={[styles.panelContainer, {
             backgroundColor: 'black',
             opacity: this._deltaY.interpolate({
-              inputRange: [0, 0, Screen.height-100, Screen.height-100],
-              outputRange: [0.5, 0.5, 0, 0]
+              inputRange: [0, Screen.height-100],
+              outputRange: [0.5, 0],
+              extrapolateRight: 'clamp'
             })
           }]} />
           <Interactable.View

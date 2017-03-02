@@ -84,13 +84,17 @@ class Row extends Component {
             <Animated.Image source={require('../img/icon-trash.png')} style={
               [styles.buttonRight, {
                 opacity: this._deltaX.interpolate({
-                  inputRange: [-155, -155, -115, -115],
-                  outputRange: [1, 1, 0, 0]
+                  inputRange: [-155, -115],
+                  outputRange: [1, 0],
+                  extrapolateLeft: 'clamp',
+                  extrapolateRight: 'clamp'
                 }),
                 transform: [{
                   scale: this._deltaX.interpolate({
-                    inputRange: [-155, -155, -115, -115],
-                    outputRange: [1, 1, 0.7, 0.7]
+                    inputRange: [-155, -115],
+                    outputRange: [1, 0.7],
+                    extrapolateLeft: 'clamp',
+                    extrapolateRight: 'clamp'
                   })
                 }]
               }
@@ -100,13 +104,17 @@ class Row extends Component {
             <Animated.Image source={require('../img/icon-clock.png')} style={
               [styles.buttonRight, {
                 opacity: this._deltaX.interpolate({
-                  inputRange: [-90, -90, -50, -50],
-                  outputRange: [1, 1, 0, 0]
+                  inputRange: [-90, -50],
+                  outputRange: [1, 0],
+                  extrapolateLeft: 'clamp',
+                  extrapolateRight: 'clamp'
                 }),
                 transform: [{
                   scale: this._deltaX.interpolate({
-                    inputRange: [-90, -90, -50, -50],
-                    outputRange: [1, 1, 0.7, 0.7]
+                    inputRange: [-90, -50],
+                    outputRange: [1, 0.7],
+                    extrapolateLeft: 'clamp',
+                    extrapolateRight: 'clamp'
                   })
                 }]
               }
@@ -119,13 +127,17 @@ class Row extends Component {
             <Animated.Image source={require('../img/icon-check.png')} style={
               [styles.buttonLeft, {
                 opacity: this._deltaX.interpolate({
-                  inputRange: [50, 50, 90, 90],
-                  outputRange: [0, 0, 1, 1]
+                  inputRange: [50, 90],
+                  outputRange: [0, 1],
+                  extrapolateLeft: 'clamp',
+                  extrapolateRight: 'clamp'
                 }),
                 transform: [{
                   scale: this._deltaX.interpolate({
-                    inputRange: [50, 50, 90, 90],
-                    outputRange: [0.7, 0.7, 1, 1]
+                    inputRange: [50, 90],
+                    outputRange: [0.7, 1],
+                    extrapolateLeft: 'clamp',
+                    extrapolateRight: 'clamp'
                   })
                 }]
               }

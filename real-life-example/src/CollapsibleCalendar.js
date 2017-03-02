@@ -22,7 +22,9 @@ export default class CollapsibleFilter extends Component {
             <Animated.Text style={[styles.month, {
               opacity: this._deltaY.interpolate({
                 inputRange: [-Calendar.height*0.84, 0],
-                outputRange: [0, 1]
+                outputRange: [0, 1],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
               }),
               transform: [{
                 translateY: this._deltaY.interpolate({
@@ -34,7 +36,9 @@ export default class CollapsibleFilter extends Component {
             <Animated.Text style={[styles.month, {
               opacity: this._deltaY.interpolate({
                 inputRange: [-Calendar.height*0.84, 0],
-                outputRange: [1, 0]
+                outputRange: [1, 0],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
               }),
               transform: [{
                 translateY: this._deltaY.interpolate({

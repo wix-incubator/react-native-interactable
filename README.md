@@ -181,6 +181,12 @@ animatedValueX={this._deltaX}
 animatedValueY={this._deltaY}
 ```
 
+* [`animatedNativeDriver`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#animatednativedriver-boolean) - whether integration with [Animated](https://facebook.github.io/react-native/docs/animated.html) should use native driver
+
+```jsx
+animatedNativeDriver={false}
+```
+
 * [`initialPosition`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#initialposition-point) - used to initialize the view's position to a position different than it's original center
 
 ```jsx

@@ -27,8 +27,10 @@ export default class NowCard extends Component {
           animatedValueX={this._deltaX}>
           <Animated.View style={[styles.card, {
             opacity: this._deltaX.interpolate({
-              inputRange: [-300, -300, 0, 300, 300],
-              outputRange: [0, 0, 1, 0, 0]
+              inputRange: [-300, 0, 300],
+              outputRange: [0, 1, 0],
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp'
             })
           }]}>
             <Text style={styles.header}>Info for you</Text>

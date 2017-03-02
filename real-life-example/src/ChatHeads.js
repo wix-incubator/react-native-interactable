@@ -23,8 +23,10 @@ export default class ChatHeads extends Component {
             source={require('../img/chatheads-delete.png')}
             style={[styles.marker, {top: 200*heightFactor}, {
               opacity: this._deltaY.interpolate({
-                inputRange: [-270*heightFactor, -10*heightFactor, 50*heightFactor],
-                outputRange: [0, 0, 1]
+                inputRange: [-10*heightFactor, 50*heightFactor],
+                outputRange: [0, 1],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
               }),
               transform: [{
                 translateX: this._deltaX.interpolate({
@@ -34,8 +36,9 @@ export default class ChatHeads extends Component {
               },
               {
                 translateY: this._deltaY.interpolate({
-                  inputRange: [-270*heightFactor, -30*heightFactor, 50*heightFactor, 270*heightFactor],
-                  outputRange: [50*heightFactor, 50*heightFactor, -10, 10]
+                  inputRange: [-30*heightFactor, 50*heightFactor, 270*heightFactor],
+                  outputRange: [50*heightFactor, -10, 10],
+                  extrapolateLeft: 'clamp'
                 })
               }]
             }

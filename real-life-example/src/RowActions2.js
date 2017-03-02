@@ -81,7 +81,7 @@ class Row extends Component {
 
         <View style={{position: 'absolute', left: 0, right: 0, height: 75}} pointerEvents='box-none'>
           <Animated.View style={
-            [styles.buttonHolder, {
+            [styles.trashHolder, {
               transform: [{
                 translateX: this._deltaX.interpolate({
                   inputRange: [-155, 0],
@@ -90,12 +90,13 @@ class Row extends Component {
               }]
             }
           ]}>
-            <TouchableOpacity onPress={this.onButtonPress.bind(this, 'trash')} style={styles.trashHolder}>
+            <TouchableOpacity onPress={this.onButtonPress.bind(this, 'trash')} style={styles.button}>
               <Image style={styles.button} source={require('../img/icon-trash.png')} />
             </TouchableOpacity>
           </Animated.View>
+
           <Animated.View style={
-            [styles.buttonHolder, {
+            [styles.snoozeHolder, {
               transform: [{
                 translateX: this._deltaX.interpolate({
                   inputRange: [-155, 0],
@@ -103,16 +104,17 @@ class Row extends Component {
                 })
               }]
             }
-          ]}>
-            <TouchableOpacity onPress={this.onButtonPress.bind(this, 'snooze')} style={styles.snoozeHolder}>
+            ]}>
+            <TouchableOpacity onPress={this.onButtonPress.bind(this, 'snooze')} style={styles.button}>
               <Image style={styles.button} source={require('../img/icon-clock.png')} />
             </TouchableOpacity>
           </Animated.View>
         </View>
 
         <View style={{position: 'absolute', left: 0, right: 0, height: 75}} pointerEvents='box-none'>
+
           <Animated.View style={
-            [styles.buttonHolder, {
+            [styles.doneHolder, {
               transform: [{
                 translateX: this._deltaX.interpolate({
                   inputRange: [0, 78],
@@ -120,8 +122,8 @@ class Row extends Component {
                 })
               }]
             }
-          ]}>
-            <TouchableOpacity onPress={this.onButtonPress.bind(this, 'done')} style={styles.doneHolder}>
+            ]}>
+            <TouchableOpacity onPress={this.onButtonPress.bind(this, 'done')} style={styles.button}>
               <Image style={styles.button} source={require('../img/icon-check.png')} />
             </TouchableOpacity>
           </Animated.View>
@@ -178,8 +180,6 @@ const styles = StyleSheet.create({
   button: {
     width: 40,
     height: 40
-  },
-  buttonHolder: {
   },
   trashHolder: {
     position: 'absolute',

@@ -13,15 +13,15 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
+//        ndk {
+//            abiFilters "armeabi-v7a", "x86"
+//        }
     }
     splits {
         abi {
             reset()
             enable false
-            universalApk false  // If true, also generate a universal APK
+            universalApk true
             include "armeabi-v7a", "x86"
         }
     }

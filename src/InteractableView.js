@@ -21,7 +21,7 @@ export default class InteractableView extends Component {
             y: this.props.animatedValueY
           }
         }],
-        { useNativeDriver: true }
+        { useNativeDriver: false }
       );
     }
   }

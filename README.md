@@ -58,12 +58,10 @@ To run the example, clone the repo and run from the root folder:<br>
 ```
 
 * **Install and run the demo app from the App Store on your phone**
-
-<img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br>Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)
+<br><br><img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/O7ulJa1.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/2mrUNIM.gif" width=200 />
-
-  Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)
 
 * **Build and run the demo app on your computer**
 <br><br>The [demo app](real-life-example) contains more complex demonstrations. It's harder to learn from them, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo.

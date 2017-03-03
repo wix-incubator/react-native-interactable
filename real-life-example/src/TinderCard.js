@@ -13,7 +13,7 @@ export default class TinderCard extends Component {
     return (
       <View style={styles.container}>
 
-        <Interactable.View
+        <Interactable.View style={styles.container}
           horizontalOnly={true}
           snapPoints={[
             {x: 390},
@@ -57,7 +57,7 @@ export default class TinderCard extends Component {
           </Animated.View>
         </Interactable.View>
 
-        <View style={{marginTop: 40}}>
+        <View style={{marginBottom: 40}}>
           <Text style={styles.text}>Swipe LEFT to trash</Text>
           <Text style={styles.text}>or RIGHT to keep</Text>
         </View>
@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#efefef',
+    width: Screen.width + 80,
+    alignSelf: 'center'
   },
   card: {
     width: Screen.width - 40,

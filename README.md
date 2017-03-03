@@ -36,16 +36,22 @@ First off, we are aware that *interactable* isn't a real word. The correct form 
 <br>
 ## Installation
 
-* Install the library from npm
+* Install the package from npm
 
 ```
 npm install react-native-interactable --save
 ```
 
-* [Connect](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking) the native library to your Xcode project
+* Link the native library to your project
 
 ```
-ios/Interactable.xcodeproj
+react-native link react-native-interactable
+```
+
+Note: instead of linking automatically you can also link manually according to these [instructions](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking)
+
+```
+node_modules/react-native-interactable/ios/Interactable.xcodeproj
 ```
 
 <br>

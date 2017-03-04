@@ -4,7 +4,7 @@ import Interactable from 'react-native-interactable';
 
 const Screen = Dimensions.get('window');
 
-export default class RowActions1 extends Component {
+export default class RowActions2 extends Component {
   constructor(props) {
     super(props);
     this.state = {

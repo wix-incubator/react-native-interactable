@@ -19,7 +19,7 @@ public class PhysicsAnchorBehavior extends PhysicsBehavior {
     public void executeFrameWithDeltaTime(float deltaTime, PhysicsObject physicsObject) {
         if (deltaTime == 0.0) return;
 
-        Log.d("InteractableView"," PhysicsAnchorBehavior executeFrameWithDeltaTime: " + deltaTime);
+//        Log.d("InteractableView"," PhysicsAnchorBehavior executeFrameWithDeltaTime: " + deltaTime);
 
         float dx = this.anchorPoint.x - this.target.getTranslationX();
         float vx = dx / deltaTime;

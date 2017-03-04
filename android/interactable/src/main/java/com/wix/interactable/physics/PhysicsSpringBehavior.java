@@ -29,7 +29,7 @@ public class PhysicsSpringBehavior extends PhysicsBehavior {
         float ay = (-this.tension * dy) / physicsObject.mass;
         float vy = physicsObject.velocity.y + deltaTime * ay;
 
-        Log.d("InteractableView"," PhysicsSpringBehavior executeFrameWithDeltaTime cur Vx = " + physicsObject.velocity.x + " vx = " + vx);
+//        Log.d("InteractableView"," PhysicsSpringBehavior executeFrameWithDeltaTime cur Vx = " + physicsObject.velocity.x + " vx = " + vx);
 
         physicsObject.velocity = new PointF(vx, vy);
     }

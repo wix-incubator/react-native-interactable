@@ -55,11 +55,11 @@ public class InteractablePoint {
 
     public static InteractablePoint findClosestPoint(ArrayList<InteractablePoint> pointArray,
                                                      PointF relativePoint) {
-        Log.d("InteractableView","findClosestPoint size = " + pointArray.size());
+//        Log.d("InteractableView","findClosestPoint size = " + pointArray.size());
         float minDist = Float.MAX_VALUE;
         InteractablePoint closestPoint = null;
         for (InteractablePoint point : pointArray) {
-            Log.d("InteractableView","findClosestPoint point x = " + point.x);
+//            Log.d("InteractableView","findClosestPoint point x = " + point.x);
 
             float curDist = point.distanceFromPoint(relativePoint);
             if (curDist < minDist) {

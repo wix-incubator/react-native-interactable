@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
@@ -121,7 +120,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
+//        Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
         return true;
     }
 
@@ -190,7 +189,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         float toss = 0.1f;
         if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
-        Log.d("InteractableView","handleEndOfDrag velocity = " + velocity);
+//        Log.d("InteractableView","handleEndOfDrag velocity = " + velocity);
 
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                                             getTranslationY() + toss*velocity.y);
@@ -221,7 +220,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
     private void addTempBounceBehaviorWithBoundaries(InteractableArea boundaries) {
-        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundaries);
+//        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundaries);
 //        if (boundaries != null && boundaries.getBounce() > 0.0)
         if (boundaries != null)
         {
@@ -239,7 +238,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         }
     }
     private void addConstantBoundaries(InteractableArea boundaries) {
-        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundaries);
+//        Log.d("InteractableView","addTempBounceBehaviorWithBoundaries influenceArea = " + boundaries);
 //        if (boundaries != null && boundaries.getBounce() > 0.0)
         if (boundaries != null)
         {
@@ -327,7 +326,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (radius <= 0.0) return null;
         PointF minPoint = new PointF(anchor.x - radius, anchor.y - radius);
         PointF maxPoint = new PointF(anchor.x + radius, anchor.y + radius);
-        Log.d("InteractableView","influenceAreaWithRadius minPoint = " + minPoint + " maxPoint = " + maxPoint);
+//        Log.d("InteractableView","influenceAreaWithRadius minPoint = " + minPoint + " maxPoint = " + maxPoint);
         return new PhysicsArea(minPoint,maxPoint);
     }
 
@@ -373,8 +372,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     public void setGravityPoints(ArrayList<InteractablePoint> gravityPoints) {
         this.gravityPoints = gravityPoints;
         for (InteractablePoint point : gravityPoints) {
-            Log.d("InteractableView","setGravityPoints strength = " + point.strength);
-            Log.d("InteractableView","setGravityPoints damping = " + point.damping);
+//            Log.d("InteractableView","setGravityPoints strength = " + point.strength);
+//            Log.d("InteractableView","setGravityPoints damping = " + point.damping);
 
             addConstantGravityBehavior(point);
         }
@@ -383,7 +382,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     public void setFrictionAreas(ArrayList<InteractablePoint> frictionAreas) {
         this.gravityPoints = gravityPoints;
         for (InteractablePoint point : frictionAreas) {
-            Log.d("InteractableView","setFrictionAreas damping = " + point.damping);
+//            Log.d("InteractableView","setFrictionAreas damping = " + point.damping);
             addConstantFrictionBehavior(point);
         }
     }

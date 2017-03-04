@@ -135,14 +135,14 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
             PhysicsObject physicsObject = targetsToObjects.get(behavior.target);
             if (physicsObject != null) {
                 behavior.executeFrameWithDeltaTime(deltaTime,physicsObject);
-                Log.d("InteractableView"," animateFrameWithDeltaTime doing behavior " + " vx = " + physicsObject.velocity.x);
+//                Log.d("InteractableView"," animateFrameWithDeltaTime doing behavior " + " vx = " + physicsObject.velocity.x);
             }
         }
 
         boolean hadMovement = false;
         for (View v : targetsToObjects.keySet()) {
             PhysicsObject physicsObject = targetsToObjects.get(v);
-            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " vx = " + physicsObject.velocity.x);
+//            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " vx = " + physicsObject.velocity.x);
             float dx = 0f;
             if (Math.abs(physicsObject.velocity.x) > ANIMATOR_PAUSE_ZERO_VELOCITY) {
                 dx = deltaTime * physicsObject.velocity.x;

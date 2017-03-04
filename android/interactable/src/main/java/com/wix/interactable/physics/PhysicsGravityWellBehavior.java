@@ -1,8 +1,6 @@
 package com.wix.interactable.physics;
 
-import android.graphics.Point;
 import android.graphics.PointF;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -46,8 +44,8 @@ public class PhysicsGravityWellBehavior extends PhysicsBehavior {
         double ay = dy / dr * a;
         float vy = (float) (physicsObject.velocity.y + deltaTime * ay);
 
-        Log.d("InteractableView"," PhysicsGravityWellBehavior executeFrameWithDeltaTime: " + deltaTime
-                + " vx = " + vx + " cur vx = " + physicsObject.velocity.x);
+//        Log.d("InteractableView"," PhysicsGravityWellBehavior executeFrameWithDeltaTime: " + deltaTime
+//                + " vx = " + vx + " cur vx = " + physicsObject.velocity.x);
 
         physicsObject.velocity = new PointF(vx, vy);
     }

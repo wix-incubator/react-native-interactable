@@ -24,7 +24,7 @@ public class PhysicsBounceBehavior extends PhysicsBehavior {
 
     @Override
     public void executeFrameWithDeltaTime(float timeInterval, PhysicsObject physicsObject) {
-        Log.d("InteractableView"," PhysicsBounceBehavior executeFrameWithDeltaTime: " + timeInterval + " minX = " + minPoint.x);
+//        Log.d("InteractableView"," PhysicsBounceBehavior executeFrameWithDeltaTime: " + timeInterval + " minX = " + minPoint.x);
         applyLimits();
         if (this.minPoint.x == this.target.getTranslationX() && physicsObject.velocity.x < 0.0)
         {

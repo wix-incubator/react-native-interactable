@@ -52,7 +52,7 @@ export default class RowActions1 extends Component {
             value={this.state.damping}
             minimumValue={0.1}
             maximumValue={0.6}
-            onValueChange={(value) => this.setState({damping: value})}
+            onSlidingComplete={(value) => this.setState({damping: value})}
           />
           <Text style={styles.playgroundLabel}>Change spring tension:</Text>
           <Slider
@@ -61,7 +61,7 @@ export default class RowActions1 extends Component {
             value={this.state.tension}
             minimumValue={0.0}
             maximumValue={1000.0}
-            onValueChange={(value) => this.setState({tension: value})}
+            onSlidingComplete={(value) => this.setState({tension: value})}
           />
         </View>
 

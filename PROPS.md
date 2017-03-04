@@ -173,7 +173,7 @@ animatedValueY={this._deltaY}
 animatedNativeDriver={false}
 ```
 
-Whether integration with [Animated](https://facebook.github.io/react-native/docs/animated.html) should use native driver. Default `false` since Animated native driver is still a bit experimental.
+Whether integration with [Animated](https://facebook.github.io/react-native/docs/animated.html) should use native driver. Default `false` since Animated native driver is still a bit experimental. Try it out as eventually the quirks will be resolved and then we'll have a 100% native driver end to end with 60 FPS on derived animations as well.
 
 #### `initialPosition` (point)
 

@@ -71,13 +71,14 @@ To run the example, clone the repo and run from the root folder:<br>
 ```
 
 * **Install and run the demo app from the App Store on your phone**
+<br><br>If you don't want to mess with building yourself, you can play with a pre-built demo on your phone.
 <br><br>Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)
 <br><br><img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/O7ulJa1.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/2mrUNIM.gif" width=200 />
 
 * **Build and run the demo app on your computer**
-<br><br>The [demo app](real-life-example) contains more complex demonstrations. It's harder to learn from them, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo.
+<br><br>The [demo app](real-life-example) contains more complex demonstrations than the [example](example) project. They're harder to learn from, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo app.
 <br><br>*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
 <br><br>
 To run the demo app, clone the repo and run from the root folder:

@@ -84,10 +84,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 6,
     marginHorizontal: 20,
+    marginVertical: 10,
     shadowColor: '#7f7f7f',
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 2,
-    shadowOpacity: 0.4
+    shadowOpacity: 0.4,
+    elevation: 4
   },
   image: {
     width: Screen.width - 40,

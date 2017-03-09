@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 75,
-    paddingTop: 14,
+    paddingTop: 22,
     paddingLeft: 20,
     flexDirection: 'row',
     backgroundColor: '#5894f3',

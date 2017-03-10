@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     marginLeft: 25
   },
   playground: {
-    marginTop: 80,
+    marginTop: Screen.height <= 500 ? 0 : 80,
     padding: 20,
     width: Screen.width - 40,
     backgroundColor: '#5894f3',

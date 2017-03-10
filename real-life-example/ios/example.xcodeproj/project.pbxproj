@@ -897,6 +897,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.talkol.react-native-interactable.rl";
 				PRODUCT_NAME = example;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -916,6 +917,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.talkol.react-native-interactable.rl";
 				PRODUCT_NAME = example;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

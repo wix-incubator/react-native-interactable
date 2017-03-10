@@ -30,8 +30,12 @@ export default class NotifPanel extends Component {
               <Notification title='First Notification' body='This is the body of the first notification' />
               <Notification title='Second Notification' body='This is the body of the 2nd notification' />
               <Notification title='Third Notification' body='This is the body of the 3rd notification' />
-              <Text style={styles.panelHeader}>Yesterday</Text>
-              <Notification title='Fourth Notification' body='This is the body of the 4th notification' />
+              {Screen.height <= 500-75 ? false :
+                <View>
+                  <Text style={styles.panelHeader}>Yesterday</Text>
+                  <Notification title='Fourth Notification' body='This is the body of the 4th notification' />
+                </View>
+              }
               <View style={(Platform.OS === 'android') ? styles.panelFooterAndroid : styles.panelFooterIos }>
                 <Text style={styles.panelFooterText}>4 NOTIFICATIONS</Text>
                 <View style={styles.panelHandle} />

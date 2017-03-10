@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: Screen.width - 40,
-    height: 150
+    height: Screen.height <= 500 ? 70 : 150
   },
   header: {
     marginTop: 8,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     color: '#7f7f7f'
   },
   playground: {
-    marginTop: 40,
+    marginTop: Screen.height <= 500 ? 10 : 40,
     padding: 20,
     width: Screen.width - 40,
     backgroundColor: '#5894f3',

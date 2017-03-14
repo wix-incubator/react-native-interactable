@@ -72,7 +72,7 @@ To run the example, clone the repo and run from the root folder:<br>
 
 * **Install and run the demo app from the App Store on your phone**
 <br><br>If you don't want to mess with building yourself, you can play with a pre-built demo on your phone.
-<br><br>Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)
+<br><br>Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8) or [Google Play Store (Android)](https://play.google.com/store/apps/details?id=com.wix.interactions)
 <br><br><img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/O7ulJa1.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/2mrUNIM.gif" width=200 />

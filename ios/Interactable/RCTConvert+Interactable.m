@@ -23,7 +23,7 @@
     point.tension = [self CGFloat:json[@"tension"] ?: @(300.0)];
     point.strength = [self CGFloat:json[@"strength"] ?: @(400.0)];
     point.falloff = [self CGFloat:json[@"falloff"] ?: @(40.0)];
-    point.id = [self NSString:json[@"id"] ?: nil];
+    point.id = [self id:json[@"id"] ?: [NSNull null]];
     point.influenceArea = [self InteractableArea:json[@"influenceArea"] ?: nil];
     point.haptics = [self BOOL:json[@"haptics"] ?: @(NO)];
     return point;

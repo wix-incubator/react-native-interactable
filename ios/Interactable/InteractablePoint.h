@@ -18,7 +18,7 @@
 @property (nonatomic, assign) CGFloat tension;
 @property (nonatomic, assign) CGFloat strength;
 @property (nonatomic, assign) CGFloat falloff;
-@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) id id;
 @property (nonatomic, copy) InteractableArea *influenceArea;
 @property (nonatomic, assign) BOOL haptics;
 

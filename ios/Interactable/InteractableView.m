@@ -235,9 +235,9 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                                                                        userData:@{ @"x": @(deltaFromOrigin.x),
                                                                                    @"y": @(deltaFromOrigin.y)}
                                                                   coalescingKey:self.coalescingKey];
-        
-        
-        RCTRootView* rootView = ((RCTRootView*)self.window.rootViewController.view);
+
+
+        RCTRootView *rootView = [self getRootView];
         [[[rootView bridge]eventDispatcher] sendEvent:event];
         
         

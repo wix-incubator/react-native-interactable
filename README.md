@@ -240,6 +240,7 @@ this._deltaY = new Animated.Value(0);
 ```
 
 <br>
+
 ## Implementation Details
 
 Originally, the iOS implementation relied on [UIKit Dynamics](https://developer.apple.com/reference/uikit/uidynamicanimator) - a powerful native animation engine for physical interactions. A physics engine is required in order to make the interaction life-like. Consider the action of tossing a view connected via a spring to a snap point. A simple native [spring animation](https://developer.apple.com/reference/uikit/uiview/1622594-animatewithduration) will not be enough to take the initial velocity vector into account.

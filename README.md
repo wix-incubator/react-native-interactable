@@ -11,7 +11,7 @@
 * [Usage](#usage)
 * [Implementation Details](#implementation-details)
 
-<br>
+
 This is an experimental implementation of a declarative API for handling fluid user interactions with views at 60 FPS in React Native. Here are some example use-cases for views that users can interact with:
 
 * **Swipeable card** (a la Google Now) springing into place unless swiped away with enough force
@@ -33,7 +33,7 @@ Fluid user interactions take this a step further than animations. Interactions r
 
 First off, we are aware that *interactable* isn't a real word. The correct form is *interactive* but this has connotation that isn't necessarily related to physical interactions. Similar to `Animated.View`, we wanted to have `Interactable.View` - meaning a view you can interact with. And hey, [Unity](https://docs.unity3d.com/ScriptReference/UI.Selectable-interactable.html) did it too.
 
-<br>
+
 ## Installation
 
 * Install the package from npm
@@ -54,16 +54,16 @@ Note: instead of linking automatically you can also link manually according to t
 node_modules/react-native-interactable/ios/Interactable.xcodeproj
 ```
 
-<br>
+
 ## Example
 
 To see the library in action you have several options:
 
 * **Build and run the example project on your computer**
-<br><br>The [example](example) project has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. It's simplistic but easy to learn from.
-<br><br>*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
-<br><br>
-To run the example, clone the repo and run from the root folder:<br>
+The [example](example) project has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. It's simplistic but easy to learn from.
+*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
+
+To run the example, clone the repo and run from the root folder:
 ```
   cd example
   npm install
@@ -71,19 +71,19 @@ To run the example, clone the repo and run from the root folder:<br>
 ```
 
 * **Install and run the demo app from the App Store/Google Play on your phone**
-<br><br>If you don't want to mess with building yourself, you can play with a pre-built demo on your phone.
-<br><br>Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)<br>Download from [Google Play Store (Android)](https://play.google.com/store/apps/details?id=com.wix.interactions&hl=en)
+If you don't want to mess with building yourself, you can play with a pre-built demo on your phone.
+Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)Download from [Google Play Store (Android)](https://play.google.com/store/apps/details?id=com.wix.interactions&hl=en)
 
-<br><br><img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/O7ulJa1.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/2mrUNIM.gif" width=200 />
 
 
 
 * **Build and run the demo app on your computer**
-<br><br>The [demo app](real-life-example) contains more complex demonstrations than the [example](example) project. They're harder to learn from, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo app.
-<br><br>*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
-<br><br>
+The [demo app](real-life-example) contains more complex demonstrations than the [example](example) project. They're harder to learn from, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo app.
+*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
+
 To run the demo app, clone the repo and run from the root folder:
 ```
   cd real-life-example
@@ -91,7 +91,7 @@ To run the demo app, clone the repo and run from the root folder:
   react-native run-ios
 ```
 
-<br>
+
 ## Usage
 
 The core of this library is the `Interactable.View` component, used to wrap views you want to interact with:
@@ -239,7 +239,7 @@ this._deltaY = new Animated.Value(0);
 </Interactable.View>
 ```
 
-<br>
+
 
 ## Implementation Details
 

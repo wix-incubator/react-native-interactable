@@ -12,6 +12,8 @@
 #import "InteractableArea.h"
 #import "InteractableSpring.h"
 #import "RCTConvert+Interactable.h"
+#import <React/RCTBridge.h>
+#import <React/RCTUIManager.h>
 
 @implementation InteractableViewManager
 
@@ -35,5 +37,25 @@ RCT_EXPORT_VIEW_PROPERTY(onSnap, RCTDirectEventBlock    )
 RCT_EXPORT_VIEW_PROPERTY(onStop, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(initialPosition, CGPoint)
 RCT_EXPORT_VIEW_PROPERTY(onAnimatedEvent, RCTDirectEventBlock)
+
+RCT_EXPORT_METHOD(setVelocity:(nonnull NSNumber *)reactTag
+                  params:(NSDictionary*)params)
+{
+    [self.bridge.uiManager addUIBlock:
+     ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry)
+    {
+         UIView *view = viewRegistry[reactTag];
+         if ([view isKindOfClass:[InteractableView class]])
+         {
+             [(InteractableView*)view setVelocity:params];
+         }
+         else
+         {
+             RCTLogError(@"tried to setVelocity: on non-InteractableView view %@ "
+                         "with tag #%@", view, reactTag);
+         }
+     }];
+}
+
 
 @end

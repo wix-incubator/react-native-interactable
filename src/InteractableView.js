@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { requireNativeComponent, Animated } from 'react-native';
+import ReactNative, { requireNativeComponent, Animated, NativeModules } from 'react-native';
 
 // const NativeInteractableView = requireNativeComponent('InteractableView', null);
 
 // this is required in order to support native events
 const NativeInteractableView = Animated.createAnimatedComponent(requireNativeComponent('InteractableView', null));
+
+// this is required in order to perform imperative commands
+const NativeViewManager = NativeModules.InteractableViewManager;
 
 export default class InteractableView extends Component {
   constructor(props) {
@@ -47,4 +50,9 @@ export default class InteractableView extends Component {
       />
     );
   }
+
+  setVelocity(params) {
+    NativeViewManager.setVelocity(ReactNative.findNodeHandle(this), params);
+  }
+
 }

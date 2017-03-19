@@ -206,6 +206,19 @@ animatedNativeDriver={false}
 initialPosition={{x: -140, y: -280}}
 ```
 
+### `Interactable.View` Methods
+
+* `setVelocity()` - used to imperatively set the view's velocity in order to move it around
+
+```jsx
+instance.setVelocity({x: 2000});
+```
+
+Takes a single argument, which is a params object containing:
+
+  * `x` - The horizontal velocity. Optional.
+  * `y` - The vertical velocity. Optional.
+
 ## Animating other views according to `Interactable.View` position
 
 This library is integrated with the [Animated](https://facebook.github.io/react-native/docs/animated.html) library in order to support performant animations of other views according to the movement of the `Interactable.View`.

@@ -29,4 +29,6 @@
 @property (nonatomic, assign) CGPoint initialPosition;
 @property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
 
+- (void)setVelocity:(NSDictionary*)params;
+
 @end

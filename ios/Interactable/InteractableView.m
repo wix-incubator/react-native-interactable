@@ -504,6 +504,18 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     return [[PhysicsArea alloc] initWithMinPoint:minPoint maxPoint:maxPoint];
 }
 
+// MARK: - Imperative commands
+
+- (void)setVelocity:(NSDictionary*)params
+{
+    if (self.dragBehavior) return;
+    CGFloat x = [[params objectForKey:@"x"] floatValue];
+    CGFloat y = [[params objectForKey:@"y"] floatValue];
+    [self.animator ensureRunning];
+    [self.animator setTarget:self velocity:CGPointMake(x, y)];
+    [self setTempBehaviorsForDragEnd];
+}
+
 @end
 
 

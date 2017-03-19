@@ -34,6 +34,7 @@ Fluid user interactions take this a step further than animations. Interactions r
 First off, we are aware that *interactable* isn't a real word. The correct form is *interactive* but this has connotation that isn't necessarily related to physical interactions. Similar to `Animated.View`, we wanted to have `Interactable.View` - meaning a view you can interact with. And hey, [Unity](https://docs.unity3d.com/ScriptReference/UI.Selectable-interactable.html) did it too.
 
 <br>
+
 ## Installation
 
 * Install the package from npm
@@ -55,6 +56,7 @@ node_modules/react-native-interactable/ios/Interactable.xcodeproj
 ```
 
 <br>
+
 ## Example
 
 To see the library in action you have several options:
@@ -92,6 +94,7 @@ To run the demo app, clone the repo and run from the root folder:
 ```
 
 <br>
+
 ## Usage
 
 The core of this library is the `Interactable.View` component, used to wrap views you want to interact with:

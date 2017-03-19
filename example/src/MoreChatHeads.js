@@ -44,9 +44,9 @@ export default class MoreChatHeads extends Component {
       <View style={styles.container}>
         <Interactable.View
           snapPoints={[
-            {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
-            {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
-          initialPosition={{x: -140, y: -280}}>
+            {x: -140, y: 0}, {x: -140, y: -120}, {x: -140, y:  120}, {x: -140, y: -250}, {x: -140, y: 250},
+            {x:  140, y: 0}, {x:  140, y:  120}, {x:  140, y: -120}, {x:  140, y: -250}, {x:  140, y: 250}]}
+          initialPosition={{x: -140, y: -250}}>
           <View style={styles.head} />
         </Interactable.View>
       </View>
@@ -58,10 +58,10 @@ export default class MoreChatHeads extends Component {
       <View style={styles.container}>
         <Interactable.View
           snapPoints={[
-            {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
-            {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
+            {x: -140, y: 0}, {x: -140, y: -120}, {x: -140, y:  120}, {x: -140, y: -250}, {x: -140, y: 250},
+            {x:  140, y: 0}, {x:  140, y:  120}, {x:  140, y: -120}, {x:  140, y: -250}, {x:  140, y: 250}]}
           dragWithSpring={{tension: 1000, damping: 0.7}}
-          initialPosition={{x: -140, y: -280}}>
+          initialPosition={{x: -140, y: -250}}>
           <View style={styles.head} />
         </Interactable.View>
       </View>
@@ -71,17 +71,17 @@ export default class MoreChatHeads extends Component {
   renderLocalizedSprings() {
     return (
       <View style={styles.container}>
-        <View style={styles.markerContainer}><View style={[styles.marker, {top: -140}]} /></View>
-        <View style={styles.markerContainer}><View style={[styles.marker, {top:  140}]} /></View>
+        <View style={styles.markerContainer}><View style={[styles.marker, {top: -120}]} /></View>
+        <View style={styles.markerContainer}><View style={[styles.marker, {top:  120}]} /></View>
         <Interactable.View
           snapPoints={[
-            {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
-            {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
+            {x: -140, y: 0}, {x: -140, y: -120}, {x: -140, y:  120}, {x: -140, y: -250}, {x: -140, y: 250},
+            {x:  140, y: 0}, {x:  140, y:  120}, {x:  140, y: -120}, {x:  140, y: -250}, {x:  140, y: 250}]}
           dragWithSpring={{tension: 2000, damping: 0.5}}
           springPoints={[
-            {x: 0, y:-140, tension: 4000, damping: 0.5, influenceArea: {left: -40, right: 40, top: -180, bottom: -100}, haptics: true},
-            {x: 0, y: 140, tension: 4000, damping: 0.5, influenceArea: {left: -40, right: 40, top:  100, bottom:  180}, haptics: true}]}
-          initialPosition={{x: -140, y: -280}}>
+            {x: 0, y:-120, tension: 4000, damping: 0.5, influenceArea: {left: -40, right: 40, top: -160, bottom: -80}, haptics: true},
+            {x: 0, y: 120, tension: 4000, damping: 0.5, influenceArea: {left: -40, right: 40, top:  80, bottom:  160}, haptics: true}]}
+          initialPosition={{x: -140, y: -250}}>
           <View style={styles.head} />
         </Interactable.View>
       </View>
@@ -95,14 +95,14 @@ export default class MoreChatHeads extends Component {
         <View style={styles.markerContainer}><View style={[styles.marker, {top:  140}]} /></View>
         <Interactable.View
           snapPoints={[
-            {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
-            {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
+            {x: -140, y: 0}, {x: -140, y: -120}, {x: -140, y:  120}, {x: -140, y: -250}, {x: -140, y: 250},
+            {x:  140, y: 0}, {x:  140, y:  120}, {x:  140, y: -120}, {x:  140, y: -250}, {x:  140, y: 250}]}
           dragWithSpring={{tension: 2000, damping: 0.5}}
           gravityPoints={[
-            {x: 0, y:-140, strength:  8000, falloff: 40, damping: 0.5, haptics: true},
-            {x: 0, y: 140, strength: -8000, falloff: 40, damping: 0.5, haptics: true}]}
+            {x: 0, y:-120, strength:  8000, falloff: 40, damping: 0.5, haptics: true},
+            {x: 0, y: 120, strength: -8000, falloff: 40, damping: 0.5, haptics: true}]}
           onStop={this.onStopInteraction}
-          initialPosition={{x: -140, y: -280}}>
+          initialPosition={{x: -140, y: -250}}>
           <View style={styles.head} />
         </Interactable.View>
       </View>
@@ -114,11 +114,11 @@ export default class MoreChatHeads extends Component {
       <View style={styles.container}>
         <Interactable.View
           snapPoints={[
-            {x: -140, y: 0}, {x: -140, y: -140}, {x: -140, y:  140}, {x: -140, y: -280}, {x: -140, y: 280},
-            {x:  140, y: 0}, {x:  140, y:  140}, {x:  140, y: -140}, {x:  140, y: -280}, {x:  140, y: 280}]}
+            {x: -140, y: 0}, {x: -140, y: -120}, {x: -140, y:  120}, {x: -140, y: -250}, {x: -140, y: 250},
+            {x:  140, y: 0}, {x:  140, y:  120}, {x:  140, y: -120}, {x:  140, y: -250}, {x:  140, y: 250}]}
           dragWithSpring={{tension: 2000, damping: 0.5}}
           frictionAreas={[{damping: 0.3, limitY: {min: 0}, haptics: true}]}
-          initialPosition={{x: -140, y: -280}}>
+          initialPosition={{x: -140, y: -250}}>
           <View style={styles.head} />
         </Interactable.View>
       </View>

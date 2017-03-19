@@ -17,13 +17,13 @@ export default class CollapsingHeader extends Component {
                 {
                   translateY: this._deltaY.interpolate({
                     inputRange: [-150, -150, 0, 0],
-                    outputRange: [-50, -50, 0, 0]
+                    outputRange: [-58, -58, 0, 0]
                   })
                 },
                 {
                   scale: this._deltaY.interpolate({
                     inputRange: [-150, -150, 0, 0],
-                    outputRange: [0.3, 0.3, 1, 1]
+                    outputRange: [0.35, 0.35, 1, 1]
                   })
                 }
               ]

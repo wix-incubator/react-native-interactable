@@ -8,18 +8,18 @@ export default class ChatHeads extends Component {
       <View style={styles.container}>
         <Interactable.View
           snapPoints={[
-            {x: -140, y: -280},
-            {x: 140, y: -280},
-            {x: -140, y: -140},
-            {x: 140, y: -140},
+            {x: -140, y: -250},
+            {x: 140, y: -250},
+            {x: -140, y: -120},
+            {x: 140, y: -120},
             {x: -140, y: 0},
             {x: 140, y: 0},
-            {x: -140, y: 140},
-            {x: 140, y: 140},
-            {x: -140, y: 280},
-            {x: 140, y: 280, tension: 50, damping: 0.9}
+            {x: -140, y: 120},
+            {x: 140, y: 120},
+            {x: -140, y: 250},
+            {x: 140, y: 250, tension: 50, damping: 0.9}
           ]}
-          initialPosition={{x: -140, y: -280}}>
+          initialPosition={{x: -140, y: -250}}>
           <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
         </Interactable.View>
       </View>

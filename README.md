@@ -208,16 +208,15 @@ initialPosition={{x: -140, y: -280}}
 
 ### `Interactable.View` Methods
 
-* `setVelocity()` - used to imperatively set the view's velocity in order to move it around
+##### `setVelocity()` - used to imperatively set the view's velocity in order to move it around
 
 ```jsx
 instance.setVelocity({x: 2000});
 ```
 
 Takes a single argument, which is a params object containing:
-
-  * `x` - The horizontal velocity. Optional.
-  * `y` - The vertical velocity. Optional.
+ * `x` - The horizontal velocity. Optional.
+ * `y` - The vertical velocity. Optional.
 
 ## Animating other views according to `Interactable.View` position
 

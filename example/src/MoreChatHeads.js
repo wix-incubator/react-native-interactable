@@ -117,7 +117,7 @@ export default class MoreChatHeads extends Component {
             {x: -140, y: 0}, {x: -140, y: -120}, {x: -140, y:  120}, {x: -140, y: -250}, {x: -140, y: 250},
             {x:  140, y: 0}, {x:  140, y:  120}, {x:  140, y: -120}, {x:  140, y: -250}, {x:  140, y: 250}]}
           dragWithSpring={{tension: 2000, damping: 0.5}}
-          frictionAreas={[{damping: 0.3, limitY: {min: 0}, haptics: true}]}
+          frictionAreas={[{damping: 0.3, influenceArea: {top: 0}, haptics: true}]}
           initialPosition={{x: -140, y: -250}}>
           <View style={styles.head} />
         </Interactable.View>

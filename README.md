@@ -37,6 +37,8 @@ First off, we are aware that *interactable* isn't a real word. The correct form 
 
 ## Installation
 
+**Requires RN 0.40 and above.**
+
 * Install the package from npm
 
 ```

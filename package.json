@@ -24,8 +24,8 @@
   "dependencies": {
   },
   "peerDependencies": {
-    "react": ">= 15.0.0",
-    "react-native": ">= 0.32.0"
+    "react": ">= 15.4.1",
+    "react-native": ">= 0.40.0"
   },
   "jest": {
     "preset": "jest-react-native"

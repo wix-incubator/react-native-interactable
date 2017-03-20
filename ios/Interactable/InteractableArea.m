@@ -15,4 +15,18 @@
     return self;
 }
 
+- (BOOL)pointInside:(CGPoint)point withOrigin:(CGPoint)origin
+{
+    CGFloat cx = point.x - origin.x;
+    CGFloat cy = point.y - origin.y;
+    
+    if (cx < self.left) return NO;
+    if (cx > self.right) return NO;
+    
+    if (cy < self.top) return NO;
+    if (cy > self.bottom) return NO;
+    
+    return YES;
+}
+
 @end

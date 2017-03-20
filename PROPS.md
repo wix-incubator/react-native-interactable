@@ -182,3 +182,29 @@ initialPosition={{x: -140, y: -280}}
 ```
 
 Optional, used to initialize the view's position to a position different than it's original center. This is mostly useful when you want to provide `snapPoints` points relative to the center calculated by React Native layout, but want the view itself to start from a different position. See [chat heads](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/ChatHeads.js#L22) example.
+
+#### `alertAreas` (array of areas)
+
+```jsx
+alertAreas={[{id: 'myArea', influenceArea: {top: 0}}]}
+```
+
+Send alert event when the view's center enters/leaves any region within the group. Every element in the array is an object with the following properties:
+
+* `id` - A required string name for the area to identify it in the `onAlert` event.
+* `influenceArea` - Limit the alert to a specific area. Optional. An object with the following properties:
+  * `left` - The minimum horizontal alert point (relative to the center). Optional.
+  * `right` - The maximum horizontal alert point (relative to the center). Optional.
+  * `top` - The minimum vertical alert point (relative to the center). Optional.
+  * `bottom` - The maximum vertical alert point (relative to the center). Optional.  
+
+#### `onAlert` (function)
+
+  ```jsx
+  onAlert={this.onAlertEvent}
+  ```
+
+  Optional, a function called whenever the view's center enters/leaves an alert area (see `alertAreas`). When the function is called, an event object is passed as argument, containing the following properties:
+
+  * key: `id` - The string name of the area that was entered/left.
+  * value: `enter` or `leave` (depending if entering or leaving the area).

@@ -17,6 +17,7 @@ import MoreChatHeads from './MoreChatHeads';
 import HandleTouches from './HandleTouches';
 import HandleRelayout from './HandleRelayout';
 import SideMenu from './SideMenu';
+import AlertAreas from './AlertAreas';
 
 export default class example extends Component {
   constructor(props) {
@@ -79,6 +80,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, SideMenu)}>
           <Text style={styles.button}>Side Menu (imperative cmds)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, AlertAreas)}>
+          <Text style={styles.button}>Alert Areas</Text>
         </TouchableOpacity>
       </ScrollView>
     );

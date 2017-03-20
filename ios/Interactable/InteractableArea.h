@@ -18,4 +18,6 @@
 @property (nonatomic, assign) CGFloat bounce;
 @property (nonatomic, assign) BOOL haptics;
 
+- (BOOL)pointInside:(CGPoint)point withOrigin:(CGPoint)origin;
+
 @end

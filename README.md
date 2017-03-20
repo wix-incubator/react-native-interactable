@@ -142,6 +142,12 @@ gravityPoints={[{x: 0, y: 0, strength: 8000, falloff: 40, damping: 0.5}]}
 frictionAreas={[{damping: 0.5, influenceArea: {top: 0}}]}
 ```
 
+* [`alertAreas`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#alertareas-array-of-areas) - send alert event when the view's center enters/leaves any region within the group
+
+```jsx
+alertAreas={[{id: 'myArea', influenceArea: {top: 0}}]}
+```
+
 * [`horizontalOnly`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#horizontalonly-boolean) - whether the view should be locked to horizontal movement only
 
 ```jsx
@@ -170,6 +176,12 @@ onSnap={this.onDrawerSnap}
 
 ```jsx
 onStop={this.onStopInteraction}
+```
+
+* [`onAlert`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onalert-function) - a function called whenever the view's center enters/leaves an alert area
+
+```jsx
+onAlert={this.onAlertEvent}
 ```
 
 * [`dragWithSpring`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#dragwithspring-object) - specify to make dragging behavior of the view occur using a spring

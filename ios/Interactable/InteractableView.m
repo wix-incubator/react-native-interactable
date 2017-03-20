@@ -93,6 +93,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 @property (nonatomic, assign) BOOL initialPositionSet;
 @property (nonatomic, assign) BOOL reactRelayoutHappening;
 @property (nonatomic, assign) CGPoint reactRelayoutCenterDeltaFromOrigin;
+@property (nonatomic) NSMutableSet *insideAlertAreas;
 
 @property (nonatomic, assign) uint16_t coalescingKey;
 @property (nonatomic, assign) NSString* lastEmittedEventName;
@@ -108,6 +109,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         self.originSet = NO;
         self.initialPositionSet = NO;
         self.reactRelayoutHappening = NO;
+        self.insideAlertAreas = [NSMutableSet set];
         
         // pan gesture recognizer for touches
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -167,6 +169,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     
     [super setCenter:center];
     [self reportAnimatedEvent];
+    [self reportAlertEvent];
 }
 
 - (void)initializeAnimator
@@ -221,9 +224,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
         
-        
-        //        RCT_SEND_SCROLL_EVENT(onAnimatedEvent, (@{@"updatedChildFrames": childFrames}));
-        
         if (![self.lastEmittedEventName isEqualToString:@"onAnimatedEvent"]) {
             self.coalescingKey++;
             self.lastEmittedEventName = @"onAnimatedEvent";
@@ -236,16 +236,46 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                                                                                    @"y": @(deltaFromOrigin.y)}
                                                                   coalescingKey:self.coalescingKey];
 
-
         RCTRootView *rootView = [self getRootView];
         [[[rootView bridge]eventDispatcher] sendEvent:event];
         
         
-        //        self.onAnimatedEvent(@
-        //                             {
-        //                                 @"x": @(deltaFromOrigin.x),
-        //                                 @"y": @(deltaFromOrigin.y)
-        //                             });
+        // self.onAnimatedEvent(@
+        //                      {
+        //                          @"x": @(deltaFromOrigin.x),
+        //                          @"y": @(deltaFromOrigin.y)
+        //                      });
+    }
+}
+
+- (void)reportAlertEvent
+{
+    if (self.onAlert && self.alertAreas && self.originSet)
+    {
+        NSMutableDictionary *alert = [NSMutableDictionary dictionary];
+        for (InteractablePoint *area in self.alertAreas)
+        {
+            if (area.influenceArea && area.id)
+            {
+                if ([area.influenceArea pointInside:self.center withOrigin:self.origin])
+                {
+                    if (![self.insideAlertAreas containsObject:area.id])
+                    {
+                        [alert setObject:@"enter" forKey:area.id];
+                        [self.insideAlertAreas addObject:area.id];
+                    }
+                }
+                else
+                {
+                    if ([self.insideAlertAreas containsObject:area.id])
+                    {
+                        [alert setObject:@"leave" forKey:area.id];
+                        [self.insideAlertAreas removeObject:area.id];
+                    }
+                }
+            }
+        }
+        if ([alert count] > 0) self.onAlert(alert);
     }
 }
 

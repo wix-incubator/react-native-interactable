@@ -15,6 +15,7 @@ import CollapsingHeader from './CollapsingHeader';
 import MoreDrawers from './MoreDrawers';
 import MoreChatHeads from './MoreChatHeads';
 import HandleTouches from './HandleTouches';
+import TouchesInside from './TouchesInside';
 import HandleRelayout from './HandleRelayout';
 import SideMenu from './SideMenu';
 import AlertAreas from './AlertAreas';
@@ -74,6 +75,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, HandleTouches)}>
           <Text style={styles.button}>Handle Touches</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, TouchesInside)}>
+          <Text style={styles.button}>Touches Inside</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, HandleRelayout)}>
           <Text style={styles.button}>Handle Relayout</Text>

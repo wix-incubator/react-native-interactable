@@ -1,4 +1,5 @@
 package com.wix.interactable;
+import android.graphics.PointF;
 
 public class InteractableArea {
     private float top;
@@ -15,6 +16,23 @@ public class InteractableArea {
         this.right = right;
         this.bounce = bounce;
         this.haptics = haptics;
+    }
+
+    public boolean pointInside(PointF point) {
+        float cx = point.x;
+        float cy = point.y;
+
+        if (cx < this.left) return false;
+        if (cx > this.right) return false;
+
+        if (cy < this.top) return false;
+        if (cy > this.bottom) return false;
+
+        return true;
+    }
+
+    public boolean pointInsideWithOrigin(PointF point, PointF origin) {
+        return this.pointInside(new PointF(point.x - origin.x, point.y - origin.y));
     }
 
 

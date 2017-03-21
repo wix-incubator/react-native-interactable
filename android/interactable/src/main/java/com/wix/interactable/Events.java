@@ -55,4 +55,24 @@ public class Events {
             rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
         }
     }
+    public static class OnAlertEvent extends Event<OnAlertEvent> {
+
+        WritableMap eventData;
+
+        public OnAlertEvent(int viewTag, String alertAreaId, String alertType) {
+            super(viewTag);
+            eventData = Arguments.createMap();
+            eventData.putString(alertAreaId, alertType);
+        }
+
+        @Override
+        public String getEventName() {
+            return "onAlert";
+        }
+
+        @Override
+        public void dispatch(RCTEventEmitter rctEventEmitter) {
+            rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+        }
+    }
 }

@@ -18,6 +18,8 @@ import com.wix.interactable.physics.PhysicsGravityWellBehavior;
 import com.wix.interactable.physics.PhysicsSpringBehavior;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InteractableView extends ViewGroup implements PhysicsAnimator.PhysicsAnimatorListener {
 
@@ -41,6 +43,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private ArrayList<InteractablePoint> snapPoints = new ArrayList<>();
     private ArrayList<InteractablePoint> springPoints = new ArrayList<>();
     private ArrayList<InteractablePoint> gravityPoints = new ArrayList<>();
+    private ArrayList<InteractablePoint> frictionAreas = new ArrayList<>();
+    private ArrayList<InteractablePoint> alertAreas = new ArrayList<>();
+    private Set<String> insideAlertAreas = new HashSet<>();
 
     private InteractionListener listener;
 
@@ -83,7 +88,27 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     @Override
     public void onAnimationFrame() {
-        listener.onAnimatedEvent(getTranslationX(), getTranslationY());
+        PointF currentPosition = getCurrentPosition();
+        listener.onAnimatedEvent(currentPosition.x, currentPosition.y);
+        reportAlertEvent(currentPosition);
+    }
+
+    private void reportAlertEvent(PointF position) {
+        for (InteractablePoint area : alertAreas) {
+            if (area.influenceArea != null && area.id != null) {
+                if (area.influenceArea.pointInside(position)) {
+                    if (!insideAlertAreas.contains(area.id)) {
+                        listener.onAlert(area.id, "enter");
+                        insideAlertAreas.add(area.id);
+                    }
+                } else {
+                    if(insideAlertAreas.contains(area.id)) {
+                        listener.onAlert(area.id, "leave");
+                        insideAlertAreas.remove(area.id);
+                    }
+                }
+            }
+        }
     }
 
     private void initializeAnimator() {
@@ -192,7 +217,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 //        Log.d("InteractableView","handleEndOfDrag velocity = " + velocity);
 
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
-                                            getTranslationY() + toss*velocity.y);
+                getTranslationY() + toss*velocity.y);
 
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
 
@@ -310,7 +335,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private PhysicsArea influenceAreaFromPoint(InteractablePoint point)
     {
         if (point.influenceArea == null) return null;
-        
+
         PointF minPoint = new PointF(-Float.MAX_VALUE, -Float.MAX_VALUE);
         PointF maxPoint = new PointF(Float.MAX_VALUE, Float.MAX_VALUE);
 
@@ -357,9 +382,13 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     public void setDragToss(float dragToss) {
         this.dragToss = dragToss;
     }
-    
+
     public void setSnapPoints(ArrayList snapPoints) {
         this.snapPoints = snapPoints;
+    }
+
+    public void setAlertAreas(ArrayList<InteractablePoint> alertAreas) {
+        this.alertAreas = alertAreas;
     }
 
     public void setSpringsPoints(ArrayList<InteractablePoint> springPoints) {
@@ -380,7 +409,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
     public void setFrictionAreas(ArrayList<InteractablePoint> frictionAreas) {
-        this.gravityPoints = gravityPoints;
+        this.frictionAreas = frictionAreas;
         for (InteractablePoint point : frictionAreas) {
 //            Log.d("InteractableView","setFrictionAreas damping = " + point.damping);
             addConstantFrictionBehavior(point);
@@ -389,6 +418,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public interface InteractionListener {
         void onSnap(int indexOfSnapPoint, String snapPointId);
+        void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
     }
 }

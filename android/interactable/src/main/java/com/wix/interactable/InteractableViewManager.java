@@ -58,6 +58,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setFrictionAreas(RNConvert.interactablePoints(frictionAreas));
     }
 
+    @ReactProp(name = "alertAreas")
+    public void setAlertAreas(InteractableView view, @Nullable ReadableArray alertAreas) {
+        view.setAlertAreas(RNConvert.interactablePoints(alertAreas));
+    }
+
     @ReactProp(name = "dragWithSprings")
     public void setDrag(InteractableView view, @Nullable ReadableMap dragWithSprings) {
         view.setDragWithSprings(RNConvert.interactableDrag(dragWithSprings));
@@ -89,6 +94,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.<String, Object>builder()
                 .put("onSnap", MapBuilder.of("registrationName", "onSnap"))
+                .put("onAlert", MapBuilder.of("registrationName", "onAlert"))
                 .put("onAnimatedEvent", MapBuilder.of("registrationName", "onAnimatedEvent"))
                 .build();
     }
@@ -105,6 +111,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         @Override
         public void onSnap(int indexOfSnapPoint, String snapPointId) {
             eventDispatcher.dispatchEvent(new Events.OnSnapEvent(interactableView.getId(), indexOfSnapPoint, snapPointId));
+        }
+
+        @Override
+        public void onAlert(String alertAreaId, String alertType) {
+            eventDispatcher.dispatchEvent(new Events.OnAlertEvent(interactableView.getId(), alertAreaId, alertType));
         }
 
         @Override

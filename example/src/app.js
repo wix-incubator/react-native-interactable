@@ -19,6 +19,7 @@ import TouchesInside from './TouchesInside';
 import HandleRelayout from './HandleRelayout';
 import SideMenu from './SideMenu';
 import AlertAreas from './AlertAreas';
+import CollapsingHeaderWithScroll from './CollapsingHeaderWithScroll';
 
 export default class example extends Component {
   constructor(props) {
@@ -87,6 +88,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, AlertAreas)}>
           <Text style={styles.button}>Alert Areas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeaderWithScroll)}>
+          <Text style={styles.button}>Collapsing Header with Scroll</Text>
         </TouchableOpacity>
       </ScrollView>
     );

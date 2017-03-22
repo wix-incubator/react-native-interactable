@@ -76,12 +76,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
         behaviors.add(idx,behavior);
 
         ensureTargetObjectExists(behavior.target);
-        if (!isRunning) {
-            isRunning = true;
-            lastFrameTS = 0;
-            this.consecutiveFramesWithNoMovement = 0;
-            this.choreographer.postFrameCallback(this);
-        }
+        ensureRunning();
     }
 
     public void addTempBehavior(PhysicsBehavior behavior) {
@@ -113,6 +108,21 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
             targetsToObjects.put(target,physicsObject);
         }
         return physicsObject;
+    }
+    
+    public void setTargetVelocity(View target, PointF velocity) {
+        PhysicsObject physicsObject = ensureTargetObjectExists(target);
+        physicsObject.velocity = velocity;
+        ensureRunning();
+    }
+
+    private void ensureRunning(){
+        if (!isRunning) {
+            isRunning = true;
+            lastFrameTS = 0;
+            this.consecutiveFramesWithNoMovement = 0;
+            this.choreographer.postFrameCallback(this);
+        }
     }
 
     public PointF getTargetVelocity(View target) {

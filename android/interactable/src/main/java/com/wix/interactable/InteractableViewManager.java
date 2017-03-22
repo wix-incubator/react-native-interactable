@@ -1,7 +1,9 @@
 package com.wix.interactable;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 
+import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
@@ -17,6 +19,7 @@ import java.util.Map;
 public class InteractableViewManager extends ViewGroupManager<InteractableView> {
 
     public static final String REACT_CLASS = "InteractableView";
+    public static final int COMMAND_SET_VELOCITY = 1;
 
     @Override
     public String getName() {
@@ -26,6 +29,31 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
     @Override
     protected InteractableView createViewInstance(ThemedReactContext reactContext) {
         return new InteractableView(reactContext);
+    }
+
+    @Override
+    public Map<String,Integer> getCommandsMap() {
+        return MapBuilder.of("setVelocity", COMMAND_SET_VELOCITY);
+    }
+
+    @Override
+    public void receiveCommand(
+            InteractableView view,
+            int commandType,
+            @Nullable ReadableArray args) {
+        Assertions.assertNotNull(view);
+        Assertions.assertNotNull(args);
+        switch (commandType) {
+            case COMMAND_SET_VELOCITY: {
+                view.setVelocity(RNConvert.pointF(args.getMap(0)));
+                return;
+            }
+            default:
+                throw new IllegalArgumentException(String.format(
+                        "Unsupported command %d received by %s.",
+                        commandType,
+                        getClass().getSimpleName()));
+        }
     }
 
     @ReactProp(name = "verticalOnly")

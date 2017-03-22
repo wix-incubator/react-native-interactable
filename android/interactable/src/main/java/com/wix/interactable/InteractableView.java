@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
+import com.facebook.react.bridge.ReadableMap;
 import com.wix.interactable.physics.PhysicsAnchorBehavior;
 import com.wix.interactable.physics.PhysicsAnimator;
 import com.wix.interactable.physics.PhysicsArea;
@@ -40,6 +41,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private InteractableArea boundaries;
     private InteractableSpring dragWithSprings;
     private float dragToss;
+    private PointF velocity;
+
     private ArrayList<InteractablePoint> snapPoints = new ArrayList<>();
     private ArrayList<InteractablePoint> springPoints = new ArrayList<>();
     private ArrayList<InteractablePoint> gravityPoints = new ArrayList<>();
@@ -206,6 +209,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private void handleEndOfDrag() {
         this.animator.removeTempBehaviors();
+        this.dragBehavior = null;
+
         this.animator.setDragging(false);
 
         PointF velocity = this.animator.getTargetVelocity(this);
@@ -415,6 +420,15 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             addConstantFrictionBehavior(point);
         }
     }
+
+
+    public void setVelocity(PointF velocity) {
+        if(dragBehavior!=null) return;
+        this.velocity = velocity;
+        this.animator.setTargetVelocity(this,this.velocity);
+        handleEndOfDrag();
+    }
+
 
     public interface InteractionListener {
         void onSnap(int indexOfSnapPoint, String snapPointId);

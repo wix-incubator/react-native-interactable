@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactNative, { requireNativeComponent, Animated, NativeModules } from 'react-native';
+import ReactNative, { requireNativeComponent, Animated, NativeModules, UIManager,Platform } from 'react-native';
+
 
 // const NativeInteractableView = requireNativeComponent('InteractableView', null);
 
@@ -51,8 +52,17 @@ export default class InteractableView extends Component {
     );
   }
 
-  setVelocity(params) {
-    NativeViewManager.setVelocity(ReactNative.findNodeHandle(this), params);
-  }
+    setVelocity(params) {
+        if (Platform.OS === 'ios') {
+            NativeViewManager.setVelocity(ReactNative.findNodeHandle(this), params);
+        } else if (Platform.OS === 'android') {
+            UIManager.dispatchViewManagerCommand(
+                ReactNative.findNodeHandle(this),
+                UIManager.InteractableView.Commands.setVelocity,
+                [params],
+            );
+        }
+    }
+
 
 }

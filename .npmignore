@@ -217,3 +217,7 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
+
+example
+real-life-example
+android/build

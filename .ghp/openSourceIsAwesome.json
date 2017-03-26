@@ -1,5 +1,6 @@
 {
-    "description" : "Declarative API for handling fluid user interactions with views at 60 FPS in React Native",
+    "name": "react-native-interactable",
+    "description": "Declarative API for handling fluid user interactions with views at 60 FPS in React Native",
     "title": "React Native Interactable",
     "github": "https://github.com/wix/react-native-interactable",
     "AndroidVideoUrl": "https://github.com/wix/react-native/blob/master/src/videos/react-interactable-android.mp4?raw=true",

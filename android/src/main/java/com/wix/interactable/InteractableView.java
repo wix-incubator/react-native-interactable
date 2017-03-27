@@ -157,12 +157,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
         Log.d("InteractableView","onInterceptTouchEvent ptr count = " + ev.getPointerCount());
-//        handleTouch(ev);
+
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            this.animator.removeTempBehaviors();
-            this.animator.setDragging(true);
             this.dragStartLocation = new PointF(ev.getX(),ev.getY());
-            this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
             this.isSwiping = false;
         }
         if (ev.getAction() == MotionEvent.ACTION_MOVE) {
@@ -182,6 +179,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
                     verticalOnly && isVSwipe ||
                     !horizontalOnly && !verticalOnly) {
                 this.dragStartLocation = new PointF(ev.getX(),ev.getY());
+                startDrag();
                 getReactRoot().onChildStartedNativeGesture(ev);
                 return true;
             }
@@ -194,70 +192,11 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//
-//        Log.d("InteractableView","onTouchEvent action = " + event.getAction());
-//
-//        switch (event.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                this.animator.removeTempBehaviors();
-//                this.animator.setDragging(true);
-//                this.dragStartLocation = new PointF(event.getX(),event.getY());
-//                this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
-//
-////                getParent().requestDisallowInterceptTouchEvent(true);
-//                getReactRoot().onChildStartedNativeGesture(event);
-//                break;
-//
-//            case MotionEvent.ACTION_MOVE:
-//
-//                float newX = getTranslationX() + event.getX() - dragStartLocation.x;
-//                float newY = getTranslationY() + event.getY() - dragStartLocation.y;
-//                if (horizontalOnly) {
-//                    newY = 0;
-//                }
-//                if (verticalOnly) {
-//                    newX = 0;
-//                }
-//
-//                this.dragBehavior.setAnchorPoint(new PointF(newX,newY));
-////                float dx = event.getX() - dragLastLocation.x;
-////                float dy = event.getY() - dragLastLocation.y;
-////                if (horizontalOnly) {
-////                    dy = 0;
-////                }
-////                if (verticalOnly) {
-////                    dx = 0;
-////                }
-////
-////                this.dragBehavior.moveAnchorPoint(dx,dy);
-//
-//                break;
-//            case MotionEvent.ACTION_UP:
-//            case MotionEvent.ACTION_CANCEL:
-//                handleEndOfDrag();
-//                break;
-//
-//        }
-//        this.dragLastLocation = new PointF(event.getX(),event.getY());
-//
-//        return true;
-//    }
-
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         handleTouch(event);
         getParent().requestDisallowInterceptTouchEvent(true);
         return true;
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        boolean ret = super.dispatchTouchEvent(ev);
-        Log.d("InteractableView","dispatchTouchEvent action = " + ev.getAction() + " ret = " + ret);
-        return ret;
     }
 
     private void handleTouch(MotionEvent event) {
@@ -285,20 +224,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
                 }
 
                 this.dragBehavior.setAnchorPoint(new PointF(newX,newY));
-//                float dx = event.getX() - dragLastLocation.x;
-//                float dy = event.getY() - dragLastLocation.y;
-//                if (horizontalOnly) {
-//                    dy = 0;
-//                }
-//                if (verticalOnly) {
-//                    dx = 0;
-//                }
-//
-//                this.dragBehavior.moveAnchorPoint(dx,dy);
-
-
-
-
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
@@ -322,6 +247,11 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         return null;
     }
 
+    private void startDrag() {
+        this.animator.removeTempBehaviors();
+        this.animator.setDragging(true);
+        this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+    }
 
     private void handleEndOfDrag() {
         this.animator.removeTempBehaviors();

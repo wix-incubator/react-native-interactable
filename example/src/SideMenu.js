@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: -RemainingWidth,
-    right: RemainingWidth,
+    right: 0,
     bottom: 0,
     flexDirection: 'row',
     zIndex: 1002

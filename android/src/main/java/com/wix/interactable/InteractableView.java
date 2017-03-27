@@ -5,10 +5,13 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
-import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.ReactRootView;
 import com.wix.interactable.physics.PhysicsAnchorBehavior;
 import com.wix.interactable.physics.PhysicsAnimator;
 import com.wix.interactable.physics.PhysicsArea;
@@ -36,6 +39,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private boolean verticalOnly;
     private boolean horizontalOnly;
+    private boolean isSwiping;
     private PointF initialPosition;
 
     private InteractableArea boundaries;
@@ -52,6 +56,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private InteractionListener listener;
 
+    private int mTouchSlop;
 
     public InteractableView(Context context) {
         super(context);
@@ -78,6 +83,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         originSet = false;
         initialPositionSet = false;
         initializeAnimator();
+        ViewConfiguration vc = ViewConfiguration.get(getContext());
+        mTouchSlop = vc.getScaledTouchSlop();
     }
 
     public void setEventListener(InteractionListener listener) {
@@ -148,8 +155,38 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
-        return true;
+        Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
+        Log.d("InteractableView","onInterceptTouchEvent ptr count = " + ev.getPointerCount());
+//        handleTouch(ev);
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            this.animator.removeTempBehaviors();
+            this.animator.setDragging(true);
+            this.dragStartLocation = new PointF(ev.getX(),ev.getY());
+            this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+            this.isSwiping = false;
+        }
+        if (ev.getAction() == MotionEvent.ACTION_MOVE) {
+            if (isSwiping || ev.getPointerCount() > 1) {
+                return false;
+            }
+
+            float delX = ev.getX() - dragStartLocation.x;
+            float delY = ev.getY() - dragStartLocation.y;
+//            Log.d("InteractableView","onInterceptTouchEvent delX = " + delX);
+//            Log.d("InteractableView","onInterceptTouchEvent mTouchSlop = " + mTouchSlop);
+            boolean isHSwipe = Math.abs(delX) > mTouchSlop;
+            boolean isVSwipe = Math.abs(delY) > mTouchSlop;
+            this.isSwiping = this.isSwiping || isHSwipe || isVSwipe;
+
+            if (horizontalOnly && isHSwipe ||
+                    verticalOnly && isVSwipe ||
+                    !horizontalOnly && !verticalOnly) {
+                this.dragStartLocation = new PointF(ev.getX(),ev.getY());
+                getReactRoot().onChildStartedNativeGesture(ev);
+                return true;
+            }
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override
@@ -157,17 +194,81 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     }
 
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//
+//        Log.d("InteractableView","onTouchEvent action = " + event.getAction());
+//
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                this.animator.removeTempBehaviors();
+//                this.animator.setDragging(true);
+//                this.dragStartLocation = new PointF(event.getX(),event.getY());
+//                this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+//
+////                getParent().requestDisallowInterceptTouchEvent(true);
+//                getReactRoot().onChildStartedNativeGesture(event);
+//                break;
+//
+//            case MotionEvent.ACTION_MOVE:
+//
+//                float newX = getTranslationX() + event.getX() - dragStartLocation.x;
+//                float newY = getTranslationY() + event.getY() - dragStartLocation.y;
+//                if (horizontalOnly) {
+//                    newY = 0;
+//                }
+//                if (verticalOnly) {
+//                    newX = 0;
+//                }
+//
+//                this.dragBehavior.setAnchorPoint(new PointF(newX,newY));
+////                float dx = event.getX() - dragLastLocation.x;
+////                float dy = event.getY() - dragLastLocation.y;
+////                if (horizontalOnly) {
+////                    dy = 0;
+////                }
+////                if (verticalOnly) {
+////                    dx = 0;
+////                }
+////
+////                this.dragBehavior.moveAnchorPoint(dx,dy);
+//
+//                break;
+//            case MotionEvent.ACTION_UP:
+//            case MotionEvent.ACTION_CANCEL:
+//                handleEndOfDrag();
+//                break;
+//
+//        }
+//        this.dragLastLocation = new PointF(event.getX(),event.getY());
+//
+//        return true;
+//    }
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        handleTouch(event);
+        getParent().requestDisallowInterceptTouchEvent(true);
+        return true;
+    }
 
-//        Log.d("InteractableView","onTouchEvent action = " + event.getAction());
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean ret = super.dispatchTouchEvent(ev);
+        Log.d("InteractableView","dispatchTouchEvent action = " + ev.getAction() + " ret = " + ret);
+        return ret;
+    }
+
+    private void handleTouch(MotionEvent event) {
+        Log.d("InteractableView","handleTouch action = " + event.getAction());
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                this.animator.removeTempBehaviors();
-                this.animator.setDragging(true);
-                this.dragStartLocation = new PointF(event.getX(),event.getY());
-                this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+//                this.animator.removeTempBehaviors();
+//                this.animator.setDragging(true);
+//                this.dragStartLocation = new PointF(event.getX(),event.getY());
+//                this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
 
 
                 break;
@@ -195,6 +296,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 //
 //                this.dragBehavior.moveAnchorPoint(dx,dy);
 
+
+
+
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
@@ -203,9 +307,21 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
         }
         this.dragLastLocation = new PointF(event.getX(),event.getY());
-
-        return true;
     }
+
+    private ReactRootView getReactRoot() {
+        View v = this;
+        while (v.getParent() != null) {
+            if (v instanceof ReactRootView) {
+                Log.d("InteractableView","has root");
+                return (ReactRootView) v;
+            }
+            v = (View) v.getParent();
+        }
+        Log.d("InteractableView","no root");
+        return null;
+    }
+
 
     private void handleEndOfDrag() {
         this.animator.removeTempBehaviors();

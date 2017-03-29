@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 public class TouchBlocker extends ViewGroup {
     public final static String TAG = "TouchBlocker";
 
+    public void setBlockAllTouch(boolean blockAllTouch) {
+        this.blockAllTouch = blockAllTouch;
+    }
+
     private boolean blockAllTouch = false;
     public TouchBlocker(Context context) {
         super(context);

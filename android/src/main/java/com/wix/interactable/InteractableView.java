@@ -56,7 +56,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private InteractionListener listener;
 
-    private int mTouchSlop;
+    private int touchSlop;
+    private TouchBlocker touchBlocker;
+    private boolean isDelegatingTouch = false;
 
     public InteractableView(Context context) {
         super(context);
@@ -84,7 +86,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         initialPositionSet = false;
         initializeAnimator();
         ViewConfiguration vc = ViewConfiguration.get(getContext());
-        mTouchSlop = vc.getScaledTouchSlop();
+        touchSlop = vc.getScaledTouchSlop();
     }
 
     public void setEventListener(InteractionListener listener) {
@@ -156,11 +158,11 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
-        Log.d("InteractableView","onInterceptTouchEvent ptr count = " + ev.getPointerCount());
 
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             this.dragStartLocation = new PointF(ev.getX(),ev.getY());
             this.isSwiping = false;
+            this.isDelegatingTouch = false;
         }
         if (ev.getAction() == MotionEvent.ACTION_MOVE) {
             if (isSwiping || ev.getPointerCount() > 1) {
@@ -169,10 +171,15 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
             float delX = ev.getX() - dragStartLocation.x;
             float delY = ev.getY() - dragStartLocation.y;
-//            Log.d("InteractableView","onInterceptTouchEvent delX = " + delX);
-//            Log.d("InteractableView","onInterceptTouchEvent mTouchSlop = " + mTouchSlop);
-            boolean isHSwipe = Math.abs(delX) > mTouchSlop;
-            boolean isVSwipe = Math.abs(delY) > mTouchSlop;
+            Log.d("InteractableView","onInterceptTouchEvent delY = " + delY);
+            Log.d("InteractableView","onInterceptTouchEvent curY = " + getTranslationY());
+
+//            if (delY < 0 && getTranslationY() == boundaries.getTop()) {
+//                return false;
+//            }
+
+            boolean isHSwipe = Math.abs(delX) > touchSlop;
+            boolean isVSwipe = Math.abs(delY) > touchSlop;
             this.isSwiping = this.isSwiping || isHSwipe || isVSwipe;
 
             if (horizontalOnly && isHSwipe ||
@@ -180,7 +187,14 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
                     !horizontalOnly && !verticalOnly) {
                 this.dragStartLocation = new PointF(ev.getX(),ev.getY());
                 startDrag();
-                getReactRoot().onChildStartedNativeGesture(ev);
+                if (touchBlocker == null) {
+                    getReactRoot().onChildStartedNativeGesture(ev);
+
+                }
+                else {
+
+                }
+
                 return true;
             }
         }
@@ -189,18 +203,49 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
+        touchBlocker = (TouchBlocker) findViewWithTag(TouchBlocker.TAG);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        handleTouch(event);
+
         getParent().requestDisallowInterceptTouchEvent(true);
-        return true;
+        return handleTouch(event);
     }
 
-    private void handleTouch(MotionEvent event) {
-        Log.d("InteractableView","handleTouch action = " + event.getAction());
+    private void delegateEventToBlocker(MotionEvent event) {
+        if (!isDelegatingTouch){
+            event.setAction(MotionEvent.ACTION_DOWN);
+            this.animator.setDragging(false);
+            isSwiping = false;
+            isDelegatingTouch = true;
+        }
+
+        touchBlocker.dispatchTouchEvent(event);
+    }
+
+    private boolean handleTouch(MotionEvent event) {
+
+        float delX = event.getX() - dragStartLocation.x;
+        float delY = event.getY() - dragStartLocation.y;
+
+        Log.d("InteractableView","handleTouch action = " + event.getAction() +
+                " curY = " + getTranslationY() +
+                " delY = " + delY + " isDelegatingTouch = " + isDelegatingTouch);
+
+        if (isAtTopBound() && touchBlocker != null
+                && (delY < 0 || !touchBlocker.isAtTop() )) {
+            Log.d("InteractableView","has blocker! y " + touchBlocker.getTop());
+
+            delegateEventToBlocker(event);
+
+            return true;
+        }
+        if (isDelegatingTouch) {
+            isDelegatingTouch = false;
+            startDrag();
+            this.dragStartLocation = new PointF(event.getX(),event.getY());
+        }
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -232,6 +277,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
         }
         this.dragLastLocation = new PointF(event.getX(),event.getY());
+        return true;
     }
 
     private ReactRootView getReactRoot() {
@@ -245,6 +291,13 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         }
         Log.d("InteractableView","no root");
         return null;
+    }
+
+    private boolean isAtTopBound() {
+        if (this.boundaries == null) {
+            return false;
+        }
+        return getTranslationY() <= this.boundaries.getTop();
     }
 
     private void startDrag() {
@@ -281,6 +334,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (snapPoint == null) {
             return;
         }
+        Log.d("InteractableView","onSnap!!! snapPoint.id = " + snapPoint.id);
         listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;

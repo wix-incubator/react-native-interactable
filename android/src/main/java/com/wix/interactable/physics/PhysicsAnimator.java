@@ -164,7 +164,7 @@ public class PhysicsAnimator implements Choreographer.FrameCallback {
                 hadMovement = true;
             }
 
-//            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " dx = " + dx);
+            Log.d("InteractableView"," animateFrameWithDeltaTime " + deltaTime + " dx = " + dx);
 
             v.animate().translationXBy(dx).translationYBy(dy).setDuration(0).start();
         }

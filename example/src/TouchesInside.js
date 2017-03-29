@@ -46,10 +46,13 @@ export default class TouchesInside extends Component {
               value={this.state.switch}
               onValueChange={(value) => this.setState({switch: value})} />
 
+
+            <Interactable.Blocker
+            style={{width: 150, height: 300, marginVertical: 10, alignSelf: 'center'}}>
             <WebView
               source={{uri: 'https://i.imgur.com/vKb4qnU.jpg'}}
               style={{width: 150, height: 100, marginVertical: 10, alignSelf: 'center'}} />
-
+              </Interactable.Blocker>
           </View>
         </Interactable.View>
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Animated, ScrollView, Dimensions } from 'react-native';
 import Interactable from 'react-native-interactable';
+console.log(Interactable.Blocker);
 
 const Screen = {
   height: Dimensions.get('window').height - 75
@@ -45,6 +46,8 @@ export default class CollapsingHeaderWithScroll extends Component {
             boundaries={{top: -150}}
             onSnap={this.onSnap.bind(this)}
             animatedValueY={this._deltaY}>
+            <Interactable.Blocker
+            style={{left: 0, right: 0, height: Screen.height - 100, backgroundColor: '#e0e0e0'}}>
             <ScrollView
               bounces={false}
               canCancelContentTouches={this.state.canScroll}
@@ -58,17 +61,18 @@ export default class CollapsingHeaderWithScroll extends Component {
               <View style={styles.placeholder} />
               <View style={styles.placeholder} />
             </ScrollView>
+            </Interactable.Blocker>
           </Interactable.View>
 
       </View>
     );
   }
   onSnap(event) {
-    const { id } = event.nativeEvent;
-    if (id === 'bottom') {
-      this.setState({ canScroll: true });
-      alert('This implementation is still broken, in progress');
-    }
+    // const { id } = event.nativeEvent;
+    // if (id === 'bottom') {
+    //   this.setState({ canScroll: true });
+    //   alert('This implementation is still broken, in progress');
+    // }
   }
   onScroll(event) {
     const { contentOffset } = event.nativeEvent;

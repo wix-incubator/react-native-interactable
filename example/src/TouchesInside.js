@@ -39,7 +39,10 @@ export default class TouchesInside extends Component {
               <Picker.Item label="JavaScript" value="js" />
             </Picker>
 
-            <Slider style={{marginVertical: 10}} />
+            <Interactable.Blocker
+              blockAllTouch={true}>
+              <Slider style={{marginVertical: 10}} />
+            </Interactable.Blocker>
 
             <Switch
               style={{alignSelf: 'center'}}

@@ -178,9 +178,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             if (horizontalOnly && isHSwipe ||
                     verticalOnly && isVSwipe ||
                     !horizontalOnly && !verticalOnly) {
-                this.dragStartLocation = new PointF(ev.getX(),ev.getY());
-                startDrag();
-                getReactRoot().onChildStartedNativeGesture(ev);
+
+                startDrag(ev);
+
                 return true;
             }
         }
@@ -203,14 +203,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         Log.d("InteractableView","handleTouch action = " + event.getAction());
 
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-//                this.animator.removeTempBehaviors();
-//                this.animator.setDragging(true);
-//                this.dragStartLocation = new PointF(event.getX(),event.getY());
-//                this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
-
-
-                break;
 
             case MotionEvent.ACTION_MOVE:
 
@@ -247,10 +239,17 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         return null;
     }
 
-    private void startDrag() {
+    private void startDrag(MotionEvent ev) {
+        this.dragStartLocation = new PointF(ev.getX(),ev.getY());
         this.animator.removeTempBehaviors();
         this.animator.setDragging(true);
         this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+
+        try {
+            getReactRoot().onChildStartedNativeGesture(ev);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleEndOfDrag() {

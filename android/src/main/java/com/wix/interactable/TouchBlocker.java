@@ -18,6 +18,13 @@ public class TouchBlocker extends ViewGroup {
     }
 
     private boolean blockAllTouch = false;
+
+//    private long scrollLastTS;
+//    private float scrollSpeed;
+//    private final float scrollDamping = 700f;
+
+
+
     public TouchBlocker(Context context) {
         super(context);
         setTag(TAG);
@@ -58,5 +65,26 @@ public class TouchBlocker extends ViewGroup {
     public boolean isAtTop() {
         return getChildAt(0).getScrollY() == 0;
     }
+
+//    public void animateScrollFling(float vStart) {
+//        scrollLastTS = System.currentTimeMillis();
+//        scrollSpeed = vStart;
+//        post(scrollRunnable);
+//    }
+//
+//    private Runnable scrollRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            long timeNow = System.currentTimeMillis();
+//            float deltaTime = (timeNow - scrollLastTS) / 1000f;
+//            getChildAt(0).scrollBy(0, (int) (deltaTime * scrollSpeed));
+//            scrollSpeed -= scrollDamping * deltaTime;
+//
+//            scrollLastTS = timeNow;
+//            if (scrollSpeed > 0) {
+//                post(scrollRunnable);
+//            }
+//        }
+//    };
 
 }

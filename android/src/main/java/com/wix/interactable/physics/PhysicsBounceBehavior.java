@@ -10,6 +10,16 @@ import android.view.View;
 
 public class PhysicsBounceBehavior extends PhysicsBehavior {
 
+    public interface BounceListener {
+        void onBounceLimitTop(float vy);
+    }
+
+    public void setBounceListener(BounceListener listener) {
+        this.listener = listener;
+    }
+
+    private BounceListener listener;
+
     private PointF minPoint;
     private PointF maxPoint;
     private float bounce = 0.5f;
@@ -24,7 +34,7 @@ public class PhysicsBounceBehavior extends PhysicsBehavior {
 
     @Override
     public void executeFrameWithDeltaTime(float timeInterval, PhysicsObject physicsObject) {
-//        Log.d("InteractableView"," PhysicsBounceBehavior executeFrameWithDeltaTime: " + timeInterval + " minX = " + minPoint.x);
+        Log.d("InteractableView"," PhysicsBounceBehavior executeFrameWithDeltaTime: " + timeInterval + " minY = " + minPoint.y);
         applyLimits();
         if (this.minPoint.x == this.target.getTranslationX() && physicsObject.velocity.x < 0.0)
         {
@@ -35,10 +45,15 @@ public class PhysicsBounceBehavior extends PhysicsBehavior {
         }
         if (this.minPoint.y == this.target.getTranslationY() && physicsObject.velocity.y < 0.0)
         {
+            Log.d("InteractableView"," PhysicsBounceBehavior applying top limit ");
+            if (listener != null) {
+                listener.onBounceLimitTop(physicsObject.velocity.y);
+            }
             float vx = physicsObject.velocity.x;
             float vy = -physicsObject.velocity.y * this.bounce;
             physicsObject.velocity = new PointF(vx, vy);
             doHaptic();
+
         }
         if (this.maxPoint.x == this.target.getTranslationX() && physicsObject.velocity.x > 0.0)
         {

@@ -86,18 +86,18 @@ class Row extends Component {
       <View style={{backgroundColor: '#de6d77'}}>
 
         <View style={{position: 'absolute', right: 0, height: 75, flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={this.onButtonPress.bind(this, 'trash')}>
+          <TouchableOpacity style={[styles.button]} onPress={this.onButtonPress.bind(this, 'trash')}>
             <Animated.Image source={require('../img/icon-trash.png')} style={
-              [styles.buttonRight, {
+              [styles.buttonImage, {
                 opacity: this._deltaX.interpolate({
-                  inputRange: [-155, -115],
+                  inputRange: [-150, -115],
                   outputRange: [1, 0],
                   extrapolateLeft: 'clamp',
                   extrapolateRight: 'clamp'
                 }),
                 transform: [{
                   scale: this._deltaX.interpolate({
-                    inputRange: [-155, -115],
+                    inputRange: [-150, -115],
                     outputRange: [1, 0.7],
                     extrapolateLeft: 'clamp',
                     extrapolateRight: 'clamp'
@@ -106,18 +106,18 @@ class Row extends Component {
               }
             ]} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.onButtonPress.bind(this, 'snooze')}>
+          <TouchableOpacity style={[styles.button]} onPress={this.onButtonPress.bind(this, 'snooze')}>
             <Animated.Image source={require('../img/icon-clock.png')} style={
-              [styles.buttonRight, {
+              [styles.buttonImage, {
                 opacity: this._deltaX.interpolate({
-                  inputRange: [-90, -50],
+                  inputRange: [-75, -50],
                   outputRange: [1, 0],
                   extrapolateLeft: 'clamp',
                   extrapolateRight: 'clamp'
                 }),
                 transform: [{
                   scale: this._deltaX.interpolate({
-                    inputRange: [-90, -50],
+                    inputRange: [-75, -50],
                     outputRange: [1, 0.7],
                     extrapolateLeft: 'clamp',
                     extrapolateRight: 'clamp'
@@ -129,18 +129,18 @@ class Row extends Component {
         </View>
 
         <View style={{position: 'absolute', left: 0, height: 75, flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity onPress={this.onButtonPress.bind(this, 'done')}>
+          <TouchableOpacity style={[styles.button]} onPress={this.onButtonPress.bind(this, 'done')}>
             <Animated.Image source={require('../img/icon-check.png')} style={
-              [styles.buttonLeft, {
+              [styles.buttonImage, {
                 opacity: this._deltaX.interpolate({
-                  inputRange: [50, 90],
+                  inputRange: [50, 75],
                   outputRange: [0, 1],
                   extrapolateLeft: 'clamp',
                   extrapolateRight: 'clamp'
                 }),
                 transform: [{
                   scale: this._deltaX.interpolate({
-                    inputRange: [50, 90],
+                    inputRange: [50, 75],
                     outputRange: [0.7, 1],
                     extrapolateLeft: 'clamp',
                     extrapolateRight: 'clamp'
@@ -154,9 +154,9 @@ class Row extends Component {
         <Interactable.View
           horizontalOnly={true}
           snapPoints={[
-            {x: 90, damping: 1-this.props.damping, tension: this.props.tension},
+            {x: 75, damping: 1-this.props.damping, tension: this.props.tension},
             {x: 0, damping: 1-this.props.damping, tension: this.props.tension},
-            {x: -155, damping: 1-this.props.damping, tension: this.props.tension}
+            {x: -150, damping: 1-this.props.damping, tension: this.props.tension}
           ]}
           dragToss={0.01}
           animatedValueX={this._deltaX}>
@@ -200,15 +200,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'gray'
   },
-  buttonRight: {
-    width: 40,
-    height: 40,
-    marginRight: 25
+  button: {
+    width: 75,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center"
   },
-  buttonLeft: {
+  buttonImage: {
     width: 40,
-    height: 40,
-    marginLeft: 25
+    height: 40
   },
   playground: {
     marginTop: Screen.height <= 500 ? 0 : 80,

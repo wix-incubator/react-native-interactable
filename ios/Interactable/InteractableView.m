@@ -569,6 +569,22 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     [self setTempBehaviorsForDragEnd];
 }
 
+- (void)snapTo:(NSDictionary*)params
+{
+    NSInteger index = [[params objectForKey:@"index"] integerValue];
+    if (self.snapPoints && index >= 0 && index < [self.snapPoints count])
+    {
+        [self.animator removeTempBehaviors];
+        self.dragBehavior = nil;
+        
+        InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
+        if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
+        
+        [self addTempBounceBehaviorWithBoundaries:self.boundaries];
+        [self.animator ensureRunning];
+    }
+}
+
 @end
 
 

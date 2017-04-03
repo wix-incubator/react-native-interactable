@@ -18,6 +18,7 @@ import HandleTouches from './HandleTouches';
 import TouchesInside from './TouchesInside';
 import HandleRelayout from './HandleRelayout';
 import SideMenu from './SideMenu';
+import SnapTo from './SnapTo';
 import AlertAreas from './AlertAreas';
 import CollapsingHeaderWithScroll from './CollapsingHeaderWithScroll';
 
@@ -84,7 +85,10 @@ export default class example extends Component {
           <Text style={styles.button}>Handle Relayout</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, SideMenu)}>
-          <Text style={styles.button}>Side Menu (imperative cmds)</Text>
+          <Text style={styles.button}>Side Menu (imperative cmd)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, SnapTo)}>
+          <Text style={styles.button}>Snap To (imperative cmd)</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, AlertAreas)}>
           <Text style={styles.button}>Alert Areas and Drag Event</Text>

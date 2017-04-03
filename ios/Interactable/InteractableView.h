@@ -34,5 +34,6 @@
 @property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
 
 - (void)setVelocity:(NSDictionary*)params;
+- (void)snapTo:(NSDictionary*)params;
 
 @end

@@ -56,6 +56,8 @@ public class TouchBlocker extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d("InteractableView","TouchBlocker onInterceptTouchEvent action = " + ev.getAction()
+        + " scrollY = " + getChildAt(0).getScrollY());
         if (blockAllTouch) {
         		getParent().requestDisallowInterceptTouchEvent(true);
 

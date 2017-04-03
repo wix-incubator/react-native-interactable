@@ -30,4 +30,14 @@ public class TouchBlockerManager extends ViewGroupManager<TouchBlocker> {
     public void setBlockAllTouch(TouchBlocker view, @Nullable boolean blockAllTouch) {
         view.setBlockAllTouch(blockAllTouch);
     }
+
+    @ReactProp(name = "blockVerticalSwipe")
+    public void setBlockVerticalSwipe(TouchBlocker view, @Nullable boolean blockVerticalSwipe) {
+        view.setBlockVerticalSwipe(blockVerticalSwipe);
+    }
+
+    @ReactProp(name = "blockHorizontalSwipe")
+    public void setBlockHorizontalSwipe(TouchBlocker view, @Nullable boolean blockHorizontalSwipe) {
+        view.setBlockHorizontalSwipe(blockHorizontalSwipe);
+    }
 }

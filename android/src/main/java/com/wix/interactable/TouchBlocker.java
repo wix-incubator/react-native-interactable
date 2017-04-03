@@ -12,18 +12,27 @@ import android.view.ViewGroup;
 
 public class TouchBlocker extends ViewGroup {
     public final static String TAG = "TouchBlocker";
+    private float y1, y2, x1, x2;
 
     public void setBlockAllTouch(boolean blockAllTouch) {
         this.blockAllTouch = blockAllTouch;
     }
 
+    public void setBlockVerticalSwipe(boolean blockVerticalSwipe) {
+        this.blockVerticalSwipe = blockVerticalSwipe;
+    }
+
+    public void setBlockHorizontalSwipe(boolean blockHorizontalSwipe) {
+        this.blockHorizontalSwipe = blockHorizontalSwipe;
+    }
+
     private boolean blockAllTouch = false;
+    private boolean blockVerticalSwipe = false;
+    private boolean blockHorizontalSwipe = false;
 
 //    private long scrollLastTS;
 //    private float scrollSpeed;
 //    private final float scrollDamping = 700f;
-
-
 
     public TouchBlocker(Context context) {
         super(context);
@@ -47,11 +56,50 @@ public class TouchBlocker extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d("InteractableView","TouchBlocker onInterceptTouchEvent action = " + ev.getAction()
-        + " scrollY = " + getChildAt(0).getScrollY());
         if (blockAllTouch) {
-            getParent().requestDisallowInterceptTouchEvent(true);
+        		getParent().requestDisallowInterceptTouchEvent(true);
+
+        		return super.onInterceptTouchEvent(ev);
         }
+
+        if (blockVerticalSwipe) {
+            switch(ev.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    y1 = ev.getY();
+
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    y2 = ev.getY();
+                    float deltaY = y2 - y1;
+
+                    if (Math.abs(deltaY) > 0) {
+          					    getParent().requestDisallowInterceptTouchEvent(true);
+                    }
+
+                    break;
+            }
+        }
+
+        if (blockHorizontalSwipe) {
+            switch(ev.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    x1 = ev.getX();
+
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    x2 = ev.getX();
+                    float deltaX = x2 - x1;
+
+                    if (Math.abs(deltaX) > 0) {
+              		      getParent().requestDisallowInterceptTouchEvent(true);
+                    }
+
+                    break;
+            }
+        }
+
         return super.onInterceptTouchEvent(ev);
     }
 

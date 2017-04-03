@@ -94,6 +94,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 @property (nonatomic, assign) BOOL reactRelayoutHappening;
 @property (nonatomic, assign) CGPoint reactRelayoutCenterDeltaFromOrigin;
 @property (nonatomic) NSMutableSet *insideAlertAreas;
+@property (nonatomic) UIPanGestureRecognizer *pan;
 
 @property (nonatomic, assign) uint16_t coalescingKey;
 @property (nonatomic, assign) NSString* lastEmittedEventName;
@@ -110,11 +111,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         self.initialPositionSet = NO;
         self.reactRelayoutHappening = NO;
         self.insideAlertAreas = [NSMutableSet set];
+        self.dragEnabled = YES;
         
         // pan gesture recognizer for touches
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        pan.delegate = self;
-        [self addGestureRecognizer:pan];
+        self.pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        self.pan.delegate = self;
+        [self addGestureRecognizer:self.pan];
     }
     return self;
 }
@@ -170,6 +172,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     [super setCenter:center];
     [self reportAnimatedEvent];
     [self reportAlertEvent];
+}
+
+- (void)setDragEnabled:(BOOL)dragEnabled
+{
+    _dragEnabled = dragEnabled;
+    self.pan.enabled = dragEnabled;
 }
 
 - (void)initializeAnimator

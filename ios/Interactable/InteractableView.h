@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) BOOL verticalOnly;
 @property (nonatomic, assign) BOOL horizontalOnly;
+@property (nonatomic, assign) BOOL dragEnabled;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *snapPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *springPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *gravityPoints;

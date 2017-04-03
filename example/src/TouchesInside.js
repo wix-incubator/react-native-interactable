@@ -7,6 +7,7 @@ export default class TouchesInside extends Component {
     super(props);
     this.state = {
       vertical: true,
+      dragEnabled: true,
       language: 'java',
       switch: true
     };
@@ -16,15 +17,20 @@ export default class TouchesInside extends Component {
       <View style={styles.container}>
 
         <View style={styles.direction}>
-          <Text style={{marginRight: 10}}>Vertical movement: </Text>
+          <Text style={{marginRight: 10}}>Vertical: </Text>
           <Switch
             value={this.state.vertical}
             onValueChange={(value) => this.setState({vertical: value})} />
+          <Text style={{marginRight: 10, marginLeft: 20}}>Can drag: </Text>
+          <Switch
+            value={this.state.dragEnabled}
+            onValueChange={(value) => this.setState({dragEnabled: value})} />
         </View>
 
         <Interactable.View
           verticalOnly={this.state.vertical}
           horizontalOnly={!this.state.vertical}
+          dragEnabled={this.state.dragEnabled}
           snapPoints={[{y: 0}]}>
           <View style={{width: 300, height: 500, backgroundColor: '#cccccc', padding: 20, borderRadius: 10}}>
 

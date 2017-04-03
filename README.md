@@ -190,6 +190,12 @@ onDrag={this.onDragEvent}
 onAlert={this.onAlertEvent}
 ```
 
+* [`dragEnabled`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#dragenabled-boolean) - whether the user can drag the view or not
+
+```jsx
+dragEnabled={true}
+```
+
 * [`dragWithSpring`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#dragwithspring-object) - specify to make dragging behavior of the view occur using a spring
 
 ```jsx

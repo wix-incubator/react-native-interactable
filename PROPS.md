@@ -100,7 +100,7 @@ Send alert event when the view's center enters/leaves any region within the grou
 horizontalOnly={true}
 ```
 
-Optional, whether the view should be locked to horizontal movement only.
+Optional, whether the view should be locked to horizontal movement only. Default `false`.
 
 #### `verticalOnly` (boolean)
 
@@ -108,7 +108,7 @@ Optional, whether the view should be locked to horizontal movement only.
 verticalOnly={true}
 ```
 
-Optional, whether the view should be locked to vertical movement only.
+Optional, whether the view should be locked to vertical movement only. Default `false`.
 
 #### `boundaries` (object)
 
@@ -169,6 +169,14 @@ Optional, a function called whenever the view's center enters/leaves an alert ar
 
 * key: `id` - The string name of the area that was entered/left.
 * value: `enter` or `leave` (depending if entering or leaving the area).
+
+#### `dragEnabled` (boolean)
+
+```jsx
+dragEnabled={true}
+```
+
+Optional, whether the user can drag the view or not. Default `true`.
 
 #### `dragWithSpring` (object)
 

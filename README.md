@@ -77,12 +77,9 @@ To run the example, clone the repo and run from the root folder:<br>
 * **Install and run the demo app from the App Store/Google Play on your phone**
 <br><br>If you don't want to mess with building yourself, you can play with a pre-built demo on your phone.
 <br><br>Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)<br>Download from [Google Play Store (Android)](https://play.google.com/store/apps/details?id=com.wix.interactions&hl=en)
-
 <br><br><img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/O7ulJa1.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="http://i.imgur.com/2mrUNIM.gif" width=200 />
-
-
 
 * **Build and run the demo app on your computer**
 <br><br>The [demo app](real-life-example) contains more complex demonstrations than the [example](example) project. They're harder to learn from, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo app.
@@ -113,6 +110,7 @@ import Interactable from 'react-native-interactable';
 
 </Interactable.View>
 ```
+<br>
 
 ### `Interactable.View` Props
 
@@ -232,6 +230,8 @@ animatedNativeDriver={false}
 initialPosition={{x: -140, y: -280}}
 ```
 
+<br>
+
 ### `Interactable.View` Methods
 
 ##### `setVelocity(params)` - used to imperatively set the view's velocity in order to move it around
@@ -253,6 +253,7 @@ Takes a single argument, which is a params object containing:
  Takes a single argument, which is a params object containing:
   * `index` - The index of the snap point in the `snapPoints` array. Optional.
 
+<br>
 
 ## Animating other views according to `Interactable.View` position
 

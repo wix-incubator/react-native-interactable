@@ -178,6 +178,12 @@ onSnap={this.onDrawerSnap}
 onStop={this.onStopInteraction}
 ```
 
+* [`onDrag`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#ondrag-function) - a function called whenever the user starts or stops dragging the view
+
+```jsx
+onDrag={this.onDragEvent}
+```
+
 * [`onAlert`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onalert-function) - a function called whenever the view's center enters/leaves an alert area
 
 ```jsx

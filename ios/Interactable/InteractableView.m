@@ -279,6 +279,19 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     }
 }
 
+- (void)reportDragEvent:(NSString*)state
+{
+    if (self.onDrag)
+    {
+        CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
+        self.onDrag(@{
+                        @"state": state,
+                        @"x": @(deltaFromOrigin.x),
+                        @"y": @(deltaFromOrigin.y)
+                      });
+    }
+}
+
 // MARK: - Touches
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan
@@ -288,6 +301,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         [self cancelCurrentReactTouch];
         self.dragStartCenter = self.center;
         [self setTempBehaviorsForDragStart];
+        [self reportDragEvent:@"start"];
     }
     
     CGPoint translation = [pan translationInView:self];
@@ -299,6 +313,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         pan.state == UIGestureRecognizerStateCancelled)
     {
         [self setTempBehaviorsForDragEnd];
+        [self reportDragEvent:@"end"];
     }
 }
 

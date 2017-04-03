@@ -87,7 +87,7 @@ export default class example extends Component {
           <Text style={styles.button}>Side Menu (imperative cmds)</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, AlertAreas)}>
-          <Text style={styles.button}>Alert Areas</Text>
+          <Text style={styles.button}>Alert Areas and Drag Event</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeaderWithScroll)}>
           <Text style={styles.button}>Collapsing Header with Scroll</Text>

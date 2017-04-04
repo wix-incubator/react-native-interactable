@@ -52,17 +52,28 @@ export default class InteractableView extends Component {
     );
   }
 
-    setVelocity(params) {
-        if (Platform.OS === 'ios') {
-            NativeViewManager.setVelocity(ReactNative.findNodeHandle(this), params);
-        } else if (Platform.OS === 'android') {
-            UIManager.dispatchViewManagerCommand(
-                ReactNative.findNodeHandle(this),
-                UIManager.InteractableView.Commands.setVelocity,
-                [params],
-            );
-        }
+  setVelocity(params) {
+    if (Platform.OS === 'ios') {
+      NativeViewManager.setVelocity(ReactNative.findNodeHandle(this), params);
+    } else if (Platform.OS === 'android') {
+      UIManager.dispatchViewManagerCommand(
+        ReactNative.findNodeHandle(this),
+        UIManager.InteractableView.Commands.setVelocity,
+        [params],
+      );
     }
+  }
 
+  snapTo(params) {
+    if (Platform.OS === 'ios') {
+      NativeViewManager.snapTo(ReactNative.findNodeHandle(this), params);
+    } /*else if (Platform.OS === 'android') {
+      UIManager.dispatchViewManagerCommand(
+        ReactNative.findNodeHandle(this),
+        UIManager.InteractableView.Commands.snapTo,
+        [params],
+      );
+    }*/
+  }
 
 }

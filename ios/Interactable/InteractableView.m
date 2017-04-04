@@ -94,6 +94,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 @property (nonatomic, assign) BOOL reactRelayoutHappening;
 @property (nonatomic, assign) CGPoint reactRelayoutCenterDeltaFromOrigin;
 @property (nonatomic) NSMutableSet *insideAlertAreas;
+@property (nonatomic) UIPanGestureRecognizer *pan;
 
 @property (nonatomic, assign) uint16_t coalescingKey;
 @property (nonatomic, assign) NSString* lastEmittedEventName;
@@ -110,11 +111,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         self.initialPositionSet = NO;
         self.reactRelayoutHappening = NO;
         self.insideAlertAreas = [NSMutableSet set];
+        self.dragEnabled = YES;
         
         // pan gesture recognizer for touches
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        pan.delegate = self;
-        [self addGestureRecognizer:pan];
+        self.pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        self.pan.delegate = self;
+        [self addGestureRecognizer:self.pan];
     }
     return self;
 }
@@ -170,6 +172,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     [super setCenter:center];
     [self reportAnimatedEvent];
     [self reportAlertEvent];
+}
+
+- (void)setDragEnabled:(BOOL)dragEnabled
+{
+    _dragEnabled = dragEnabled;
+    self.pan.enabled = dragEnabled;
 }
 
 - (void)initializeAnimator
@@ -279,6 +287,19 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     }
 }
 
+- (void)reportDragEvent:(NSString*)state
+{
+    if (self.onDrag)
+    {
+        CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
+        self.onDrag(@{
+                        @"state": state,
+                        @"x": @(deltaFromOrigin.x),
+                        @"y": @(deltaFromOrigin.y)
+                      });
+    }
+}
+
 // MARK: - Touches
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan
@@ -288,6 +309,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         [self cancelCurrentReactTouch];
         self.dragStartCenter = self.center;
         [self setTempBehaviorsForDragStart];
+        [self reportDragEvent:@"start"];
     }
     
     CGPoint translation = [pan translationInView:self];
@@ -299,6 +321,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         pan.state == UIGestureRecognizerStateCancelled)
     {
         [self setTempBehaviorsForDragEnd];
+        [self reportDragEvent:@"end"];
     }
 }
 
@@ -544,6 +567,22 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     [self.animator ensureRunning];
     [self.animator setTarget:self velocity:CGPointMake(x, y)];
     [self setTempBehaviorsForDragEnd];
+}
+
+- (void)snapTo:(NSDictionary*)params
+{
+    NSInteger index = [[params objectForKey:@"index"] integerValue];
+    if (self.snapPoints && index >= 0 && index < [self.snapPoints count])
+    {
+        [self.animator removeTempBehaviors];
+        self.dragBehavior = nil;
+        
+        InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
+        if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
+        
+        [self addTempBounceBehaviorWithBoundaries:self.boundaries];
+        [self.animator ensureRunning];
+    }
 }
 
 @end

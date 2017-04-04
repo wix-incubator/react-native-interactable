@@ -242,11 +242,12 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
     private void startDrag(MotionEvent ev) {
+        PointF currentPosition = getCurrentPosition();
+        listener.onDrag("start",currentPosition.x, currentPosition.y);
         this.dragStartLocation = new PointF(ev.getX(),ev.getY());
         this.animator.removeTempBehaviors();
         this.animator.setDragging(true);
         this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
-
         try {
             getReactRoot().onChildStartedNativeGesture(ev);
         } catch (Exception e) {
@@ -266,8 +267,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         float toss = 0.1f;
         if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
-//        Log.d("InteractableView","handleEndOfDrag velocity = " + velocity);
-
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                 getTranslationY() + toss*velocity.y);
 
@@ -275,7 +274,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehaviorWithBoundaries(this.boundaries);
-
+        PointF currentPosition = getCurrentPosition();
+        listener.onDrag("end",currentPosition.x, currentPosition.y);
     }
 
     private void addTempSnapToPointBehavior(InteractablePoint snapPoint) {
@@ -481,5 +481,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         void onSnap(int indexOfSnapPoint, String snapPointId);
         void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
+        void onDrag(String state, float x, float y);
     }
 }

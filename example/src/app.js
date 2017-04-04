@@ -16,6 +16,7 @@ import MoreDrawers from './MoreDrawers';
 import MoreChatHeads from './MoreChatHeads';
 import HandleTouches from './HandleTouches';
 import TouchesInside from './TouchesInside';
+import TouchesInsideStatic from './TouchesInsideStatic';
 import HandleRelayout from './HandleRelayout';
 import SideMenu from './SideMenu';
 import SnapTo from './SnapTo';
@@ -79,7 +80,10 @@ export default class example extends Component {
           <Text style={styles.button}>Handle Touches</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, TouchesInside)}>
-          <Text style={styles.button}>Touches Inside</Text>
+          <Text style={styles.button}>Touches Inside (interactive)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, TouchesInsideStatic)}>
+          <Text style={styles.button}>Touches Inside (static)</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, HandleRelayout)}>
           <Text style={styles.button}>Handle Relayout</Text>

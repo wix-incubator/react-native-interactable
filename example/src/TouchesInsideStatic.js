@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Switch, Button, Picker, Slider, WebView } from 'react-native';
+import { StyleSheet, View, Text, Switch, ActivityIndicator, Image, TextInput } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 export default class TouchesInside extends Component {
@@ -34,27 +34,15 @@ export default class TouchesInside extends Component {
           snapPoints={[{y: 0}]}>
           <View style={{width: 300, height: 500, backgroundColor: '#cccccc', padding: 20, borderRadius: 10}}>
 
-            <Button title='Button' onPress={() => { alert('Button pressed')}} />
+            <Text>Hello world</Text>
 
-            <Picker
-              style={{backgroundColor: '#ff000020'}}
-              selectedValue={this.state.language}
-              onValueChange={(lang) => this.setState({language: lang})}>
-              <Picker.Item label="Objective-C" value="objc" />
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
-            </Picker>
+            <ActivityIndicator animating={true} size='large' style={{marginBottom: 10}} />
 
-            <Slider style={{marginVertical: 10}} />
+            <Image style={{width: 220, height: 100, marginBottom: 10}} source={{uri: 'https://static.wixstatic.com/media/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg/v1/fill/w_300,h_160,al_c,q_80,usm_0.66_1.00_0.01/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg'}} />
 
-            <Switch
-              style={{alignSelf: 'center'}}
-              value={this.state.switch}
-              onValueChange={(value) => this.setState({switch: value})} />
+            <TextInput style={{height: 40, backgroundColor: 'white', padding: 5, borderColor: 'black', borderWidth: 1, marginBottom: 10}} />
 
-            <WebView
-              source={{uri: 'https://static.wixstatic.com/media/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg/v1/fill/w_733,h_489,al_c,q_80,usm_0.66_1.00_0.01/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg'}}
-              style={{width: 150, height: 100, marginVertical: 10, alignSelf: 'center'}} />
+            <View pointerEvents='none' style={{width: 220, height: 75, backgroundColor: 'blue', marginBottom: 10}} />
 
           </View>
         </Interactable.View>

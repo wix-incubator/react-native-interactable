@@ -201,11 +201,12 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private void handleTouch(MotionEvent event) {
         Log.d("InteractableView","handleTouch action = " + event.getAction());
-
         switch (event.getAction()) {
-
+            case MotionEvent.ACTION_DOWN:
+                // for case when there are non-touchable children views
+                startDrag(event);
+                break;
             case MotionEvent.ACTION_MOVE:
-
                 float newX = getTranslationX() + event.getX() - dragStartLocation.x;
                 float newY = getTranslationY() + event.getY() - dragStartLocation.y;
                 if (horizontalOnly) {

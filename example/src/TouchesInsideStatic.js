@@ -32,7 +32,7 @@ export default class TouchesInside extends Component {
           horizontalOnly={!this.state.vertical}
           dragEnabled={this.state.dragEnabled}
           snapPoints={[{y: 0}]}>
-          <View style={{width: 300, height: 500, backgroundColor: '#cccccc', padding: 20, borderRadius: 10}}>
+          <View style={{width: 300, height: 500, padding: 20, borderRadius: 10}}>
 
             <Text>Hello world</Text>
 

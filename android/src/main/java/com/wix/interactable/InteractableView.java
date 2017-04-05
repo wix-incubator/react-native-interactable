@@ -39,6 +39,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private boolean verticalOnly;
     private boolean horizontalOnly;
+    private boolean dragEnabled;
     private boolean isSwiping;
     private PointF initialPosition;
 
@@ -82,6 +83,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private void init() {
         originSet = false;
         initialPositionSet = false;
+        dragEnabled = true;
         initializeAnimator();
         ViewConfiguration vc = ViewConfiguration.get(getContext());
         mTouchSlop = vc.getScaledTouchSlop();
@@ -175,9 +177,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             boolean isVSwipe = Math.abs(delY) > mTouchSlop;
             this.isSwiping = this.isSwiping || isHSwipe || isVSwipe;
 
-            if (horizontalOnly && isHSwipe ||
+            if (dragEnabled && (horizontalOnly && isHSwipe ||
                     verticalOnly && isVSwipe ||
-                    !horizontalOnly && !verticalOnly) {
+                    !horizontalOnly && !verticalOnly)) {
 
                 startDrag(ev);
 
@@ -204,7 +206,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 // for case when there are non-touchable children views
-                startDrag(event);
+                if(dragEnabled){
+                    startDrag(event);
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 float newX = getTranslationX() + event.getX() - dragStartLocation.x;
@@ -413,6 +417,10 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setHorizontalOnly(boolean horizontalOnly) {
         this.horizontalOnly = horizontalOnly;
+    }
+
+    public void setDragEnabled(boolean dragEnabled) {
+        this.dragEnabled = dragEnabled;
     }
 
     public void setInitialPosition(PointF initialPosition) {

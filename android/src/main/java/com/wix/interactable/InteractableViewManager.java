@@ -66,6 +66,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setHorizontalOnly(horizontalOnly);
     }
 
+    @ReactProp(name = "dragEnabled")
+    public void setDragEnabled(InteractableView view, @Nullable boolean dragEnabled) {
+        view.setDragEnabled(dragEnabled);
+    }
+
     @ReactProp(name = "snapPoints")
     public void setSnapTo(InteractableView view, @Nullable ReadableArray snapPoints) {
         view.setSnapPoints(RNConvert.interactablePoints(snapPoints));

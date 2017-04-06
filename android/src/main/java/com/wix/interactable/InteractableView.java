@@ -484,6 +484,19 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         handleEndOfDrag();
     }
 
+    public void snapTo(int index) {
+
+        if(this.snapPoints!=null && index >= 0 && index < this.snapPoints.size())
+        {
+            this.animator.removeTempBehaviors();
+            this.dragBehavior = null;
+            InteractablePoint snapPoint = snapPoints.get(index);
+            addTempSnapToPointBehavior(snapPoint);
+            addTempBounceBehaviorWithBoundaries(this.boundaries);
+        }
+    }
+
+
 
     public interface InteractionListener {
         void onSnap(int indexOfSnapPoint, String snapPointId);

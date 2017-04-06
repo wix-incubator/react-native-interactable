@@ -20,6 +20,8 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
 
     public static final String REACT_CLASS = "InteractableView";
     public static final int COMMAND_SET_VELOCITY = 1;
+    public static final int COMMAND_SNAP_TO = 2;
+
 
     @Override
     public String getName() {
@@ -33,7 +35,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
 
     @Override
     public Map<String,Integer> getCommandsMap() {
-        return MapBuilder.of("setVelocity", COMMAND_SET_VELOCITY);
+        return MapBuilder.of("setVelocity", COMMAND_SET_VELOCITY, "snapTo", COMMAND_SNAP_TO);
     }
 
     @Override
@@ -46,6 +48,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         switch (commandType) {
             case COMMAND_SET_VELOCITY: {
                 view.setVelocity(RNConvert.pointF(args.getMap(0)));
+                return;
+            }
+            case COMMAND_SNAP_TO: {
+                int snapPoint = args.getMap(0).getInt("index");
+                view.snapTo(snapPoint);
                 return;
             }
             default:

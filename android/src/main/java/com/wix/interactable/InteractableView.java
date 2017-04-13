@@ -450,6 +450,10 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setDragEnabled(boolean dragEnabled) {
         this.dragEnabled = dragEnabled;
+        
+        if (this.dragBehavior != null && !dragEnabled) {
+            handleEndOfDrag();
+        }
     }
 
     public void setInitialPosition(PointF initialPosition) {

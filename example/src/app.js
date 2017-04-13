@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 15,
     paddingLeft: 40,
     backgroundColor: '#223f6b'
   },

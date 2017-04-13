@@ -31,8 +31,9 @@ export default class TouchesInside extends Component {
           verticalOnly={this.state.vertical}
           horizontalOnly={!this.state.vertical}
           dragEnabled={this.state.dragEnabled}
-          snapPoints={[{y: 0}]}>
-          <View style={{width: 300, height: 500, backgroundColor: '#cccccc', padding: 20, borderRadius: 10}}>
+          snapPoints={[{y: 0}]}
+          style={{width: 300, height: 500, padding: 20, borderRadius: 10}}>
+
 
             <Button title='Button' onPress={() => { alert('Button pressed')}} />
 
@@ -54,9 +55,10 @@ export default class TouchesInside extends Component {
 
             <WebView
               source={{uri: 'https://static.wixstatic.com/media/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg/v1/fill/w_733,h_489,al_c,q_80,usm_0.66_1.00_0.01/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg'}}
-              style={{width: 150, height: 100, marginVertical: 10, alignSelf: 'center'}} />
+              style={{width: 150, height: 100}}/>
 
-          </View>
+
+
         </Interactable.View>
 
       </View>

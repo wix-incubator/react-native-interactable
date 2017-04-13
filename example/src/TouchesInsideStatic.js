@@ -31,8 +31,9 @@ export default class TouchesInside extends Component {
           verticalOnly={this.state.vertical}
           horizontalOnly={!this.state.vertical}
           dragEnabled={this.state.dragEnabled}
-          snapPoints={[{y: 0}]}>
-          <View style={{width: 300, height: 500, padding: 20, borderRadius: 10}}>
+          snapPoints={[{y: 0}]}
+          style={{width: 300, height: 500, padding: 20, borderRadius: 10}}>
+
 
             <Text>Hello world</Text>
 
@@ -44,7 +45,7 @@ export default class TouchesInside extends Component {
 
             <View pointerEvents='none' style={{width: 220, height: 75, backgroundColor: 'blue', marginBottom: 10}} />
 
-          </View>
+
         </Interactable.View>
 
       </View>

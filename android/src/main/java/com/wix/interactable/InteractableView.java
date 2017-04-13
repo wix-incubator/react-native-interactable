@@ -25,14 +25,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.facebook.react.uimanager.TouchTargetHelper.findTargetTagForTouch;
+
+
 public class InteractableView extends ViewGroup implements PhysicsAnimator.PhysicsAnimatorListener {
 
-    private boolean originSet;
-    private PointF origin;
+
     private PhysicsAnimator animator;
     private PhysicsBehavior dragBehavior;
 
-    private PointF dragStartCenter;
     private PointF dragStartLocation;
     private PointF dragLastLocation;
     private boolean initialPositionSet;
@@ -58,6 +59,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private InteractionListener listener;
 
     private int mTouchSlop;
+    private boolean isChildIsScrollContainer = false;
+    private boolean skippedOneInterception;
+
 
     public InteractableView(Context context) {
         super(context);
@@ -81,7 +85,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
     private void init() {
-        originSet = false;
         initialPositionSet = false;
         dragEnabled = true;
         initializeAnimator();
@@ -155,35 +158,55 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         return res;
     }
 
+    private void resetTouchEventFlags() {
+        this.isSwiping = false;
+        this.isChildIsScrollContainer = false;
+        this.skippedOneInterception=false;
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d("InteractableView","onInterceptTouchEvent action = " + ev.getAction());
-        Log.d("InteractableView","onInterceptTouchEvent ptr count = " + ev.getPointerCount());
 
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+        final int actionMasked = ev.getAction() & MotionEvent.ACTION_MASK;
+
+        // initiate the dragStartLocation and flags
+        if (actionMasked == MotionEvent.ACTION_DOWN) {
             this.dragStartLocation = new PointF(ev.getX(),ev.getY());
-            this.isSwiping = false;
-        }
-        if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-            if (isSwiping || ev.getPointerCount() > 1) {
-                return false;
+            resetTouchEventFlags();
+
+            // detect whether we targeted scrollable child, if so we will not intercapte the touch
+            int targetChildTag = findTargetTagForTouch(ev.getX(),ev.getY(),this);
+            View targetChild = (View)findViewById(targetChildTag);
+            if(targetChild!=null && targetChild.isScrollContainer()){
+                isChildIsScrollContainer = true;
             }
+        }
+
+        if (actionMasked == MotionEvent.ACTION_MOVE) {
+
+/*         if (isSwiping || ev.getPointerCount() > 1) {
+                return false;
+            }*/
 
             float delX = ev.getX() - dragStartLocation.x;
             float delY = ev.getY() - dragStartLocation.y;
-//            Log.d("InteractableView","onInterceptTouchEvent delX = " + delX);
-//            Log.d("InteractableView","onInterceptTouchEvent mTouchSlop = " + mTouchSlop);
             boolean isHSwipe = Math.abs(delX) > mTouchSlop;
             boolean isVSwipe = Math.abs(delY) > mTouchSlop;
+
             this.isSwiping = this.isSwiping || isHSwipe || isVSwipe;
 
-            if (dragEnabled && (horizontalOnly && isHSwipe ||
+           if (!isChildIsScrollContainer && dragEnabled && (horizontalOnly && isHSwipe ||
                     verticalOnly && isVSwipe ||
                     !horizontalOnly && !verticalOnly)) {
 
-                startDrag(ev);
-
-                return true;
+               // we are giving opportunity intercept the action to the ChildrenViews
+               if(!skippedOneInterception){
+                   skippedOneInterception=true;
+               }
+               else{
+                   startDrag(ev);
+                   return true;
+               }
             }
         }
         return super.onInterceptTouchEvent(ev);
@@ -192,6 +215,12 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
+    }
+
+
+    @Override
+    public boolean shouldDelayChildPressedState() {
+        return false;
     }
 
     @Override

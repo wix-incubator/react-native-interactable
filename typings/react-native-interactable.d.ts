@@ -1,6 +1,6 @@
 declare module 'react-native-interactable' {
 
-  import {Animated} from 'react-native';
+  import {Animated, ViewProperties} from 'react-native';
 
   namespace Interactable {
     interface ISnapPoint {
@@ -112,7 +112,7 @@ declare module 'react-native-interactable' {
       nativeEvent: INativeAlertEvent;
     }
 
-    interface IInteractableView {
+    interface IInteractableView extends ViewProperties {
       snapPoints?: ISnapPoint[];
       springPoints?: ISpringPoint[];
       gravityPoints?: IGravityPoints[];

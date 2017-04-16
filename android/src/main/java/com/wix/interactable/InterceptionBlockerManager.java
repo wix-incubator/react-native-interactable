@@ -10,11 +10,11 @@ import com.facebook.react.uimanager.annotations.ReactProp;
  * Created by zachik on 28/03/2017.
  */
 
-public class TouchBlockerManager extends ViewGroupManager<InterceptionBlocker> {
+public class InterceptionBlockerManager extends ViewGroupManager<InterceptionBlocker> {
 
     @Override
     public String getName() {
-        return "TouchBlocker";
+        return "InterceptionBlocker";
     }
 
     @Override

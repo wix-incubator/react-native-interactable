@@ -5,10 +5,10 @@ import ReactNative, { requireNativeComponent, Animated, NativeModules, UIManager
 // const NativeTouchBlocker = requireNativeComponent('TouchBlocker', null);
 
 // this is required in order to support native events
-const NativeTouchBlocker = Animated.createAnimatedComponent(requireNativeComponent('TouchBlocker', null));
+const NativeTouchBlocker = Animated.createAnimatedComponent(requireNativeComponent('InterceptionBlocker', null));
 
 // this is required in order to perform imperative commands
-const NativeViewManager = NativeModules.TouchBlockerManager;
+const NativeViewManager = NativeModules.InterceptionBlockerManager;
 
 export default class TouchBlocker extends Component {
   constructor(props) {

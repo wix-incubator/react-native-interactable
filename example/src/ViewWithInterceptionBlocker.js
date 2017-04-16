@@ -43,7 +43,7 @@ export default class ViewWithInterceptionBlocker extends Component {
                     <View style={styles.card1}>
                         <Text style={{fontSize: 12,fontWeight: 'bold'}}>Regular view</Text>
                     </View>
-                    <Interactable.Blocker
+                    <Interactable.InterceptionBlocker
                         style={{left: 0, right: 0, height: 100,backgroundColor: '#e0e0e0'}}
                         blockAllTouch={this.state.blockAllTouch}
                         blockVerticalSwipe={this.state.blockVerticalSwipe}
@@ -51,7 +51,7 @@ export default class ViewWithInterceptionBlocker extends Component {
                      <View style={styles.card2}>
                         <Text style={{fontSize: 12,fontWeight: 'bold'}}>View wrapped with InterceptionBlocker</Text>
                      </View>
-                     </Interactable.Blocker>
+                     </Interactable.InterceptionBlocker>
                 </Interactable.View>
             </View>
         );

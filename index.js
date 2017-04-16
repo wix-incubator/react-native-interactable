@@ -1,8 +1,8 @@
 import InteractableView from './src/InteractableView';
-import TouchBlocker from './src/TouchBlocker';
+import TouchInterceptionBlocker from './src/TouchInterceptionBlocker';
 
 
 module.exports = {
   View: InteractableView,
-  Blocker: TouchBlocker
+  InterceptionBlocker: TouchInterceptionBlocker
 };

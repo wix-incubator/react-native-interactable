@@ -27,7 +27,7 @@ public class Interactable implements ReactPackage {
 //        return Collections.<ViewManager>singletonList(new InteractableViewManager());
         List<ViewManager> viewManagers = new ArrayList<>();
         viewManagers.add(new InteractableViewManager());
-        viewManagers.add(new TouchBlockerManager());
+        viewManagers.add(new InterceptionBlockerManager());
 
         return viewManagers;
     }

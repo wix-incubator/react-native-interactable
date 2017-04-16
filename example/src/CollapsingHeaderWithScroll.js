@@ -46,7 +46,7 @@ export default class CollapsingHeaderWithScroll extends Component {
             boundaries={{top: -150}}
             onSnap={this.onSnap.bind(this)}
             animatedValueY={this._deltaY}>
-            <Interactable.Blocker
+            <Interactable.InterceptionBlocker
             style={{left: 0, right: 0, height: Screen.height - 100, backgroundColor: '#e0e0e0'}}
             >
             <ScrollView
@@ -62,7 +62,7 @@ export default class CollapsingHeaderWithScroll extends Component {
               <View style={styles.placeholder} />
               <View style={styles.placeholder} />
             </ScrollView>
-            </Interactable.Blocker>
+            </Interactable.InterceptionBlocker>
           </Interactable.View>
 
       </View>

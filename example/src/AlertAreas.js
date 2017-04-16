@@ -14,12 +14,13 @@ export default class AlertAreas extends Component {
         <View style={styles.markerContainer}><View style={{backgroundColor: '#00ff0030', position: 'absolute', left: Screen.width/2 + 100, right: 0, top: 0, bottom: 0}} /></View>
         <View style={styles.markerContainer}><View style={{backgroundColor: '#ffff0060', position: 'absolute', left: Screen.width/2 - 150, right: Screen.width/2 + 50, top: Screen.height/2 + 100, bottom: Screen.height/2 - 200}} /></View>
         <Interactable.View
-          snapPoints={[{x: -140, y: -0}, {x: 140, y: -250}, {x: -140, y: 250}, {x: 140, y: 250}]}
+          snapPoints={[{x: -140, y: -250}, {x: 140, y: -250}, {x: -140, y: 250}, {x: 140, y: 250}]}
           alertAreas={[
             {id: 'green', influenceArea: {left: 100}},
             {id: 'yellow', influenceArea: {top: 100, bottom: 200, left: -150, right: -50}}
           ]}
           onAlert={this.onAlert.bind(this)}
+          onDrag={this.onDrag.bind(this)}
           initialPosition={{x: -140, y: -250}}>
           <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
         </Interactable.View>
@@ -27,7 +28,10 @@ export default class AlertAreas extends Component {
     );
   }
   onAlert(event) {
-    console.log(event.nativeEvent);
+    console.log('alert:', event.nativeEvent);
+  }
+  onDrag(event) {
+    console.log('drag:', event.nativeEvent);
   }
 }
 

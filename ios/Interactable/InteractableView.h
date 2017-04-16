@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) BOOL verticalOnly;
 @property (nonatomic, assign) BOOL horizontalOnly;
+@property (nonatomic, assign) BOOL dragEnabled;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *snapPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *springPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *gravityPoints;
@@ -28,9 +29,11 @@
 @property (nonatomic, copy) RCTDirectEventBlock onSnap;
 @property (nonatomic, copy) RCTDirectEventBlock onStop;
 @property (nonatomic, copy) RCTDirectEventBlock onAlert;
+@property (nonatomic, copy) RCTDirectEventBlock onDrag;
 @property (nonatomic, assign) CGPoint initialPosition;
 @property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
 
 - (void)setVelocity:(NSDictionary*)params;
+- (void)snapTo:(NSDictionary*)params;
 
 @end

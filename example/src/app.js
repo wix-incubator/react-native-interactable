@@ -16,11 +16,13 @@ import MoreDrawers from './MoreDrawers';
 import MoreChatHeads from './MoreChatHeads';
 import HandleTouches from './HandleTouches';
 import TouchesInside from './TouchesInside';
+import TouchesInsideStatic from './TouchesInsideStatic';
 import HandleRelayout from './HandleRelayout';
 import SideMenu from './SideMenu';
 import SnapTo from './SnapTo';
 import AlertAreas from './AlertAreas';
 import CollapsingHeaderWithScroll from './CollapsingHeaderWithScroll';
+import ViewWithInterceptionBlocker from './ViewWithInterceptionBlocker';
 
 export default class example extends Component {
   constructor(props) {
@@ -79,7 +81,10 @@ export default class example extends Component {
           <Text style={styles.button}>Handle Touches</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, TouchesInside)}>
-          <Text style={styles.button}>Touches Inside</Text>
+          <Text style={styles.button}>Touches Inside (interactive)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, TouchesInsideStatic)}>
+          <Text style={styles.button}>Touches Inside (static)</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, HandleRelayout)}>
           <Text style={styles.button}>Handle Relayout</Text>
@@ -95,6 +100,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeaderWithScroll)}>
           <Text style={styles.button}>Collapsing Header with Scroll</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this,  ViewWithInterceptionBlocker)}>
+              <Text style={styles.button}>View wrapped with InterceptionBlocker</Text>
         </TouchableOpacity>
       </ScrollView>
     );
@@ -130,7 +138,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 15,
     paddingLeft: 40,
     backgroundColor: '#223f6b'
   },

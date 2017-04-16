@@ -20,6 +20,8 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
 
     public static final String REACT_CLASS = "InteractableView";
     public static final int COMMAND_SET_VELOCITY = 1;
+    public static final int COMMAND_SNAP_TO = 2;
+
 
     @Override
     public String getName() {
@@ -33,7 +35,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
 
     @Override
     public Map<String,Integer> getCommandsMap() {
-        return MapBuilder.of("setVelocity", COMMAND_SET_VELOCITY);
+        return MapBuilder.of("setVelocity", COMMAND_SET_VELOCITY, "snapTo", COMMAND_SNAP_TO);
     }
 
     @Override
@@ -46,6 +48,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         switch (commandType) {
             case COMMAND_SET_VELOCITY: {
                 view.setVelocity(RNConvert.pointF(args.getMap(0)));
+                return;
+            }
+            case COMMAND_SNAP_TO: {
+                int snapPoint = args.getMap(0).getInt("index");
+                view.snapTo(snapPoint);
                 return;
             }
             default:
@@ -64,6 +71,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
     @ReactProp(name = "horizontalOnly")
     public void setHorizontalOnly(InteractableView view, @Nullable boolean horizontalOnly) {
         view.setHorizontalOnly(horizontalOnly);
+    }
+
+    @ReactProp(name = "dragEnabled")
+    public void setDragEnabled(InteractableView view, @Nullable boolean dragEnabled) {
+        view.setDragEnabled(dragEnabled);
     }
 
     @ReactProp(name = "snapPoints")
@@ -124,6 +136,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
                 .put("onSnap", MapBuilder.of("registrationName", "onSnap"))
                 .put("onAlert", MapBuilder.of("registrationName", "onAlert"))
                 .put("onAnimatedEvent", MapBuilder.of("registrationName", "onAnimatedEvent"))
+                .put("onDrag", MapBuilder.of("registrationName", "onDrag"))
                 .build();
     }
 
@@ -149,6 +162,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         @Override
         public void onAnimatedEvent(float x, float y) {
             eventDispatcher.dispatchEvent(new Events.OnAnimatedEvent(interactableView.getId(), x, y));
+        }
+
+        @Override
+        public void onDrag(String state, float x, float y) {
+            eventDispatcher.dispatchEvent(new Events.onDrag(interactableView.getId(),state, x, y));
         }
     }
 }

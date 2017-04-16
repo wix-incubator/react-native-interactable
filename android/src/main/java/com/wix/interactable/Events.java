@@ -75,4 +75,27 @@ public class Events {
             rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
         }
     }
+
+    public static class onDrag extends Event<onDrag> {
+
+        WritableMap eventData;
+
+        public onDrag(int viewTag, String state, float x, float y) {
+            super(viewTag);
+            eventData = Arguments.createMap();
+            eventData.putString("state", state);
+            eventData.putDouble("x", PixelUtil.toDIPFromPixel(x));
+            eventData.putDouble("y", PixelUtil.toDIPFromPixel(y));
+        }
+
+        @Override
+        public String getEventName() {
+            return "onDrag";
+        }
+
+        @Override
+        public void dispatch(RCTEventEmitter rctEventEmitter) {
+            rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+        }
+    }
 }

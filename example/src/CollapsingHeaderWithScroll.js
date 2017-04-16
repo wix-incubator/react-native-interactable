@@ -47,7 +47,8 @@ export default class CollapsingHeaderWithScroll extends Component {
             onSnap={this.onSnap.bind(this)}
             animatedValueY={this._deltaY}>
             <Interactable.Blocker
-            style={{left: 0, right: 0, height: Screen.height - 100, backgroundColor: '#e0e0e0'}}>
+            style={{left: 0, right: 0, height: Screen.height - 100, backgroundColor: '#e0e0e0'}}
+            >
             <ScrollView
               bounces={false}
               canCancelContentTouches={this.state.canScroll}

@@ -67,13 +67,13 @@ export default class InteractableView extends Component {
   snapTo(params) {
     if (Platform.OS === 'ios') {
       NativeViewManager.snapTo(ReactNative.findNodeHandle(this), params);
-    } /*else if (Platform.OS === 'android') {
+    } else if (Platform.OS === 'android') {
       UIManager.dispatchViewManagerCommand(
         ReactNative.findNodeHandle(this),
         UIManager.InteractableView.Commands.snapTo,
         [params],
       );
-    }*/
+    }
   }
 
 }

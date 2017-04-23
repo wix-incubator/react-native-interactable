@@ -41,6 +41,7 @@ RCT_EXPORT_VIEW_PROPERTY(onAlert, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDrag, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(initialPosition, CGPoint)
 RCT_EXPORT_VIEW_PROPERTY(onAnimatedEvent, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(reportOnAnimatedEvents, BOOL)
 
 RCT_EXPORT_METHOD(setVelocity:(nonnull NSNumber *)reactTag
                   params:(NSDictionary*)params)

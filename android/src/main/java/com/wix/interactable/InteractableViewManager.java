@@ -113,6 +113,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setDragToss(dragToss);
     }
 
+    @ReactProp(name = "reportOnAnimatedEvents")
+    public void setReportOnAnimatedEvents(InteractableView view, @Nullable boolean reportOnAnimatedEvents) {
+        view.setReportOnAnimatedEvents(reportOnAnimatedEvents);
+    }
+
     @ReactProp(name = "boundaries")
     public void setBoundaries(InteractableView view, @Nullable ReadableMap boundaries) {
         view.setBoundaries(RNConvert.interactableLimit(boundaries));

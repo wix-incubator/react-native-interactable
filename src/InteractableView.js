@@ -48,6 +48,7 @@ export default class InteractableView extends Component {
         animatedValueX={undefined}
         animatedValueY={undefined}
         onAnimatedEvent={this._animatedEvent}
+        reportOnAnimatedEvents={!!this._animatedEvent}
       />
     );
   }

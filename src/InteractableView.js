@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
-import ReactNative, { requireNativeComponent, Animated, NativeModules, UIManager,Platform } from 'react-native';
-
-
-// const NativeInteractableView = requireNativeComponent('InteractableView', null);
-
-// this is required in order to support native events
-const NativeInteractableView = Animated.createAnimatedComponent(requireNativeComponent('InteractableView', null));
+import ReactNative, { requireNativeComponent, Animated, NativeModules, UIManager, Platform } from 'react-native';
 
 // this is required in order to perform imperative commands
 const NativeViewManager = NativeModules.InteractableViewManager;
 
-export default class InteractableView extends Component {
+const NativeInteractableView = requireNativeComponent('InteractableView', null);
+
+class WrappedInteractableView extends Component {
+  render() {
+    return (
+      <NativeInteractableView
+        {...this.props}
+        ref={(ref) => this._nativeViewRef = ref}
+      />
+    );
+  }
+
+  getScrollableNode() {
+    return ReactNative.findNodeHandle(this._nativeViewRef);
+  }
+}
+
+// this is required in order to support native events:
+const AnimatedInteractableView = Animated.createAnimatedComponent(WrappedInteractableView);
+
+class WrappedAnimatedInteractableView extends Component {
   constructor(props) {
     super(props);
     if (this.props.animatedValueX || this.props.animatedValueY) {
@@ -42,7 +56,7 @@ export default class InteractableView extends Component {
 
   render() {
     return (
-      <NativeInteractableView
+      <AnimatedInteractableView
         dragToss={0.1}
         {...this.props}
         animatedValueX={undefined}
@@ -75,5 +89,6 @@ export default class InteractableView extends Component {
       );
     }
   }
-
 }
+
+export default WrappedAnimatedInteractableView;

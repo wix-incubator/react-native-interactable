@@ -21,7 +21,7 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-    return [[InteractableView alloc] init];
+    return [[InteractableView alloc] initWithBridge:self.bridge];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(verticalOnly, BOOL)

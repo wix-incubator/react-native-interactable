@@ -228,7 +228,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
 - (void)reportAnimatedEvent
 {
-    if (self.onAnimatedEvent && self.originSet)
+    if (self.reportOnAnimatedEvents && self.originSet)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
         

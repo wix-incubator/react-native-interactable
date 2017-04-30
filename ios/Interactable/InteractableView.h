@@ -32,6 +32,7 @@
 @property (nonatomic, copy) RCTDirectEventBlock onDrag;
 @property (nonatomic, assign) CGPoint initialPosition;
 @property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
+@property (nonatomic, assign) BOOL reportOnAnimatedEvents;
 
 - (void)setVelocity:(NSDictionary*)params;
 - (void)snapTo:(NSDictionary*)params;

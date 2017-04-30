@@ -48,6 +48,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private InteractableSpring dragWithSprings;
     private float dragToss;
     private PointF velocity;
+    private boolean reportOnAnimatedEvents;
 
     private ArrayList<InteractablePoint> snapPoints = new ArrayList<>();
     private ArrayList<InteractablePoint> springPoints = new ArrayList<>();
@@ -104,7 +105,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     @Override
     public void onAnimationFrame() {
         PointF currentPosition = getCurrentPosition();
-        listener.onAnimatedEvent(currentPosition.x, currentPosition.y);
+        if(reportOnAnimatedEvents) {
+            listener.onAnimatedEvent(currentPosition.x, currentPosition.y);
+        }
         reportAlertEvent(currentPosition);
     }
 
@@ -475,6 +478,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     public void setDragToss(float dragToss) {
         this.dragToss = dragToss;
     }
+
+    public void setReportOnAnimatedEvents(boolean reportOnAnimatedEvents) {this.reportOnAnimatedEvents = reportOnAnimatedEvents; }
 
     public void setSnapPoints(ArrayList snapPoints) {
         this.snapPoints = snapPoints;

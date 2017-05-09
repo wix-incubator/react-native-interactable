@@ -57,6 +57,14 @@ Note: instead of linking automatically you can also link manually according to t
 node_modules/react-native-interactable/ios/Interactable.xcodeproj
 ```
 
+**Manually link via Cocoa Pods (iOS)**
+
+* Add the following to your `Podfile` and run `pod update`:
+
+```
+pod 'Interactable', :path => '../node_modules/react-native-interactable'
+```
+
 <br>
 
 ## Example

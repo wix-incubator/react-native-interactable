@@ -327,6 +327,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)pan
 {
+    if (![pan isKindOfClass:[UIPanGestureRecognizer class]]) return YES;
+    
     CGPoint translation = [pan translationInView:self];
     if (self.horizontalOnly) return fabs(translation.x) > fabs(translation.y);
     if (self.verticalOnly) return fabs(translation.y) > fabs(translation.x);

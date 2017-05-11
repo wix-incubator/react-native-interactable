@@ -574,14 +574,21 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     NSInteger index = [[params objectForKey:@"index"] integerValue];
     if (self.snapPoints && index >= 0 && index < [self.snapPoints count])
     {
+        BOOL animated = [params objectForKey:@"animated"] == nil || [[params objectForKey:@"animated"] boolValue];
+        
         [self.animator removeTempBehaviors];
         self.dragBehavior = nil;
         
         InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
-        if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
         
-        [self addTempBounceBehaviorWithBoundaries:self.boundaries];
-        [self.animator ensureRunning];
+        if (!animated) {
+            if (snapPoint) self.center = [snapPoint positionWithOrigin:self.origin];
+        } else {
+            if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
+            
+            [self addTempBounceBehaviorWithBoundaries:self.boundaries];
+            [self.animator ensureRunning];
+        }
     }
 }
 

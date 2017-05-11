@@ -51,8 +51,13 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
                 return;
             }
             case COMMAND_SNAP_TO: {
-                int snapPoint = args.getMap(0).getInt("index");
-                view.snapTo(snapPoint);
+                ReadableMap params = args.getMap(0);
+                int snapPoint = params.getInt("index");
+                boolean animated = true;
+                if (params.hasKey("animated") {
+                    animated = params.getBoolean("animated");
+                }
+                view.snapTo(snapPoint, animated);
                 return;
             }
             default:

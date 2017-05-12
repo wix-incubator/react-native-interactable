@@ -1,5 +1,5 @@
 {
-  "name": "real-life-example",
+  "name": "example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "react": "15.4.2",
-    "react-native": "^0.42.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.44.0",
     "react-native-interactable": "file:.."
   },
   "devDependencies": {

@@ -54,7 +54,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
                 ReadableMap params = args.getMap(0);
                 int snapPoint = params.getInt("index");
                 boolean animated = true;
-                if (params.hasKey("animated") {
+                if (params.hasKey("animated")) {
                     animated = params.getBoolean("animated");
                 }
                 view.snapTo(snapPoint, animated);

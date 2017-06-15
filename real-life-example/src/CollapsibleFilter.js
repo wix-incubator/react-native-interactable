@@ -34,10 +34,29 @@ export default class CollapsibleFilter extends Component {
               <Image style={styles.filterUp} source={require('../img/icon-up.png')} />
             </TouchableOpacity>
           </Animated.View>
+          <TouchableOpacity onPress={() => alert('all pressed')} style={styles.btnAbs}>
+            <Animated.View style={[styles.filterField, {
+              opacity: this._deltaY.interpolate({
+                inputRange: [-120, -100],
+                outputRange: [1, 0],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
+              })
+            }]}>
+              <Text style={styles.filterFieldText}>Anywhere Anytime Anything</Text>
+            </Animated.View>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => alert('Anywhere pressed')}>
-            <View style={styles.filterField}>
+            <Animated.View style={[styles.filterField, {
+              opacity: this._deltaY.interpolate({
+                inputRange: [-120, -100],
+                outputRange: [0, 1],
+                extrapolateLeft: 'clamp',
+                extrapolateRight: 'clamp'
+              }),
+            }]}>
               <Text style={styles.filterFieldText}>Anywhere</Text>
-            </View>
+            </Animated.View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => alert('Anytime pressed')}>
             <Animated.View style={[styles.filterField, {
@@ -113,6 +132,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 4,
     justifyContent: 'center'
+  },
+  btnAbs: {
+    position: 'absolute',
+    top: 46,
+    left: 0,
+    right: 0,
+    zIndex: 0,
   },
   filterFieldText: {
     color: 'white',

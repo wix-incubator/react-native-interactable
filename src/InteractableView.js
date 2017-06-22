@@ -90,6 +90,12 @@ class WrappedAnimatedInteractableView extends Component {
       );
     }
   }
+
+  changePosition(params) {
+    if (Platform.OS === 'ios') {
+      NativeViewManager.changePosition(ReactNative.findNodeHandle(this), params);
+    }
+  }
 }
 
 export default WrappedAnimatedInteractableView;

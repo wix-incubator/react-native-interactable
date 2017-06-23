@@ -155,13 +155,13 @@ const CGFloat ANIMATOR_PAUSE_ZERO_VELOCITY = 1.0;
     {
         PhysicsObject *object = [self.targetsToObjects objectForKey:target];
         CGFloat dx = 0.0;
-        if (ABS(object.velocity.x) > ANIMATOR_PAUSE_ZERO_VELOCITY)
+        if (!self.delegate.verticalOnly && ABS(object.velocity.x) > ANIMATOR_PAUSE_ZERO_VELOCITY)
         {
             dx = deltaTime * object.velocity.x;
             hadMovement = YES;
         }
         CGFloat dy = 0.0;
-        if (ABS(object.velocity.y) > ANIMATOR_PAUSE_ZERO_VELOCITY)
+        if (!self.delegate.horizontalOnly && ABS(object.velocity.y) > ANIMATOR_PAUSE_ZERO_VELOCITY)
         {
             dy = deltaTime * object.velocity.y;
             hadMovement = YES;

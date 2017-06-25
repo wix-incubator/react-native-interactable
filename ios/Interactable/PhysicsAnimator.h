@@ -36,4 +36,8 @@
 
 - (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator;
 
+@property (nonatomic, readonly) BOOL horizontalOnly;
+@property (nonatomic, readonly) BOOL verticalOnly;
+
+
 @end

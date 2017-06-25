@@ -534,6 +534,12 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         }
     }
 
+    public void changePosition(PointF position) {
+        if(dragBehavior != null) return;
+        setTranslationX(position.x);
+        setTranslationY(position.y);
+        handleEndOfDrag();
+    }
 
 
     public interface InteractionListener {

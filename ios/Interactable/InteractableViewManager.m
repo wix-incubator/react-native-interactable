@@ -81,4 +81,23 @@ RCT_EXPORT_METHOD(snapTo:(nonnull NSNumber *)reactTag
      }];
 }
 
+RCT_EXPORT_METHOD(changePosition:(nonnull NSNumber *)reactTag
+                  params:(NSDictionary*)params)
+{
+    [self.bridge.uiManager addUIBlock:
+     ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry)
+     {
+         UIView *view = viewRegistry[reactTag];
+         if ([view isKindOfClass:[InteractableView class]])
+         {
+             [(InteractableView*)view changePosition:params];
+         }
+         else
+         {
+             RCTLogError(@"tried to changePosition: on non-InteractableView view %@ "
+                         "with tag #%@", view, reactTag);
+         }
+     }];
+}
+
 @end

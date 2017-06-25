@@ -210,6 +210,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		A75CBD2E1EBB6E6C009DBD7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CCA33CB81E3E363100649701 /* Interactable.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CC0127961E3ACC3900B23C9F;
+			remoteInfo = Interactable;
+		};
 		CCA33CBC1E3E363100649701 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCA33CB81E3E363100649701 /* Interactable.xcodeproj */;
@@ -490,6 +497,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A75CBD2F1EBB6E6C009DBD7F /* PBXTargetDependency */,
 			);
 			name = example;
 			productName = "Hello World";
@@ -830,6 +838,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* example */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		A75CBD2F1EBB6E6C009DBD7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Interactable;
+			targetProxy = A75CBD2E1EBB6E6C009DBD7F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

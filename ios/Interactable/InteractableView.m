@@ -587,6 +587,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
 - (void)changePosition:(NSDictionary*)params
 {
+    if (self.dragBehavior) return;
     CGPoint pt = CGPointMake(((NSNumber *)params[@"x"]).floatValue, ((NSNumber *)params[@"y"]).floatValue);
     pt.x += self.origin.x;
     pt.y += self.origin.y;

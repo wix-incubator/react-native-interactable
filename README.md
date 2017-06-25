@@ -259,6 +259,16 @@ Takes a single argument, which is a params object containing:
  Takes a single argument, which is a params object containing:
   * `index` - The index of the snap point in the `snapPoints` array. Optional.
 
+##### `changePosition(params)` - used to imperatively set the view's position
+
+```jsx
+instance.setPosition({x: 120, y: 40});
+```
+
+Takes a single argument, which is a params object containing:
+ * `x` - The x coordinate.
+ * `y` - The y coordinate.
+
 <br>
 
 ## Animating other views according to `Interactable.View` position

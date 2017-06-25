@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 export default class ChangePosition extends Component {
@@ -42,15 +42,26 @@ export default class ChangePosition extends Component {
         </Interactable.View>
         <View style={{
           position: 'absolute',
-          left: 80,
-          zIndex: 1
+          left: 140,
+          zIndex: 1,
         }}>
-          <Button color='blue' title={"ChangePosition to " + blueDestination} onPress={() => {
-            this.refs['blue'].changePosition(blueDestination);
-          }}/>
-          <Button color='green' title="ChangePosition to random" onPress={() => {
-            this.refs['green'].changePosition({x: (Math.random() - 0.5) * 280, y: (Math.random() - 0.5) * 500});
-          }}/>
+          <TouchableOpacity
+            onPress={() => {
+              this.refs['blue'].changePosition(blueDestination)
+            }}
+          >
+            <Text style={{color: 'blue', fontSize: 12}}>{"ChangePosition to " + JSON.stringify(blueDestination)}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.refs['green'].changePosition({
+                x: (Math.random() - 0.5) * 280,
+                y: (Math.random() - 0.5) * 500}
+              )
+            }}
+          >
+            <Text style={{color: 'green'}}>ChangePosition to random</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -63,5 +74,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-  },
+  }
 });

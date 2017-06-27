@@ -303,6 +303,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         float toss = 0.1f;
         if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
+        PointF currentPosition = getCurrentPosition();
+        listener.onDrag("end",currentPosition.x, currentPosition.y);
+
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                 getTranslationY() + toss*velocity.y);
 
@@ -310,8 +313,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehaviorWithBoundaries(this.boundaries);
-        PointF currentPosition = getCurrentPosition();
-        listener.onDrag("end",currentPosition.x, currentPosition.y);
     }
 
     private void addTempSnapToPointBehavior(InteractablePoint snapPoint) {

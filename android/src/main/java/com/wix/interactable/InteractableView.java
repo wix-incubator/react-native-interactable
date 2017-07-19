@@ -536,6 +536,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             if (!animated) {
                 setTranslationX(snapPoint.x);
                 setTranslationY(snapPoint.y);
+                setVelocity(new PointF(0, 0));
             } else {
                 addTempSnapToPointBehavior(snapPoint);
                 addTempBounceBehaviorWithBoundaries(this.boundaries);

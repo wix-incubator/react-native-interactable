@@ -583,6 +583,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         
         if (!animated) {
             if (snapPoint) self.center = [snapPoint positionWithOrigin:self.origin];
+            [self.animator setTarget:self velocity:CGPointZero];
         } else {
             if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
             

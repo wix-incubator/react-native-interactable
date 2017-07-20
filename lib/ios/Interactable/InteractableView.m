@@ -103,7 +103,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
 @implementation InteractableView
 
-- (instancetype)init
+- (instancetype)initWithBridge:(RCTBridge *)bridge
 {
     if ((self = [super init]))
     {
@@ -112,6 +112,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         self.reactRelayoutHappening = NO;
         self.insideAlertAreas = [NSMutableSet set];
         self.dragEnabled = YES;
+        self.bridge = bridge;
         
         // pan gesture recognizer for touches
         self.pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -244,9 +245,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                                                                                    @"y": @(deltaFromOrigin.y)}
                                                                   coalescingKey:self.coalescingKey];
 
-        RCTRootView *rootView = [self getRootView];
-        [[[rootView bridge]eventDispatcher] sendEvent:event];
-        
+        [[self.bridge eventDispatcher] sendEvent:event];
         
         // self.onAnimatedEvent(@
         //                      {

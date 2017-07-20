@@ -1,6 +1,6 @@
 declare module 'react-native-interactable' {
 
-  import {Animated, ViewProperties} from 'react-native';
+  import {Animated, ViewProperties, ViewStyle} from 'react-native';
 
   namespace Interactable {
     interface ISnapPoint {
@@ -132,6 +132,7 @@ declare module 'react-native-interactable' {
       animatedValueY?: Animated.Value;
       animatedNativeDriver?: boolean;
       initialPosition?: IInitialPosition;
+      style?: ViewStyle;
     }
 
     interface IInteractable {

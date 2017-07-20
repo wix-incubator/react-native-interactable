@@ -1,6 +1,6 @@
 {
   "name": "react-native-interactable",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "High performance interactable views in React Native",
   "license": "MIT",
   "author": "Tal Kol <talkol@gmail.com>",

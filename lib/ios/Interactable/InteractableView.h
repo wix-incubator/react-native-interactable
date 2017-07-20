@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <React/RCTComponent.h>
+#import <React/RCTBridge.h>
 #import "InteractablePoint.h"
 #import "InteractableArea.h"
 #import "InteractableSpring.h"
@@ -18,6 +19,7 @@
 @property (nonatomic, assign) BOOL verticalOnly;
 @property (nonatomic, assign) BOOL horizontalOnly;
 @property (nonatomic, assign) BOOL dragEnabled;
+@property (nonatomic, strong) RCTBridge *bridge;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *snapPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *springPoints;
 @property (nonatomic, copy) NSArray<InteractablePoint *> *gravityPoints;
@@ -34,6 +36,7 @@
 @property (nonatomic, copy) RCTDirectEventBlock onAnimatedEvent;
 @property (nonatomic, assign) BOOL reportOnAnimatedEvents;
 
+- (instancetype)initWithBridge:(RCTBridge*)bridge;
 - (void)setVelocity:(NSDictionary*)params;
 - (void)snapTo:(NSDictionary*)params;
 - (void)changePosition:(NSDictionary*)params;

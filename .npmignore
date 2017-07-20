@@ -1,6 +1,8 @@
 example
 real-life-example
 logos
+./index.ios.js
+./index.android.js
 
 #################
 # from .gitignore:

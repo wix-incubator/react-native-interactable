@@ -238,6 +238,13 @@
 			remoteGlobalIDString = CC0127971E3ACC3900B23C9F;
 			remoteInfo = Interactable;
 		};
+		A761CB8C1F20D427004720AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 83CBBA2D1A601D0E00E9B192;
+			remoteInfo = React;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -513,6 +520,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A761CB8D1F20D427004720AF /* PBXTargetDependency */,
 				A712548A1F0E9DB80066860E /* PBXTargetDependency */,
 			);
 			name = example;
@@ -839,7 +847,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../../node_modules/react-native/packager/react-native-xcode.sh example/index.ios.js";
+			shellScript = "export NODE_BINARY=node\n../../node_modules/react-native/packager/react-native-xcode.sh index.ios.js\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -873,6 +881,11 @@
 			isa = PBXTargetDependency;
 			name = Interactable;
 			targetProxy = A71254891F0E9DB80066860E /* PBXContainerItemProxy */;
+		};
+		A761CB8D1F20D427004720AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = React;
+			targetProxy = A761CB8C1F20D427004720AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

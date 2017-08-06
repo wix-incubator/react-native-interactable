@@ -11,17 +11,17 @@ import java.util.List;
 
 public class Interactable implements ReactPackage {
 
-    @Override
+    // Deprecated RN 0.47
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Collections.emptyList();
     }
 
-    @Override
+    // Deprecated RN 0.47
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
 
-    @Override
+    // Deprecated RN 0.47
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Collections.<ViewManager>singletonList(new InteractableViewManager());
     }

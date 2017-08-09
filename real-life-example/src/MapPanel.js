@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Image, Text, Animated } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, Text, Animated, TouchableOpacity } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = {
@@ -18,8 +18,11 @@ export default class MapPanel extends Component {
 
         <Image style={styles.map} source={require('../img/map-bg.jpg')} />
 
-        <View style={styles.panelContainer}>
-          <Animated.View style={[styles.panelContainer, {
+
+        <View style={styles.panelContainer} pointerEvents={'box-none'}>
+          <Animated.View
+            pointerEvents={'box-none'}
+            style={[styles.panelContainer, {
             backgroundColor: 'black',
             opacity: this._deltaY.interpolate({
               inputRange: [0, Screen.height-100],

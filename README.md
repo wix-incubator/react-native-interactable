@@ -77,7 +77,7 @@ To see the library in action you have several options:
 <br><br>
 To run the example, clone the repo and run from the root folder:<br>
 ```
-  cd example
+  cd real-life-example
   npm install
   react-native run-ios
 ```

@@ -170,10 +170,16 @@ verticalOnly={true}
 boundaries={{left: -100, right: 100, bounce: 0.5}}
 ```
 
-* [`onSnap`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onsnap-function) - a function called whenever the view snaps to a `snapPoints` point (after dragging)
+* [`onSnap`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onsnap-function) - a function called whenever the view finishes snapping to a `snapPoints` point (after dragging)
 
 ```jsx
 onSnap={this.onDrawerSnap}
+```
+
+* [`onSnapStart`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onsnapstart-function) - a function called whenever the view starts snapping to a `snapPoints` point (after dragging)
+
+```jsx
+onSnapStart={this.onDrawerSnapStart}
 ```
 
 * [`onStop`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onstop-function) - a function called whenever the interaction stops (views freeze momentarily)

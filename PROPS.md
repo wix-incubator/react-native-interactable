@@ -131,7 +131,18 @@ Optional, an object providing limits to movement relative to the view's center (
 onSnap={this.onDrawerSnap}
 ```
 
-Optional, a function called whenever the view snaps to a `snapPoints` point (after being dragged). Example for [drawer](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/IconDrawer.js#L63). When the function is called, an event object is passed as argument, containing the following properties:
+Optional, a function called whenever the view finishes snapping to a `snapPoints` point (after being dragged). Example for [drawer](https://github.com/wix/react-native-interactable/blob/b72eff0649b48dd50548593e5ecfe4c42b026a02/example/src/IconDrawer.js#L63). When the function is called, an event object is passed as argument, containing the following properties:
+
+* `index` - The zero-based index of the point in the `snapPoints` array.
+* `id` - The string `id` of the point in the `snapPoints` array (assuming it was provided).
+
+#### `onSnapStart` (function)
+
+```jsx
+onSnapStart={this.onDrawerSnapStart}
+```
+
+Optional, a function called whenever the view starts snapping to a `snapPoints` point (after being dragged). When the function is called, an event object is passed as argument, containing the following properties:
 
 * `index` - The zero-based index of the point in the `snapPoints` array.
 * `id` - The string `id` of the point in the `snapPoints` array (assuming it was provided).

@@ -415,7 +415,18 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     CGPoint projectedCenter = CGPointMake(self.center.x + toss*velocity.x, self.center.y + toss*velocity.y);
     
     InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
-    if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
+    if (snapPoint)
+    {
+        [self addTempSnapToPointBehavior:snapPoint];
+        if (self.onSnapStart)
+        {
+            self.onSnapStart(@
+                        {
+                            @"index": @([self.snapPoints indexOfObject:snapPoint]),
+                            @"id": snapPoint.id
+                        });
+        }
+    }
     
     [self addTempBounceBehaviorWithBoundaries:self.boundaries];
 }

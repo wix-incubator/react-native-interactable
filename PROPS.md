@@ -158,6 +158,7 @@ Optional, a function called whenever the user starts or stops dragging the view.
 * `state` - `start` or `end`, whether the user started or finished dragging.
 * `x` - The horizontal position of the view (relative to the center).
 * `y` - The vertical position of the view (relative to the center).
+* `targetSnapPointId` - For `end` state, the string `id` of the target point in the `snapPoints` array (assuming it was provided). Otherwise, empty string.
 
 #### `onAlert` (function)
 

@@ -45,6 +45,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private PointF initialPosition;
 
     private InteractableArea boundaries;
+    private PhysicsBounceBehavior oldBoundariesBehavior;
+
     private InteractableSpring dragWithSprings;
     private float dragToss;
     private PointF velocity;
@@ -367,6 +369,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint,0, boundaries.isHaptic());
 
             this.animator.addBehavior(bounceBehavior);
+            this.oldBoundariesBehavior = bounceBehavior;
         }
     }
 
@@ -468,6 +471,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setBoundaries(InteractableArea boundaries) {
         this.boundaries = boundaries;
+        animator.removeBehavior(this.oldBoundariesBehavior);
         addConstantBoundaries(boundaries);
     }
 

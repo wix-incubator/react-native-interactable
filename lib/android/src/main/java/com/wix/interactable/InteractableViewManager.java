@@ -179,8 +179,8 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         }
 
         @Override
-        public void onDrag(String state, float x, float y) {
-            eventDispatcher.dispatchEvent(new Events.onDrag(interactableView.getId(),state, x, y));
+        public void onDrag(String state, float x, float y, String targetSnapPointId) {
+            eventDispatcher.dispatchEvent(new Events.onDrag(interactableView.getId(),state, x, y, targetSnapPointId));
         }
     }
 }

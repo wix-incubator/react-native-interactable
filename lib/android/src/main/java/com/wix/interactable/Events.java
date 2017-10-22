@@ -80,12 +80,13 @@ public class Events {
 
         WritableMap eventData;
 
-        public onDrag(int viewTag, String state, float x, float y) {
+        public onDrag(int viewTag, String state, float x, float y, String targetSnapPointId) {
             super(viewTag);
             eventData = Arguments.createMap();
             eventData.putString("state", state);
             eventData.putDouble("x", PixelUtil.toDIPFromPixel(x));
             eventData.putDouble("y", PixelUtil.toDIPFromPixel(y));
+            eventData.putString("targetSnapPointId", targetSnapPointId);
         }
 
         @Override

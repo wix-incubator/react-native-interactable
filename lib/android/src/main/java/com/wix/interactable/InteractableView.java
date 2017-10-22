@@ -279,7 +279,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private void startDrag(MotionEvent ev) {
         PointF currentPosition = getCurrentPosition();
-        listener.onDrag("start",currentPosition.x, currentPosition.y, '');
+        listener.onDrag("start",currentPosition.x, currentPosition.y, "");
         this.dragStartLocation = new PointF(ev.getX(),ev.getY());
         this.animator.removeTempBehaviors();
         this.animator.setDragging(true);

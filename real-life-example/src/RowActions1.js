@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Animated, TouchableOpacity, Slider, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Animated, TouchableOpacity, TouchableHighlight, Slider, Dimensions } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = Dimensions.get('window');
@@ -80,8 +80,10 @@ class Row extends Component {
   constructor(props) {
     super(props);
     this._deltaX = new Animated.Value(0);
+    this.state = {isMoving: false, position: 1};
   }
   render() {
+    const activeOpacity = this.state.position !== 1 ? 0.5 : 1;
     return (
       <View style={{backgroundColor: '#de6d77'}}>
 
@@ -152,21 +154,46 @@ class Row extends Component {
         </View>
 
         <Interactable.View
+          ref={el => this.interactableElem = el}
           horizontalOnly={true}
           snapPoints={[
             {x: 75, damping: 1-this.props.damping, tension: this.props.tension},
             {x: 0, damping: 1-this.props.damping, tension: this.props.tension},
             {x: -150, damping: 1-this.props.damping, tension: this.props.tension}
           ]}
+          onSnap={this.onSnap.bind(this)}
+          onDrag={this.onDrag.bind(this)}
+          onStop={this.onStopMoving.bind(this)}
           dragToss={0.01}
           animatedValueX={this._deltaX}>
-          <View style={{left: 0, right: 0, height: 75, backgroundColor: 'white'}}>
-            {this.props.children}
-          </View>
+          <TouchableHighlight onPress={this.onRowPress.bind(this)} activeOpacity={activeOpacity} underlayColor={'#dddddd'}>
+            <View style={{left: 0, right: 0, height: 75, backgroundColor: 'white'}}>
+              {this.props.children}
+            </View>
+          </TouchableHighlight>
         </Interactable.View>
 
       </View>
     );
+  }
+  onSnap({nativeEvent}) {
+    const { index } = nativeEvent;
+    this.setState({position: index});
+  }
+  onRowPress() {
+    const { isMoving, position } = this.state;
+    if (!isMoving && position !== 1) {
+      this.interactableElem.snapTo({index: 1});
+    }
+  }
+  onDrag({nativeEvent}) {
+    const { state } = nativeEvent;
+    if (state === 'start') {
+      this.setState({isMoving: true});
+    }
+  }
+  onStopMoving() {
+    this.setState({isMoving: false});
   }
   onButtonPress(name) {
     alert(`Button ${name} pressed`);

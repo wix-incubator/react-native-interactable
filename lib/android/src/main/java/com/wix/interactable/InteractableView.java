@@ -320,7 +320,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             return;
         }
         listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id);
-        listener.onSnapStart();
+        listener.onSnapStart(snapPoints.indexOf(snapPoint), snapPoint.id);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
 

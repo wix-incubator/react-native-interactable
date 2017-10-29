@@ -38,9 +38,11 @@ public class Events {
 
         WritableMap eventData;
 
-        public OnSnapStartEvent(int viewTag) {
+        public OnSnapStartEvent(int viewTag, int indexOfSnapPoint, String snapPointId) {
             super(viewTag);
             eventData = Arguments.createMap();
+            eventData.putInt("index",indexOfSnapPoint);
+            eventData.putString("id", snapPointId);
         }
 
         @Override

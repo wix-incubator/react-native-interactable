@@ -148,6 +148,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.<String, Object>builder()
                 .put("onSnap", MapBuilder.of("registrationName", "onSnap"))
+                .put("onSnapStart", MapBuilder.of("registrationName", "onSnapStart"))
                 .put("onAlert", MapBuilder.of("registrationName", "onAlert"))
                 .put("onAnimatedEvent", MapBuilder.of("registrationName", "onAnimatedEvent"))
                 .put("onDrag", MapBuilder.of("registrationName", "onDrag"))
@@ -169,6 +170,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         }
 
         @Override
+        public void onSnapStart(int indexOfSnapPoint, String snapPointId) {
+            eventDispatcher.dispatchEvent(new Events.OnSnapStartEvent(interactableView.getId(), indexOfSnapPoint, snapPointId));
+        }
+
+        @Override
         public void onAlert(String alertAreaId, String alertType) {
             eventDispatcher.dispatchEvent(new Events.OnAlertEvent(interactableView.getId(), alertAreaId, alertType));
         }
@@ -184,4 +190,3 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         }
     }
 }
-

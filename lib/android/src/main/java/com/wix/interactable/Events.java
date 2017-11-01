@@ -99,4 +99,24 @@ public class Events {
             rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
         }
     }
+
+    public static class onStop extends Event<onStop> {
+
+        WritableMap eventData;
+
+        public onStop(int viewTag, float x, float y) {
+            super(viewTag);
+            eventData = Arguments.createMap();
+            eventData.putDouble("x", PixelUtil.toDIPFromPixel(x));
+            eventData.putDouble("y", PixelUtil.toDIPFromPixel(y));
+        }
+
+        @Override
+        public String getEventName() { return "onStop"; }
+
+        @Override
+        public void dispatch(RCTEventEmitter rctEventEmitter) {
+            rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+        }
+    }
 }

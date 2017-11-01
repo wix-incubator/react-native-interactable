@@ -99,7 +99,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     @Override
     public void onAnimatorPause() {
-
+        PointF currentPosition = getCurrentPosition();
+        listener.onStop(currentPosition.x, currentPosition.y);
     }
 
     @Override
@@ -548,5 +549,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
         void onDrag(String state, float x, float y, String targetSnapPointId);
+        void onStop(float x, float y);
     }
 }

@@ -16,9 +16,10 @@ public class Events {
 
         WritableMap eventData;
 
-        public OnSnapEvent(int viewTag, int indexOfSnapPoint, String snapPointId) {
+        public OnSnapEvent(int viewTag, int indexOfSnapPoint, String snapPointId, boolean programmatic) {
             super(viewTag);
             eventData = Arguments.createMap();
+            eventData.putBoolean("programmatic", programmatic);
             eventData.putInt("index",indexOfSnapPoint);
             eventData.putString("id", snapPointId);
         }

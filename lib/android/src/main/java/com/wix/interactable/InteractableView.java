@@ -312,15 +312,15 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
         listener.onDrag("end",currentPosition.x, currentPosition.y, snapPoint.id);
 
-        addTempSnapToPointBehavior(snapPoint);
+        addTempSnapToPointBehavior(snapPoint, false);
         addTempBounceBehaviorWithBoundaries(this.boundaries);
     }
 
-    private void addTempSnapToPointBehavior(InteractablePoint snapPoint) {
+    private void addTempSnapToPointBehavior(InteractablePoint snapPoint, boolean programmatic) {
         if (snapPoint == null) {
             return;
         }
-        listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id);
+        listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id, programmatic);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
 
@@ -531,7 +531,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             this.animator.removeTempBehaviors();
             this.dragBehavior = null;
             InteractablePoint snapPoint = snapPoints.get(index);
-            addTempSnapToPointBehavior(snapPoint);
+            addTempSnapToPointBehavior(snapPoint, true);
             addTempBounceBehaviorWithBoundaries(this.boundaries);
         }
     }
@@ -545,7 +545,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
 
     public interface InteractionListener {
-        void onSnap(int indexOfSnapPoint, String snapPointId);
+        void onSnap(int indexOfSnapPoint, String snapPointId, boolean programmatic);
         void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
         void onDrag(String state, float x, float y, String targetSnapPointId);

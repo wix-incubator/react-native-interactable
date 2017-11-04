@@ -165,8 +165,8 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         }
 
         @Override
-        public void onSnap(int indexOfSnapPoint, String snapPointId) {
-            eventDispatcher.dispatchEvent(new Events.OnSnapEvent(interactableView.getId(), indexOfSnapPoint, snapPointId));
+        public void onSnap(int indexOfSnapPoint, String snapPointId, boolean programmatic) {
+            eventDispatcher.dispatchEvent(new Events.OnSnapEvent(interactableView.getId(), indexOfSnapPoint, snapPointId, programmatic));
         }
 
         @Override

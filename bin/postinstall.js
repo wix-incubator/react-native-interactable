@@ -1,15 +1,16 @@
+const Lnf = require('lnf');
 const fs = require('fs');
 
-fs.symlinkSync('.', 'lib/ios', 'dir', err => {
+Lnf.sync('lib/ios', __dirname + '..', err => {
   if (err) {
     console.error(err);
     process.exit(1);
-  }
-});
+  }  
+})
 
-fs.symlinkSync('.', 'lib/android', 'dir', err => {
+Lnf.sync('lib/android', __dirname + '..', err => {
   if (err) {
     console.error(err);
     process.exit(1);
-  }
-});
+  }  
+})

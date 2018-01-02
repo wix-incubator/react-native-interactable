@@ -16,11 +16,10 @@
     "type": "git",
     "url": "https://github.com/wix/react-native-interactable.git"
   },
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "node ./node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "postinstall": "ln -sf lib/{ios,android} ."
+    "test": "jest"
   },
   "dependencies": {},
   "peerDependencies": {

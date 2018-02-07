@@ -77,6 +77,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setVerticalOnly(verticalOnly);
     }
 
+    @ReactProp(name = "verticalOnly")
+    public void setVerticalOnly(InteractableView view, @Nullable boolean verticalOnly) {
+        view.b;
+    }
+
     @ReactProp(name = "horizontalOnly")
     public void setHorizontalOnly(InteractableView view, @Nullable boolean horizontalOnly) {
         view.setHorizontalOnly(horizontalOnly);

@@ -102,6 +102,15 @@ horizontalOnly={true}
 
 Optional, whether the view should be locked to horizontal movement only. Default `false`.
 
+#### `alwaysOnFront` (boolean) **[Android Only]**
+
+```jsx
+alwaysOnFront
+```
+
+Optional, whether the view should call `view.bringToFront()`.
+*Usually using zIndex does the trick. Use this in cases it doesn't*
+
 #### `verticalOnly` (boolean)
 
 ```jsx

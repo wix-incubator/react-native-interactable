@@ -169,6 +169,12 @@ alertAreas={[{id: 'myArea', influenceArea: {top: 0}}]}
 horizontalOnly={true}
 ```
 
+* [`startOnFront`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#startOnFront-boolean) - [ANDROID ONLY] whether the view should call `bringToFront`
+
+```jsx
+startOnFront
+```
+
 * [`verticalOnly`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#verticalonly-boolean) - whether the view should be locked to vertical movement only
 
 ```jsx

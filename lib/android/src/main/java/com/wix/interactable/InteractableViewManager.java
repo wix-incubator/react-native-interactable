@@ -1,7 +1,6 @@
 package com.wix.interactable;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReadableArray;
@@ -22,6 +21,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
     public static final int COMMAND_SET_VELOCITY = 1;
     public static final int COMMAND_SNAP_TO = 2;
     public static final int COMMAND_CHANGE_POSITION = 3;
+    public static final int COMMAND_BRING_TO_FRONT = 4;
 
 
     @Override
@@ -39,7 +39,8 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         return MapBuilder.of(
                 "setVelocity", COMMAND_SET_VELOCITY,
                 "snapTo", COMMAND_SNAP_TO,
-                "changePosition", COMMAND_CHANGE_POSITION
+                "changePosition", COMMAND_CHANGE_POSITION,
+                "bringToFront", COMMAND_BRING_TO_FRONT
                 );
     }
 
@@ -62,6 +63,10 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
             }
             case COMMAND_CHANGE_POSITION: {
                 view.changePosition(RNConvert.pointF(args.getMap(0)));
+                return;
+            }
+            case COMMAND_BRING_TO_FRONT: {
+                view.bringToFront();
                 return;
             }
             default:

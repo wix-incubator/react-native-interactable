@@ -282,6 +282,12 @@ Takes a single argument, which is a params object containing:
 
 <br>
 
+##### `bringToFront()` - bring view to front (Android Only)
+
+```jsx
+instance.bringToFront();
+```
+
 ## Animating other views according to `Interactable.View` position
 
 This library is integrated with the [Animated](https://facebook.github.io/react-native/docs/animated.html) library in order to support performant animations of other views according to the movement of the `Interactable.View`.

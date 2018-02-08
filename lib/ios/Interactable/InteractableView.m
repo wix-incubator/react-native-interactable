@@ -597,6 +597,11 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     [self.animator ensureRunning];
 }
 
+- (void)bringToFront:(NSDictionary*)params
+{
+
+}
+
 @end
 
 

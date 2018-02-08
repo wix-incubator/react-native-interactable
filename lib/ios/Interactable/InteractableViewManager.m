@@ -62,6 +62,12 @@ RCT_EXPORT_METHOD(setVelocity:(nonnull NSNumber *)reactTag
      }];
 }
 
+RCT_EXPORT_METHOD(bringToFront:(nonnull NSNumber *)reactTag
+                  params:(NSDictionary*)params)
+{
+    
+}
+
 RCT_EXPORT_METHOD(snapTo:(nonnull NSNumber *)reactTag
                   params:(NSDictionary*)params)
 {

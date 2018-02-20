@@ -67,7 +67,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 - (InteractableEvent *)coalesceWithEvent:(InteractableEvent *)newEvent
 {
     newEvent->_userData = _userData;
-
+    
     return newEvent;
 }
 
@@ -113,7 +113,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         self.insideAlertAreas = [NSMutableSet set];
         self.dragEnabled = YES;
         self.bridge = bridge;
-
+        
         // pan gesture recognizer for touches
         self.pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         self.pan.delegate = self;
@@ -126,14 +126,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 {
     // to handle the react relayout we need to remember the delta from previous origin
     self.reactRelayoutCenterDeltaFromOrigin = CGPointMake(self.origin.x - self.center.x, self.origin.y - self.center.y);
-
+    
     self.origin = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
     self.originSet = YES;
-
+    
     self.reactRelayoutHappening = YES;
     [super reactSetFrame:frame];
     self.reactRelayoutHappening = NO;
-
+    
     // initial position
     if (!self.initialPositionSet)
     {
@@ -142,7 +142,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         {
             self.center = CGPointMake(self.origin.x + self.initialPosition.x, self.origin.y + self.initialPosition.y);
         }
-
+        
         // make sure this is after origin is set and happens once
         [self initializeAnimator];
     }
@@ -155,12 +155,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         // to handle a react relayout we maintain the same delta but now with the new origin
         center = CGPointMake(self.origin.x - self.reactRelayoutCenterDeltaFromOrigin.x, self.origin.y - self.reactRelayoutCenterDeltaFromOrigin.y);
     }
-
+    
     if (self.originSet)
     {
         if (self.horizontalOnly) center.y = self.origin.y;
         if (self.verticalOnly) center.x = self.origin.x;
-
+        
         if (self.boundaries)
         {
             if (center.x - self.origin.x < self.boundaries.left) center.x = self.boundaries.left + self.origin.x;
@@ -169,7 +169,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
             if (center.y - self.origin.y > self.boundaries.bottom) center.y = self.boundaries.bottom + self.origin.y;
         }
     }
-
+    
     [super setCenter:center];
     [self reportAnimatedEvent];
     [self reportAlertEvent];
@@ -185,7 +185,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 {
     self.animator = [[PhysicsAnimator alloc] init];
     self.animator.delegate = self;
-
+    
     // initialize constant behaviors
     if (self.springPoints)
     {
@@ -215,7 +215,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                         });
         }
     }
-
+    
     if (self.onStop)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
@@ -232,12 +232,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     if (self.reportOnAnimatedEvents && self.originSet)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
-
+        
         if (![self.lastEmittedEventName isEqualToString:@"onAnimatedEvent"]) {
             self.coalescingKey++;
             self.lastEmittedEventName = @"onAnimatedEvent";
         }
-
+        
         InteractableEvent *event = [[InteractableEvent alloc] initWithEventName:@"onAnimatedEvent"
                                                                        reactTag:self.reactTag
                                                                interactableView:self
@@ -246,7 +246,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                                                                   coalescingKey:self.coalescingKey];
 
         [[self.bridge eventDispatcher] sendEvent:event];
-
+        
         // self.onAnimatedEvent(@
         //                      {
         //                          @"x": @(deltaFromOrigin.x),
@@ -310,11 +310,11 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         [self setTempBehaviorsForDragStart];
         [self reportDragEvent:@"start"];
     }
-
+    
     CGPoint translation = [pan translationInView:self];
     self.dragBehavior.anchorPoint = CGPointMake(self.dragStartCenter.x + translation.x, self.dragStartCenter.y + translation.y);
     [self.animator ensureRunning];
-
+    
     if (pan.state == UIGestureRecognizerStateEnded ||
         pan.state == UIGestureRecognizerStateFailed ||
         pan.state == UIGestureRecognizerStateCancelled)
@@ -355,7 +355,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         view = view.superview;
         if ([view isKindOfClass:[RCTRootView class]]) break;
     }
-
+    
     if ([view isKindOfClass:[RCTRootView class]])
     {
         return view;
@@ -369,26 +369,26 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
  UITouch *touch = [[event allTouches] anyObject];
  self.dragStartCenter = self.center;
  self.dragStartLocation = [touch locationInView:self.superview];
-
+ 
  [self setTempBehaviorsForDragStart];
  }
-
+ 
  - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
  {
  UITouch *touch = [[event allTouches] anyObject];
  CGPoint location = [touch locationInView:self.superview];
  CGFloat newCenterX = self.dragStartCenter.x + location.x - self.dragStartLocation.x;
  CGFloat newCenterY = self.dragStartCenter.y + location.y - self.dragStartLocation.y;
-
+ 
  self.dragBehavior.anchorPoint = CGPointMake(newCenterX, newCenterY);
  [self.animator ensureRunning];
  }
-
+ 
  - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
  {
  [self setTempBehaviorsForDragEnd];
  }
-
+ 
  - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
  {
  [self setTempBehaviorsForDragEnd];
@@ -399,7 +399,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 {
     [self.animator removeTempBehaviors];
     self.dragBehavior = nil;
-
+    
     self.dragBehavior = [self addTempDragBehavior:self.dragWithSpring];
 }
 
@@ -407,13 +407,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 {
     [self.animator removeTempBehaviors];
     self.dragBehavior = nil;
-
+    
     CGPoint velocity = [self.animator getTargetVelocity:self];
     if (self.horizontalOnly) velocity.y = 0;
     if (self.verticalOnly) velocity.x = 0;
     CGFloat toss = self.dragToss;
     CGPoint projectedCenter = CGPointMake(self.center.x + toss*velocity.x, self.center.y + toss*velocity.y);
-
+    
     InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
     if (snapPoint)
     {
@@ -427,7 +427,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                         });
         }
     }
-
+    
     [self addTempBounceBehaviorWithBoundaries:self.boundaries];
 }
 
@@ -436,7 +436,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 - (PhysicsBehavior*)addTempDragBehavior:(InteractableSpring*)spring
 {
     PhysicsBehavior *res = nil;
-
+    
     if (!spring || spring.tension == CGFLOAT_MAX)
     {
         PhysicsAnchorBehavior *anchorBehavior = [[PhysicsAnchorBehavior alloc] initWithTarget:self anchorPoint:self.center];
@@ -450,14 +450,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         res = springBehavior;
         [self.animator addTempBehavior:springBehavior];
     }
-
+    
     if (spring && spring.damping > 0.0)
     {
         PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
         frictionBehavior.friction = spring.damping;
         [self.animator addTempBehavior:frictionBehavior];
     }
-
+    
     return res;
 }
 
@@ -466,7 +466,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     PhysicsSpringBehavior *snapBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:[snapPoint positionWithOrigin:self.origin]];
     snapBehavior.tension = snapPoint.tension;
     [self.animator addTempBehavior:snapBehavior];
-
+    
     CGFloat damping = 0.7;
     if (snapPoint.damping > 0.0) damping = snapPoint.damping;
     PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
@@ -496,13 +496,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     CGPoint anchor = self.origin;
     if (point.x != CGFLOAT_MAX) anchor.x = self.origin.x + point.x;
     if (point.y != CGFLOAT_MAX) anchor.y = self.origin.y + point.y;
-
+    
     PhysicsSpringBehavior *springBehavior = [[PhysicsSpringBehavior alloc] initWithTarget:self anchorPoint:anchor];
     springBehavior.tension = point.tension;
     springBehavior.haptics = point.haptics;
     springBehavior.influence = [self influenceAreaFromPoint:point];
     [self.animator addBehavior:springBehavior];
-
+    
     if (point.damping > 0.0)
     {
         PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
@@ -517,13 +517,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     CGPoint anchor = self.origin;
     if (point.x != CGFLOAT_MAX) anchor.x = self.origin.x + point.x;
     if (point.y != CGFLOAT_MAX) anchor.y = self.origin.y + point.y;
-
+    
     PhysicsGravityWellBehavior *gravityBehavior = [[PhysicsGravityWellBehavior alloc] initWithTarget:self anchorPoint:anchor];
     gravityBehavior.strength = point.strength;
     gravityBehavior.falloff = point.falloff;
     gravityBehavior.influence = [self influenceAreaFromPoint:point];
     [self.animator addBehavior:gravityBehavior];
-
+    
     if (point.damping > 0.0)
     {
         PhysicsFrictionBehavior *frictionBehavior = [[PhysicsFrictionBehavior alloc] initWithTarget:self];
@@ -586,7 +586,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     {
         [self.animator removeTempBehaviors];
         self.dragBehavior = nil;
-
+        
         InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
         if (snapPoint) {
             [self addTempSnapToPointBehavior:snapPoint];
@@ -598,7 +598,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                             });
             }
         }
-
+        
         [self addTempBounceBehaviorWithBoundaries:self.boundaries];
         [self.animator ensureRunning];
     }

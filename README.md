@@ -89,7 +89,7 @@ To see the library in action you have several options:
 To run the example, clone the repo and run from the root folder:<br>
 ```
   cd real-life-example
-  npm install
+  yarn
   react-native run-ios
 ```
 

@@ -588,7 +588,16 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         self.dragBehavior = nil;
         
         InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
-        if (snapPoint) [self addTempSnapToPointBehavior:snapPoint];
+        if (snapPoint) {
+            [self addTempSnapToPointBehavior:snapPoint];
+            if (self.onSnapStart) {
+                self.onSnapStart(@
+                            {
+                                @"index": @([self.snapPoints indexOfObject:snapPoint]),
+                                @"id": snapPoint.id
+                            });
+            }
+        }
         
         [self addTempBounceBehaviorWithBoundaries:self.boundaries];
         [self.animator ensureRunning];

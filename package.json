@@ -20,7 +20,7 @@
   "scripts": {
     "start": "node ./node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "postinstall": "ln -sf lib/{ios,android} ."
+    "postinstall": "bash -c \"ln -sf lib/{ios,android} .\""
   },
   "dependencies": {},
   "peerDependencies": {

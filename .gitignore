@@ -39,3 +39,9 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
+
+# LOCKFILES
+package-lock.json
+
+# ERROR LOGS
+yarn-error.log

@@ -20,7 +20,9 @@
   "scripts": {
     "start": "node ./node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "postinstall": "ln -sf lib/{ios,android} ."
+    "postinstall": "ln -sf lib/{ios,android} .",
+    "example:android": "cd example && react-native run-android",
+    "example:ios": "cd example && react-native run-ios"
   },
   "dependencies": {
     "react": "16.0.0-alpha.12",

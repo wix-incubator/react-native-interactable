@@ -302,6 +302,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (this.horizontalOnly) velocity.y = 0;
         if (this.verticalOnly) velocity.x = 0;
         float toss = 0.1f;
+        if (this.dragToss) toss = this.dragToss;
         if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
         PointF currentPosition = getCurrentPosition();

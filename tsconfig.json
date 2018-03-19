@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "react-native",
+    "lib": ["dom", "es2015", "es2016", "es2017", "esnext.asynciterable"],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noEmit": true,
+    "preserveConstEnums": true,
+    "pretty": true,
+    "target": "es2015",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true
+  },
+  "exclude": ["index.js", "build", "node_modules"]
+}

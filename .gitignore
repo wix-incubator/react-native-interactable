@@ -45,3 +45,6 @@ package-lock.json
 
 # ERROR LOGS
 yarn-error.log
+
+# EDITOR
+.vscode/*

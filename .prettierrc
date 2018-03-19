@@ -1,0 +1,19 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "bracketSpacing": false,
+  "singleQuote": false,
+  "semi": true,
+  "trailingComma": "es5",
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": ["package.json", "i18n/**/*"],
+      "options": {
+        "printWidth": 600
+      }
+    }
+  ]
+}

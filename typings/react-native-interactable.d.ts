@@ -2,7 +2,7 @@ declare module "react-native-interactable" {
   import {Animated, ViewProperties, ViewStyle} from "react-native";
 
   namespace Interactable {
-    interface ISnapPoint {
+    interface SnapPoint {
       x?: number;
       y?: number;
       damping?: number;
@@ -10,14 +10,14 @@ declare module "react-native-interactable" {
       id?: string;
     }
 
-    interface IInfluenceArea {
+    interface InfluenceArea {
       left?: number;
       right?: number;
       top?: number;
       bottom?: number;
     }
 
-    interface ISpringPoint {
+    interface SpringPoint {
       x?: number;
       y?: number;
       damping?: number;
@@ -26,7 +26,7 @@ declare module "react-native-interactable" {
       haptics?: boolean;
     }
 
-    interface IGravityPoints {
+    interface GravityPoints {
       x?: number;
       y?: number;
       strength?: number;
@@ -36,18 +36,18 @@ declare module "react-native-interactable" {
       haptics?: boolean;
     }
 
-    interface IFrictionArea {
+    interface FrictionArea {
       damping?: number;
       influenceArea?: IInfluenceArea;
       haptics?: boolean;
     }
 
-    interface IAlertArea {
+    interface AlertArea {
       id: string;
       influenceArea: IInfluenceArea;
     }
 
-    interface IBoundaries {
+    interface Boundaries {
       left?: number;
       right?: number;
       top?: number;
@@ -56,31 +56,31 @@ declare module "react-native-interactable" {
       haptics?: boolean;
     }
 
-    interface IDragWithSpring {
+    interface DragWithSpring {
       tension?: number;
       damping?: number;
     }
 
-    interface IInitialPosition {
+    interface InitialPosition {
       x?: number;
       y?: number;
     }
 
-    interface INativeSnapEvent {
+    interface NativeSnapEvent {
       index: number;
       id: string;
     }
 
-    interface ISnapEvent {
+    interface SnapEvent {
       nativeEvent: INativeSnapEvent;
     }
 
-    interface INativeStopEvent {
+    interface NativeStopEvent {
       x: number;
       y: number;
     }
 
-    interface IStopEvent {
+    interface StopEvent {
       nativeEvent: INativeStopEvent;
     }
 
@@ -90,13 +90,14 @@ declare module "react-native-interactable" {
       | NativeDragEventStartStateType
       | NativeDragEventEndStateType;
 
-    interface INativeDragEvent {
+    interface NativeDragEvent {
       state: NativeDragEventState;
       x: number;
       y: number;
+      targetSnapPointId?: number;
     }
 
-    interface IDragEvent {
+    interface DragEvent {
       nativeEvent: INativeDragEvent;
     }
 
@@ -106,16 +107,16 @@ declare module "react-native-interactable" {
       | NativeAlertEventEnterValueType
       | NativeAlertEventLeaveValueType;
 
-    interface INativeAlertEvent {
+    interface NativeAlertEvent {
       id: string;
       value: NativeAlertEventValue;
     }
 
-    interface IAlertEvent {
+    interface AlertEvent {
       nativeEvent: INativeAlertEvent;
     }
 
-    interface IInteractableView extends ViewProperties {
+    interface InteractableView extends ViewProperties {
       snapPoints?: ISnapPoint[];
       springPoints?: ISpringPoint[];
       gravityPoints?: IGravityPoints[];
@@ -138,7 +139,7 @@ declare module "react-native-interactable" {
       style?: ViewStyle;
     }
 
-    interface IInteractable {
+    interface Interactable {
       View: new () => React.Component<IInteractableView, {}>;
     }
   }

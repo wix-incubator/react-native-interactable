@@ -8,13 +8,14 @@ import {
   View,
 } from "react-native";
 
-import ChangePosition from "./simpleExamples/TouchesInsideStatic";
+import RealLifeExamples from "./realLifeExamples";
 
+console.log("DEBUG", RealLifeExamples);
 export default class App extends React.Component {
   private onExamplePress = () => {};
 
   public render() {
-    return <ChangePosition />;
+    return <View />;
   }
 }
 

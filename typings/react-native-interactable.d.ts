@@ -1,6 +1,5 @@
-declare module 'react-native-interactable' {
-
-  import {Animated, ViewProperties, ViewStyle} from 'react-native';
+declare module "react-native-interactable" {
+  import {Animated, ViewProperties, ViewStyle} from "react-native";
 
   namespace Interactable {
     interface ISnapPoint {
@@ -85,9 +84,11 @@ declare module 'react-native-interactable' {
       nativeEvent: INativeStopEvent;
     }
 
-    type NativeDragEventStartStateType = 'start';
-    type NativeDragEventEndStateType = 'end';
-    type NativeDragEventState = NativeDragEventStartStateType | NativeDragEventEndStateType;
+    type NativeDragEventStartStateType = "start";
+    type NativeDragEventEndStateType = "end";
+    type NativeDragEventState =
+      | NativeDragEventStartStateType
+      | NativeDragEventEndStateType;
 
     interface INativeDragEvent {
       state: NativeDragEventState;
@@ -99,9 +100,11 @@ declare module 'react-native-interactable' {
       nativeEvent: INativeDragEvent;
     }
 
-    type NativeAlertEventEnterValueType = 'enter';
-    type NativeAlertEventLeaveValueType = 'leave';
-    type NativeAlertEventValue = NativeAlertEventEnterValueType | NativeAlertEventLeaveValueType;
+    type NativeAlertEventEnterValueType = "enter";
+    type NativeAlertEventLeaveValueType = "leave";
+    type NativeAlertEventValue =
+      | NativeAlertEventEnterValueType
+      | NativeAlertEventLeaveValueType;
 
     interface INativeAlertEvent {
       id: string;

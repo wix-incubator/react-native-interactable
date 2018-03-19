@@ -145,5 +145,5 @@ declare module "react-native-interactable" {
 
   const Interactable: Interactable.IInteractable;
 
-  export = Interactable;
+  export default Interactable;
 }

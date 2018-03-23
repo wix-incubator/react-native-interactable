@@ -279,7 +279,7 @@ Takes a single argument, which is a params object containing:
 ##### `changePosition(params)` - used to imperatively set the view's position
 
 ```jsx
-instance.setPosition({x: 120, y: 40});
+instance.changePosition({x: 120, y: 40});
 ```
 
 Takes a single argument, which is a params object containing:

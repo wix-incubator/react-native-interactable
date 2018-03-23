@@ -286,17 +286,24 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     }
 }
 
+- (void)reportDragEvent:(NSString*)state
+{
+    [self reportDragEvent:state targetSnapPointId:nil];
+}
+
 - (void)reportDragEvent:(NSString*)state targetSnapPointId:(NSString*)targetSnapPointId
 {
     if (self.onDrag)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
-        self.onDrag(@{
-                        @"state": state,
-                        @"x": @(deltaFromOrigin.x),
-                        @"y": @(deltaFromOrigin.y),
-                        @"targetSnapPointId":targetSnapPointId
-                      });
+        NSDictionary *onDragEvent = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                         state ?: [NSNull null], @"state",
+                                         deltaFromOrigin.x ?: 0, @"x",
+                                         deltaFromOrigin.y ?: 0, @"y",
+                                         targetSnapPointId ?: [NSNull null], @"targetSnapPointId",
+                                    nil];
+        
+        self.onDrag(onDragEvent); 
     }
 }
 
@@ -309,7 +316,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         [self cancelCurrentReactTouch];
         self.dragStartCenter = self.center;
         [self setTempBehaviorsForDragStart];
-        [self reportDragEvent:@"start" targetSnapPointId:@""];
+        [self reportDragEvent:@"start"];
     }
     
     CGPoint translation = [pan translationInView:self];
@@ -321,7 +328,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         pan.state == UIGestureRecognizerStateCancelled)
     {
         InteractablePoint* point = [self setTempBehaviorsForDragEnd];
-        [self reportDragEvent:@"end" targetSnapPointId:point.id];
+        NSString* targetSnapPointId = point ? point.id : nil;
+        [self reportDragEvent:@"end" targetSnapPointId:targetSnapPointId];
     }
 }
 

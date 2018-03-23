@@ -34,7 +34,7 @@ Connect the view's center to a group of constant springs. Every element in the a
   * `left` - The minimum horizontal influence point (relative to the center). Optional.
   * `right` - The maximum horizontal influence point (relative to the center). Optional.
   * `top` - The minimum vertical influence point (relative to the center). Optional.
-  * `bottom` - The maximum vertical influence point (relative to the center). Optional.  
+  * `bottom` - The maximum vertical influence point (relative to the center). Optional.
 * `haptics` - Whether to enable haptic feedback on springs with influence area. Default `false`.
 
 Note: For the springs to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
@@ -56,7 +56,7 @@ Attract/repel the view's center with a group of constant gravity wells. Every el
   * `left` - The minimum horizontal influence point (relative to the center). Optional.
   * `right` - The maximum horizontal influence point (relative to the center). Optional.
   * `top` - The minimum vertical influence point (relative to the center). Optional.
-  * `bottom` - The maximum vertical influence point (relative to the center). Optional.  
+  * `bottom` - The maximum vertical influence point (relative to the center). Optional.
 * `haptics` - Whether to enable haptic feedback on fields with influence area. Default `false`.
 
 Note: For the gravity to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
@@ -74,7 +74,7 @@ Add friction to the view's movement with a group of friction regions. Every elem
   * `left` - The minimum horizontal influence point (relative to the center). Optional.
   * `right` - The maximum horizontal influence point (relative to the center). Optional.
   * `top` - The minimum vertical influence point (relative to the center). Optional.
-  * `bottom` - The maximum vertical influence point (relative to the center). Optional.  
+  * `bottom` - The maximum vertical influence point (relative to the center). Optional.
 * `haptics` - Whether to enable haptic feedback on regions with influence area. Default `false`.
 
 Note: For the friction to affect the view while dragging, make sure dragging is performed via a spring using the `dragWithSpring` prop.
@@ -92,7 +92,7 @@ Send alert event when the view's center enters/leaves any region within the grou
   * `left` - The minimum horizontal alert point (relative to the center). Optional.
   * `right` - The maximum horizontal alert point (relative to the center). Optional.
   * `top` - The minimum vertical alert point (relative to the center). Optional.
-  * `bottom` - The maximum vertical alert point (relative to the center). Optional.  
+  * `bottom` - The maximum vertical alert point (relative to the center). Optional.
 
 #### `horizontalOnly` (boolean)
 
@@ -105,11 +105,11 @@ Optional, whether the view should be locked to horizontal movement only. Default
 #### `startOnFront` (boolean) **[Android Only]**
 
 ```jsx
-startOnFront
+startOnFront;
 ```
 
 Optional, whether the view should call `view.bringToFront()` when the view is first loaded.
-*Usually using zIndex does the trick. Use this in cases it doesn't*
+_Usually using zIndex does the trick. Use this in cases it doesn't_
 
 #### `verticalOnly` (boolean)
 
@@ -167,7 +167,7 @@ Optional, a function called whenever the user starts or stops dragging the view.
 * `state` - `start` or `end`, whether the user started or finished dragging.
 * `x` - The horizontal position of the view (relative to the center).
 * `y` - The vertical position of the view (relative to the center).
-* `targetSnapPointId` - For `end` state, the string `id` of the target point in the `snapPoints` array (assuming it was provided). Otherwise, empty string.
+* `targetSnapPointId` - For `end` state, the string `id` of the target point in the `snapPoints` array (assuming it was provided). Default: null
 
 #### `onAlert` (function)
 

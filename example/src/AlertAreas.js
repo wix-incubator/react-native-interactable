@@ -57,7 +57,7 @@ export default class AlertAreas extends Component {
         </View>
         <Interactable.View
           snapPoints={[
-            { x: -140, y: -250, id: "Hakuna" },
+            { x: -140, y: -250, id: "TestID" },
             { x: 140, y: -250 },
             { x: -140, y: 250 },
             { x: 140, y: 250 }

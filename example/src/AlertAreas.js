@@ -27,7 +27,7 @@ export default class AlertAreas extends Component {
         </View>
       </View>
             <Interactable.View
-          snapPoints={[{x: -140, y: -250}, {x: 140, y: -250}, {x: -140, y: 250}, {x: 140, y: 250}]}
+          snapPoints={[{x: -140, y: -250, id: 'testId'}, {x: 140, y: -250}, {x: -140, y: 250}, {x: 140, y: 250}]}
           dragEnabled={this.state.dragEnabled}
           alertAreas={[
               {id: 'green', influenceArea: {left: 100}},

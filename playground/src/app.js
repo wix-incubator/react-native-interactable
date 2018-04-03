@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native';
+
+// Basic Examples
 import ChatHeads from './examples/ChatHeads';
 import SwipeableCard from './examples/SwipeableCard';
 import IconDrawer from './examples/IconDrawer';
@@ -24,6 +26,18 @@ import ChangePosition from './examples/ChangePosition';
 import AlertAreas from './examples/AlertAreas';
 import CollapsingHeaderWithScroll from './examples/CollapsingHeaderWithScroll';
 
+// Real life Examples
+import Documentation from './real-life-examples/Documentation';
+import RowActions1 from './real-life-examples/RowActions1';
+import RowActions2 from './real-life-examples/RowActions2';
+import NowCard from './real-life-examples/NowCard';
+import TinderCard from './real-life-examples/TinderCard';
+import NotifPanel from './real-life-examples/NotifPanel';
+import MapPanel from './real-life-examples/MapPanel';
+import CollapsibleFilter from './real-life-examples/CollapsibleFilter';
+import CollapsibleCalendar from './real-life-examples/CollapsibleCalendar';
+import RealChatHeads from './real-life-examples/RealChatHeads';
+import UxInspirations from './real-life-examples/UxInspirations';
 export default class example extends Component {
   constructor(props) {
     super(props);
@@ -34,8 +48,7 @@ export default class example extends Component {
 
   render() {
     return (
-      <View style={styles.container} testId={'Overview'}>
-
+      <View style={styles.container} testID={'Overview'}>
         <View style={styles.header}>
           <TouchableOpacity onPress={this.onMenuPress.bind(this)}>
             <Image style={styles.menuIcon} source={require('../assets/icon-menu.png')} />
@@ -59,6 +72,7 @@ export default class example extends Component {
 
     return (
       <ScrollView style={styles.menuContainer}>
+        <Text style={styles.seperatorText}>Basic examples</Text>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, ChatHeads)}>
           <Text style={styles.button}>Chat Heads</Text>
         </TouchableOpacity>
@@ -104,6 +118,40 @@ export default class example extends Component {
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeaderWithScroll)}>
           <Text style={styles.button}>Collapsing Header with Scroll</Text>
         </TouchableOpacity>
+        <Text style={styles.seperatorText}>Real Life examples</Text>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, Documentation)}>
+          <Text style={styles.button2}>Documentation</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions1)}>
+          <Text style={styles.button}>Row Actions (Google Style)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions2)}>
+          <Text style={styles.button}>Row Actions (Apple Style)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, NowCard)}>
+          <Text style={styles.button}>Google Now-Style Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, TinderCard)}>
+          <Text style={styles.button}>Tinder-Style Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, NotifPanel)}>
+          <Text style={styles.button}>Notification Panel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, MapPanel)}>
+          <Text style={styles.button}>Apple Maps-Style Panel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsibleFilter)}>
+          <Text style={styles.button}>Collapsible Filter</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsibleCalendar)}>
+          <Text style={styles.button}>Collapsible Calendar (Any.do-Style)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, RealChatHeads)}>
+          <Text style={styles.button}>Real Chat Heads</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, UxInspirations)}>
+          <Text style={styles.button2}>UX Inspirations</Text>
+        </TouchableOpacity>
       </ScrollView>
     );
   }
@@ -139,8 +187,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     flex: 1,
     paddingTop: 15,
-    paddingLeft: 40,
-    backgroundColor: '#223f6b'
+    paddingLeft: 40
   },
   menuIcon: {
     width: 30,
@@ -151,8 +198,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20
   },
+  seperatorText: {
+    color: '#000000',
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
+    fontSize: 20,
+    fontWeight: '800'
+  },
   button: {
-    color: '#e0e0e0',
+    color: '#000000',
     fontSize: 20,
     marginBottom: 24
   },

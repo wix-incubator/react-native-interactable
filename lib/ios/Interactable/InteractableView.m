@@ -288,7 +288,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
 - (void)reportDragEvent:(NSString*)state
 {
-    [self reportDragEvent:state targetSnapPointId:nil];
+    [self reportDragEvent:state targetSnapPointId:@""];
 }
 
 - (void)reportDragEvent:(NSString*)state targetSnapPointId:(NSString*)targetSnapPointId
@@ -328,8 +328,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         pan.state == UIGestureRecognizerStateCancelled)
     {
         InteractablePoint* point = [self setTempBehaviorsForDragEnd];
-        NSString* targetSnapPointId = point ? point.id : nil;
-        [self reportDragEvent:@"end" targetSnapPointId:targetSnapPointId];
+        NSString* targetSnapPointId = point && point.id != nil ? point.id : @"";
+        if (targetSnapPointId == (id)[NSNull null] || targetSnapPointId.length == 0 ) {
+            [self reportDragEvent:@"end"];
+        } else {
+            [self reportDragEvent:@"end" targetSnapPointId:targetSnapPointId];
+        }
+        
     }
 }
 

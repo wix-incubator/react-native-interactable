@@ -296,14 +296,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     if (self.onDrag)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
-        NSDictionary *onDragEvent = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                         state ?: [NSNull null], @"state",
-                                         deltaFromOrigin.x ?: 0, @"x",
-                                         deltaFromOrigin.y ?: 0, @"y",
-                                         targetSnapPointId ?: [NSNull null], @"targetSnapPointId",
-                                    nil];
-        
-        self.onDrag(onDragEvent); 
+        self.onDrag(@{
+            @"state": state,
+            @"x": @(deltaFromOrigin.x),
+            @"y": @(deltaFromOrigin.y),
+            @"targetSnapPointId":targetSnapPointId
+        });
     }
 }
 

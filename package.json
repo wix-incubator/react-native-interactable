@@ -20,7 +20,8 @@
   "scripts": {
     "start": "node ./node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "postinstall": "ln -sf lib/{ios,android} ."
+    "postinstall": "ln -sf lib/{ios,android} .",
+    "run-android": "cd playground/android && ./gradlew installDebug"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -31,13 +32,43 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
-    "@types/react-native": ">= 0.42.0",
+    "@types/react-native": ">= 0.52.2",
     "babel-jest": "18.0.0",
     "babel-preset-react-native": "1.9.1",
-    "jest": "18.1.0",
-    "react": "16.0.0-alpha.12",
-    "react-native": "0.45.0",
-    "react-test-renderer": "15.4.2"
+    "detox": "^7.3.2",
+    "jest": "22.x.x",
+    "mocha": "^5.0.5",
+    "react": "^16.3.0-alpha.1",
+    "react-native": "0.54.4",
+    "react-test-renderer": "16.2.0"
   },
-  "typings": "typings/react-native-interactable.d.ts"
+  "typings": "typings/react-native-interactable.d.ts",
+  "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          "react-native"
+        ]
+      }
+    }
+  },
+  "detox": {
+    "test-runner": "mocha",
+    "specs": "e2e",
+    "runner-config": "e2e/mocha.opts",
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "playground/ios/DerivedData/playground/Build/Products/Debug-iphonesimulator/playground.app",
+        "build": "RCT_NO_LAUNCH_PACKAGER=true xcodebuild build -scheme playground -project playground/ios/playground.xcodeproj -sdk iphonesimulator -configuration Debug -derivedDataPath playground/ios/DerivedData/playground ONLY_ACTIVE_ARCH=YES -quiet",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      },
+      "android.emu.debug": {
+        "binaryPath": "playground/android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd playground/android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug",
+        "type": "android.emulator",
+        "name": "Nexus_5X_API_26"
+      }
+    }
+  }
 }

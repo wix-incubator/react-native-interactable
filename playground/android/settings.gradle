@@ -3,4 +3,4 @@ rootProject.name = 'playground'
 include ':app'
 
 include ':react-native-interactable'
-project(':react-native-interactable').projectDir = new File(rootProject.projectDir, '../../lib/android')
+project(':react-native-interactable').projectDir = new File(rootProject.projectDir, '../../android')

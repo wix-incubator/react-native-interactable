@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ListView, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, FlatList, TouchableOpacity, Text } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 export default class HandleTouches extends Component {
-  constructor() {
-    super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      dataSource: ds.cloneWithRows(['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8']),
-    };
-  }
+  
   render() {
     return (
-      <ListView
+      <FlatList
         contentContainerStyle={styles.container}
-        dataSource={this.state.dataSource}
-        renderRow={this.renderRow.bind(this)}
+        data={['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8']}
+        keyExtractor={item => item}
+        renderItem={this.renderRow}
       />
     );
   }
-  renderRow(data) {
+  renderRow = (data) => {
     return (
       <Interactable.View
         horizontalOnly={true}

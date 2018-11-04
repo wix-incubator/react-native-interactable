@@ -29,18 +29,18 @@
     "react-native": ">= 0.40.0"
   },
   "jest": {
-    "preset": "jest-react-native"
+    "preset": "react-native"
   },
   "devDependencies": {
     "@types/react-native": ">= 0.52.2",
-    "babel-jest": "18.0.0",
-    "babel-preset-react-native": "1.9.1",
+    "babel-jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.47.1",
     "detox": "^7.3.2",
-    "jest": "22.x.x",
+    "jest": "23.6.0",
     "mocha": "^5.0.5",
-    "react": "^16.3.0-alpha.1",
-    "react-native": "0.54.4",
-    "react-test-renderer": "16.2.0"
+    "react": "16.6.0-alpha.8af6728",
+    "react-native": "^0.57.4",
+    "react-test-renderer": "16.5.0"
   },
   "typings": "typings/react-native-interactable.d.ts",
   "babel": {

@@ -327,6 +327,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             return;
         }
         listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id);
+        listener.onSnapStart(snapPoints.indexOf(snapPoint), snapPoint.id);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
 
@@ -462,7 +463,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setDragEnabled(boolean dragEnabled) {
         this.dragEnabled = dragEnabled;
-        
+
         if (this.dragBehavior != null && !dragEnabled) {
             handleEndOfDrag();
         }
@@ -554,6 +555,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public interface InteractionListener {
         void onSnap(int indexOfSnapPoint, String snapPointId);
+        void onSnapStart(int indexOfSnapPoint, String snapPointId);
         void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
         void onDrag(String state, float x, float y, String targetSnapPointId);

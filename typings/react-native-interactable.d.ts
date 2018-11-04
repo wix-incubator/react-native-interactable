@@ -119,6 +119,7 @@ declare module 'react-native-interactable' {
       verticalOnly?: boolean;
       boundaries?: IBoundaries;
       onSnap?: (event: ISnapEvent) => void;
+      onSnapStart?: (event: ISnapEvent) => void;
       onStop?: (event: IStopEvent) => void;
       onDrag?: (event: IDragEvent) => void;
       onAlert?: (event: IAlertEvent) => void;

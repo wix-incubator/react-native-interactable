@@ -312,7 +312,11 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
                 getTranslationY() + toss*velocity.y);
 
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
-        listener.onDrag("end",currentPosition.x, currentPosition.y, snapPoint.id);
+        String targetSnapPointId = "";
+        if (snapPoint != null && snapPoint.id != null) {
+            targetSnapPointId = snapPoint.id;
+        }
+        listener.onDrag("end",currentPosition.x, currentPosition.y, targetSnapPointId);
 
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehaviorWithBoundaries(this.boundaries);

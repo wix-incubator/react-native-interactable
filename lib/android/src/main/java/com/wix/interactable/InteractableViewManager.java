@@ -1,7 +1,6 @@
 package com.wix.interactable;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReadableArray;
@@ -22,6 +21,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
     public static final int COMMAND_SET_VELOCITY = 1;
     public static final int COMMAND_SNAP_TO = 2;
     public static final int COMMAND_CHANGE_POSITION = 3;
+    public static final int COMMAND_BRING_TO_FRONT = 4;
 
 
     @Override
@@ -39,7 +39,8 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         return MapBuilder.of(
                 "setVelocity", COMMAND_SET_VELOCITY,
                 "snapTo", COMMAND_SNAP_TO,
-                "changePosition", COMMAND_CHANGE_POSITION
+                "changePosition", COMMAND_CHANGE_POSITION,
+                "bringToFront", COMMAND_BRING_TO_FRONT
                 );
     }
 
@@ -64,6 +65,10 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
                 view.changePosition(RNConvert.pointF(args.getMap(0)));
                 return;
             }
+            case COMMAND_BRING_TO_FRONT: {
+                view.bringToFront();
+                return;
+            }
             default:
                 throw new IllegalArgumentException(String.format(
                         "Unsupported command %d received by %s.",
@@ -75,6 +80,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
     @ReactProp(name = "verticalOnly")
     public void setVerticalOnly(InteractableView view, @Nullable boolean verticalOnly) {
         view.setVerticalOnly(verticalOnly);
+    }
+
+    @ReactProp(name = "startOnFront")
+    public void setStartOnFront(InteractableView view, @Nullable boolean startOnFront) {
+        view.bringToFront();
     }
 
     @ReactProp(name = "horizontalOnly")
@@ -152,6 +162,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
                 .put("onAlert", MapBuilder.of("registrationName", "onAlert"))
                 .put("onAnimatedEvent", MapBuilder.of("registrationName", "onAnimatedEvent"))
                 .put("onDrag", MapBuilder.of("registrationName", "onDrag"))
+                .put("onStop", MapBuilder.of("registrationName", "onStop"))
                 .build();
     }
 
@@ -185,8 +196,13 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         }
 
         @Override
-        public void onDrag(String state, float x, float y) {
-            eventDispatcher.dispatchEvent(new Events.onDrag(interactableView.getId(),state, x, y));
+        public void onDrag(String state, float x, float y, String targetSnapPointId) {
+            eventDispatcher.dispatchEvent(new Events.onDrag(interactableView.getId(),state, x, y, targetSnapPointId));
+        }
+
+        @Override
+        public void onStop(float x, float y) {
+            eventDispatcher.dispatchEvent(new Events.onStop(interactableView.getId(), x, y));
         }
     }
 }

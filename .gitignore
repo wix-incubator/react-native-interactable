@@ -34,8 +34,18 @@ local.properties
 node_modules/
 npm-debug.log
 
+# npm
+package-lock.json
+
+# yarn
+yarn.lock
+yarn-error.log
+
 # BUCK
 buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
+
+# Bundle artifact
+*.jsbundle

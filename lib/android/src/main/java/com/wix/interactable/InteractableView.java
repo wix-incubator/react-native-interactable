@@ -45,6 +45,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private PointF initialPosition;
 
     private InteractableArea boundaries;
+    private PhysicsBounceBehavior oldBoundariesBehavior;
+
     private InteractableSpring dragWithSprings;
     private float dragToss;
     private PointF velocity;
@@ -99,7 +101,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     @Override
     public void onAnimatorPause() {
-
+        PointF currentPosition = getCurrentPosition();
+        listener.onStop(currentPosition.x, currentPosition.y);
     }
 
     @Override
@@ -279,7 +282,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private void startDrag(MotionEvent ev) {
         PointF currentPosition = getCurrentPosition();
-        listener.onDrag("start",currentPosition.x, currentPosition.y);
+        listener.onDrag("start",currentPosition.x, currentPosition.y, "");
         this.dragStartLocation = new PointF(ev.getX(),ev.getY());
         this.animator.removeTempBehaviors();
         this.animator.setDragging(true);
@@ -304,12 +307,16 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
         PointF currentPosition = getCurrentPosition();
-        listener.onDrag("end",currentPosition.x, currentPosition.y);
 
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                 getTranslationY() + toss*velocity.y);
 
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
+        String targetSnapPointId = "";
+        if (snapPoint != null && snapPoint.id != null) {
+            targetSnapPointId = snapPoint.id;
+        }
+        listener.onDrag("end",currentPosition.x, currentPosition.y, targetSnapPointId);
 
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehaviorWithBoundaries(this.boundaries);
@@ -368,6 +375,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint,0, boundaries.isHaptic());
 
             this.animator.addBehavior(bounceBehavior);
+            this.oldBoundariesBehavior = bounceBehavior;
         }
     }
 
@@ -469,6 +477,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setBoundaries(InteractableArea boundaries) {
         this.boundaries = boundaries;
+        animator.removeBehavior(this.oldBoundariesBehavior);
         addConstantBoundaries(boundaries);
     }
 
@@ -549,6 +558,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         void onSnapStart(int indexOfSnapPoint, String snapPointId);
         void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
-        void onDrag(String state, float x, float y);
+        void onDrag(String state, float x, float y, String targetSnapPointId);
+        void onStop(float x, float y);
     }
 }

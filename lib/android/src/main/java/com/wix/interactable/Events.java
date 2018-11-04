@@ -102,18 +102,39 @@ public class Events {
 
         WritableMap eventData;
 
-        public onDrag(int viewTag, String state, float x, float y) {
+        public onDrag(int viewTag, String state, float x, float y, String targetSnapPointId) {
             super(viewTag);
             eventData = Arguments.createMap();
             eventData.putString("state", state);
             eventData.putDouble("x", PixelUtil.toDIPFromPixel(x));
             eventData.putDouble("y", PixelUtil.toDIPFromPixel(y));
+            eventData.putString("targetSnapPointId", targetSnapPointId);
         }
 
         @Override
         public String getEventName() {
             return "onDrag";
         }
+
+        @Override
+        public void dispatch(RCTEventEmitter rctEventEmitter) {
+            rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+        }
+    }
+
+    public static class onStop extends Event<onStop> {
+
+        WritableMap eventData;
+
+        public onStop(int viewTag, float x, float y) {
+            super(viewTag);
+            eventData = Arguments.createMap();
+            eventData.putDouble("x", PixelUtil.toDIPFromPixel(x));
+            eventData.putDouble("y", PixelUtil.toDIPFromPixel(y));
+        }
+
+        @Override
+        public String getEventName() { return "onStop"; }
 
         @Override
         public void dispatch(RCTEventEmitter rctEventEmitter) {

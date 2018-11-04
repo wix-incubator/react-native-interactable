@@ -103,10 +103,7 @@ declare module 'react-native-interactable' {
     type NativeAlertEventLeaveValueType = 'leave';
     type NativeAlertEventValue = NativeAlertEventEnterValueType | NativeAlertEventLeaveValueType;
 
-    interface INativeAlertEvent {
-      id: string;
-      value: NativeAlertEventValue;
-    }
+    interface INativeAlertEvent { [id: string]: NativeAlertEventValue }
 
     interface IAlertEvent {
       nativeEvent: INativeAlertEvent;

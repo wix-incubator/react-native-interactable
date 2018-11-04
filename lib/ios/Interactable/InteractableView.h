@@ -41,5 +41,6 @@
 - (void)setVelocity:(NSDictionary*)params;
 - (void)snapTo:(NSDictionary*)params;
 - (void)changePosition:(NSDictionary*)params;
+- (void)bringToFront:(NSDictionary*)params;
 
 @end

@@ -288,14 +288,20 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
 - (void)reportDragEvent:(NSString*)state
 {
+    [self reportDragEvent:state targetSnapPointId:@""];
+}
+
+- (void)reportDragEvent:(NSString*)state targetSnapPointId:(NSString*)targetSnapPointId
+{
     if (self.onDrag)
     {
         CGPoint deltaFromOrigin = [InteractablePoint deltaBetweenPoint:self.center andOrigin:self.origin];
         self.onDrag(@{
-                        @"state": state,
-                        @"x": @(deltaFromOrigin.x),
-                        @"y": @(deltaFromOrigin.y)
-                      });
+            @"state": state,
+            @"x": @(deltaFromOrigin.x),
+            @"y": @(deltaFromOrigin.y),
+            @"targetSnapPointId":targetSnapPointId
+        });
     }
 }
 
@@ -319,8 +325,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         pan.state == UIGestureRecognizerStateFailed ||
         pan.state == UIGestureRecognizerStateCancelled)
     {
-        [self setTempBehaviorsForDragEnd];
-        [self reportDragEvent:@"end"];
+        InteractablePoint* point = [self setTempBehaviorsForDragEnd];
+        NSString* targetSnapPointId = point && point.id != nil ? point.id : @"";
+        if (targetSnapPointId == (id)[NSNull null] || targetSnapPointId.length == 0 ) {
+            [self reportDragEvent:@"end"];
+        } else {
+            [self reportDragEvent:@"end" targetSnapPointId:targetSnapPointId];
+        }
+        
     }
 }
 
@@ -403,18 +415,19 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     self.dragBehavior = [self addTempDragBehavior:self.dragWithSpring];
 }
 
-- (void)setTempBehaviorsForDragEnd
+- (InteractablePoint*)setTempBehaviorsForDragEnd
 {
     [self.animator removeTempBehaviors];
     self.dragBehavior = nil;
-    
+
     CGPoint velocity = [self.animator getTargetVelocity:self];
     if (self.horizontalOnly) velocity.y = 0;
     if (self.verticalOnly) velocity.x = 0;
     CGFloat toss = self.dragToss;
     CGPoint projectedCenter = CGPointMake(self.center.x + toss*velocity.x, self.center.y + toss*velocity.y);
-    
+
     InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
+
     if (snapPoint)
     {
         [self addTempSnapToPointBehavior:snapPoint];
@@ -429,6 +442,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     }
     
     [self addTempBounceBehaviorWithBoundaries:self.boundaries];
+    return snapPoint;
 }
 
 // MARK: - Behaviors
@@ -613,6 +627,11 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     self.center = pt;
     [self setTempBehaviorsForDragEnd];
     [self.animator ensureRunning];
+}
+
+- (void)bringToFront:(NSDictionary*)params
+{
+
 }
 
 @end

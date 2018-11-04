@@ -102,6 +102,15 @@ horizontalOnly={true}
 
 Optional, whether the view should be locked to horizontal movement only. Default `false`.
 
+#### `startOnFront` (boolean) **[Android Only]**
+
+```jsx
+startOnFront
+```
+
+Optional, whether the view should call `view.bringToFront()` when the view is first loaded.
+*Usually using zIndex does the trick. Use this in cases it doesn't*
+
 #### `verticalOnly` (boolean)
 
 ```jsx
@@ -169,6 +178,7 @@ Optional, a function called whenever the user starts or stops dragging the view.
 * `state` - `start` or `end`, whether the user started or finished dragging.
 * `x` - The horizontal position of the view (relative to the center).
 * `y` - The vertical position of the view (relative to the center).
+* `targetSnapPointId` - For `end` state, the string `id` of the target point in the `snapPoints` array (assuming it was provided).
 
 #### `onAlert` (function)
 

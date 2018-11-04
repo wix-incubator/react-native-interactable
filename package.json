@@ -22,11 +22,11 @@
     "test": "jest",
     "postinstall": "ln -sf lib/{ios,android} .",
     "run-android": "cd playground/android && ./gradlew installDebug",
-    "e2e:ios": "npm run start && detox test --configuration ios.sim.debug --debug-synchronization",
+    "e2e:ios": "detox test --configuration ios.sim.release --debug-synchronization",
     "e2e:ios-multi": "npm run e2e:ios -- -w 2",
-    "e2e:android": "detox test --configuration android.emu.debug --loglevel verbose",
-    "build:ios": "detox build --configuration ios.sim.debug",
-    "build:android": "detox build --configuration android.emu.debug"
+    "e2e:android": "detox test --configuration android.emu.release --loglevel verbose",
+    "build:ios": "detox build --configuration ios.sim.release",
+    "build:android": "detox build --configuration android.emu.release"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -39,12 +39,12 @@
   "devDependencies": {
     "@types/react-native": ">= 0.52.2",
     "babel-jest": "23.6.0",
-    "metro-react-native-babel-preset": "0.47.1",
     "detox": "^9.0.0",
     "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.47.1",
     "mocha": "^5.0.5",
     "react": "16.6.0-alpha.8af6728",
-    "react-native": "^0.57.4",
+    "react-native": "0.57.4",
     "react-test-renderer": "16.5.0"
   },
   "typings": "typings/react-native-interactable.d.ts",
@@ -52,7 +52,7 @@
     "env": {
       "test": {
         "presets": [
-          "react-native"
+          "module:metro-react-native-babel-preset"
         ]
       }
     }
@@ -66,9 +66,21 @@
         "type": "ios.simulator",
         "name": "iPhone X"
       },
+      "ios.sim.release": {
+        "binaryPath": "playground/ios/DerivedData/playground/Build/Products/Release-iphonesimulator/playground.app",
+        "build": "RCT_NO_LAUNCH_PACKAGER=true xcodebuild build -scheme playground -project playground/ios/playground.xcodeproj -sdk iphonesimulator -configuration Release -derivedDataPath playground/ios/DerivedData/playground ONLY_ACTIVE_ARCH=YES -quiet",
+        "type": "ios.simulator",
+        "name": "iPhone X"
+      },
       "android.emu.debug": {
         "binaryPath": "playground/android/app/build/outputs/apk/debug/app-debug.apk",
         "build": "cd playground/android && ./gradlew :app:assembleDebug :app:assembleAndroidTest -DtestBuildType=debug",
+        "type": "android.emulator",
+        "name": "Nexus_5X_API_26"
+      },
+      "android.emu.release": {
+        "binaryPath": "playground/android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd playground/android && ./gradlew :assembleRelease :assembleAndroidTest -DtestBuildType=release",
         "type": "android.emulator",
         "name": "Nexus_5X_API_26"
       }

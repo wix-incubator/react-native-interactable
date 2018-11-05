@@ -73,7 +73,9 @@ export default class CollapsingHeaderWithScroll extends Component {
   }
   onScroll(event) {
     const { contentOffset } = event.nativeEvent;
-    if (contentOffset.y === 0) {
+    console.log('Wix contentOffset.y: ', contentOffset.y);
+    
+    if (contentOffset.y <= 0) {
       this.setState({ canScroll: false });
     }
   }

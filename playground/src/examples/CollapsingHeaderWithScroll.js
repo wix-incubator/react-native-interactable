@@ -3,7 +3,7 @@ import { StyleSheet, View, Animated, ScrollView, Dimensions } from 'react-native
 import Interactable from 'react-native-interactable';
 
 const Screen = {
-  height: Dimensions.get('window').height - 75
+  height: Dimensions.get('window').height
 };
 
 export default class CollapsingHeaderWithScroll extends Component {
@@ -45,6 +45,7 @@ export default class CollapsingHeaderWithScroll extends Component {
             boundaries={{top: -150}}
             onSnap={this.onSnap.bind(this)}
             animatedValueY={this._deltaY}
+            showsVerticalScrollIndicator={false}
           >
             <ScrollView
               bounces={false}
@@ -72,9 +73,7 @@ export default class CollapsingHeaderWithScroll extends Component {
     }
   }
   onScroll(event) {
-    const { contentOffset } = event.nativeEvent;
-    console.log('Wix contentOffset.y: ', contentOffset.y);
-    
+    const { contentOffset } = event.nativeEvent;    
     if (contentOffset.y <= 0) {
       this.setState({ canScroll: false });
     }

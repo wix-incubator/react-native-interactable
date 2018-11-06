@@ -34,7 +34,7 @@ export default class TouchesInside extends Component {
           horizontalOnly={!this.state.vertical}
           dragEnabled={this.state.dragEnabled}
           snapPoints={[{y: 0}]}
-          style={{width: 300, height: 500, padding: 20, backgroundColor: '#e0e0e0'}}
+          style={{width: 300, height: 600, padding: 20, backgroundColor: '#e0e0e0'}}
         >
           <Button title='Button' onPress={() => { alert('Button pressed')}} />
           <Picker

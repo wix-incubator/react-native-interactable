@@ -30,7 +30,7 @@ export default class SnapTo extends Component {
           <View style={{width: 70, height: 70, backgroundColor: '#EE2C38', borderRadius: 35}} />
         </Interactable.View>
         <View style={styles.button}>
-          <Button title="Snap To Next" onPress={this.onButtonPress.bind(this)} />
+          <Button title="Snap To Next" onPress={this.onButtonPress.bind(this)} color='white' />
         </View>
       </View>
     );
@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     left: 110,
-    backgroundColor: '#FAAD4D'
+    backgroundColor: '#459FED'
   }
 });

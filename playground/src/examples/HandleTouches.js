@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginTop: 30,
     justifyContent: 'center',
-    backgroundColor: '#F2564D'
+    backgroundColor: '#b5d9f8'
   }
 });

@@ -20,7 +20,7 @@ export default class AlertAreas extends Component {
       <View style={styles.container}>
         <View style={styles.markerContainer}><View style={{backgroundColor: '#32B76C', position: 'absolute', left: Screen.width/2 + 100, right: 0, top: 0, bottom: 0}} /></View>
         <View style={styles.markerContainer}><View style={{backgroundColor: '#542790', position: 'absolute', left: Screen.width/2 - 150, right: Screen.width/2 + 50, top: Screen.height/2 + 100, bottom: Screen.height/2 - 200}} /></View>
-        <View style={styles.markerContainer}><View style={{backgroundColor: '#3CC7C5', position: 'absolute', left: 0, right:Screen.width/2+50, top: Screen.height/2-150, bottom:Screen.height/2}}>
+        <View style={styles.markerContainer}><View style={{backgroundColor: '#b5d9f8', position: 'absolute', left: 0, right:Screen.width/2+50, top: Screen.height/2-150, bottom:Screen.height/2}}>
             <Text style={{fontSize: 22, margin: 8}}>
                 Non Draggable Area
             </Text>

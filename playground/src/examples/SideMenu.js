@@ -83,20 +83,22 @@ const styles = StyleSheet.create({
   },
   sideMenuTitle: {
     fontSize: 22,
+    fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20
   },
   button: {
-    margin: 20,
     color: '#542790',
-    alignSelf: 'center',
     fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 20
   },
   header: {
     height: 60,
     paddingHorizontal: 20,
     flexDirection: 'row',
-    backgroundColor: '#3CC7C5',
+    backgroundColor: '#32B76C',
     alignItems: 'center',
     zIndex: 1001
   },

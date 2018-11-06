@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#3CC7C5',
+    backgroundColor: '#b5d9f8',
     margin: 20
   },
   rowTitle: {

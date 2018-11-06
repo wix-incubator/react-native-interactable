@@ -201,7 +201,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
             this.isSwiping = this.isSwiping || isHSwipe || isVSwipe;
 
-           if (!isChildIsScrollContainer && dragEnabled && (horizontalOnly && isHSwipe ||
+           if (this.isSwiping && !isChildIsScrollContainer && dragEnabled &&
+                    (horizontalOnly && isHSwipe ||
                     verticalOnly && isVSwipe ||
                     !horizontalOnly && !verticalOnly)) {
 

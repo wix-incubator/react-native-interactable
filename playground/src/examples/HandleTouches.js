@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   card: {
     width: 300,
     height: 180,
-    backgroundColor: 'red',
+    backgroundColor: '#32B76C',
     borderRadius: 8,
     marginVertical: 6
   },
@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginTop: 30,
     justifyContent: 'center',
-    backgroundColor: 'purple'
+    backgroundColor: '#F2564D'
   }
 });

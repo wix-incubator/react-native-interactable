@@ -53,13 +53,11 @@ export default class example extends Component {
           <TouchableOpacity onPress={this.onMenuPress.bind(this)}>
             <Image style={styles.menuIcon} source={require('../assets/icon-menu.png')} />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>React Native Interactions</Text>
+          <Text style={styles.headerTitle}>React Native Interactable</Text>
         </View>
-
         <View style={styles.body}>
           {this.renderContent()}
         </View>
-
       </View>
     );
   }
@@ -72,7 +70,11 @@ export default class example extends Component {
 
     return (
       <ScrollView style={styles.menuContainer}>
-        <Text style={styles.seperatorText}>Basic examples</Text>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, Documentation)}>
+          <Text style={styles.button2}>Documentation</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.seperatorText}>Basic Examples</Text>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, ChatHeads)}>
           <Text style={styles.button}>Chat Heads</Text>
         </TouchableOpacity>
@@ -118,10 +120,8 @@ export default class example extends Component {
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeaderWithScroll)}>
           <Text style={styles.button}>Collapsing Header with Scroll</Text>
         </TouchableOpacity>
-        <Text style={styles.seperatorText}>Real Life examples</Text>
-        <TouchableOpacity onPress={this.onExamplePress.bind(this, Documentation)}>
-          <Text style={styles.button2}>Documentation</Text>
-        </TouchableOpacity>
+        
+        <Text style={[styles.seperatorText, {marginTop: 20}]}>Real Life Examples</Text>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, RowActions1)}>
           <Text style={styles.button}>Row Actions (Google Style)</Text>
         </TouchableOpacity>
@@ -149,6 +149,7 @@ export default class example extends Component {
         <TouchableOpacity onPress={this.onExamplePress.bind(this, RealChatHeads)}>
           <Text style={styles.button}>Real Chat Heads</Text>
         </TouchableOpacity>
+        
         <TouchableOpacity onPress={this.onExamplePress.bind(this, UxInspirations)}>
           <Text style={styles.button2}>UX Inspirations</Text>
         </TouchableOpacity>
@@ -172,11 +173,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   header: {
-    height: 75,
-    paddingTop: 22,
-    paddingLeft: 20,
+    height: 60,
+    paddingHorizontal: 20,
     flexDirection: 'row',
-    backgroundColor: '#5894f3',
+    backgroundColor: '#459FED',
     alignItems: 'center',
     zIndex: 1001
   },
@@ -186,35 +186,33 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    paddingTop: 15,
-    paddingLeft: 40
+    padding: 24
   },
   menuIcon: {
     width: 30,
     height: 30
   },
   headerTitle: {
-    marginLeft: 30,
+    marginLeft: 24,
     color: 'white',
     fontSize: 20
   },
   seperatorText: {
-    color: '#000000',
-    paddingBottom: 20,
+    color: 'black',
+    marginBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#000000',
     fontSize: 20,
     fontWeight: '800'
   },
   button: {
-    color: '#000000',
+    color: 'black',
     fontSize: 20,
     marginBottom: 24
   },
   button2: {
-    color: '#F09B95',
+    color: '#F2564D',
     fontSize: 20,
-    marginBottom: 24
+    marginBottom: 48
   }
 });
 

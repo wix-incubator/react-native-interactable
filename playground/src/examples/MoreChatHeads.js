@@ -17,19 +17,19 @@ export default class MoreChatHeads extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderSimple.bind(this))}>
-          <Text style={styles.button}>Simple implementation</Text>
+          <Text style={styles.button}>Simple Implementation</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderDragViaSpring.bind(this))}>
-          <Text style={styles.button}>Drag via spring</Text>
+          <Text style={styles.button}>Drag via Spring</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderLocalizedSprings.bind(this))}>
-          <Text style={styles.button}>Localized springs</Text>
+          <Text style={styles.button}>Localized Springs</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderGravityWells.bind(this))}>
-          <Text style={styles.button}>Gravity wells</Text>
+          <Text style={styles.button}>Gravity Wells</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, this.renderHalfFriction.bind(this))}>
-          <Text style={styles.button}>Friction on lower half</Text>
+          <Text style={styles.button}>Friction on Lower half</Text>
         </TouchableOpacity>
       </View>
     );
@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   button: {
-    color: 'blue',
-    fontSize: 24,
+    color: '#5848ff',
+    fontSize: 22,
     marginBottom: 24
   },
   markerContainer: {
@@ -162,13 +162,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 25,
     borderWidth: 2,
-    borderColor: '#dddddd',
+    borderColor: 'white',
     position: 'relative'
   },
   head : {
     width: 70,
     height: 70,
-    backgroundColor: 'red',
+    backgroundColor: '#EE2C38',
     borderRadius: 35
   }
 });

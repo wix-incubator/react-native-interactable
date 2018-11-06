@@ -10,7 +10,7 @@ export default class IconDrawer extends Component {
   render() {
     return (
       <View style={styles.container}>
-          <View style={{backgroundColor: 'red'}}>
+          <View style={{backgroundColor: '#32B76C'}}>
 
             <View style={{position: 'absolute', right: 0, height: 75, flexDirection: 'row', alignItems: 'center'}}>
               <Animated.View style={
@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginRight: 25,
-    backgroundColor: 'blue'
+    backgroundColor: '#EE2C38'
   }
 });

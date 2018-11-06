@@ -73,7 +73,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+    root     : "../../../",
+    entryFile: "playground/index.js"
 ]
 
 apply from: "../../../node_modules/react-native/react.gradle"

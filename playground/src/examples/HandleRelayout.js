@@ -16,7 +16,7 @@ export default class HandleRelayout extends Component {
         <TouchableOpacity onPress={this.onChangeLayoutPress.bind(this)}>
           <View style={[styles.card, {
             justifyContent: 'center',
-            backgroundColor: 'green',
+            backgroundColor: '#b5d9f8',
             height: this.state.collapsed ? 80 : 180
           }]}>
             <Text style={styles.label}>Tap to {this.state.collapsed ? 'expand' : 'collapse'}</Text>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   card: {
     width: 300,
     height: 180,
-    backgroundColor: 'red',
+    backgroundColor: '#542790',
     borderRadius: 8,
     marginVertical: 6
   },

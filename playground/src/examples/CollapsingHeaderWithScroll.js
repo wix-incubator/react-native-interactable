@@ -18,7 +18,7 @@ export default class CollapsingHeaderWithScroll extends Component {
     return (
       <View style={styles.container}>
 
-          <View style={{backgroundColor: 'red', height: 250, alignItems: 'center'}}>
+          <View style={{backgroundColor: '#542790', height: 250, alignItems: 'center'}}>
             <Animated.View style={{
               transform: [
                 {
@@ -35,7 +35,7 @@ export default class CollapsingHeaderWithScroll extends Component {
                 }
               ]
             }}>
-              <View style={{width: 150, height: 150, backgroundColor: 'blue', borderRadius: 75, marginTop: 50}} />
+              <View style={{width: 150, height: 150, backgroundColor: '#b5d9f8', borderRadius: 75, marginTop: 50}} />
             </Animated.View>
           </View>
 
@@ -83,10 +83,10 @@ export default class CollapsingHeaderWithScroll extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#e0e0e0',
   },
   placeholder: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#65C888',
     flex: 1,
     height: 120,
     marginHorizontal: 20,

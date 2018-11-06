@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f5eee8',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    shadowColor: '#000000',
+    shadowColor: 'black',
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 5,
     shadowOpacity: 0.4
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   panelButton: {
     padding: 20,
     borderRadius: 10,
-    backgroundColor: '#318bfb',
+    backgroundColor: '#459FED',
     alignItems: 'center',
     marginVertical: 10
   },

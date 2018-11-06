@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {
+  Platform,
+  Dimensions,
   AppRegistry,
   StyleSheet,
+  SafeAreaView,
   View,
   Image,
   ScrollView,
@@ -38,6 +41,11 @@ import CollapsibleFilter from './real-life-examples/CollapsibleFilter';
 import CollapsibleCalendar from './real-life-examples/CollapsibleCalendar';
 import RealChatHeads from './real-life-examples/RealChatHeads';
 import UxInspirations from './real-life-examples/UxInspirations';
+
+
+const {height, width} = Dimensions.get('window');
+const isIphoneX = (Platform.OS === 'ios') && !Platform.isPad && !Platform.isTVOS && (height === 812 || width === 812);
+
 export default class example extends Component {
   constructor(props) {
     super(props);
@@ -49,12 +57,12 @@ export default class example extends Component {
   render() {
     return (
       <View style={styles.container} testID={'Overview'}>
-        <View style={styles.header}>
+        <SafeAreaView style={styles.header}>
           <TouchableOpacity onPress={this.onMenuPress.bind(this)}>
             <Image style={styles.menuIcon} source={require('../assets/icon-menu.png')} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>React Native Interactable</Text>
-        </View>
+        </SafeAreaView>
         <View style={styles.body}>
           {this.renderContent()}
         </View>
@@ -173,11 +181,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   header: {
-    height: 60,
+    height: isIphoneX ? 100 : (Platform.OS === 'ios') ? 70 : 60,
     paddingHorizontal: 20,
     flexDirection: 'row',
     backgroundColor: '#459FED',
     alignItems: 'center',
+    alignContent: 'center',
     zIndex: 1001
   },
   body: {

@@ -19,8 +19,9 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "node ./node_modules/react-native/local-cli/cli.js start",
+    "ios": "react-native run-ios --project-path playground/ios/",
+    "android": "react-native run-android --root playground",
     "test": ":",
-    "run-android": "cd playground/android && ./gradlew installDebug",
     "e2e:ios": "detox test --configuration ios.sim.release --debug-synchronization",
     "e2e:ios-multi": "npm run e2e:ios -- -w 2",
     "e2e:android": "detox test --configuration android.emu.release --loglevel verbose",

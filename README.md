@@ -8,6 +8,9 @@
 
 <br>
 
+[![NPM Version](https://img.shields.io/npm/v/react-native-interactable.svg?style=flat)](https://www.npmjs.com/package/react-native-interactable)
+[![Build Status](https://img.shields.io/jenkins/s/http/jenkins-oss.wixpress.com:8080/job/multi-react-native-interactable-master.svg)](https://jenkins-oss.wixpress.com/job/multi-react-native-interactable-master/)
+[![NPM Downloads](https://img.shields.io/npm/dm/react-native-interactable.svg?style=flat)](https://www.npmjs.com/package/react-native-interactable)
 
 ### LOOKING FOR A MAINTAINER
 

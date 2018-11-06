@@ -22,7 +22,6 @@
     "ios": "cd ./playground && react-native run-ios",
     "android": "cd ./playground/android && ./gradlew app:assembleDebug && ./gradlew installDebug",
     "test": ":",
-    "run-android": "cd playground/android && ./gradlew installDebug",
     "e2e:ios": "detox test --configuration ios.sim.release --debug-synchronization",
     "e2e:ios-multi": "npm run e2e:ios -- -w 2",
     "e2e:android": "detox test --configuration android.emu.release --loglevel verbose",

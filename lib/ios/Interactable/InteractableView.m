@@ -201,9 +201,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     }
 }
 
+
+// MARK: - PhysicsAnimatorDelegate
+
 - (void)physicsAnimatorDidPause:(PhysicsAnimator *)animator
 {
-    if (self.onSnap)
+    if (self.onSnap && self.pan.state == UIGestureRecognizerStatePossible )
     {
         InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:self.center withOrigin:self.origin];
         if (snapPoint)
@@ -226,6 +229,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                     });
     }
 }
+
+// MARK: - Reports
 
 - (void)reportAnimatedEvent
 {

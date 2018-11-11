@@ -122,9 +122,9 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         view.setAlertAreas(RNConvert.interactablePoints(alertAreas));
     }
 
-    @ReactProp(name = "dragWithSprings")
-    public void setDrag(InteractableView view, @Nullable ReadableMap dragWithSprings) {
-        view.setDragWithSprings(RNConvert.interactableDrag(dragWithSprings));
+    @ReactProp(name = "dragWithSpring")
+    public void setDrag(InteractableView view, @Nullable ReadableMap dragWithSpring) {
+        view.setDragWithSpring(RNConvert.interactableDrag(dragWithSpring));
     }
 
     @ReactProp(name = "dragToss")

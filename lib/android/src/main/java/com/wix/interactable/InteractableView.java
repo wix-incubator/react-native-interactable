@@ -47,7 +47,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private InteractableArea boundaries;
     private PhysicsBounceBehavior oldBoundariesBehavior;
 
-    private InteractableSpring dragWithSprings;
+    private InteractableSpring dragWithSpring;
     private float dragToss;
     private PointF velocity;
     private boolean reportOnAnimatedEvents;
@@ -286,7 +286,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         this.dragStartLocation = new PointF(ev.getX(),ev.getY());
         this.animator.removeTempBehaviors();
         this.animator.setDragging(true);
-        this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+        this.dragBehavior = addTempDragBehavior(this.dragWithSpring);
         try {
             getReactRoot().onChildStartedNativeGesture(ev);
         } catch (Exception e) {
@@ -303,11 +303,10 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         PointF velocity = this.animator.getTargetVelocity(this);
         if (this.horizontalOnly) velocity.y = 0;
         if (this.verticalOnly) velocity.x = 0;
-        float toss = 0.1f;
-        if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
         PointF currentPosition = getCurrentPosition();
 
+        float toss = this.dragToss;
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                 getTranslationY() + toss*velocity.y);
 
@@ -482,8 +481,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
 
-    public void setDragWithSprings(InteractableSpring dragWithSprings) {
-        this.dragWithSprings = dragWithSprings;
+    public void setDragWithSpring(InteractableSpring dragWithSpring) {
+        this.dragWithSpring = dragWithSpring;
     }
 
     public void setDragToss(float dragToss) {

@@ -107,6 +107,15 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        testBuildType System.getProperty('testBuildType', 'debug')
+    }
+    signingConfigs {
+        release {
+            storeFile file('../playground.keystore')
+            storePassword "playground"
+            keyAlias "playground"
+            keyPassword "playground"
+        }
     }
     splits {
         abi {
@@ -119,6 +128,7 @@ android {
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }

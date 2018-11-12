@@ -296,7 +296,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private void handleEndOfDrag() {
         this.animator.removeTempBehaviors();
-        this.dragBehavior = null;
 
         this.animator.setDragging(false);
 
@@ -315,7 +314,11 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         if (snapPoint != null && snapPoint.id != null) {
             targetSnapPointId = snapPoint.id;
         }
-        listener.onDrag("end",currentPosition.x, currentPosition.y, targetSnapPointId);
+
+        if (this.dragBehavior != null) {
+            listener.onDrag("end",currentPosition.x, currentPosition.y, targetSnapPointId);
+        }
+        this.dragBehavior = null;
 
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehaviorWithBoundaries(this.boundaries);
@@ -526,7 +529,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
 
     public void setVelocity(PointF velocity) {
-        if(dragBehavior!=null) return;
+        if(this.dragBehavior != null) return;
         this.velocity = velocity;
         this.animator.setTargetVelocity(this,this.velocity);
         handleEndOfDrag();
@@ -534,7 +537,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void snapTo(int index) {
 
-        if(this.snapPoints!=null && index >= 0 && index < this.snapPoints.size())
+        if(this.snapPoints != null && index >= 0 && index < this.snapPoints.size())
         {
             this.animator.removeTempBehaviors();
             this.dragBehavior = null;
@@ -545,7 +548,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
     public void changePosition(PointF position) {
-        if(dragBehavior != null) return;
+        if(this.dragBehavior != null) return;
         setTranslationX(position.x);
         setTranslationY(position.y);
         handleEndOfDrag();

@@ -1,8 +1,12 @@
+.ghp/
+
+
 playground
 e2e
 logos
 ./index.ios.js
 ./index.android.js
+./rn-cli.config.js
 
 #################
 # from .gitignore:
@@ -83,6 +87,9 @@ fabric.properties
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+#Cocoapods
+*.podspec
+
 ## Build generated
 ios/build/
 ios/DerivedData/
@@ -152,6 +159,7 @@ android/bin/
 android/gen/
 android/out/
 android/app/build/
+lib/android/gradle/
 
 # Gradle files
 android/.gradle/

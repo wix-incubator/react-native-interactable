@@ -24,7 +24,7 @@
     "test": ":",
     "e2e:ios": "detox test --configuration ios.sim.release --debug-synchronization",
     "e2e:ios-multi": "npm run e2e:ios -- -w 2",
-    "e2e:android": "detox test --configuration android.emu.release --loglevel verbose",
+    "e2e:android": "npm run build:android && detox test --configuration android.emu.release --loglevel verbose",
     "build:ios": "detox build --configuration ios.sim.release",
     "build:android": "detox build --configuration android.emu.release"
   },
@@ -76,13 +76,13 @@
         "binaryPath": "playground/android/app/build/outputs/apk/debug/app-debug.apk",
         "build": "cd playground/android && ./gradlew :app:assembleDebug :app:assembleAndroidTest -DtestBuildType=debug",
         "type": "android.emulator",
-        "name": "Nexus_5X_API_26"
+        "name": "Pixel_2_API_26"
       },
       "android.emu.release": {
         "binaryPath": "playground/android/app/build/outputs/apk/release/app-release.apk",
         "build": "cd playground/android && ./gradlew :app:assembleRelease :app:assembleAndroidTest -DtestBuildType=release",
         "type": "android.emulator",
-        "name": "Nexus_5X_API_26"
+        "name": "Pixel_2_API_26"
       }
     }
   }

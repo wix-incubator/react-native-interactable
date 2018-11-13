@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Animated, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, Animated, ScrollView, Dimensions, TouchableOpacity, Text } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = {
@@ -53,13 +53,27 @@ export default class CollapsingHeaderWithScroll extends Component {
               onScroll={this.onScroll.bind(this)}
               style={{left: 0, right: 0, height: Screen.height - 100, backgroundColor: '#e0e0e0'}}
             >
-              <View style={styles.placeholder} />
-              <View style={styles.placeholder} />
-              <View style={styles.placeholder} />
-              <View style={styles.placeholder} />
-              <View style={styles.placeholder} />
-              <View style={styles.placeholder} />
-              <View style={styles.placeholder} />
+              <View style={styles.placeholder}/>
+              <Interactable.View
+                initialPosition={{ x: 0, y: 0 }}
+                snapPoints={[{ x: 0, y: 0 }]}
+                horizontalOnly
+              >
+                <TouchableOpacity
+                  onPress={this.onCardPress}
+                  style={[styles.placeholder, {backgroundColor: '#EE2C38', justifyContent: 'center'}]}
+                >
+                  <Text style={{textAlign: 'center', fontSize: 18}}>Interactable</Text>
+                  <TouchableOpacity style={styles.button} onPress={this.onButtonPress}>
+                    <Text style={{textAlign: 'center'}}>Touchable</Text>
+                  </TouchableOpacity>
+                </TouchableOpacity>
+              </Interactable.View> 
+              <View style={styles.placeholder}/>
+              <View style={styles.placeholder}/>
+              <View style={styles.placeholder}/>
+              <View style={styles.placeholder}/>
+              <View style={styles.placeholder}/>
             </ScrollView>
           </Interactable.View>
 
@@ -78,6 +92,12 @@ export default class CollapsingHeaderWithScroll extends Component {
       this.setState({ canScroll: false });
     }
   }
+  onCardPress() {
+    alert('Card was pressed');
+  }
+  onButtonPress() {
+    alert('Button was pressed');
+  }
 }
 
 const styles = StyleSheet.create({
@@ -91,5 +111,13 @@ const styles = StyleSheet.create({
     height: 120,
     marginHorizontal: 20,
     marginTop: 20
+  },
+  button: {
+    width: 80,
+    height: 40,
+    marginLeft: 20,
+    marginTop: 10,
+    justifyContent: 'center',
+    backgroundColor: '#b5d9f8'
   }
 });

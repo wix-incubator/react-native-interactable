@@ -28,6 +28,7 @@ import SnapTo from './examples/SnapTo';
 import ChangePosition from './examples/ChangePosition';
 import AlertAreas from './examples/AlertAreas';
 import CollapsingHeaderWithScroll from './examples/CollapsingHeaderWithScroll';
+import InModal from './examples/InModal';
 
 // Real life Examples
 import Documentation from './real-life-examples/Documentation';
@@ -127,6 +128,9 @@ export default class example extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.onExamplePress.bind(this, CollapsingHeaderWithScroll)}>
           <Text style={styles.button}>Collapsing Header with Scroll</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.onExamplePress.bind(this, InModal)}>
+          <Text style={styles.button}>Interactable in Modal</Text>
         </TouchableOpacity>
         
         <Text style={[styles.seperatorText, {marginTop: 20}]}>Real Life Examples</Text>

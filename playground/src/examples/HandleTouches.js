@@ -4,6 +4,10 @@ import Interactable from 'react-native-interactable';
 
 export default class HandleTouches extends Component {
   
+  state = { 
+    isFetching: false,
+ }
+
   render() {
     return (
       <FlatList
@@ -11,6 +15,8 @@ export default class HandleTouches extends Component {
         data={['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8']}
         keyExtractor={item => item}
         renderItem={this.renderRow}
+        onRefresh={() => this.onRefresh()}
+        refreshing={this.state.isFetching}
       />
     );
   }
@@ -18,7 +24,9 @@ export default class HandleTouches extends Component {
     return (
       <Interactable.View
         horizontalOnly={true}
-        snapPoints={[{x: 360},{x: 0},{x: -360}]}>
+        snapPoints={[{x: 360},{x: 0},{x: -360}]}
+        boundaries={{left: -180, right: 0, bounce: 0}}
+      >
         <TouchableOpacity style={styles.card} onPress={this.onCardPress}>
           <TouchableOpacity style={styles.button} onPress={this.onButtonPress.bind(this, 'A')}>
             <Text style={{textAlign: 'center'}}>Button A</Text>
@@ -36,6 +44,14 @@ export default class HandleTouches extends Component {
   onButtonPress(type) {
     alert(`Button ${type} was pressed`);
   }
+  onRefresh() {
+    this.setState({ isFetching: true }, function() { this.getData() });
+ }
+ getData() {
+  setTimeout(() => {
+    this.setState({isFetching: false});
+  }, 2000);
+ }
 }
 
 const styles = StyleSheet.create({

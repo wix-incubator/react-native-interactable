@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 0},
     shadowRadius: 5,
-    shadowOpacity: 0.4
+    shadowOpacity: 0.4,
+    elevation: 2
   },
   panelHeader: {
     alignItems: 'center'

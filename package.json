@@ -25,6 +25,7 @@
     "e2e:ios": "detox test --configuration ios.sim.release --debug-synchronization",
     "e2e:ios-multi": "npm run e2e:ios -- -w 2",
     "e2e:android": "npm run build:android && detox test --configuration android.emu.release --loglevel verbose",
+    "e2e:android:ci": "npm run build:android && detox test --configuration android.emu.release --loglevel verbose --headless",
     "build:ios": "detox build --configuration ios.sim.release",
     "build:android": "detox build --configuration android.emu.release"
   },

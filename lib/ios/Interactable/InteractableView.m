@@ -605,6 +605,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     {
         [self.animator removeTempBehaviors];
         self.dragBehavior = nil;
+        self.pan.enabled = NO;
+        self.pan.enabled = YES;
         
         InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
         if (snapPoint) {

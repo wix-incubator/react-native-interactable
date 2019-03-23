@@ -156,7 +156,11 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
         center = CGPointMake(self.origin.x - self.reactRelayoutCenterDeltaFromOrigin.x, self.origin.y - self.reactRelayoutCenterDeltaFromOrigin.y);
     }
     
-    if (self.originSet)
+    if (!self.initialPositionSet)
+    {
+        center = CGPointMake(self.origin.x + self.initialPosition.x, self.origin.y + self.initialPosition.y);
+    }
+    else if (self.originSet)
     {
         if (self.horizontalOnly) center.y = self.origin.y;
         if (self.verticalOnly) center.x = self.origin.x;

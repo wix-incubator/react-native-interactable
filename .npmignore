@@ -87,9 +87,6 @@ fabric.properties
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-#Cocoapods
-*.podspec
-
 ## Build generated
 ios/build/
 ios/DerivedData/

@@ -4,7 +4,7 @@
 <img src="http://i.imgur.com/dWFYZBG.gif" width=200 />
 
 # Interactable
-> react-native-interactable
+> react-native-interactable 
 
 <br>
 

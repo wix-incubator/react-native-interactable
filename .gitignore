@@ -28,6 +28,8 @@ project.xcworkspace
 .idea
 .gradle
 local.properties
+android/.project
+android/.settings/*
 
 # node.js
 #
@@ -45,7 +47,11 @@ yarn-error.log
 buck-out/
 \.buckd/
 android/app/libs
-android/keystores/debug.keystore
+*.keystore
+!debug.keystore
 
 # Bundle artifact
 *.jsbundle
+
+# CocoaPods
+playground/ios/Pods

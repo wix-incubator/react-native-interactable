@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/wix/react-native-interactable"
 
   s.license      = "MIT"
-  s.authors      = { "Tal Kol" => "talkol@gmail.com" }
+  s.authors      = package["author"]
   s.platform     = :ios, "7.0"
 
   s.source       = { :git => "https://github.com/wix/react-native-interactable.git" }

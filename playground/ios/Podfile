@@ -3,6 +3,7 @@ require_relative '../../node_modules/@react-native-community/cli-platform-ios/na
 
 target 'playground' do
   # Pods for Playground
+  pod 'Interactable', :path => "../../Interactable.podspec"
   pod 'FBLazyVector', :path => "../../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../../node_modules/react-native/Libraries/RCTRequired"
@@ -21,6 +22,7 @@ target 'playground' do
   pod 'React-RCTText', :path => '../../node_modules/react-native/Libraries/Text'
   pod 'React-RCTVibration', :path => '../../node_modules/react-native/Libraries/Vibration'
   pod 'React-Core/RCTWebSocket', :path => '../../node_modules/react-native/'
+  pod 'react-native-webview', :path => '../../node_modules/react-native-webview'
 
   pod 'React-cxxreact', :path => '../../node_modules/react-native/ReactCommon/cxxreact'
   pod 'React-jsi', :path => '../../node_modules/react-native/ReactCommon/jsi'
@@ -29,8 +31,6 @@ target 'playground' do
   pod 'ReactCommon/jscallinvoker', :path => "../../node_modules/react-native/ReactCommon"
   pod 'ReactCommon/turbomodule/core', :path => "../../node_modules/react-native/ReactCommon"
   pod 'Yoga', :path => '../../node_modules/react-native/ReactCommon/yoga'
-
-  pod 'Interactable', :path => '../../'
 
   pod 'DoubleConversion', :podspec => '../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../../node_modules/react-native/third-party-podspecs/glog.podspec'

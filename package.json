@@ -48,6 +48,7 @@
     "detox": "^12.0.0",
     "eslint": "^5.16.0",
     "jest": "^24.5.0",
+    "jetifier": "^1.6.4",
     "metro-react-native-babel-preset": "^0.53.1",
     "mocha": "^5.0.5",
     "react": "16.9.0",

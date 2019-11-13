@@ -21,7 +21,7 @@
     "start": "node ./node_modules/react-native/local-cli/cli.js start",
     "ios": "react-native run-ios --project-path playground/ios/",
     "android": "react-native run-android --root playground",
-    "ci-podinstall": "cd playground/ios && pod install",
+    "podinstall": "cd playground/ios && pod install",
     "test": ":",
     "e2e:ios": "detox test --configuration ios.sim.release --debug-synchronization",
     "e2e:ios-multi": "npm run e2e:ios -- -w 2",

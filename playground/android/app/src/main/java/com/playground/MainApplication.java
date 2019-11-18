@@ -68,6 +68,8 @@ public class MainApplication extends Application implements ReactApplication {
         e.printStackTrace();
       } catch (IllegalAccessException e) {
         e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
       }
     }    
   }

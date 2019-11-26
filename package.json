@@ -62,7 +62,7 @@
       }
     }
   },
-  "detox": {
+  "detox_ignore": {
     "specs": "e2e",
     "configurations": {
       "ios.sim.debug": {

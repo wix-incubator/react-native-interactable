@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BDFEED7880E51461687F39A7 /* libPods-Interactable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A92E78403382EF489E3D83C2 /* libPods-Interactable.a */; };
 		CC01279C1E3ACC3900B23C9F /* InteractableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */; };
 		CC01279D1E3ACC3900B23C9F /* InteractableViewManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CC01279A1E3ACC3900B23C9F /* InteractableViewManager.h */; };
 		CC0127DC1E3AD42C00B23C9F /* InteractableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0127DB1E3AD42C00B23C9F /* InteractableView.m */; };
@@ -39,6 +40,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		99DBCE82136182BC38B6F207 /* Pods-Interactable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Interactable.release.xcconfig"; path = "Target Support Files/Pods-Interactable/Pods-Interactable.release.xcconfig"; sourceTree = "<group>"; };
+		9D230B1B6E29DD56F501C6B0 /* Pods-Interactable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Interactable.debug.xcconfig"; path = "Target Support Files/Pods-Interactable/Pods-Interactable.debug.xcconfig"; sourceTree = "<group>"; };
+		A92E78403382EF489E3D83C2 /* libPods-Interactable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Interactable.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0127971E3ACC3900B23C9F /* libInteractable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libInteractable.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC01279A1E3ACC3900B23C9F /* InteractableViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractableViewManager.h; sourceTree = "<group>"; };
 		CC01279B1E3ACC3900B23C9F /* InteractableViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractableViewManager.m; sourceTree = "<group>"; };
@@ -77,17 +81,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFEED7880E51461687F39A7 /* libPods-Interactable.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5DDF57F3F7D0B187E1689EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A92E78403382EF489E3D83C2 /* libPods-Interactable.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BBF5D5EA22BA66A67AF6BA89 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9D230B1B6E29DD56F501C6B0 /* Pods-Interactable.debug.xcconfig */,
+				99DBCE82136182BC38B6F207 /* Pods-Interactable.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CC01278E1E3ACC3900B23C9F = {
 			isa = PBXGroup;
 			children = (
 				CC0127991E3ACC3900B23C9F /* Interactable */,
 				CC0127981E3ACC3900B23C9F /* Products */,
+				BBF5D5EA22BA66A67AF6BA89 /* Pods */,
+				A5DDF57F3F7D0B187E1689EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +175,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC0127A01E3ACC3900B23C9F /* Build configuration list for PBXNativeTarget "Interactable" */;
 			buildPhases = (
+				BE9A56418E0DFC4858BA5936 /* [CP] Check Pods Manifest.lock */,
 				CC0127931E3ACC3900B23C9F /* Sources */,
 				CC0127941E3ACC3900B23C9F /* Frameworks */,
 				CC0127951E3ACC3900B23C9F /* CopyFiles */,
@@ -184,6 +209,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = CC01278E1E3ACC3900B23C9F;
@@ -195,6 +221,31 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BE9A56418E0DFC4858BA5936 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Interactable-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CC0127931E3ACC3900B23C9F /* Sources */ = {
@@ -312,6 +363,7 @@
 		};
 		CC0127A11E3ACC3900B23C9F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D230B1B6E29DD56F501C6B0 /* Pods-Interactable.debug.xcconfig */;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -321,6 +373,7 @@
 		};
 		CC0127A21E3ACC3900B23C9F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99DBCE82136182BC38B6F207 /* Pods-Interactable.release.xcconfig */;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

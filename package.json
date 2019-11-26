@@ -1,6 +1,6 @@
 {
   "name": "react-native-interactable",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "High performance interactable views in React Native",
   "license": "MIT",
   "author": "Tal Kol <talkol@gmail.com>",
@@ -21,6 +21,7 @@
     "start": "node ./node_modules/react-native/local-cli/cli.js start",
     "ios": "react-native run-ios --project-path playground/ios/",
     "android": "react-native run-android --root playground",
+    "podinstall": "cd playground/ios && pod install",
     "test": ":",
     "e2e:ios": "detox test --configuration ios.sim.release --debug-synchronization",
     "e2e:ios-multi": "npm run e2e:ios -- -w 2",
@@ -29,7 +30,6 @@
     "build:ios": "detox build --configuration ios.sim.release",
     "build:android": "detox build --configuration android.emu.release"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": ">= 15.4.1",
     "react-native": ">= 0.40.0"
@@ -38,18 +38,18 @@
     "preset": "react-native"
   },
   "devDependencies": {
-    "@types/react-native": ">= 0.52.2",
-    "detox": "^12.0.0",
-    "mocha": "^5.0.5",
-    "react": "16.8.3",
-    "react-native": "0.59.3",
-    "@babel/core": "^7.4.0",
+    "@babel/core": "7.6.0",
     "@babel/runtime": "^7.4.2",
     "@react-native-community/eslint-config": "^0.0.3",
+    "@types/react-native": ">= 0.52.2",
     "babel-jest": "^24.5.0",
+    "detox": "^14.0.0",
     "eslint": "^5.16.0",
     "jest": "^24.5.0",
     "metro-react-native-babel-preset": "^0.53.1",
+    "mocha": "^5.0.5",
+    "react": "16.9.0",
+    "react-native": "0.61.4",
     "react-test-renderer": "16.8.3"
   },
   "typings": "typings/react-native-interactable.d.ts",
@@ -69,13 +69,13 @@
         "binaryPath": "playground/ios/DerivedData/playground/Build/Products/Debug-iphonesimulator/playground.app",
         "build": "RCT_NO_LAUNCH_PACKAGER=true xcodebuild build -scheme playground -project playground/ios/playground.xcodeproj -sdk iphonesimulator -configuration Debug -derivedDataPath playground/ios/DerivedData/playground ONLY_ACTIVE_ARCH=YES -quiet -UseModernBuildSystem=NO",
         "type": "ios.simulator",
-        "name": "iPhone X"
+        "name": "iPhone 11 Pro"
       },
       "ios.sim.release": {
         "binaryPath": "playground/ios/DerivedData/playground/Build/Products/Release-iphonesimulator/playground.app",
         "build": "RCT_NO_LAUNCH_PACKAGER=true xcodebuild build -scheme playground -project playground/ios/playground.xcodeproj -sdk iphonesimulator -configuration Release -derivedDataPath playground/ios/DerivedData/playground ONLY_ACTIVE_ARCH=YES -quiet -UseModernBuildSystem=NO",
         "type": "ios.simulator",
-        "name": "iPhone X"
+        "name": "iPhone 11 Pro"
       },
       "android.emu.debug": {
         "binaryPath": "playground/android/app/build/outputs/apk/debug/app-debug.apk",

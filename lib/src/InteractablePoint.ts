@@ -32,11 +32,11 @@ export class InteractablePoint {
         return Math.sqrt(dx*dx + dy*dy);
     }
 
-    deltaBetweenPoint(point: IPoint, origin: IPoint): IPoint {
+    static deltaBetweenPoint(point: IPoint, origin: IPoint): IPoint {
         return { x: point.x - origin.x, y: point.y - origin.y };
     }
 
-    findClosestPoint(points: InteractablePoint[], relativeToPoint: IPoint, origin: IPoint): InteractablePoint {
+    static findClosestPoint(points: InteractablePoint[], relativeToPoint: IPoint, origin: IPoint): InteractablePoint {
         let resultPoint = null;
         let minDistance = Number.MAX_SAFE_INTEGER;
         for (const point of points) {

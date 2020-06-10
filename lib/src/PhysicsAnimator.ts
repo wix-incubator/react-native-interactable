@@ -45,19 +45,27 @@ export class PhysicsAnimator {
 
 
     addBehavior(behavior: PhysicsBehavior) {
-
+        if (behavior.target) {
+            this.ensureTargetObjectExists(behavior.target);
+        }
+        const index = behavior.findSortIndexInArray(this.behaviors);
+        this.behaviors.splice(index, 0, behavior);
+        this.ensureRunning();
     }
 
     addTempBehavior(behavior: PhysicsBehavior) {
-
+        behavior.temp = true;
+        this.addBehavior(behavior);
     }
 
     removeAllBehaviors() {
-
+        this.behaviors = [];
+        this.targetsToObjects = new Map();
+        this.stopRunning();
     }
 
     removeTempBehaviors() {
-
+        this.behaviors = this.behaviors.filter(behavior => behavior.temp != true);
     }
 
     ensureRunning() {

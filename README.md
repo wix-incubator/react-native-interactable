@@ -8,6 +8,9 @@
 
 <br>
 
+[![NPM Version](https://img.shields.io/npm/v/react-native-interactable.svg?style=flat)](https://www.npmjs.com/package/react-native-interactable)
+[![Build Status](https://img.shields.io/jenkins/s/http/jenkins-oss.wixpress.com:8080/job/multi-react-native-interactable-master.svg)](https://jenkins-oss.wixpress.com/job/multi-react-native-interactable-master/)
+[![NPM Downloads](https://img.shields.io/npm/dm/react-native-interactable.svg?style=flat)](https://www.npmjs.com/package/react-native-interactable)
 
 ### LOOKING FOR A MAINTAINER
 
@@ -80,36 +83,18 @@ pod 'Interactable', :path => '../node_modules/react-native-interactable'
 
 ## Example
 
-To see the library in action you have several options:
+<br><br>The [playground](https://github.com/wix/react-native-interactable/tree/master/playground) project has few use-cases implemented like: *swipeable card*, *drawer*, *collapsible header* and *chat heads* under the "Basic examples" section. It's simplistic but easy to learn from.
+<br><br>Under the "Real life example" you'll find more complex demonstrations. They're harder to learn from, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo app.
 
-* **Build and run the example project on your computer**
-<br><br>The [example](example) project has 4 use-cases implemented: *swipeable card*, *drawer*, *collapsible header* and *chat heads*. It's simplistic but easy to learn from.
+* **Build and run the example project**
+To see the library in action, clone the repo and run the playground from the root folder:<br>
+```
+  npm start
+  npm run ios
+```
 <br><br>*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
 <br><br>
-To run the example, clone the repo and run from the root folder:<br>
-```
-  cd real-life-example
-  yarn
-  react-native run-ios
-```
 
-* **Install and run the demo app from the App Store/Google Play on your phone**
-<br><br>If you don't want to mess with building yourself, you can play with a pre-built demo on your phone.
-<br><br>Download from [Apple App Store (iOS)](https://itunes.apple.com/us/app/react-native-interactions/id1209875831?ls=1&mt=8)<br>Download from [Google Play Store (Android)](https://play.google.com/store/apps/details?id=com.wix.interactions&hl=en)
-<br><br><img src="http://i.imgur.com/VpSsavS.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://i.imgur.com/O7ulJa1.gif" width=200 />&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://i.imgur.com/2mrUNIM.gif" width=200 />
-
-* **Build and run the demo app on your computer**
-<br><br>The [demo app](real-life-example) contains more complex demonstrations than the [example](example) project. They're harder to learn from, but they're cool to watch. More info about the [UX inspirations](https://github.com/wix/react-native-interactable/blob/master/UX-INSPIRATIONS.md) for the demo app.
-<br><br>*Note: It's recommended to experience it on a [real device](http://facebook.github.io/react-native/docs/running-on-device.html) and not on a simulator. The simulator has poor performance so the framerate isn't like the real thing.*
-<br><br>
-To run the demo app, clone the repo and run from the root folder:
-```
-  cd real-life-example
-  npm install
-  react-native run-ios
-```
-
-<br>
 
 ## Usage
 
@@ -187,10 +172,16 @@ verticalOnly={true}
 boundaries={{left: -100, right: 100, bounce: 0.5}}
 ```
 
-* [`onSnap`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onsnap-function) - a function called whenever the view snaps to a `snapPoints` point (after dragging)
+* [`onSnap`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onsnap-function) - a function called whenever the view finishes snapping to a `snapPoints` point (after dragging)
 
 ```jsx
 onSnap={this.onDrawerSnap}
+```
+
+* [`onSnapStart`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onsnapstart-function) - a function called whenever the view starts snapping to a `snapPoints` point (after dragging)
+
+```jsx
+onSnapStart={this.onDrawerSnapStart}
 ```
 
 * [`onStop`](https://github.com/wix/react-native-interactable/blob/master/PROPS.md#onstop-function) - a function called whenever the interaction stops (views freeze momentarily)

@@ -30,7 +30,7 @@ export default class ChangePosition extends Component {
           snapPoints={snapPoints}
           initialPosition={{x: -140, y: 0}}
         >
-          <View style={{width: 70, height: 70, backgroundColor: 'blue', borderRadius: 35}} />
+          <View style={{width: 70, height: 70, backgroundColor: '#3182C8', borderRadius: 35}} />
         </Interactable.View>
         <Interactable.View
           style={{zIndex: 2}}
@@ -38,11 +38,12 @@ export default class ChangePosition extends Component {
           snapPoints={snapPoints}
           initialPosition={{x: -140, y: 0}}
         >
-          <View style={{width: 70, height: 70, backgroundColor: 'green', borderRadius: 35}} />
+          <View style={{width: 70, height: 70, backgroundColor: '#32B76C', borderRadius: 35}} />
         </Interactable.View>
         <View style={{
           position: 'absolute',
-          left: 140,
+          top: 50,
+          left: 50,
           zIndex: 1,
         }}>
           <TouchableOpacity
@@ -50,7 +51,7 @@ export default class ChangePosition extends Component {
               this.refs['blue'].changePosition(blueDestination)
             }}
           >
-            <Text style={{color: 'blue', fontSize: 12}}>{"ChangePosition to " + JSON.stringify(blueDestination)}</Text>
+            <Text style={{color: '#3182C8', borderColor: '#3182C8', borderWidth: 1, padding: 6, borderRadius: 15, alignSelf: 'center'}}>{"ChangePosition to " + JSON.stringify(blueDestination)}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -60,7 +61,7 @@ export default class ChangePosition extends Component {
               )
             }}
           >
-            <Text style={{color: 'green'}}>ChangePosition to random</Text>
+            <Text style={{color: '#32B76C', borderColor: '#32B76C', borderWidth: 1, padding: 6, borderRadius: 15, alignSelf: 'center', margin: 10}}>ChangePosition to random</Text>
           </TouchableOpacity>
         </View>
       </View>

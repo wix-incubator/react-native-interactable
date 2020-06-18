@@ -103,10 +103,7 @@ declare module 'react-native-interactable' {
     type NativeAlertEventLeaveValueType = 'leave';
     type NativeAlertEventValue = NativeAlertEventEnterValueType | NativeAlertEventLeaveValueType;
 
-    interface INativeAlertEvent {
-      id: string;
-      value: NativeAlertEventValue;
-    }
+    interface INativeAlertEvent { [id: string]: NativeAlertEventValue }
 
     interface IAlertEvent {
       nativeEvent: INativeAlertEvent;
@@ -122,6 +119,7 @@ declare module 'react-native-interactable' {
       verticalOnly?: boolean;
       boundaries?: IBoundaries;
       onSnap?: (event: ISnapEvent) => void;
+      onSnapStart?: (event: ISnapEvent) => void;
       onStop?: (event: IStopEvent) => void;
       onDrag?: (event: IDragEvent) => void;
       onAlert?: (event: IAlertEvent) => void;

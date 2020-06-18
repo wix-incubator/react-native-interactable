@@ -52,7 +52,7 @@ export default class RowActions1 extends Component {
             value={this.state.damping}
             minimumValue={0.1}
             maximumValue={0.6}
-            minimumTrackTintColor={'#007AFF'}
+            minimumTrackTintColor={'#542790'}
             maximumTrackTintColor={'white'}
             thumbTintColor={'white'}
             onSlidingComplete={(value) => this.setState({damping: value})}
@@ -64,7 +64,7 @@ export default class RowActions1 extends Component {
             value={this.state.tension}
             minimumValue={0.0}
             maximumValue={1000.0}
-            minimumTrackTintColor={'#007AFF'}
+            minimumTrackTintColor={'#542790'}
             maximumTrackTintColor={'white'}
             thumbTintColor={'white'}
             onSlidingComplete={(value) => this.setState({tension: value})}
@@ -166,7 +166,7 @@ class Row extends Component {
           onStop={this.onStopMoving.bind(this)}
           dragToss={0.01}
           animatedValueX={this._deltaX}>
-          <TouchableHighlight onPress={this.onRowPress.bind(this)} activeOpacity={activeOpacity} underlayColor={'#dddddd'}>
+          <TouchableHighlight onPress={this.onRowPress.bind(this)} activeOpacity={activeOpacity} underlayColor={'white'}>
             <View style={{left: 0, right: 0, height: 75, backgroundColor: 'white'}}>
               {this.props.children}
             </View>
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#73d4e3',
+    backgroundColor: '#b5d9f8',
     margin: 20
   },
   rowTitle: {
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     marginTop: Screen.height <= 500 ? 0 : 80,
     padding: 20,
     width: Screen.width - 40,
-    backgroundColor: '#5894f3',
+    backgroundColor: '#459FED',
     alignItems: 'stretch',
     alignSelf: 'center'
   },

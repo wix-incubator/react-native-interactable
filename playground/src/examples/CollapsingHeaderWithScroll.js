@@ -3,7 +3,7 @@ import { StyleSheet, View, Animated, ScrollView, Dimensions } from 'react-native
 import Interactable from 'react-native-interactable';
 
 const Screen = {
-  height: Dimensions.get('window').height - 75
+  height: Dimensions.get('window').height
 };
 
 export default class CollapsingHeaderWithScroll extends Component {
@@ -18,7 +18,7 @@ export default class CollapsingHeaderWithScroll extends Component {
     return (
       <View style={styles.container}>
 
-          <View style={{backgroundColor: 'red', height: 250, alignItems: 'center'}}>
+          <View style={{backgroundColor: '#542790', height: 250, alignItems: 'center'}}>
             <Animated.View style={{
               transform: [
                 {
@@ -35,7 +35,7 @@ export default class CollapsingHeaderWithScroll extends Component {
                 }
               ]
             }}>
-              <View style={{width: 150, height: 150, backgroundColor: 'blue', borderRadius: 75, marginTop: 50}} />
+              <View style={{width: 150, height: 150, backgroundColor: '#b5d9f8', borderRadius: 75, marginTop: 50}} />
             </Animated.View>
           </View>
 
@@ -44,12 +44,15 @@ export default class CollapsingHeaderWithScroll extends Component {
             snapPoints={[{y: 0}, {y: -150, id: 'bottom'}]}
             boundaries={{top: -150}}
             onSnap={this.onSnap.bind(this)}
-            animatedValueY={this._deltaY}>
+            animatedValueY={this._deltaY}
+            showsVerticalScrollIndicator={false}
+          >
             <ScrollView
               bounces={false}
-              canCancelContentTouches={this.state.canScroll}
+              scrollEnabled={this.state.canScroll}
               onScroll={this.onScroll.bind(this)}
-              style={{left: 0, right: 0, height: Screen.height - 100, backgroundColor: '#e0e0e0'}}>
+              style={{left: 0, right: 0, height: Screen.height - 100, backgroundColor: '#e0e0e0'}}
+            >
               <View style={styles.placeholder} />
               <View style={styles.placeholder} />
               <View style={styles.placeholder} />
@@ -67,12 +70,11 @@ export default class CollapsingHeaderWithScroll extends Component {
     const { id } = event.nativeEvent;
     if (id === 'bottom') {
       this.setState({ canScroll: true });
-      alert('This implementation is still broken, in progress');
     }
   }
   onScroll(event) {
-    const { contentOffset } = event.nativeEvent;
-    if (contentOffset.y === 0) {
+    const { contentOffset } = event.nativeEvent;    
+    if (contentOffset.y <= 0) {
       this.setState({ canScroll: false });
     }
   }
@@ -81,10 +83,10 @@ export default class CollapsingHeaderWithScroll extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#e0e0e0',
   },
   placeholder: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#65C888',
     flex: 1,
     height: 120,
     marginHorizontal: 20,

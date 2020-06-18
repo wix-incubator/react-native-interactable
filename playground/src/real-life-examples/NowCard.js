@@ -48,7 +48,7 @@ export default class NowCard extends Component {
             value={this.state.damping}
             minimumValue={0.1}
             maximumValue={0.6}
-            minimumTrackTintColor={'#007AFF'}
+            minimumTrackTintColor={'#542790'}
             maximumTrackTintColor={'white'}
             thumbTintColor={'white'}
             onSlidingComplete={(value) => this.setState({damping: value})}
@@ -60,7 +60,7 @@ export default class NowCard extends Component {
             value={this.state.tension}
             minimumValue={0.0}
             maximumValue={1000.0}
-            minimumTrackTintColor={'#007AFF'}
+            minimumTrackTintColor={'#542790'}
             maximumTrackTintColor={'white'}
             thumbTintColor={'white'}
             onSlidingComplete={(value) => this.setState({tension: value})}
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     height: 22,
     fontSize: 12,
-    color: '#7b7b7b',
+    color: '#7f7f7f',
     overflow: 'hidden'
   },
   title: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     marginTop: Screen.height <= 500 ? 10 : 40,
     padding: 20,
     width: Screen.width - 40,
-    backgroundColor: '#5894f3',
+    backgroundColor: '#459FED',
     alignItems: 'stretch'
   },
   playgroundLabel: {

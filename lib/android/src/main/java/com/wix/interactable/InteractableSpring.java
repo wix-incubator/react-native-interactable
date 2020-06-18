@@ -5,13 +5,11 @@ package com.wix.interactable;
  */
 
 public class InteractableSpring {
-    float toss;
     float tension;
     float damping;
 
 
-    public InteractableSpring(float toss, float tension, float damping) {
-        this.toss = toss;
+    public InteractableSpring(float tension, float damping) {
         this.tension = tension;
         this.damping = damping;
     }

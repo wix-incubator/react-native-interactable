@@ -7,7 +7,7 @@ export default class MoreDrawers extends Component {
     return (
       <View style={styles.container}>
 
-        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+        <View style={{backgroundColor: '#32B76C', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
             horizontalOnly={true}>
@@ -17,7 +17,7 @@ export default class MoreDrawers extends Component {
           </Interactable.View>
         </View>
 
-        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+        <View style={{backgroundColor: '#32B76C', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
             boundaries={{right: 0}}
@@ -28,7 +28,7 @@ export default class MoreDrawers extends Component {
           </Interactable.View>
         </View>
 
-        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+        <View style={{backgroundColor: '#32B76C', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
             boundaries={{right: 0, bounce: 0.2, haptics: true}}
@@ -39,7 +39,7 @@ export default class MoreDrawers extends Component {
           </Interactable.View>
         </View>
 
-        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+        <View style={{backgroundColor: '#32B76C', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
             dragWithSpring={{tension: 1000, damping: 0.7}}
@@ -50,7 +50,7 @@ export default class MoreDrawers extends Component {
           </Interactable.View>
         </View>
 
-        <View style={{backgroundColor: 'red', marginBottom: 50}}>
+        <View style={{backgroundColor: '#32B76C', marginBottom: 50}}>
           <Interactable.View
             snapPoints={[{x: 0}, {x: -230}]}
             dragWithSpring={{tension: 2000, damping: 0.5}}

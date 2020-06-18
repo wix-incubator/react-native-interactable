@@ -20,10 +20,18 @@ export default class SideMenu extends Component {
             initialPosition={{x: -SideMenuWidth}}>
             <View style={styles.sideMenu}>
               <Text style={styles.sideMenuTitle}>Menu</Text>
-              <Button title='Button 1' onPress={() => alert('Button 1 pressed')} />
-              <Button title='Button 2' onPress={() => alert('Button 2 pressed')} />
-              <Button title='Button 3' onPress={() => alert('Button 3 pressed')} />
-              <Button title='Close' onPress={this.onClosePress.bind(this)} />
+              <TouchableOpacity onPress={() => alert('Button 1 pressed')}>
+                <Text style={styles.button}>Button 1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => alert('Button 2 pressed')}>
+                <Text style={styles.button}>Button 2</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => alert('Button 3 pressed')}>
+                <Text style={styles.button}>Button 3</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.onClosePress.bind(this)}>
+                <Text style={styles.button}>Cancel</Text>
+              </TouchableOpacity>
             </View>
           </Interactable.View>
         </View>
@@ -70,19 +78,27 @@ const styles = StyleSheet.create({
     width: Screen.width,
     paddingLeft: RemainingWidth,
     flex: 1,
-    backgroundColor: '#aaa',
-    paddingTop: 80
+    backgroundColor: '#e0e0e0',
+    paddingTop: 20
   },
   sideMenuTitle: {
-    fontSize: 20,
+    fontSize: 22,
+    fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20
   },
+  button: {
+    color: '#542790',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 20
+  },
   header: {
     height: 60,
-    paddingLeft: 20,
+    paddingHorizontal: 20,
     flexDirection: 'row',
-    backgroundColor: 'red',
+    backgroundColor: '#32B76C',
     alignItems: 'center',
     zIndex: 1001
   },
@@ -97,7 +113,7 @@ const styles = StyleSheet.create({
     height: 30
   },
   headerTitle: {
-    marginLeft: 30,
+    marginLeft: 24,
     color: 'white',
     fontSize: 20
   },

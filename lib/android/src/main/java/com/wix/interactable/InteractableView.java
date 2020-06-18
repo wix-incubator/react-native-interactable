@@ -45,7 +45,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private PointF initialPosition;
 
     private InteractableArea boundaries;
-    private InteractableSpring dragWithSprings;
+    private PhysicsBounceBehavior oldBoundariesBehavior;
+
+    private InteractableSpring dragWithSpring;
     private float dragToss;
     private PointF velocity;
     private boolean reportOnAnimatedEvents;
@@ -284,7 +286,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         this.dragStartLocation = new PointF(ev.getX(),ev.getY());
         this.animator.removeTempBehaviors();
         this.animator.setDragging(true);
-        this.dragBehavior = addTempDragBehavior(this.dragWithSprings);
+        this.dragBehavior = addTempDragBehavior(this.dragWithSpring);
         try {
             getReactRoot().onChildStartedNativeGesture(ev);
         } catch (Exception e) {
@@ -294,23 +296,29 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     private void handleEndOfDrag() {
         this.animator.removeTempBehaviors();
-        this.dragBehavior = null;
 
         this.animator.setDragging(false);
 
         PointF velocity = this.animator.getTargetVelocity(this);
         if (this.horizontalOnly) velocity.y = 0;
         if (this.verticalOnly) velocity.x = 0;
-        float toss = 0.1f;
-        if (this.dragWithSprings != null) toss = this.dragWithSprings.toss;
 
         PointF currentPosition = getCurrentPosition();
 
+        float toss = this.dragToss;
         PointF projectedCenter = new PointF(getTranslationX() + toss*velocity.x,
                 getTranslationY() + toss*velocity.y);
 
         InteractablePoint snapPoint = InteractablePoint.findClosestPoint(snapPoints,projectedCenter);
-        listener.onDrag("end",currentPosition.x, currentPosition.y, snapPoint.id);
+        String targetSnapPointId = "";
+        if (snapPoint != null && snapPoint.id != null) {
+            targetSnapPointId = snapPoint.id;
+        }
+
+        if (this.dragBehavior != null) {
+            listener.onDrag("end",currentPosition.x, currentPosition.y, targetSnapPointId);
+        }
+        this.dragBehavior = null;
 
         addTempSnapToPointBehavior(snapPoint);
         addTempBounceBehaviorWithBoundaries(this.boundaries);
@@ -321,6 +329,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             return;
         }
         listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id);
+        listener.onSnapStart(snapPoints.indexOf(snapPoint), snapPoint.id);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
 
@@ -368,6 +377,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             PhysicsBounceBehavior bounceBehavior = new PhysicsBounceBehavior(this,minPoint, maxPoint,0, boundaries.isHaptic());
 
             this.animator.addBehavior(bounceBehavior);
+            this.oldBoundariesBehavior = bounceBehavior;
         }
     }
 
@@ -455,7 +465,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setDragEnabled(boolean dragEnabled) {
         this.dragEnabled = dragEnabled;
-        
+
         if (this.dragBehavior != null && !dragEnabled) {
             handleEndOfDrag();
         }
@@ -469,12 +479,13 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void setBoundaries(InteractableArea boundaries) {
         this.boundaries = boundaries;
+        animator.removeBehavior(this.oldBoundariesBehavior);
         addConstantBoundaries(boundaries);
     }
 
 
-    public void setDragWithSprings(InteractableSpring dragWithSprings) {
-        this.dragWithSprings = dragWithSprings;
+    public void setDragWithSpring(InteractableSpring dragWithSpring) {
+        this.dragWithSpring = dragWithSpring;
     }
 
     public void setDragToss(float dragToss) {
@@ -518,7 +529,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
 
     public void setVelocity(PointF velocity) {
-        if(dragBehavior!=null) return;
+        if(this.dragBehavior != null) return;
         this.velocity = velocity;
         this.animator.setTargetVelocity(this,this.velocity);
         handleEndOfDrag();
@@ -526,7 +537,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public void snapTo(int index) {
 
-        if(this.snapPoints!=null && index >= 0 && index < this.snapPoints.size())
+        if(this.snapPoints != null && index >= 0 && index < this.snapPoints.size())
         {
             this.animator.removeTempBehaviors();
             this.dragBehavior = null;
@@ -537,7 +548,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     }
 
     public void changePosition(PointF position) {
-        if(dragBehavior != null) return;
+        if(this.dragBehavior != null) return;
         setTranslationX(position.x);
         setTranslationY(position.y);
         handleEndOfDrag();
@@ -546,6 +557,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     public interface InteractionListener {
         void onSnap(int indexOfSnapPoint, String snapPointId);
+        void onSnapStart(int indexOfSnapPoint, String snapPointId);
         void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
         void onDrag(String state, float x, float y, String targetSnapPointId);

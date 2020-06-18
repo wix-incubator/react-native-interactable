@@ -42,11 +42,10 @@ public class RNConvert {
     }
 
     public static InteractableSpring interactableDrag(ReadableMap params) {
-        float toss = params.hasKey("toss") ? (float) params.getDouble("toss") : 0.1f;
         float tension = params.hasKey("tension") ? (float) params.getDouble("tension") : Float.MAX_VALUE;
         float damping = params.hasKey("damping") ? (float) params.getDouble("damping") : 0f;
 
-        return new InteractableSpring(toss, tension, damping);
+        return new InteractableSpring(tension, damping);
     }
 
     public static ArrayList<InteractablePoint> interactablePoints(ReadableArray points) {

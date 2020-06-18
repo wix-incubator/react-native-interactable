@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Text} from 'react-native';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
 import Interactable from 'react-native-interactable';
 
 const Screen = {
@@ -18,26 +18,26 @@ export default class AlertAreas extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.markerContainer}><View style={{backgroundColor: '#00ff0030', position: 'absolute', left: Screen.width/2 + 100, right: 0, top: 0, bottom: 0}} /></View>
-        <View style={styles.markerContainer}><View style={{backgroundColor: '#ffff0060', position: 'absolute', left: Screen.width/2 - 150, right: Screen.width/2 + 50, top: Screen.height/2 + 100, bottom: Screen.height/2 - 200}} /></View>
-        <View style={styles.markerContainer}><View style={{backgroundColor: '#add8e6', position: 'absolute', left: 0, right:Screen.width/2+50, top: Screen.height/2-150, bottom:Screen.height/2}}>
-            <Text style={{fontSize: 28}}>
+        <View style={styles.markerContainer}><View style={{backgroundColor: '#32B76C', position: 'absolute', left: Screen.width/2 + 100, right: 0, top: 0, bottom: 0}} /></View>
+        <View style={styles.markerContainer}><View style={{backgroundColor: '#542790', position: 'absolute', left: Screen.width/2 - 150, right: Screen.width/2 + 50, top: Screen.height/2 + 100, bottom: Screen.height/2 - 200}} /></View>
+        <View style={styles.markerContainer}><View style={{backgroundColor: '#b5d9f8', position: 'absolute', left: 0, right:Screen.width/2+50, top: Screen.height/2-150, bottom:Screen.height/2}}>
+            <Text style={{fontSize: 22, margin: 8}}>
                 Non Draggable Area
             </Text>
         </View>
       </View>
             <Interactable.View
-          snapPoints={[{x: -140, y: -250}, {x: 140, y: -250}, {x: -140, y: 250}, {x: 140, y: 250}]}
+          snapPoints={[{x: -140, y: -250, id: 'testId'}, {x: 140, y: -250}, {x: -140, y: 250}, {x: 140, y: 250}]}
           dragEnabled={this.state.dragEnabled}
           alertAreas={[
               {id: 'green', influenceArea: {left: 100}},
-              {id: 'yellow', influenceArea: {top: 100, bottom: 200, left: -150, right: -50}},
+              {id: 'purple', influenceArea: {top: 100, bottom: 200, left: -150, right: -50}},
               {id: 'blue', influenceArea: {top: -150,bottom:0 ,left: -Screen.width/2, right: -50, }},
           ]}
           onAlert={this.onAlert.bind(this)}
           onDrag={this.onDrag.bind(this)}
           initialPosition={{x: -140, y: -250}}>
-          <View style={{width: 70, height: 70, backgroundColor: 'red', borderRadius: 35}} />
+          <View style={{width: 70, height: 70, backgroundColor: '#EE2C38', borderRadius: 35}} />
         </Interactable.View>
       </View>
     );

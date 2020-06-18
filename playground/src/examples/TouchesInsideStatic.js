@@ -17,11 +17,11 @@ export default class TouchesInside extends Component {
       <View style={styles.container}>
 
         <View style={styles.direction}>
-          <Text style={{marginRight: 10}}>Vertical: </Text>
+          <Text style={{marginRight: 6}}>Vertical:</Text>
           <Switch
             value={this.state.vertical}
             onValueChange={(value) => this.setState({vertical: value})} />
-          <Text style={{marginRight: 10, marginLeft: 20}}>Can drag: </Text>
+          <Text style={{marginRight: 6, marginLeft: 24}}>Can drag:</Text>
           <Switch
             value={this.state.dragEnabled}
             onValueChange={(value) => this.setState({dragEnabled: value})} />
@@ -32,20 +32,13 @@ export default class TouchesInside extends Component {
           horizontalOnly={!this.state.vertical}
           dragEnabled={this.state.dragEnabled}
           snapPoints={[{y: 0}]}
-          style={{width: 300, height: 500, padding: 20, borderRadius: 10}}>
-
-
-            <Text>Hello world</Text>
-
-            <ActivityIndicator animating={true} size='large' style={{marginBottom: 10}} />
-
-            <Image style={{width: 220, height: 100, marginBottom: 10}} source={{uri: 'https://static.wixstatic.com/media/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg/v1/fill/w_300,h_160,al_c,q_80,usm_0.66_1.00_0.01/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg'}} />
-
-            <TextInput style={{height: 40, backgroundColor: 'white', padding: 5, borderColor: 'black', borderWidth: 1, marginBottom: 10}} />
-
-            <View pointerEvents='none' style={{width: 220, height: 75, backgroundColor: 'blue', marginBottom: 10}} />
-
-
+          style={{width: 300, height: 500, padding: 20, backgroundColor: '#e0e0e0'}}
+        >
+            <Text style={{alignSelf: 'center', fontSize: 18, margin: 20}}>Hello world</Text>
+            <ActivityIndicator animating={true} size='large' style={{marginBottom: 20}} />
+            <Image style={{width: 220, height: 120, marginBottom: 20, alignSelf: 'center'}} source={{uri: 'https://static.wixstatic.com/media/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg/v1/fill/w_300,h_160,al_c,q_80,usm_0.66_1.00_0.01/e758eb_729674838e084f49bc75db035ed286a6~mv2.jpg'}} />
+            <TextInput style={{height: 40, backgroundColor: 'white', padding: 4, borderWidth: 1, marginBottom: 20}} />
+            <View pointerEvents='none' style={{width: 220, height: 80, backgroundColor: '#542790', marginBottom: 20, alignSelf: 'center'}} />
         </Interactable.View>
 
       </View>

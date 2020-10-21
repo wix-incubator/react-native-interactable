@@ -435,7 +435,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
     InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
 
-    self.snapType = "endOfDrag";
+    self.snapType = @"endOfDrag";
 
     if (snapPoint)
     {
@@ -610,7 +610,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     {
         [self.animator removeTempBehaviors];
         self.dragBehavior = nil;
-        self.snapType = "snapTo";
+        self.snapType = @"snapTo";
         
         InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
         if (snapPoint) {

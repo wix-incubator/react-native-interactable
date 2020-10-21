@@ -96,8 +96,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 @property (nonatomic) NSMutableSet *insideAlertAreas;
 @property (nonatomic) UIPanGestureRecognizer *pan;
 
-@property (nonatomic, assign) uint16_t snapType;
 @property (nonatomic, assign) uint16_t coalescingKey;
+@property (nonatomic, assign) NSString* snapType;
 @property (nonatomic, assign) NSString* lastEmittedEventName;
 
 @end

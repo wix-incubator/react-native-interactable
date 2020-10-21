@@ -70,6 +70,7 @@ declare module 'react-native-interactable' {
     interface INativeSnapEvent {
       index: number;
       id: string;
+      type: string;
     }
 
     interface ISnapEvent {

@@ -321,16 +321,16 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         }
         this.dragBehavior = null;
 
-        addTempSnapToPointBehavior(snapPoint);
+        addTempSnapToPointBehavior(snapPoint, "endOfDrag");
         addTempBounceBehaviorWithBoundaries(this.boundaries);
     }
 
-    private void addTempSnapToPointBehavior(InteractablePoint snapPoint) {
+    private void addTempSnapToPointBehavior(InteractablePoint snapPoint, String type) {
         if (snapPoint == null) {
             return;
         }
-        listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id);
-        listener.onSnapStart(snapPoints.indexOf(snapPoint), snapPoint.id);
+        listener.onSnap(snapPoints.indexOf(snapPoint), snapPoint.id, type);
+        listener.onSnapStart(snapPoints.indexOf(snapPoint), snapPoint.id, type);
         PhysicsSpringBehavior snapBehavior = new PhysicsSpringBehavior(this,snapPoint.positionWithOrigin());
         snapBehavior.tension = snapPoint.tension;
 
@@ -543,7 +543,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
             this.animator.removeTempBehaviors();
             this.dragBehavior = null;
             InteractablePoint snapPoint = snapPoints.get(index);
-            addTempSnapToPointBehavior(snapPoint);
+            addTempSnapToPointBehavior(snapPoint, "snapTo");
             addTempBounceBehaviorWithBoundaries(this.boundaries);
         }
     }
@@ -557,8 +557,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
 
     public interface InteractionListener {
-        void onSnap(int indexOfSnapPoint, String snapPointId);
-        void onSnapStart(int indexOfSnapPoint, String snapPointId);
+        void onSnap(int indexOfSnapPoint, String snapPointId, String type);
+        void onSnapStart(int indexOfSnapPoint, String snapPointId, String type);
         void onAlert(String alertAreaId, String alertType);
         void onAnimatedEvent(float x, float y);
         void onDrag(String state, float x, float y, String targetSnapPointId);

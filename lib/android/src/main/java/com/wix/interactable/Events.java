@@ -16,11 +16,12 @@ public class Events {
 
         WritableMap eventData;
 
-        public OnSnapEvent(int viewTag, int indexOfSnapPoint, String snapPointId) {
+        public OnSnapEvent(int viewTag, int indexOfSnapPoint, String snapPointId, String type) {
             super(viewTag);
             eventData = Arguments.createMap();
             eventData.putInt("index",indexOfSnapPoint);
             eventData.putString("id", snapPointId);
+            eventData.putString("type", type);
         }
 
         @Override
@@ -38,11 +39,12 @@ public class Events {
 
         WritableMap eventData;
 
-        public OnSnapStartEvent(int viewTag, int indexOfSnapPoint, String snapPointId) {
+        public OnSnapStartEvent(int viewTag, int indexOfSnapPoint, String snapPointId, String type) {
             super(viewTag);
             eventData = Arguments.createMap();
             eventData.putInt("index",indexOfSnapPoint);
             eventData.putString("id", snapPointId);
+            eventData.putString("type", type);
         }
 
         @Override

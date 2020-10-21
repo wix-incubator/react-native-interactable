@@ -96,6 +96,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 @property (nonatomic) NSMutableSet *insideAlertAreas;
 @property (nonatomic) UIPanGestureRecognizer *pan;
 
+@property (nonatomic, assign) uint16_t snapType;
 @property (nonatomic, assign) uint16_t coalescingKey;
 @property (nonatomic, assign) NSString* lastEmittedEventName;
 
@@ -214,7 +215,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
             self.onSnap(@
                         {
                             @"index": @([self.snapPoints indexOfObject:snapPoint]),
-                            @"id": snapPoint.id
+                            @"id": snapPoint.id,
+                            @"type": self.snapType,
                         });
         }
     }
@@ -433,6 +435,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
 
     InteractablePoint *snapPoint = [InteractablePoint findClosestPoint:self.snapPoints toPoint:projectedCenter withOrigin:self.origin];
 
+    self.snapType = "endOfDrag";
+
     if (snapPoint)
     {
         [self addTempSnapToPointBehavior:snapPoint];
@@ -441,7 +445,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
             self.onSnapStart(@
                         {
                             @"index": @([self.snapPoints indexOfObject:snapPoint]),
-                            @"id": snapPoint.id
+                            @"id": snapPoint.id,
+                            @"type": self.snapType,
                         });
         }
     }
@@ -605,6 +610,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
     {
         [self.animator removeTempBehaviors];
         self.dragBehavior = nil;
+        self.snapType = "snapTo";
         
         InteractablePoint *snapPoint = [self.snapPoints objectAtIndex:index];
         if (snapPoint) {
@@ -613,7 +619,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init)
                 self.onSnapStart(@
                             {
                                 @"index": @([self.snapPoints indexOfObject:snapPoint]),
-                                @"id": snapPoint.id
+                                @"id": snapPoint.id,
+                                @"type": self.snapType,
                             });
             }
         }

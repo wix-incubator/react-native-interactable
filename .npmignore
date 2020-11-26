@@ -1,5 +1,5 @@
 .ghp/
-
+scripts/
 
 playground
 e2e
@@ -185,6 +185,10 @@ android/captures/
 
 # Keystore files
 *.jks
+
+# Test
+lib/android/src/test/
+lib/android/src/androidTest/
 
 ##################
 # React-Native

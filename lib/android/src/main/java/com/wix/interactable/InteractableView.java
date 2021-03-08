@@ -541,6 +541,9 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         {
             this.animator.removeTempBehaviors();
             this.dragBehavior = null;
+            setDragEnabled(false);
+            setDragEnabled(true);
+
             InteractablePoint snapPoint = snapPoints.get(index);
             addTempSnapToPointBehavior(snapPoint);
             addTempBounceBehaviorWithBoundaries(this.boundaries);

@@ -38,7 +38,7 @@
     "preset": "react-native"
   },
   "devDependencies": {
-    "@babel/core": "7.6.0",
+    "@babel/core": "7.29.6",
     "@babel/runtime": "^7.4.2",
     "@react-native-community/eslint-config": "^0.0.3",
     "@types/react-native": ">= 0.52.2",
